@@ -62,3 +62,22 @@ $(document).ready(function () {
 // END login
 
 
+$('.btn-show').click(function(){
+    var url = $(this).attr('data-url');
+    if ($('#show').length){
+        $("#show").remove();
+    }
+    $.ajax({
+        type: 'get',
+        url: url,
+        success: function(response) {
+            console.log(response)
+            $( "body" ).append(response);
+            $('#show').modal('show');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            //xử lý lỗi tại đây
+            alert('Loi')
+        }
+    })
+})

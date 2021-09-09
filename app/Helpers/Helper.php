@@ -18,12 +18,15 @@ class Helper
                         ' . $category->image . '
                         </td>
                         <td>' . $char . ' ' . $category->name . '</td>
+                        <td>' . $category->description . '</td>
                         <td>' . $category->slug . '</td>
                         <td>' . $category->updated_at . '</td>
                         <td>' . self::active($category->active) . '</td>
                         <td>' . self::showHome($category->showHome) . '</td>
-                        <td>
-                            <a class="btn btn-primary waves-effect waves-light" href="'. route('admin.categories.edit', $category->slug) .'"><i class="ti-pencil-alt"></i></a>
+                        <td style="min-width: 195px">
+                            <button class="btn btn-primary btn-sm btn-show" data-url="'. route('admin.categories.show', $category->slug) .'" data-toggle="modal" data-target="#show"><i class="fas fa-folder"></i> Detail</button>
+                            <button class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</button>
+                            <button class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</button>
                         </td>
                     </tr>
                 ';
@@ -33,7 +36,6 @@ class Helper
                 $html .= self::category($categories, $category->id, $char . '|--');
             }
         }
-//        <button class="btn btn-danger waves-effect waves-light" href="#" onclick="removeCategory(' . $category->id . ')"><i class="ti-trash"></i></button>
         return $html;
     }
 

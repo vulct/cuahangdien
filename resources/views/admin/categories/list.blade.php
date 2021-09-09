@@ -30,12 +30,13 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered datatable">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th> Ảnh </th>
+                                        <th>Ảnh</th>
                                         <th>Tên</th>
+                                        <th>Mô tả</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
@@ -49,8 +50,9 @@
                                     <tfoot>
                                     <tr>
                                         <th>ID</th>
-                                        <th> Ảnh </th>
+                                        <th>Ảnh</th>
                                         <th>Tên</th>
+                                        <th>Mô tả</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
@@ -74,6 +76,7 @@
     </div>
 @endsection
 
+@include('admin.categories.edit')
 
 @push('stylesheets')
     <!-- Google Font: Source Sans Pro -->
@@ -82,6 +85,7 @@
     <link rel="stylesheet" href="{{ asset('manage/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('manage/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('manage/dist/css/custom.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">

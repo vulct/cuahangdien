@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Category;
 use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
 
@@ -55,11 +56,15 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+
+        return view('admin.categories.detail',[
+            'cate' => $category
+        ]);
+//       return response()->json(['data'=>$category,],200); // 200 là mã lỗi
     }
 
     /**

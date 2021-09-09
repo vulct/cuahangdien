@@ -23,16 +23,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [HomeController::class, 'index']);
 
             #Categories
-            Route::name('categories.')->group(function () {
-                Route::prefix('categories')->group(function () {
-                    Route::get('/', [CategoryController::class, 'index'])->name('list');
-                    Route::get('/create', [CategoryController::class, 'create'])->name('create');
-                    Route::post('/create', [CategoryController::class, 'store']);
-                    Route::delete('/destroy', [CategoryController::class, 'destroy'])->name('destroy');
-                    Route::get('/{cate}/edit', [CategoryController::class, 'show'])->name('edit');
-                    Route::post('/{cate}/edit', [CategoryController::class, 'update']);
-                });
-            });
+            Route::resource('/categories',CategoryController::class);
+//            Route::name('categories.')->group(function () {
+//                Route::prefix('categories')->group(function () {
+//
+////                    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+////                    Route::post('/create', [CategoryController::class, 'store']);
+////                    Route::delete('/destroy', [CategoryController::class, 'destroy'])->name('destroy');
+////                    Route::get('/{cate}/edit', [CategoryController::class, 'show'])->name('edit');
+////                    Route::post('/{cate}/edit', [CategoryController::class, 'update']);
+//                });
+//            });
 //
 //            #Brands
 //            Route::name('brands.')->group(function () {
