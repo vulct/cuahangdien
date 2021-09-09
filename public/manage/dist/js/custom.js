@@ -25,8 +25,8 @@ toastr.options = {
 }
 
 // Login
-$(document).ready(function() {
-    $("#login").click(function() {
+$(document).ready(function () {
+    $("#login").click(function () {
         $("#login").attr("disabled", true);
         $.ajax({
             type: 'POST',
@@ -35,23 +35,23 @@ $(document).ready(function() {
             dataType: 'json',
             success: function (data) {
                 toastr.success(data.message)
-                setTimeout(function (){
+                setTimeout(function () {
                     window.location.href = '/admin/dashboard';
-                },500);
+                }, 500);
 
             },
-            error : function (xhr) {
+            error: function (xhr) {
                 $("#login").removeAttr("disabled");
                 var err = JSON.parse(xhr.responseText);
-                if (xhr.status === 401){
+                if (xhr.status === 401) {
                     toastr.error(err.message)
                 }
 
                 if (xhr.status === 422) {
-                    if (err.errors.email){
+                    if (err.errors.email) {
                         toastr.error(err.errors.email)
                     }
-                    if (err.errors.password){
+                    if (err.errors.password) {
                         toastr.error(err.errors.password)
                     }
                 }

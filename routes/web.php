@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,18 +22,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
             Route::get('/dashboard', [HomeController::class, 'index']);
 
-//            #Categories
-//            Route::name('categories.')->group(function () {
-//                Route::prefix('categories')->group(function () {
-//                    Route::get('/', [CategoriesController::class, 'index'])->name('list');
-//                    Route::get('/list', [CategoriesController::class, 'index']);
-//                    Route::get('/add', [CategoriesController::class, 'create'])->name('create');
-//                    Route::post('/add', [CategoriesController::class, 'store']);
-//                    Route::delete('/destroy', [CategoriesController::class, 'destroy'])->name('destroy');
-//                    Route::get('/{cate}/edit', [CategoriesController::class, 'show'])->name('edit');
-//                    Route::post('/{cate}/edit', [CategoriesController::class, 'update']);
-//                });
-//            });
+            #Categories
+            Route::name('categories.')->group(function () {
+                Route::prefix('categories')->group(function () {
+                    Route::get('/', [CategoryController::class, 'index'])->name('list');
+                    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+                    Route::post('/create', [CategoryController::class, 'store']);
+                    Route::delete('/destroy', [CategoryController::class, 'destroy'])->name('destroy');
+                    Route::get('/{cate}/edit', [CategoryController::class, 'show'])->name('edit');
+                    Route::post('/{cate}/edit', [CategoryController::class, 'update']);
+                });
+            });
 //
 //            #Brands
 //            Route::name('brands.')->group(function () {
