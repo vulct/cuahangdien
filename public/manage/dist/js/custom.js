@@ -23,7 +23,7 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
-
+// add active in nav
 $(function(){
     var current = location.pathname;
     $('nav ul li a').each(function(){
@@ -35,6 +35,7 @@ $(function(){
         }
     })
 })
+
 
 // Login
 $(document).ready(function () {
@@ -109,6 +110,7 @@ $('.btn-edit').on( "click touchend",function(){
                 height: 300
             });
             $('#edit').modal('show');
+            bsCustomFileInput.init();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             toastr.error(errorThrown)

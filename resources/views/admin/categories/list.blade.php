@@ -115,7 +115,8 @@
     <script src="{{ asset('manage/dist/js/pages/datatable.js') }}"></script>
     <!-- Summernote -->
     <script src="{{asset('manage/plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <!-- File input -->
+    <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
     <!-- Customize -->
     <script src="{{ asset('manage/dist/js/custom.js') }}"></script>
-
 @endpush
