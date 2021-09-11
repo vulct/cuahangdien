@@ -24,6 +24,18 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
+$(function(){
+    var current = location.pathname;
+    $('nav ul li a').each(function(){
+        var $this = $(this);
+        // if the current path is like this link, make it active
+        url = $this.attr('href').replace(/^.*\/\/[^\/]+/, '');
+        if(url.indexOf(current) !== -1){
+            $this.addClass('active');
+        }
+    })
+})
+
 // Login
 $(document).ready(function () {
     $("#login").click(function () {
@@ -75,8 +87,7 @@ $('.btn-show').on( "click touchend",function(){
             $('#show').modal('show');
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            //xử lý lỗi tại đây
-            alert(errorThrown)
+            toastr.error(errorThrown)
         }
     })
 })
@@ -100,8 +111,7 @@ $('.btn-edit').on( "click touchend",function(){
             $('#edit').modal('show');
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            //xử lý lỗi tại đây
-            alert(errorThrown)
+            toastr.error(errorThrown)
         }
     })
 })
