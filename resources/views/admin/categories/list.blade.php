@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>{{$name_page}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$classify}}</li>
                         </ol>
                     </div>
                 </div>
@@ -26,21 +26,19 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with default features</h3>
+                                <h3 class="card-title">Danh sách danh mục của sản phẩm.</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered datatable">
+                                <table id="example1" class="table table-bordered datatable" style="table-layout: fixed;width: 100%;">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Ảnh</th>
                                         <th>Tên</th>
-                                        <th>Mô tả</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
-                                        <th>Hiển thị trang chủ</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                     </thead>
@@ -52,11 +50,9 @@
                                         <th>ID</th>
                                         <th>Ảnh</th>
                                         <th>Tên</th>
-                                        <th>Mô tả</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
-                                        <th>Hiển thị trang chủ</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                     </tfoot>
@@ -76,8 +72,6 @@
     </div>
 @endsection
 
-@include('admin.categories.edit')
-
 @push('stylesheets')
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -90,6 +84,8 @@
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
 @endpush
 
 @push('scripts')
@@ -116,6 +112,10 @@
     <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{ asset('manage/dist/js/custom.js') }}"></script>
     <script src="{{ asset('manage/dist/js/pages/datatable.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{asset('manage/plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <!-- Customize -->
+    <script src="{{ asset('manage/dist/js/custom.js') }}"></script>
+
 @endpush

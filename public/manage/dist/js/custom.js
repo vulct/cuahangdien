@@ -62,7 +62,7 @@ $(document).ready(function () {
 // END login
 
 
-$('.btn-show').click(function(){
+$('.btn-show').on( "click touchend",function(){
     var url = $(this).attr('data-url');
     if ($('#show').length){
         $("#show").remove();
@@ -71,13 +71,37 @@ $('.btn-show').click(function(){
         type: 'get',
         url: url,
         success: function(response) {
-            console.log(response)
             $( "body" ).append(response);
             $('#show').modal('show');
         },
         error: function (jqXHR, textStatus, errorThrown) {
             //xử lý lỗi tại đây
-            alert('Loi')
+            alert(errorThrown)
+        }
+    })
+})
+
+
+$('.btn-edit').on( "click touchend",function(){
+    var url = $(this).attr('data-url');
+    if ($('#edit').length){
+        $("#edit").remove();
+    }
+    $.ajax({
+        type: 'get',
+        url: url,
+        success: function(response) {
+            console.log(response)
+            $( ".content" ).append(response);
+            // Summernote
+            $('#summernote').summernote({
+                height: 300
+            });
+            $('#edit').modal('show');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            //xử lý lỗi tại đây
+            alert(errorThrown)
         }
     })
 })

@@ -24,9 +24,9 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.list', [
+            'name_page' => 'Danh Sách Danh Mục',
             'title' => 'Danh Mục Sản Phẩm',
             'classify' => 'Danh Mục',
-            'name' => 'Danh Sách Danh Mục',
             'categories' => $this->categoryService->get()
         ]);
     }
@@ -62,20 +62,23 @@ class CategoryController extends Controller
     {
 
         return view('admin.categories.detail',[
+            'categories' => $this->categoryService->get(0),
             'cate' => $category
         ]);
-//       return response()->json(['data'=>$category,],200); // 200 là mã lỗi
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', [
+            'categories' => $this->categoryService->get(0),
+            'cate' => $category
+        ]);
     }
 
     /**
