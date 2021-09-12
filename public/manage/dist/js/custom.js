@@ -145,6 +145,7 @@ $('.btn-edit').on( "click touchend",function(){
                 const name = $('#name').val();
                 $('#slug').val(slug(name));
             })
+            updateCategory();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             toastr.error(errorThrown)
@@ -152,9 +153,29 @@ $('.btn-edit').on( "click touchend",function(){
     })
 })
 
-// convert title name to URL slug -- Category
-$("#name").on('keyup change focusout', function (){
-    const name = $('#name').val();
-    $('#slug').val(slug(name));
-})
-// END convert title name to URL slug -- Category
+
+
+// Update category
+function updateCategory(){
+    $('#btn-update').click(function(){
+        let formEdit = $("#form-edit");
+        let valuesToSubmit = formEdit.serialize();
+        let url = formEdit.attr('action')
+        $.ajax({
+            data: valuesToSubmit,
+            type: 'PATCH',
+            url: url,
+            success: function(response) {
+                $('#edit').modal('hide');
+                toastr.success(response.message);
+                setTimeout(function (){
+                    location.reload();
+                }, 500);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                toastr.error(textStatus)
+            }
+        });
+        return false;
+    })
+}

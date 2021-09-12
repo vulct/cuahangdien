@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Admin\Category;
 use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
@@ -86,11 +87,16 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Category $category, UpdateCategoryRequest $updateCategoryRequest): \Illuminate\Http\JsonResponse
     {
-        //
+
+        $result = $this->categoryService->update($category, $updateCategoryRequest);
+        if ($result){
+            return response()->json(['message'=>'Cập nhật danh mục thành công.'],200);
+        }
+        return response()->json(['message'=>'Cập nhật danh mục không thành công.'],200);
     }
 
     /**

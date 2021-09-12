@@ -2,12 +2,20 @@
 
 namespace App\Services\Admin;
 
-
 use App\Models\Admin\Category;
+use App\Services\UploadService;
 use Illuminate\Support\Facades\Session;
 
 class CategoryService
 {
+
+    protected $upload;
+
+    public function __construct(UploadService $upload)
+    {
+        $this->upload = $upload;
+    }
+
     public function get($parent_id = 1)
     {
         return Category::
@@ -60,16 +68,20 @@ class CategoryService
 
     public function update($cate, $request)
     {
+
         try {
             if ($cate != $request->input('cate_parent')){
                 $cate->parent_id = (int)$request->input('cate_parent');
             }
-            $cate->cate_name = (string)$request->input('cate_name');
-            $cate->cate_image = "";
-            $cate->cate_description = (string)$request->input('cate_description');
-            $cate->cate_slug = (string)$request->input('cate_slug');
-            $cate->cate_active = (int)$request->input('active');
-            $cate->cate_showHome = (int)$request->input('show_home');
+
+            if ($request->hasFile('image')) {
+                $cate->image = $this->upload->store($request->file('image'));
+            }
+
+            $cate->name = (string)$request->input('name');
+            $cate->description = (string)$request->input('description');
+            $cate->slug = (string)$request->input('slug');
+            $cate->active = (int)$request->input('active');
             $cate->save();
             Session::flash('success', 'Cập nhật danh mục thành công.');
             return true;

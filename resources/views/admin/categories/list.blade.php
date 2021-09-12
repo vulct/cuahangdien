@@ -79,6 +79,9 @@
     <link rel="stylesheet" href="{{ asset('manage/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('manage/dist/css/adminlte.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('manage/plugins/toastr/toastr.min.css')}}">
+
     <link rel="stylesheet" href="{{ asset('manage/dist/css/custom.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
