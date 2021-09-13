@@ -68,7 +68,11 @@ var slug = function(str) {
 // Login
 $(document).ready(function () {
     $("#login").click(function () {
-        $("#login").attr("disabled", true);
+        const btnLogin = $("#login");
+        const btnLoginText = btnLogin.text();
+        btnLogin.attr("disabled", true);
+        btnLogin.empty();
+        btnLogin.append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
         $.ajax({
             type: 'POST',
             url: '/admin/auth/login',
@@ -82,7 +86,9 @@ $(document).ready(function () {
 
             },
             error: function (xhr) {
-                $("#login").removeAttr("disabled");
+                btnLogin.removeAttr("disabled");
+                btnLogin.empty();
+                btnLogin.append(btnLoginText);
                 var err = JSON.parse(xhr.responseText);
                 if (xhr.status === 401) {
                     toastr.error(err.message)
@@ -120,62 +126,48 @@ $('.btn-show').on( "click touchend",function(){
         }
     })
 })
+// Remove category
+$('.btn-delete').on('click', function (){
+    const slug = $(this).attr('data-url');
+    removeCategory(slug);
+});
 
+function removeCategory(slug){
+    Swal.fire({
+        title: 'Bạn đã chắc chắn xóa?',
+        text: "Nếu danh mục xóa là danh mục cha, tất cả danh mục con đều sẽ bị xóa!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Đồng ý, xóa danh mục!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'delete',
+                dataType: 'json',
+                data: { slug },
+                url: '/admin/categories/destroy',
+                success: function (data){
+                    if (data.error === false){
+                        Swal.fire(
+                            'Deleted!',
+                            data.message,
+                            'success'
+                        )
+                        setTimeout(function (){
+                            location.reload();
+                        }, 500);
+                    }else {
+                        Swal.fire(
+                            'Deleted!',
+                            'Xóa không thành công, vui lòng thử lại.',
+                            'error'
+                        )
+                    }
 
-$('.btn-edit').on( "click touchend",function(){
-    var url = $(this).attr('data-url');
-    if ($('#edit').length){
-        $("#edit").remove();
-    }
-    $.ajax({
-        type: 'get',
-        url: url,
-        success: function(response) {
-            console.log(response)
-            $( ".content" ).append(response);
-            // Summernote
-            $('#summernote').summernote({
-                height: 300
-            });
-            $('#edit').modal('show');
-            // customize input file
-            bsCustomFileInput.init();
-            // slug
-            $("#name").on('keyup change focusout', function (){
-                const name = $('#name').val();
-                $('#slug').val(slug(name));
+                }
             })
-            updateCategory();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            toastr.error(errorThrown)
         }
-    })
-})
-
-
-
-// Update category
-function updateCategory(){
-    $('#btn-update').click(function(){
-        let formEdit = $("#form-edit");
-        let valuesToSubmit = formEdit.serialize();
-        let url = formEdit.attr('action')
-        $.ajax({
-            data: valuesToSubmit,
-            type: 'PATCH',
-            url: url,
-            success: function(response) {
-                $('#edit').modal('hide');
-                toastr.success(response.message);
-                setTimeout(function (){
-                    location.reload();
-                }, 500);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                toastr.error(textStatus)
-            }
-        });
-        return false;
     })
 }

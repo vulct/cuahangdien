@@ -63,7 +63,7 @@
                     </div>
                     <!-- /.col -->
                 </div>
-                <div class="social-auth-links text-center mt-2 mb-3">
+                <div id="btn-login" class="text-center mt-2 mb-3">
                     <button type="submit" id="login" class="btn btn-block btn-primary">{{__('Login')}}</button>
                 </div>
             </form>

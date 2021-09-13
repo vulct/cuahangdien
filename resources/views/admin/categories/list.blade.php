@@ -73,35 +73,15 @@
 @endsection
 
 @push('stylesheets')
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('manage/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('manage/dist/css/adminlte.min.css') }}">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="{{asset('manage/plugins/toastr/toastr.min.css')}}">
-
-    <link rel="stylesheet" href="{{ asset('manage/dist/css/custom.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.css') }}">
 @endpush
 
 @push('scripts')
-    <!-- jQuery -->
-    <script src="{{ asset('manage/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('manage/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('manage/dist/js/adminlte.min.js') }}"></script>
-    <!-- Toastr -->
-    <script src="{{asset('manage/plugins/toastr/toastr.min.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('manage/dist/js/demo.js') }}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('manage/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('manage/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -116,10 +96,6 @@
     <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <script src="{{ asset('manage/dist/js/pages/datatable.js') }}"></script>
-    <!-- Summernote -->
-    <script src="{{asset('manage/plugins/summernote/summernote-bs4.min.js')}}"></script>
-    <!-- File input -->
-    <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-    <!-- Customize -->
-    <script src="{{ asset('manage/dist/js/custom.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush

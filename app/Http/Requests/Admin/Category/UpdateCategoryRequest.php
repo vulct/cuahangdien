@@ -30,9 +30,12 @@ class UpdateCategoryRequest extends FormRequest
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
-                Rule::unique('categories','id')->where(function ($query) {
-                    $query->where('isDelete', '0');
-                })->ignore($this->get('slug'))
+                'min:3',
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+                'max:255',
+                Rule::unique('categories')->where(function($query) {
+                    $query->where('isDelete', 0);
+                })->ignore($this->category->id)
             ]
         ];
     }
@@ -40,15 +43,9 @@ class UpdateCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'tên danh mục',
+            'name' => 'tên thương hiệu',
             'slug' => 'đường dẫn (URL)',
+            'image' => 'hình ảnh'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'slug' => Str::slug($this->get('slug')),
-        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Models\Admin\Category;
 use App\Services\UploadService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CategoryService
@@ -55,12 +56,13 @@ class CategoryService
 
     public function destroy($request): bool
     {
-        $id = $request->input('id');
+        $slug = $request->input('slug');
 
-        $category = Category::where('id', $id)->first();
+        $category = Category::where('slug', $slug)->first();
 
         if ($category) {
-            return Category::where('id', $id)->orWhere('parent_id', $id)->update(['cate_isDelete' => 1]);
+            return DB::table('categories')->where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
+            //return Category::where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
         }
 
         return false;
@@ -68,9 +70,9 @@ class CategoryService
 
     public function update($cate, $request)
     {
-
         try {
-            if ($cate != $request->input('cate_parent')){
+
+            if ($cate->id != $request->input('cate_parent')){
                 $cate->parent_id = (int)$request->input('cate_parent');
             }
 

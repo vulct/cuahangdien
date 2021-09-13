@@ -77,6 +77,8 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return view('admin.categories.edit', [
+            'title' => 'Chỉnh Sửa Danh Mục Sản Phẩm',
+            'classify' => 'Danh Mục',
             'categories' => $this->categoryService->get(0),
             'cate' => $category
         ]);
@@ -87,26 +89,36 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Category $category, UpdateCategoryRequest $updateCategoryRequest): \Illuminate\Http\JsonResponse
+    public function update(Category $category, UpdateCategoryRequest $updateCategoryRequest): \Illuminate\Http\RedirectResponse
     {
-
         $result = $this->categoryService->update($category, $updateCategoryRequest);
         if ($result){
-            return response()->json(['message'=>'Cập nhật danh mục thành công.'],200);
+            return redirect()->route('admin.categories.index');
         }
-        return response()->json(['message'=>'Cập nhật danh mục không thành công.'],200);
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $result = $this->categoryService->destroy($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa danh mục thành công'
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
     }
 }
