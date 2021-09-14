@@ -36,14 +36,19 @@ class CategoryService
     {
         try {
 
+            if ($request->hasFile('image')) {
+                $path_image = $this->upload->store($request->file('image'));
+            }else{
+                $path_image = '/storage/uploads/default/image-available.jpg';
+            }
+
             Category::create([
                 "name" => (string)$request->name,
                 "parent_id" => (int)$request->cate_parent,
-                "image" => "",
+                "image" => $path_image,
                 "description" => (string)$request->description,
                 "slug" => (string)$request->slug,
-                "active" => (int)$request->active,
-                "showHome" => (int)$request->show_home
+                "active" => (int)$request->active
             ]);
 
             Session::flash('success', 'Tạo danh mục thành công.');
@@ -62,7 +67,6 @@ class CategoryService
 
         if ($category) {
             return DB::table('categories')->where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
-            //return Category::where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
         }
 
         return false;

@@ -6,7 +6,7 @@ class Helper
 {
     public static function category($categories, $parent_id = 0, $char = ''): string
     {
-        $html = "";
+        $html = '';
 
         foreach ($categories as $key => $category) {
             if ($category->parent_id == $parent_id) {
@@ -15,7 +15,7 @@ class Helper
                     <tr>
                         <td>' . $category->id . '</td>
                         <td>
-                        <img src="'.$category->image.'" class="img-circle img-size-32 mr-2" style="min-height: 32px;">
+                        <img src="'.$category->image.'" class="img-circle img-size-32 mr-2" style="min-height: 32px;" alt="Hình thu nhỏ" />
                         </td>
                         <td>' . $char . ' ' . $category->name . '</td>
                         <td>' . $category->slug . '</td>
