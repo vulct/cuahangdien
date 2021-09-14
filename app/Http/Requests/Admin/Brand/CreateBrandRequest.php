@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Category;
+namespace App\Http\Requests\Admin\Brand;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class CreateBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,9 +32,9 @@ class UpdateCategoryRequest extends FormRequest
                 'min:3',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
                 'max:255',
-                Rule::unique('categories')->where(function($query) {
+                Rule::unique('brands')->where(function($query) {
                     $query->where('isDelete', 0);
-                })->ignore($this->category->id)
+                })
             ]
         ];
     }
@@ -43,7 +42,7 @@ class UpdateCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'tên danh mục',
+            'name' => 'tên thương hiệu',
             'slug' => 'đường dẫn (URL)',
             'image' => 'hình ảnh'
         ];

@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{$name_page}}</h1>
+                        <h1>{{$title}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,35 +27,50 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách danh mục của sản phẩm.</h3>
-                                <a href="{{route('admin.categories.create')}}" class="btn btn-primary float-right">{{__('Thêm mới danh mục')}}</a>
+                                <h3 class="card-title">Danh sách thương hiệu của sản phẩm.</h3>
+                                <a href="{{route('admin.brands.create')}}" class="btn btn-primary float-right">{{__('Thêm mới thương hiệu')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered dt-responsive" style="table-layout: fixed;width: 100%;">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>#</th>
                                         <th>Ảnh</th>
                                         <th>Tên</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
-                                        <th>Hành động</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {!! \App\Helpers\Helper::category($categories) !!}
+                                    @php $i= 0; @endphp
+                                    @foreach($brands as $key => $brand)
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            <td><img class="rounded me-4" alt="[130x60]" width="130" height="60" src="{{$brand->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                            <td>{{$brand->name}}</td>
+                                            <td class="txt-slug">{{$brand->slug}}</td>
+                                            <td>{{$brand->updated_at}}</td>
+                                            <td>{!! \App\Helpers\Helper::active($brand->active) !!}</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.brands.show', $brand->slug)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
+                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.brands.edit', $brand->slug)}}"><i class="fas fa-pencil-alt"></i></a>
+                                                <button class="btn btn-danger btn-sm btn-delete" data-url="brands/destroy" onclick="removeFunction('{{$brand->slug}}')"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>#</th>
                                         <th>Ảnh</th>
                                         <th>Tên</th>
                                         <th>Đường dẫn</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
-                                        <th>Hành động</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                     </tfoot>
                                 </table>

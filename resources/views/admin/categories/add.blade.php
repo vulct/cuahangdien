@@ -159,5 +159,9 @@
     <!-- Select2 -->
     <script rel="stylesheet" src="{{asset('manage/plugins/select2/js/select2.full.min.js')}}"></script>
     <!-- Edit page -->
+    <script>
+        //Initialize Select2 Elements
+        $('.select2').select2();
+    </script>
     <script src="{{asset('manage/dist/js/pages/edit-form.js')}}"></script>
 @endpush

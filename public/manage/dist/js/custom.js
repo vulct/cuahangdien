@@ -126,28 +126,24 @@ $('.btn-show').on( "click touchend",function(){
         }
     })
 })
-// Remove category
-$('.btn-delete').on('click', function (){
-    const slug = $(this).attr('data-url');
-    removeCategory(slug);
-});
-
-function removeCategory(slug){
+// Remove
+function removeFunction(slug){
+    const url = $(".btn-delete").attr('data-url');
     Swal.fire({
         title: 'Bạn đã chắc chắn xóa?',
-        text: "Nếu danh mục xóa là danh mục cha, tất cả danh mục con đều sẽ bị xóa!",
+        text: "Sau khi xóa, dữ liệu sẽ không thể không phục.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Đồng ý, xóa danh mục!'
+        confirmButtonText: 'Đồng ý, tiến hành xóa!'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 type: 'delete',
                 dataType: 'json',
                 data: { slug },
-                url: '/admin/categories/destroy',
+                url: url,
                 success: function (data){
                     if (data.error === false){
                         Swal.fire(

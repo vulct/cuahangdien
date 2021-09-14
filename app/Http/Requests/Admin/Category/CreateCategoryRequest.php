@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class CreateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +34,7 @@ class UpdateCategoryRequest extends FormRequest
                 'max:255',
                 Rule::unique('categories')->where(function($query) {
                     $query->where('isDelete', 0);
-                })->ignore($this->category->id)
+                })
             ]
         ];
     }
@@ -43,7 +42,7 @@ class UpdateCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'tên danh mục',
+            'name' => 'tên thương hiệu',
             'slug' => 'đường dẫn (URL)',
             'image' => 'hình ảnh'
         ];
