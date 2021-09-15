@@ -169,17 +169,20 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
+                    <a href="{{route('admin.products.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>Quản lý sản phẩm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.categories.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản lý danh mục
-                            <span class="right badge badge-danger">New</span>
-                        </p>
+                        <p>Quản lý danh mục</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin.brands.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-handshake"></i>
                         <p>Quản lý thương hiệu</p>
                     </a>
                 </li>
@@ -188,6 +191,35 @@
                         <i class="nav-icon fas fa-dolly"></i>
                         <p>Quản lý vận chuyển</p>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Quản lý trang nội dung
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="../examples/contacts.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contacts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../examples/faq.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>FAQ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../examples/contact-us.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contact us</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

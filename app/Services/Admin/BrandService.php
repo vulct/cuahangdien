@@ -4,7 +4,7 @@
 namespace App\Services\Admin;
 
 
-use App\Models\Admin\Brand;
+use App\Models\Brand;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\Session;
 

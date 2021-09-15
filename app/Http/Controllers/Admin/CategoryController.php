@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\CreateCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
-use App\Models\Admin\Category;
+use App\Models\Category;
 use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
 

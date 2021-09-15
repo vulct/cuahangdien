@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\Admin\ShippingMethod;
+use App\Models\ShippingMethod;
 use Illuminate\Support\Facades\Session;
 
 class ShippingService

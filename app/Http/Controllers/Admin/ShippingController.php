@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ShippingMethod\ShippingMethodRequest;
-use App\Models\Admin\ShippingMethod;
+use App\Models\ShippingMethod;
 use App\Services\Admin\ShippingService;
 use Illuminate\Http\Request;
 

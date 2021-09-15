@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Brand\CreateBrandRequest;
 use App\Http\Requests\Admin\Brand\UpdateBrandRequest;
-use App\Models\Admin\Brand;
+use App\Models\Brand;
 use App\Services\Admin\BrandService;
 use Illuminate\Http\Request;
 

@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\Admin\Category;
+use App\Models\Category;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
