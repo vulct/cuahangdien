@@ -183,6 +183,12 @@
                         <p>Quản lý thương hiệu</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.shipping_methods.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-dolly"></i>
+                        <p>Quản lý vận chuyển</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

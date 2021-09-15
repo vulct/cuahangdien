@@ -27,8 +27,8 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách thương hiệu của sản phẩm.</h3>
-                                <a href="{{route('admin.brands.create')}}" class="btn btn-primary float-right">{{__('Thêm mới thương hiệu')}}</a>
+                                <h3 class="card-title">Danh sách phương thức vận chuyển.</h3>
+                                <a href="{{route('admin.shipping_methods.create')}}" class="btn btn-primary float-right">{{__('Thêm mới phương thức')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -36,9 +36,8 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Ảnh</th>
                                         <th>Tên</th>
-                                        <th>Đường dẫn</th>
+                                        <th>Mô tả</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
@@ -46,18 +45,17 @@
                                     </thead>
                                     <tbody>
                                     @php $i= 0; @endphp
-                                    @foreach($brands as $key => $brand)
+                                    @foreach($shipping_methods as $key => $method)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="rounded me-4" alt="[130x60]" width="130" height="60" src="{{$brand->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
-                                            <td>{{$brand->name}}</td>
-                                            <td class="txt-slug">{{$brand->slug}}</td>
-                                            <td>{{$brand->updated_at}}</td>
-                                            <td>{!! \App\Helpers\Helper::active($brand->active) !!}</td>
+                                            <td>{{$method->name}}</td>
+                                            <td>{!! $method->description !!}</td>
+                                            <td>{{$method->updated_at}}</td>
+                                            <td>{!! \App\Helpers\Helper::active($method->active) !!}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.brands.show', $brand->slug)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
-                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.brands.edit', $brand->slug)}}"><i class="fas fa-pencil-alt"></i></a>
-                                                <button class="btn btn-danger btn-sm btn-delete" data-url="brands/destroy" onclick="removeFunction('{{$brand->slug}}')"><i class="fas fa-trash"></i></button>
+                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.shipping_methods.show', $method->id)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
+                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.shipping_methods.edit', $method->id)}}"><i class="fas fa-pencil-alt"></i></a>
+                                                <button class="btn btn-danger btn-sm btn-delete" data-url="shipping_methods/destroy" onclick="removeFunction('{{$method->id}}')"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -65,9 +63,8 @@
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Ảnh</th>
                                         <th>Tên</th>
-                                        <th>Đường dẫn</th>
+                                        <th>Mô tả</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
@@ -90,7 +87,6 @@
 
 @push('stylesheets')
     <!-- DataTables -->
-
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">

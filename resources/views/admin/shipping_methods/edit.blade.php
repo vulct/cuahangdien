@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{!! __('Edit :resource',['resource' => 'thông tin danh mục:' .' <b>'.$cate->name .'</b>']) !!}</h3>
+                        <h3 class="card-title">{!! __('Edit :resource',['resource' => 'thông tin phương thức vận chuyển']) !!}</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -38,7 +38,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.categories.update', $cate->slug) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.shipping_methods.update', $shipping->id) }}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card card-primary">
@@ -54,25 +54,14 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="name">{{__('Name')}}</label>
-                                                <input type="text" id="name" class="form-control" value="{{$cate->name}}" name="name">
+                                                <input type="text" id="name" class="form-control" value="{{$shipping->name}}" name="name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote">{{__('Mô tả')}}</label>
-                                                <textarea id="summernote" name="description">{{$cate->description}}</textarea>
+                                                <textarea id="summernote" name="description">{{$shipping->description}}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputStatus">{{__('Danh mục cha')}}</label>
-                                                <select id="inputStatus" name="cate_parent" class="form-control select2"
-                                                        style="width: 100%">
-                                                    <option value="0">Trống</option>
-                                                    @foreach($categories as $cate_parent)
-                                                        <option
-                                                            value="{{$cate_parent->id}}" {{ $cate_parent->id == $cate->parent_id ? 'selected' : '' }}>{{$cate_parent->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" id="btn_add_cate" class="btn btn-success float-right btn-block">{{__('Save')}}</button>
+                                                <button type="submit" class="btn btn-success float-right btn-block">{{__('Save')}}</button>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -91,41 +80,10 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}}</label>
-                                                <input type="text" id="slug" class="form-control" value="{{$cate->slug}}" name="slug">
-                                            </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"
-                                                       name="active" value="1" @if($cate->active == 1) checked="" @endif>
+                                                       name="active" value="1" @if($shipping->active == 1) checked="" @endif>
                                                 <label for="customCheckbox2" class="custom-control-label">Hoạt động</label>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
-                                    <div class="card card-info">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Files</h3>
-
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="slug">{{__('Hình thu nhỏ')}}</label>
-                                                <img class="card-img-right flex-auto d-none d-md-block" src="{{$cate->image}}"
-                                                     alt="Thumbnail [200x250]" style="width: 200px;"
-                                                     data-holder-rendered="true">
-                                                <div class="custom-file mt-2">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                           accept="image/*" name="image">
-                                                    <label class="custom-file-label"
-                                                           for="exampleInputFile">{{__('Choose File')}}</label>
-                                                </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -152,21 +110,15 @@
 @push('stylesheets')
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('manage/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @push('scripts')
     <!-- Summernote -->
     <script src="{{asset('manage/plugins/summernote/summernote-bs4.min.js')}}"></script>
-    <!-- File input -->
-    <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-    <!-- Select2 -->
-    <script rel="stylesheet" src="{{asset('manage/plugins/select2/js/select2.full.min.js')}}"></script>
-    <!-- Edit page -->
     <script>
-        //Initialize Select2 Elements
-        $('.select2').select2();
+        // Summernote
+        $('#summernote').summernote({
+            height: 300
+        });
     </script>
-    <script src="{{asset('manage/dist/js/pages/edit-form.js')}}"></script>
 @endpush
