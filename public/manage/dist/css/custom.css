@@ -5,3 +5,11 @@
 .select2-container .select2-selection--single{
     height: calc(2.25rem + 2px) !important;
 }
+
+.btn.btn-floating {
+    height: 35px;
+    width: 35px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+}

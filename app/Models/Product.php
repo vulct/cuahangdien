@@ -20,6 +20,5 @@ class Product extends Model
         "isDelete",
         "category_id",
         "brand_id",
-        "attribute_id",
     ];
 }

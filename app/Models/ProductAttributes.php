@@ -15,6 +15,7 @@ class ProductAttributes extends Model
         "price_list",
         "discount",
         "price_sale",
+        "product_id",
         "active",
         "isDelete",
     ];

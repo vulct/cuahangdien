@@ -6,6 +6,6 @@ $("#name").on('keyup change focusout', function (){
     $('#slug').val(slug(name));
 })
 // Summernote
-$('#summernote').summernote({
+$('.summernote').summernote({
     height: 300
 });

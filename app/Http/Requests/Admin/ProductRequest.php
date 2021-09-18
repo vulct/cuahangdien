@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
                 'min:3',
                 'max:255'
             ],
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
                 'min:3',
@@ -42,7 +42,9 @@ class ProductRequest extends FormRequest
                     $query->where('isDelete', 0);
                 })
             ],
-            'warranty'=>'string|min:3|max:255'
+            'warranty'=>'required|string|min:3|max:255',
+            'category'=> 'integer',
+            'brand'=> 'integer',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

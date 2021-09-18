@@ -25,7 +25,6 @@ class CreateProductsTable extends Migration
             $table->integer('isDelete')->default(0);
             $table->integer('category_id');
             $table->integer('brand_id');
-            $table->integer('attribute_id');
             $table->timestamps();
         });
     }
