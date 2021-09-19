@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('image',255);
             $table->string('slug',255);
             $table->string('warranty',255);
+            $table->string('unit',255);
             $table->integer('active')->default(1);
             $table->integer('isDelete')->default(0);
             $table->integer('category_id');

@@ -17,8 +17,8 @@ class CreateProductAttributesTable extends Migration
             $table->id();
             $table->string('type_name');
             $table->string('codename');
-            $table->decimal('price_list', 13, 2)->nullable()->default(null);
-            $table->decimal('price_sale', 13, 2)->nullable()->default(null);
+            $table->decimal('price', 13, 2)->nullable()->default(null);
+            $table->decimal('discount', 13, 2)->nullable()->default(null);
             $table->integer('active')->default(1);
             $table->integer('isDelete')->default(0);
             $table->integer('product_id');

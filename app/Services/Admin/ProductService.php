@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\UploadService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ProductService
@@ -24,24 +25,6 @@ class ProductService
         return Product::orderbyDesc('id')->where('isDelete', 0)->get();
     }
 
-
-    public function insert($request)
-    {
-
-        try {
-            $request->except('_token');
-            Product::create($request->all());
-
-            Session::flash('success', 'Thêm Sản phẩm thành công');
-        } catch (\Exception $err) {
-            Session::flash('error', 'Thêm Sản phẩm lỗi');
-            \Log::info($err->getMessage());
-            return false;
-        }
-
-        return true;
-    }
-
 //    public function get()
 //    {
 //        return Product::with('menu')
@@ -50,21 +33,23 @@ class ProductService
 
     public function create($request)
     {
+
         try {
+            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->get();
+            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->get();
+            if ($count_Category !== null || $count_Brand !== null || (int)$request->input('category_id') === 0 || (int)$request->input('brand_id')) {
+                $category_id = (int)$request->input('category');
+                $brand_id = (int)$request->input('brand');
+            } else {
+                Session::flash('error', 'Danh mục hoặc thương hiệu đã chọn không hợp lệ, vui lòng kiểm tra lại.');
+                return false;
+            }
+            DB::beginTransaction();
             // upload image product
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
             } else {
                 $path_image = '/storage/uploads/default/image-available.jpg';
-            }
-
-            $count_Category = Category::where(['id', (int)$request->input('category_id')], ['isDelete', 0])->count();
-            $count_Brand = Brand::where(['id', (int)$request->input('brand_id')], ['isDelete', 0])->count();
-            if ($count_Category !== 0 && $count_Brand !== 0){
-                $category_id = (int)$request->input('category_id');
-                $brand_id = (int)$request->input('brand_id');
-            }else{
-                return false;
             }
             // add product
             $product_id = Product::create([
@@ -73,6 +58,7 @@ class ProductService
                 "description" => (string)$request->input('description'),
                 "content" => (string)$request->input('content'),
                 "warranty" => (string)$request->input('warranty'),
+                "unit" => (string)$request->input('unit') === null ? (string)$request->input('unit') : 'Cái',
                 "slug" => (string)$request->input('slug'),
                 "active" => (int)$request->input('active'),
                 "category_id" => $category_id,
@@ -80,19 +66,25 @@ class ProductService
             ])->id;
 
             // add attributes for product
-            for ($i = 1; $i < count($request->input('group-a')); $i++) {
-                if ($request->input("group-a[$i]type_name") !== null && $request->input('group-a[0]codename') !== null){
-                    if ($this->insertAttribute($product_id,$request->input("group-a[$i]"))){
-                        Session::flash('success', 'Tạo sản phẩm thành công.');
-                        return true;
-                    }else{
-                        Session::flash('error', 'Vui lòng thêm ít nhất một mẫu mã cho sản phẩm.');
+            if (count($request->input('group-a')) <= 0) {
+                Session::flash('error', 'Vui lòng thêm ít nhất một mẫu mã cho sản phẩm.');
+                return false;
+            }
+            $dataAttributes = $request->input('group-a');
+            for ($i = 0; $i < count($dataAttributes); $i++) {
+                if ($dataAttributes[$i]['codename'] !== null) {
+                    if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false){
+                        DB::rollBack();
                         return false;
                     }
                 }
             }
+            DB::commit();
+            Session::flash('success', 'Thêm sản phẩm thành công.');
         } catch (\Exception $exception) {
-            Session::flash('error', $exception->getMessage());
+            DB::rollBack();
+            Session::flash('error', 'Thêm sản phẩm không thành công. Vui lòng thử lại.');
+            \Log::info($exception->getMessage());
             return false;
         }
         return true;
@@ -100,7 +92,9 @@ class ProductService
 
     protected function insertAttribute($product_id, $data): bool
     {
-        $this->productAttributeService->create($product_id, $data);
-        return true;
+        if ($this->productAttributeService->create($product_id, $data)) {
+            return true;
+        }
+        return false;
     }
 }

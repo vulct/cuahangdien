@@ -16,6 +16,7 @@ class Product extends Model
         "image",
         "slug",
         "warranty",
+        "unit",
         "active",
         "isDelete",
         "category_id",

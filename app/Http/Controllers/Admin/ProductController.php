@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductRequest;
 use App\Services\Admin\BrandService;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\ProductService;
@@ -57,11 +58,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        dd($request->input('group-a'));
-        $this->productService->create($request);
-        return back();
+        if ($this->productService->create($request)){
+            return redirect()->route('admin.products.list');
+        }
+        return back()->withInput();
     }
 
     /**

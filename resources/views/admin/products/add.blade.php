@@ -25,8 +25,7 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới sản phẩm')}}</h3>
-
+                        <h3 class="card-title">{{__('Thêm mới sản phẩm')}} {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -53,8 +52,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="name">{{__('Name')}}</label>
-                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name" placeholder="Ổ cắm kéo dài chống sét lan truyền thế hệ mới ">
+                                                <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
+                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name" placeholder="Ổ cắm kéo dài chống sét lan truyền thế hệ mới" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">{{__('Mô tả')}}</label>
@@ -65,22 +64,22 @@
                                                 <textarea id="content" class="summernote" name="content">{{old('content')}}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputStatus">{{__('Danh mục sản phẩm')}}</label>
+                                                <label for="inputStatus">{{__('Danh mục sản phẩm')}} <span class="text-danger">*</span></label>
                                                 <select id="inputStatus" name="category" class="form-control select2"
-                                                        style="width: 100%">
-                                                    <option value="0" selected>Trống</option>
+                                                        style="width: 100%" required>
+                                                    <option value="">Trống</option>
                                                     @foreach($categories as $cate_parent)
-                                                        <option value="{{$cate_parent->id}}">{{$cate_parent->name}}</option>
+                                                        <option value="{{$cate_parent->id}}" {{ old('category') == $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputBrand">{{__('Thương hiệu sản phẩm')}}</label>
+                                                <label for="inputBrand">{{__('Thương hiệu sản phẩm')}} <span class="text-danger">*</span></label>
                                                 <select id="inputBrand" name="brand" class="form-control select2"
-                                                        style="width: 100%">
-                                                    <option value="0" selected>Trống</option>
+                                                        style="width: 100%" required>
+                                                    <option value="">Trống</option>
                                                     @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                        <option value="{{$brand->id}}" {{ old('brand') == $brand->id ? "selected" :""}}>{{$brand->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -104,47 +103,85 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}}</label>
-                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug" placeholder="o-cam-keo-dai-chong-set-lan-truyen-the-he-moi">
+                                                <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
+                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug" placeholder="o-cam-keo-dai-chong-set-lan-truyen-the-he-moi" required>
                                             </div>
                                             <div class="form-group repeater">
                                                 <div data-repeater-list="group-a">
-                                                    <div data-repeater-item="">
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-sm-12 form-group">
-                                                                <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
-                                                                <input type="text" class="form-control" name="type_name" id="inputTypeProduct" value="{{old('type_name')}}" placeholder="1 ổ cắm, 230V - 10A" >
+                                                    @if(old('group-a'))
+                                                        @for( $i =0; $i < count(old('group-a')); $i++)
+                                                            <div data-repeater-item="">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12 form-group">
+                                                                        <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
+                                                                        <input type="text" class="form-control" name="type_name" value="{{old("group-a.$i.type_name")}}" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12 form-group">
+                                                                        <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
+                                                                        <input type="text" class="form-control" name="codename" value="{{old("group-a.$i.codename")}}"  id="codename" placeholder="PM1W-VN" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-5 col-sm-12 form-group">
+                                                                        <label for="price">{{__('Giá bán (VNĐ)')}}</label>
+                                                                        <input type="number" class="form-control" id="price" name="price" value="{{old("group-a.$i.price")}}" placeholder="276,000 VNĐ">
+                                                                    </div>
+                                                                    <div class="col-md-5 col-sm-12 form-group">
+                                                                        <label for="discount">{{__('Chiết khấu (%)')}}</label>
+                                                                        <input type="number" class="form-control" id="discount" name="discount" value="{{old("group-a.$i.discount")}}" placeholder="30%">
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
+                                                                        <div><label>&nbsp;</label></div>
+                                                                        <button type="button" class="btn btn-danger" data-repeater-delete="">
+                                                                            <i class="fas fa-trash font-size-10"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6 col-sm-12 form-group">
-                                                                <label for="codename">{{__('Mã sản phẩm')}}</label>
-                                                                <input type="text" class="form-control" name="codename" id="codename" value="{{old('codename')}}" placeholder="PM1W-VN">
+                                                        @endfor
+                                                    @else
+                                                        <div data-repeater-item="">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-12 form-group">
+                                                                    <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
+                                                                    <input type="text" class="form-control" name="type_name" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-12 form-group">
+                                                                    <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" name="codename" id="codename" placeholder="PM1W-VN" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-5 col-sm-12 form-group">
+                                                                    <label for="price">{{__('Giá bán (VNĐ)')}}</label>
+                                                                    <input type="number" class="form-control" id="price" name="price" placeholder="276,000 VNĐ">
+                                                                </div>
+                                                                <div class="col-md-5 col-sm-12 form-group">
+                                                                    <label for="discount">{{__('Chiết khấu (%)')}}</label>
+                                                                    <input type="number" class="form-control" id="discount" name="discount" placeholder="30%">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
+                                                                    <div><label>&nbsp;</label></div>
+                                                                    <button type="button" class="btn btn-danger" data-repeater-delete="">
+                                                                        <i class="fas fa-trash font-size-10"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-5 col-sm-12 form-group">
-                                                                <label for="price">{{__('Giá bán thường (VNĐ)')}}</label>
-                                                                <input type="text" class="form-control" id="price" name="price" value="{{old('price')}}" placeholder="276,000">
-                                                            </div>
-                                                            <div class="col-md-5 col-sm-12 form-group">
-                                                                <label for="price_sale">{{__('Giá khuyến mãi (VNĐ)')}}</label>
-                                                                <input type="text" class="form-control" id="price_sale" name="price_sale" value="{{old('price_sale')}}" placeholder="173,880">
-                                                            </div>
-                                                            <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
-                                                                <div><label>&nbsp;</label></div>
-                                                                <button type="button" class="btn btn-danger" data-repeater-delete="">
-                                                                    <i class="fas fa-trash font-size-10"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    @endif
+
                                                 </div>
                                                 <button type="button" class="btn btn-primary" data-repeater-create="">
                                                     <i class="fas fa-plus font-size-10 mr-2"></i> {{__('Thêm mẫu mã')}}
                                                 </button>
                                             </div>
                                             <div class="form-group">
-                                                <label for="warranty">{{__('Bảo hành')}}</label>
-                                                <input type="text" id="warranty" class="form-control" value="{{old('warranty')}}" name="warranty" placeholder="12 tháng">
+                                                <label for="warranty">{{__('Bảo hành')}} <span class="text-danger">*</span></label>
+                                                <input type="text" id="warranty" class="form-control" value="{{old('warranty')}}" name="warranty" placeholder="12 tháng" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="unit">{{__('Đơn vị tính')}} <span class="text-muted">{{__('(Đơn vị mặc định: Cái)')}}</span></label>
+                                                <input type="text" id="unit" class="form-control" value="{{old('unit')}}" name="unit" placeholder="Cái">
                                             </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"

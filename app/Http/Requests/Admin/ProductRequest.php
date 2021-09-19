@@ -32,7 +32,11 @@ class ProductRequest extends FormRequest
                 'min:3',
                 'max:255'
             ],
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'type_name' => 'string',
+            'codename' => 'string',
+            'price' => 'integer',
+            'discount' => 'integer',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
                 'min:3',
@@ -42,9 +46,10 @@ class ProductRequest extends FormRequest
                     $query->where('isDelete', 0);
                 })
             ],
-            'warranty'=>'required|string|min:3|max:255',
-            'category'=> 'integer',
-            'brand'=> 'integer',
+            'warranty' => 'required|string|min:3|max:255',
+            'unit' => 'string|min:1|max:255',
+            'category' => 'integer|required',
+            'brand' => 'integer|required'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -52,7 +57,9 @@ class ProductRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('products')->ignore($this->product->id)
+                Rule::unique('products')->where(function ($query) {
+                    $query->where('isDelete', 0);
+                })->ignore($this->product->id)
             ];
         }
 
@@ -65,7 +72,17 @@ class ProductRequest extends FormRequest
             'name' => 'tên sản phẩm',
             'slug' => 'đường dẫn (URL)',
             'image' => 'hình ảnh',
-            'warranty' => 'bảo hành'
+            'warranty' => 'bảo hành',
+            'unit' => 'đơn vị tính',
+            'discount' => 'chiết khấu'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category.not_in' => 'Vui lòng chọn danh mục sản phẩm.',
+            'brand.not_in' => 'Vui lòng chọn thương hiệu sản phẩm.'
         ];
     }
 }
