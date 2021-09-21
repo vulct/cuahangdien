@@ -2,7 +2,10 @@
 $("#example1").DataTable({
     "scrollX": true,
     "responsive": true, "lengthChange": false, "autoWidth": true,
-    "buttons": ["copy", "csv", "excel", "pdf"]
+    "buttons": ["copy", "csv", "excel", "pdf"],
+    "columnDefs": [
+        {"width": "30px", "targets": 0}
+    ]
 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 $('#example2').DataTable({
     "paging": true,

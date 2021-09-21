@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttributes;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -22,14 +23,8 @@ class ProductService
 
     public function get()
     {
-        return Product::orderbyDesc('id')->where('isDelete', 0)->get();
+        return Product::with('attributes')->orderbyDesc('id')->where('isDelete', 0)->get();
     }
-
-//    public function get()
-//    {
-//        return Product::with('menu')
-//            ->orderByDesc('id')->paginate(15);
-//    }
 
     public function create($request)
     {
@@ -73,7 +68,7 @@ class ProductService
             $dataAttributes = $request->input('group-a');
             for ($i = 0; $i < count($dataAttributes); $i++) {
                 if ($dataAttributes[$i]['codename'] !== null) {
-                    if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false){
+                    if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false) {
                         DB::rollBack();
                         return false;
                     }
@@ -96,5 +91,20 @@ class ProductService
             return true;
         }
         return false;
+    }
+
+    public function update($request, $product)
+    {
+
+        try {
+            $product->fill($request->input());
+            $product->save();
+            Session::flash('success', 'Cập nhật thông tin sản phẩm thành công');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
     }
 }
