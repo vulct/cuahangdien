@@ -30,8 +30,8 @@ class ProductService
     {
 
         try {
-            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->first();
-            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->first();
+            $count_Category = Category::where('id', (int)$request->input('category'))->where('isDelete', 0)->first();
+            $count_Brand = Brand::where('id', (int)$request->input('brand'))->where('isDelete', 0)->first();
             if ($count_Category !== null || $count_Brand !== null) {
                 $category_id = (int)$request->input('category');
                 $brand_id = (int)$request->input('brand');
@@ -102,8 +102,8 @@ class ProductService
         // attribute nào không thuộc array request thì update isDelete => 1
 
         try {
-            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->first();
-            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->first();
+            $count_Category = Category::where('id', (int)$request->input('category'))->where('isDelete', 0)->first();
+            $count_Brand = Brand::where('id', (int)$request->input('brand'))->where('isDelete', 0)->first();
             if ($count_Category !== null || $count_Brand !== null) {
                 $category_id = (int)$request->input('category');
                 $brand_id = (int)$request->input('brand');
@@ -112,7 +112,6 @@ class ProductService
                 return false;
             }
 
-            DB::beginTransaction();
             // update image product
             $path_image = $product->image;
 
@@ -126,18 +125,19 @@ class ProductService
             for ($i = 0; $i < count($dataAttributes); $i++) {
                 if ($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] === null) {
                     if ($this->insertAttribute($product->id, $dataAttributes[$i]) === false) {
-                        DB::rollBack();
+                        Session::flash('error', 'Thêm mới mẫu mã không thành công. Vui lòng kiểm tra lại.');
                         return false;
                     }
-                }elseif($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] !== null){
+                }
+                if($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] !== null){
                     foreach ($product['attributes'] as $att){
                         // update attribute
                         if ($dataAttributes[$i]['attribute_id'] === $att->id){
                             if ($this->updateAttribute($dataAttributes[$i]['attribute_id'],$dataAttributes[$i]) === false) {
-                                DB::rollBack();
+                                Session::flash('error', 'Cập nhật mẫu mã không thành công. Vui lòng kiểm tra lại.');
                                 return false;
                             }
-                            $arrayAttributeChecked = $dataAttributes[$i]['attribute_id'];
+                            $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
                         }
                     }
                 }
@@ -146,8 +146,8 @@ class ProductService
             // destroy attribute
             foreach ($product['attributes'] as $att){
                 if (!in_array($att->id, $arrayAttributeChecked)){
-                    if ($this->deleteAttribute($dataAttributes[$i]['attribute_id']) === false) {
-                        DB::rollBack();
+                    if ($this->deleteAttribute($att->id) === false) {
+                        Session::flash('error', 'Xóa mẫu mã không thành công. Vui lòng kiểm tra lại.');
                         return false;
                     }
                 }
@@ -158,12 +158,13 @@ class ProductService
             $product->image = $path_image;
             $product->description = (string)$request->input('description');
             $product->content = (string)$request->input('content');
-            $product->warranty = (string)$request->input('name');
+            $product->warranty = (string)$request->input('warranty');
             $product->unit = (string)$request->input('unit') === null ? (string)$request->input('unit') : 'Cái';
             $product->slug = (string)$request->input('slug');
             $product->category_id = $category_id;
             $product->brand_id = $brand_id;
             $product->save();
+
             Session::flash('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $err) {
             Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại');

@@ -47,7 +47,6 @@ class ProductRequest extends FormRequest
                 })
             ],
             'warranty' => 'required|string|min:3|max:255',
-            'unit' => 'string|min:1|max:255',
             'category' => 'integer|required',
             'brand' => 'integer|required'
         ];

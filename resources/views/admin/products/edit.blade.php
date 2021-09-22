@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="form-group repeater">
                                                 <div data-repeater-list="group-a">
-                                                    @if($product['attributes'])
+                                                    @if(count($product['attributes']) > 0)
                                                         @foreach($product['attributes'] as $att)
                                                         <div data-repeater-item="">
                                                             <div class="row">
@@ -172,36 +172,36 @@
                                                                         </div>
                                                                     </div>
                                                                 @endfor
-                                                            @else
-                                                                <div data-repeater-item="">
-                                                                    <div class="row">
-                                                                        <div class="col-md-6 col-sm-12 form-group">
-                                                                            <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
-                                                                            <input type="text" class="form-control" name="type_name" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
-                                                                        </div>
-                                                                        <div class="col-md-6 col-sm-12 form-group">
-                                                                            <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
-                                                                            <input type="text" class="form-control" name="codename" id="codename" placeholder="PM1W-VN" required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-5 col-sm-12 form-group">
-                                                                            <label for="price">{{__('Giá bán (VNĐ)')}}</label>
-                                                                            <input type="text" data-input-mask="money" class="form-control" id="price" name="price" placeholder="276,000 VNĐ">
-                                                                        </div>
-                                                                        <div class="col-md-5 col-sm-12 form-group">
-                                                                            <label for="discount">{{__('Chiết khấu (%)')}}</label>
-                                                                            <input type="number" class="form-control" id="discount" name="discount" placeholder="30%">
-                                                                        </div>
-                                                                        <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
-                                                                            <div><label>&nbsp;</label></div>
-                                                                            <button type="button" class="btn btn-danger" data-repeater-delete="">
-                                                                                <i class="fas fa-trash font-size-10"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
+                                                    @else
+                                                        <div data-repeater-item="">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-12 form-group">
+                                                                    <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
+                                                                    <input type="text" class="form-control" name="type_name" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
                                                                 </div>
-                                                            @endif
+                                                                <div class="col-md-6 col-sm-12 form-group">
+                                                                    <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" name="codename" id="codename" placeholder="PM1W-VN" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-5 col-sm-12 form-group">
+                                                                    <label for="price">{{__('Giá bán (VNĐ)')}}</label>
+                                                                    <input type="text" data-input-mask="money" class="form-control" id="price" name="price" placeholder="276,000 VNĐ">
+                                                                </div>
+                                                                <div class="col-md-5 col-sm-12 form-group">
+                                                                    <label for="discount">{{__('Chiết khấu (%)')}}</label>
+                                                                    <input type="number" class="form-control" id="discount" name="discount" placeholder="30%">
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
+                                                                    <div><label>&nbsp;</label></div>
+                                                                    <button type="button" class="btn btn-danger" data-repeater-delete="">
+                                                                        <i class="fas fa-trash font-size-10"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <button type="button" class="btn btn-primary" data-repeater-create="">
                                                     <i class="fas fa-plus font-size-10 mr-2"></i> {{__('Thêm mẫu mã')}}

@@ -28,12 +28,12 @@ class ProductAttributesService
 
     public function destroy($id)
     {
-        $attribute = ProductAttributes::where(['id' => $id, 'isDelete' => 0])->first();
+        $attribute = ProductAttributes::where('id', $id)->first();
 
         if ($attribute) {
-            return ProductAttributes::where(['slug' => $id, 'isDelete' => 0])->update(['isDelete' => 1]);
+            ProductAttributes::where('id', $id)->delete();
+            return true;
         }
-
         return false;
     }
 

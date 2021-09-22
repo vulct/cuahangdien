@@ -67,13 +67,12 @@ class BrandService
 
     public function update($brand, $brandRequest)
     {
-        $path_image = $brand->image;
-
-        if ($brandRequest->hasFile('image')) {
-            $path_image = $this->upload->store($brandRequest->file('image'));
-        }
-
         try {
+            $path_image = $brand->image;
+
+            if ($brandRequest->hasFile('image')) {
+                $path_image = $this->upload->store($brandRequest->file('image'));
+            }
 
             $brand->name = (string)$brandRequest->input('name');
             $brand->image = $path_image;
