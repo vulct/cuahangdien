@@ -30,9 +30,9 @@ class ProductService
     {
 
         try {
-            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->get();
-            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->get();
-            if ($count_Category !== null || $count_Brand !== null || (int)$request->input('category_id') === 0 || (int)$request->input('brand_id')) {
+            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->first();
+            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->first();
+            if ($count_Category !== null || $count_Brand !== null) {
                 $category_id = (int)$request->input('category');
                 $brand_id = (int)$request->input('brand');
             } else {
@@ -95,9 +95,74 @@ class ProductService
 
     public function update($request, $product)
     {
+        // 1. Check xem có tồn tại input name "attribute_id":
+        // - Có : Update attribute đó.
+        // - Không: Create attribute mới.
+        // 2. Kiểm tra trong array của request với array của product
+        // attribute nào không thuộc array request thì update isDelete => 1
 
         try {
-            $product->fill($request->input());
+            $count_Category = Category::where('id', (int)$request->input('category_id'))->where('isDelete', 0)->first();
+            $count_Brand = Brand::where('id', (int)$request->input('brand_id'))->where('isDelete', 0)->first();
+            if ($count_Category !== null || $count_Brand !== null) {
+                $category_id = (int)$request->input('category');
+                $brand_id = (int)$request->input('brand');
+            } else {
+                Session::flash('error', 'Danh mục hoặc thương hiệu đã chọn không hợp lệ, vui lòng kiểm tra lại.');
+                return false;
+            }
+
+            DB::beginTransaction();
+            // update image product
+            $path_image = $product->image;
+
+            if ($request->hasFile('image')) {
+                $path_image = $this->upload->store($request->file('image'));
+            }
+
+            //update or create attributes
+            $arrayAttributeChecked = [];
+            $dataAttributes = $request->input('group-a');
+            for ($i = 0; $i < count($dataAttributes); $i++) {
+                if ($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] === null) {
+                    if ($this->insertAttribute($product->id, $dataAttributes[$i]) === false) {
+                        DB::rollBack();
+                        return false;
+                    }
+                }elseif($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] !== null){
+                    foreach ($product['attributes'] as $att){
+                        // update attribute
+                        if ($dataAttributes[$i]['attribute_id'] === $att->id){
+                            if ($this->updateAttribute($dataAttributes[$i]['attribute_id'],$dataAttributes[$i]) === false) {
+                                DB::rollBack();
+                                return false;
+                            }
+                            $arrayAttributeChecked = $dataAttributes[$i]['attribute_id'];
+                        }
+                    }
+                }
+            }
+
+            // destroy attribute
+            foreach ($product['attributes'] as $att){
+                if (!in_array($att->id, $arrayAttributeChecked)){
+                    if ($this->deleteAttribute($dataAttributes[$i]['attribute_id']) === false) {
+                        DB::rollBack();
+                        return false;
+                    }
+                }
+            }
+
+            // update detail product
+            $product->name = (string)$request->input('name');
+            $product->image = $path_image;
+            $product->description = (string)$request->input('description');
+            $product->content = (string)$request->input('content');
+            $product->warranty = (string)$request->input('name');
+            $product->unit = (string)$request->input('unit') === null ? (string)$request->input('unit') : 'Cái';
+            $product->slug = (string)$request->input('slug');
+            $product->category_id = $category_id;
+            $product->brand_id = $brand_id;
             $product->save();
             Session::flash('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $err) {
@@ -106,5 +171,21 @@ class ProductService
             return false;
         }
         return true;
+    }
+
+    public function updateAttribute($attribute_id, $data): bool
+    {
+        if ($this->productAttributeService->update($attribute_id, $data)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteAttribute($attribute_id): bool
+    {
+        if ($this->productAttributeService->destroy($attribute_id)) {
+            return true;
+        }
+        return false;
     }
 }

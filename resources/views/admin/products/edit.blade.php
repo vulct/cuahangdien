@@ -37,7 +37,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.products.update') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.products.update',$product->slug) }}" method="post" enctype="multipart/form-data">
                             @method('PATCH')
                             <div class="row">
                                 <div class="col-md-6">
@@ -115,6 +115,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-6 col-sm-12 form-group">
                                                                     <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
+                                                                    <input type="hidden" name="attribute_id" value="{{$att->id}}">
                                                                     <input type="text" class="form-control" name="type_name" value="{{$att->type_name}}" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
                                                                 </div>
                                                                 <div class="col-md-6 col-sm-12 form-group">
