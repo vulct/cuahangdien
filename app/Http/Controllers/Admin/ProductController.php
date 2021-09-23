@@ -104,8 +104,9 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+
         $result = $this->productService->update($request, $product);
-        return back()->with($result);
+        return back();
 //        if ($result) {
 //
 ////            return redirect()->route('admin.products.index');

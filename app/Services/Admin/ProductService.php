@@ -85,14 +85,6 @@ class ProductService
         return true;
     }
 
-    protected function insertAttribute($product_id, $data): bool
-    {
-        if ($this->productAttributeService->create($product_id, $data)) {
-            return true;
-        }
-        return false;
-    }
-
     public function update($request, $product)
     {
         // 1. Check xem có tồn tại input name "attribute_id":
@@ -123,21 +115,24 @@ class ProductService
             $arrayAttributeChecked = [];
             $dataAttributes = $request->input('group-a');
             for ($i = 0; $i < count($dataAttributes); $i++) {
-                if ($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] === null) {
-                    if ($this->insertAttribute($product->id, $dataAttributes[$i]) === false) {
-                        Session::flash('error', 'Thêm mới mẫu mã không thành công. Vui lòng kiểm tra lại.');
+                // add attribute
+                if ($dataAttributes[$i]['codename'] !== null && !isset($dataAttributes[$i]['attribute_id'])) {
+                    $attribute_id = $this->insertAttribute($product->id, $dataAttributes[$i]);
+                    if ($attribute_id === false) {
+                        Session::flash('error', 'Thêm mới mẫu mã không thành công, vui lòng kiểm tra lại.');
                         return false;
                     }
+                    $arrayAttributeChecked[] = $attribute_id;
                 }
-                if($dataAttributes[$i]['codename'] !== null && $dataAttributes[$i]['attribute_id'] !== null){
+                // update attribute
+                if($dataAttributes[$i]['codename'] !== null && isset($dataAttributes[$i]['attribute_id'])){
                     foreach ($product['attributes'] as $att){
-                        // update attribute
-                        if ($dataAttributes[$i]['attribute_id'] === $att->id){
+                        $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
+                        if ((int)$dataAttributes[$i]['attribute_id'] === $att->id){
                             if ($this->updateAttribute($dataAttributes[$i]['attribute_id'],$dataAttributes[$i]) === false) {
-                                Session::flash('error', 'Cập nhật mẫu mã không thành công. Vui lòng kiểm tra lại.');
+                                Session::flash('error', 'Cập nhật mẫu mã không thành công, vui lòng kiểm tra lại.');
                                 return false;
                             }
-                            $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
                         }
                     }
                 }
@@ -147,7 +142,7 @@ class ProductService
             foreach ($product['attributes'] as $att){
                 if (!in_array($att->id, $arrayAttributeChecked)){
                     if ($this->deleteAttribute($att->id) === false) {
-                        Session::flash('error', 'Xóa mẫu mã không thành công. Vui lòng kiểm tra lại.');
+                        Session::flash('error', 'Xóa mẫu mã không thành công, vui lòng kiểm tra lại.');
                         return false;
                     }
                 }
@@ -171,7 +166,7 @@ class ProductService
             \Log::info($err->getMessage());
             return false;
         }
-        return true;
+
     }
 
     public function updateAttribute($attribute_id, $data): bool
@@ -188,5 +183,10 @@ class ProductService
             return true;
         }
         return false;
+    }
+
+    protected function insertAttribute($product_id, $data)
+    {
+        return $this->productAttributeService->create($product_id, $data);
     }
 }
