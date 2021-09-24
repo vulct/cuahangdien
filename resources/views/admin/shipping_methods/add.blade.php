@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote">{{__('Mô tả')}}</label>
-                                                <textarea id="summernote" name="description">{{old('description')}}</textarea>
+                                                <textarea id="summernote" class="summernote" name="description">{{old('description')}}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-success float-right btn-block">{{__('Save')}}</button>

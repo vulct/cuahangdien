@@ -57,8 +57,8 @@
                                                 <input type="text" id="name" class="form-control" value="{{$brand->name}}" name="name">
                                             </div>
                                             <div class="form-group">
-                                                <label for="summernote">{{__('Mô tả')}}</label>
-                                                <textarea id="summernote" name="description">{{$brand->description}}</textarea>
+                                                <label for="description">{{__('Mô tả')}}</label>
+                                                <textarea id="description" class="summernote" name="description">{{$brand->description}}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" id="btn_add_cate" class="btn btn-success float-right btn-block">{{__('Save')}}</button>

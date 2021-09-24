@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote">{{__('Mô tả')}}</label>
-                                                <textarea id="summernote" name="description">{{$cate->description}}</textarea>
+                                                <textarea id="summernote" class="summernote" name="description">{{$cate->description}}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputStatus">{{__('Danh mục cha')}}</label>

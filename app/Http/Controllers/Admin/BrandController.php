@@ -66,7 +66,6 @@ class BrandController extends Controller
     public function show(Brand $brand)
     {
         return view('admin.brands.detail', [
-            'categories' => $this->brandService->get(),
             'brand' => $brand
         ]);
     }

@@ -169,31 +169,37 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{route('admin.products.index')}}" class="nav-link">
+                    <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Quản lý sản phẩm</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.categories.index')}}" class="nav-link">
+                    <a href="{{route('admin.categories.index')}}" class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Quản lý danh mục</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.brands.index')}}" class="nav-link">
+                    <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>Quản lý thương hiệu</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.shipping_methods.index')}}" class="nav-link">
+                    <a href="{{route('admin.shipping_methods.index')}}" class="nav-link {{ (request()->is('admin/shipping_methods*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-dolly"></i>
                         <p>Quản lý vận chuyển</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.pages.index')}}" class="nav-link {{ (request()->is('admin/pages*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Quản lý trang nội dung</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link }">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Quản lý trang nội dung
@@ -202,9 +208,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../examples/contacts.html" class="nav-link">
+                            <a href="{{route('admin.pages.index')}}" class="nav-link {{ (request()->routeIs('admin.pages.index')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Contacts</p>
+                                <p>Danh </p>
                             </a>
                         </li>
                         <li class="nav-item">

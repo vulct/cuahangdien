@@ -23,18 +23,7 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
-// add active in nav
-$(function(){
-    var current = location.pathname;
-    $('nav ul li a').each(function(){
-        var $this = $(this);
-        // if the current path is like this link, make it active
-        url = $this.attr('href').replace(/^.*\/\/[^\/]+/, '');
-        if(url.indexOf(current) !== -1){
-            $this.addClass('active');
-        }
-    })
-})
+
 
 // Create slug category
 
@@ -49,12 +38,12 @@ var slug = function(str) {
         str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
 
-    str = str.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-    str = str.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-    str = str.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-    str = str.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-    str = str.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-    str = str.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    str = str.replace(/[áàảạãăắằẳẵặâấầẩẫậ]/gi, 'a');
+    str = str.replace(/[éèẻẽẹêếềểễệ]/gi, 'e');
+    str = str.replace(/[iíìỉĩị]/gi, 'i');
+    str = str.replace(/[óòỏõọôốồổỗộơớờởỡợ]/gi, 'o');
+    str = str.replace(/[úùủũụưứừửữự]/gi, 'u');
+    str = str.replace(/[ýỳỷỹỵ]/gi, 'y');
     str = str.replace(/đ/gi, 'd');
 
     str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars

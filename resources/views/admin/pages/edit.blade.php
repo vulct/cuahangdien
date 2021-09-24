@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới thương hiệu')}}</h3>
+                        <h3 class="card-title">{{__('Thêm mới trang nội dung')}}</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -38,9 +38,10 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.brands.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.pages.update', $page->slug) }}" method="post" enctype="multipart/form-data">
+                            @method('PATCH')
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h3 class="card-title">{{__('Tổng quan')}}</h3>
@@ -54,64 +55,23 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="name">{{__('Name')}}</label>
-                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
+                                                <input type="text" id="name" class="form-control" value="{{$page->name}}" name="name">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">{{__('Mô tả')}}</label>
-                                                <textarea id="description" class="summernote" name="description">{{old('description')}}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-success float-right btn-block">{{__('Save')}}</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card card-secondary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">{{__('Customize')}}</h3>
-
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
                                             <div class="form-group">
                                                 <label for="slug">{{__('Đường dẫn')}}</label>
-                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug">
+                                                <input type="text" id="slug" class="form-control" value="{{$page->slug}}" name="slug">
                                             </div>
-                                            <div class="custom-control custom-checkbox">
+                                            <div class="form-group">
+                                                <label for="content">{{__('Nội dung')}}</label>
+                                                <textarea id="content" class="summernote" name="content">{{$page->content}}</textarea>
+                                            </div>
+                                            <div class="custom-control custom-checkbox pb-2">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"
-                                                       name="active" value="1" checked="" />
+                                                       name="active" value="1" @if($page->active == 1) checked="" @endif />
                                                 <label for="customCheckbox2" class="custom-control-label">Hoạt động</label>
                                             </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
-                                    <div class="card card-info">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Files</h3>
-
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
                                             <div class="form-group">
-                                                <label for="slug">{{__('Logo')}}</label>
-                                                <div class="custom-file mt-2">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                           accept="image/*" name="image">
-                                                    <label class="custom-file-label"
-                                                           for="exampleInputFile">{{__('Choose File')}}</label>
-                                                </div>
+                                                <button type="submit" class="btn btn-success float-right btn-block">{{__('Edit')}}</button>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->

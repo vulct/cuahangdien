@@ -20,7 +20,7 @@
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Đường dẫn')}}:</th>
-                                        <td><a href="{{config('app.url') . '/brands/'. $brand->slug}}">{{config('app.url') . '/brands/'. $brand->slug}}</a></td>
+                                        <td><a href="{{config('app.url') . '/brand/'. $brand->slug}}">{{config('app.url') . '/brand/'. $brand->slug}}</a></td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Mô tả')}}:</th>

@@ -1,4 +1,3 @@
-{{-- Modal show chi tiết todo --}}
 <div class="modal fade" id="show">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

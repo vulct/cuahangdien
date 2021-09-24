@@ -71,11 +71,15 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(Product $product)
     {
-        //
+        return view('admin.products.detail', [
+            'brands' => $this->brandService->get(),
+            'categories' => $this->categoryService->get(),
+            'product' => $product
+        ]);
     }
 
     /**
@@ -104,14 +108,11 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-
         $result = $this->productService->update($request, $product);
+        if ($result) {
+            return redirect()->route('admin.products.index');
+        }
         return back();
-//        if ($result) {
-//
-////            return redirect()->route('admin.products.index');
-//        }
-
     }
 
     /**
