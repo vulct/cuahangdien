@@ -11,11 +11,14 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'parent_id',
-        'image',
-        'description',
+        'meta_title',
         'slug',
+        'parent_id',
+        'keyword',
+        'description',
+        'image',
         'active',
+        'top',
         'isDelete'
     ];
 

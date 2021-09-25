@@ -15,10 +15,10 @@ class CreateShippingMethodsTable extends Migration
     {
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
-            $table->text('description');
-            $table->integer('active')->default(1);
-            $table->integer('isDelete')->default(0);
+            $table->string('name',200);
+            $table->string('description',300);
+            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
         });
     }

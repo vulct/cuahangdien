@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Category;
+
 class Helper
 {
     public static function category($categories, $parent_id = 0, $char = ''): string
@@ -9,6 +11,7 @@ class Helper
         $html = '';
 
         foreach ($categories as $key => $category) {
+            $name_parent = self::getNameParentCategory($category->parent_id) !== null  ? self::getNameParentCategory($category->parent_id)->name : '';
             if ($category->parent_id == $parent_id) {
                 $slug = $category->slug;
                 $html .= '
@@ -18,8 +21,8 @@ class Helper
                         <img src="'.$category->image.'" class="img-circle img-size-32 mr-2" style="min-height: 32px;" alt="Hình thu nhỏ" />
                         </td>
                         <td>' . $char . ' ' . $category->name . '</td>
+                        <td>'. $name_parent .'</td>
                         <td class="txt-slug">' . $category->slug . '</td>
-                        <td>' . $category->updated_at . '</td>
                         <td>' . self::active($category->active) . '</td>
                         <td>
                             <button class="btn btn-primary btn-sm btn-show" data-url="'. route('admin.categories.show', $category->slug) .'" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
@@ -41,5 +44,10 @@ class Helper
     {
         return $active == 0 ? '<span class="d-block badge bg-danger p-2">Không hoạt động</span>'
             : '<span class="d-block badge bg-success p-2">Hoạt động</span>';
+    }
+
+    public static function getNameParentCategory($id)
+    {
+        return Category::where(['id'=>$id, 'isDelete'=>0])->first();
     }
 }

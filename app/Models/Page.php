@@ -11,8 +11,10 @@ class Page extends Model
 
     protected $fillable = [
         'name',
-        'content',
         'slug',
+        'keyword',
+        'description',
+        'content',
         'active',
         'isDelete'
     ];

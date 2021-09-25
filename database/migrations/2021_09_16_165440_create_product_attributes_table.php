@@ -15,12 +15,15 @@ class CreateProductAttributesTable extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name');
+            $table->string('type_name')->nullable();
             $table->string('codename');
+            $table->string('size')->nullable();
             $table->decimal('price', 13, 2)->nullable()->default(null);
             $table->decimal('discount', 13, 2)->nullable()->default(null);
             $table->integer('product_id');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

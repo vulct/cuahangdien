@@ -102,10 +102,21 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $result = $this->pageService->destroy($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thương hiệu thành công'
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
     }
 }

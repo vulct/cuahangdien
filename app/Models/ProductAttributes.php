@@ -12,6 +12,7 @@ class ProductAttributes extends Model
     protected $fillable = [
         "type_name",
         "codename",
+        "size",
         "price",
         "discount",
         "product_id",

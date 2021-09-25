@@ -7,7 +7,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{$name_page}}</h1>
+                        <h1>
+                            <i class="fa fa-indent" aria-hidden="true"></i>
+                            {{$name_page}}
+                        </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,7 +30,6 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách danh mục của sản phẩm.</h3>
                                 <a href="{{route('admin.categories.create')}}" class="btn btn-primary float-right">{{__('Thêm mới danh mục')}}</a>
                             </div>
                             <!-- /.card-header -->
@@ -36,10 +38,10 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Ảnh</th>
+                                        <th>Hình ảnh</th>
                                         <th>Tên</th>
+                                        <th>Cấp cha</th>
                                         <th>Đường dẫn</th>
-                                        <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -50,10 +52,10 @@
                                     <tfoot>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Ảnh</th>
+                                        <th>Hình ảnh</th>
                                         <th>Tên</th>
+                                        <th>Cấp cha</th>
                                         <th>Đường dẫn</th>
-                                        <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>

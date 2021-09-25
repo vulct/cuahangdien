@@ -32,51 +32,56 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped table-responsive-stack" style="table-layout: fixed;width: 100%;">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tên</th>
-                                        <th>Danh mục</th>
-                                        <th>Thương hiệu</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Cập nhật</th>
-                                        <th>Trạng thái</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @php $i= 0; @endphp
-                                    @foreach($products as $key => $product)
+                                <div class="table-responsive">
+                                    <table id="example1" class="table table-hover box-body text-wrap table-bordered" style="table-layout: fixed;width: 100%;">
+                                        <thead>
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{$product->name}}</td>
-                                            <td>{{$product->category->name}}</td>
-                                            <td>{{$product->brand->name}}</td>
-                                            <td>{{$product->unit}}</td>
-                                            <td>{{$product->updated_at}}</td>
-                                            <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.products.show', $product->slug)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
-                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.products.edit', $product->slug)}}" ><i class="fas fa-pencil-alt"></i></a>
-                                                <button class="btn btn-danger btn-sm btn-delete" data-url="products/destroy" onclick="removeFunction('{{$product->slug}}')"><i class="fas fa-trash"></i></button>
-                                            </td>
+                                            <th>#</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên</th>
+                                            <th>Danh mục</th>
+                                            <th>Thương hiệu</th>
+                                            <th>Đơn vị tính</th>
+                                            <th>Cập nhật</th>
+                                            <th>Trạng thái</th>
+                                            <th>&nbsp;</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tên</th>
-                                        <th>Danh mục</th>
-                                        <th>Thương hiệu</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Cập nhật</th>
-                                        <th>Trạng thái</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @php $i= 0; @endphp
+                                        @foreach($products as $key => $product)
+                                            <tr>
+                                                <td>{{ ++$i }}</td>
+                                                <td><img class="rounded me-4" alt="{{$product->name}}" width="50" height="50" src="{{$product->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                                <td>{{$product->name}}</td>
+                                                <td>{{$product->category->name}}</td>
+                                                <td>{{$product->brand->name}}</td>
+                                                <td>{{$product->unit}}</td>
+                                                <td>{{$product->updated_at}}</td>
+                                                <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.products.show', $product->slug)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
+                                                    <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.products.edit', $product->slug)}}" ><i class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn btn-danger btn-sm btn-delete" data-url="products/destroy" onclick="removeFunction('{{$product->slug}}')"><i class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên</th>
+                                            <th>Danh mục</th>
+                                            <th>Thương hiệu</th>
+                                            <th>Đơn vị tính</th>
+                                            <th>Cập nhật</th>
+                                            <th>Trạng thái</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>

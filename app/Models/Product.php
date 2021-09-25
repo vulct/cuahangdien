@@ -11,6 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         "name",
+        "meta_title",
         "content",
         "description",
         "image",
@@ -19,6 +20,7 @@ class Product extends Model
         "unit",
         "active",
         "isDelete",
+        "view",
         "category_id",
         "brand_id",
     ];

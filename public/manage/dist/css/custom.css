@@ -14,6 +14,11 @@
     border-radius: 50%;
 }
 
+.nav-sidebar .nav-header{
+    color: #ffffff !important;
+    background: #4da0f1 !important;
+    padding: 10px 25px 10px 15px;
+}
 
 /*Landscape phones and down*/
 @media (max-width: 480px) {
