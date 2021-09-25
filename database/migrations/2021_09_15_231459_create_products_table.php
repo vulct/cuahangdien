@@ -15,23 +15,27 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name',200);
-            $table->string('meta_title',100)->nullable();
+            $table->string('name', 200);
+            $table->string('meta_title', 100)->nullable();
             $table->text('content')->nullable();
             $table->string('description', 300)->nullable();
             $table->string('image', 255)->nullable();
-            $table->string('slug',120)->index();
-            $table->string('warranty',255);
-            $table->string('unit',255);
+            $table->string('slug', 120)->index();
+            $table->string('warranty', 255);
+            $table->string('unit', 255);
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('isDelete')->default(0);
             $table->integer('view')->default(0);
-            $table->integer('category_id')->index();
-            $table->integer('brand_id')->index();
             $table->timestamps();
+        });
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('brand_id')->references('id')->on('brands');
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreignId('category_id')
+                ->nullable()->default(0)->index()
+                ->constrained();
+            $table->foreignId('brand_id')
+                ->nullable()->default(0)->index()
+                ->constrained();
         });
     }
 
