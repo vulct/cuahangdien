@@ -145,9 +145,6 @@
                                                 <div class="col-sm-10">
                                                     <textarea id="summernote" class="summernote"
                                                               name="description">{{old('description')}}</textarea>
-                                                    <span class="form-text">
-                                                        <i class="fa fa-info-circle"></i> Tối đa 300 kí tự
-                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -271,16 +268,13 @@
     <!-- Select2 -->
     <script rel="stylesheet" src="{{asset('manage/plugins/select2/js/select2.full.min.js')}}"></script>
     <!-- Iconpicker -->
-    <script rel="stylesheet"
-            src="{{asset('manage/plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.js')}}"></script>
+    <script rel="stylesheet" src="{{asset('manage/plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.js')}}"></script>
     <!-- Edit page -->
     <script>
         // Initialize Select2 Elements
         $('.select2').select2();
         // Iconpicker
         $(document).ready(function () {
-            //icon picker
-            //
             $('.icon').iconpicker({
                 placement: 'bottomLeft',
                 animation: false,
@@ -289,7 +283,6 @@
                 }
             });
         });
-
     </script>
     <script src="{{asset('manage/dist/js/pages/edit-form.js')}}"></script>
 @endpush

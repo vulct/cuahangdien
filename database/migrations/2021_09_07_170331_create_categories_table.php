@@ -21,7 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id');
             $table->string('keyword', 200)->nullable();
             $table->string('icon', 200)->nullable();
-            $table->string('description',300);
+            $table->text('description');
             $table->string('image',255);
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('top')->default(0);

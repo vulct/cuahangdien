@@ -34,7 +34,7 @@ class CategoryRequest extends FormRequest
             'meta_title' => 'string|nullable|max:100',
             'keyword' => 'string|max:200|nullable',
             'icon' => 'string|max:200|nullable',
-            'description' => 'string|max:300|nullable',
+            'description' => 'string|nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',

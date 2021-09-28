@@ -75,6 +75,28 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label for="icon"
+                                                       class="col-sm-2 col-form-label">{{ __('Icon') }}</label>
+                                                <div class="col-sm-10 ">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text">
+                                                          <span class="input-group-addon">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                          </span>
+                                                          </span>
+                                                        </div>
+                                                        <input style="width: 140px" type="text" id="icon"
+                                                               name="icon"
+                                                               value="{{ $cate->icon ?? 'fas fa-bars'  }}"
+                                                               class="form-control icon " placeholder="Icon">
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Hiển thị tại trang chủ
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="meta_title"
                                                        class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</span></label>
                                                 <div class="col-sm-10">
@@ -118,9 +140,6 @@
                                                 <div class="col-sm-10">
                                                     <textarea id="summernote" class="summernote"
                                                               name="description">{{$cate->description}}</textarea>
-                                                    <span class="form-text">
-                                                        <i class="fa fa-info-circle"></i> Tối đa 300 kí tự
-                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,9 +167,6 @@
                                                 <input type="text" id="slug" class="form-control"
                                                        value="{{$cate->slug}}" name="slug" required />
                                             </div>
-                                            <pre>
-                                                {{$cate->parent_id}}
-                                            </pre>
                                             <div class="form-group">
                                                 <label for="cate_parent">{{__('Danh mục cha')}}</label>
                                                 <select id="cate_parent" name="cate_parent" class="form-control select2"
@@ -237,6 +253,8 @@
     <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('manage/plugins/select2/css/select2.min.css')}}">
+    <!-- Iconpicker -->
+    <link rel="stylesheet" href="{{asset('manage/plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.css')}}">
 @endpush
 
 @push('scripts')
@@ -246,10 +264,22 @@
     <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
     <!-- Select2 -->
     <script rel="stylesheet" src="{{asset('manage/plugins/select2/js/select2.full.min.js')}}"></script>
+    <!-- Iconpicker -->
+    <script rel="stylesheet" src="{{asset('manage/plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.js')}}"></script>
     <!-- Edit page -->
     <script>
         //Initialize Select2 Elements
         $('.select2').select2();
+        // Iconpicker
+        $(document).ready(function () {
+            $('.icon').iconpicker({
+                placement: 'bottomLeft',
+                animation: false,
+                templates: {
+                    iconpickerItem: '<a role="button" href="javascript:;" class="iconpicker-item"><i></i></a>',
+                }
+            });
+        });
     </script>
     <script src="{{asset('manage/dist/js/pages/edit-form.js')}}"></script>
 @endpush

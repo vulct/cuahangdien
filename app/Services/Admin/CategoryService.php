@@ -85,8 +85,7 @@ class CategoryService
             $cate->icon = (string)$request->input('icon');
             $cate->description = (string)$request->input('description');
             $cate->active = (int)$request->input('active');
-            $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
-            $cate->top = $top;
+            $cate->top = (int)$request->top;
             $cate->save();
             Session::flash('success', 'Cập nhật danh mục thành công.');
             return true;
