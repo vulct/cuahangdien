@@ -9,13 +9,14 @@
                     <div class="col-sm-6">
                         <h1>
                             <i class="fa fa-indent" aria-hidden="true"></i>
-                            {{$name_page}}
+                            {{$title}}
                         </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a>
+                            </li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -30,18 +31,22 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{route('admin.categories.create')}}" class="btn btn-primary float-right">{{__('Thêm mới danh mục')}}</a>
+                                <a href="{{route('admin.categories.create')}}" class="btn btn-success float-right">
+                                    <i class="fa fa-plus" title="Thêm mới danh mục"></i>
+                                    {{__('Thêm mới danh mục')}}
+                                </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered dt-responsive" style="table-layout: fixed;width: 100%;">
+                                <table id="table-no-sort" class="table table-bordered dt-responsive"
+                                       style="table-layout: fixed;width: 100%;">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Hình ảnh</th>
                                         <th>Tên</th>
                                         <th>Cấp cha</th>
-                                        <th>Đường dẫn</th>
+                                        <th>Hiển thị</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -55,7 +60,7 @@
                                         <th>Hình ảnh</th>
                                         <th>Tên</th>
                                         <th>Cấp cha</th>
-                                        <th>Đường dẫn</th>
+                                        <th>Hiển thị</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>

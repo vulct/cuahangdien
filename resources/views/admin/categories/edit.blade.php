@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -28,11 +28,13 @@
                         <h3 class="card-title">{!! __('Edit :resource',['resource' => 'thông tin danh mục:' .' <b>'.$cate->name .'</b>']) !!}</h3>
 
                         <div class="card-tools">
+                            <div class="btn-group mr-5">
+                                <a href="{{route('admin.categories.index')}}"
+                                   class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
+                                        class="hidden-xs"> Trở lại danh sách</span></a>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -40,39 +42,136 @@
                     <div class="card-body">
                         <form action="{{ route('admin.categories.update', $cate->slug) }}" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h3 class="card-title">{{__('Tổng quan')}}</h3>
 
                                             <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                        title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="name"
+                                                       class="col-sm-2 col-form-label">{{__('Name')}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="name" name="name"
+                                                               value="{{$cate->name}}"
+                                                               class="form-control" placeholder="" required/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="meta_title"
+                                                       class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="meta_title"
+                                                               name="meta_title"
+                                                               value="{{$cate->meta_title}}"
+                                                               class="form-control" placeholder=""/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 100 kí tự
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="keyword"
+                                                       class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="keyword"
+                                                               name="keyword"
+                                                               value="{{$cate->keyword}}"
+                                                               class="form-control" placeholder=""/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="summernote"
+                                                       class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="summernote" class="summernote"
+                                                              name="description">{{$cate->description}}</textarea>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 300 kí tự
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-secondary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">{{__('Customize')}}</h3>
+
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                        title="Collapse">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="name">{{__('Name')}}</label>
-                                                <input type="text" id="name" class="form-control" value="{{$cate->name}}" name="name">
+                                                <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
+                                                <input type="text" id="slug" class="form-control"
+                                                       value="{{$cate->slug}}" name="slug" required />
                                             </div>
+                                            <pre>
+                                                {{$cate->parent_id}}
+                                            </pre>
                                             <div class="form-group">
-                                                <label for="summernote">{{__('Mô tả')}}</label>
-                                                <textarea id="summernote" class="summernote" name="description">{{$cate->description}}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputStatus">{{__('Danh mục cha')}}</label>
-                                                <select id="inputStatus" name="cate_parent" class="form-control select2"
+                                                <label for="cate_parent">{{__('Danh mục cha')}}</label>
+                                                <select id="cate_parent" name="cate_parent" class="form-control select2"
                                                         style="width: 100%">
-                                                    <option value="0">Trống</option>
-                                                    @foreach($categories as $cate_parent)
-                                                        <option
-                                                            value="{{$cate_parent->id}}" {{ $cate_parent->id == $cate->parent_id ? 'selected' : '' }}>{{$cate_parent->name}}</option>
-                                                    @endforeach
+                                                    <option value="0" selected>==ROOT==</option>
+                                                    {!! \App\Helpers\Helper::categoryOption($categories, 0, '',$cate->parent_id) !!}
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" id="btn_add_cate" class="btn btn-success float-right btn-block">{{__('Save')}}</button>
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox" id="active"
+                                                       name="active" value="1" @if($cate->active == 1) checked="" @endif/>
+                                                <label for="active" class="custom-control-label">Hoạt
+                                                    động</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox" id="top"
+                                                       name="top" value="1" @if($cate->top == 1) checked="" @endif />
+                                                <label for="top" class="custom-control-label">Hiển thị</label>
+                                                <span class="form-text">
+                                                    <i class="fa fa-info-circle"></i> Danh mục này sẽ hiển thị ra ngoài trang chủ. Mặc định chỉ dành cho những danh mục Root.
+                                                </span>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -80,36 +179,13 @@
                                     <!-- /.card -->
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card card-secondary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">{{__('Customize')}}</h3>
-
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}}</label>
-                                                <input type="text" id="slug" class="form-control" value="{{$cate->slug}}" name="slug">
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="customCheckbox2"
-                                                       name="active" value="1" @if($cate->active == 1) checked="" @endif>
-                                                <label for="customCheckbox2" class="custom-control-label">Hoạt động</label>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
                                     <div class="card card-info">
                                         <div class="card-header">
                                             <h3 class="card-title">Files</h3>
 
                                             <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                        title="Collapse">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </div>
@@ -133,8 +209,15 @@
                                     <!-- /.card -->
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success d-block w-100">{{__('Edit')}}</button>
+                                    </div>
+                                </div>
+                            </div>
                             @csrf
-                            @method('PUT')
+                            @method('PATCH')
                         </form>
                         <!-- /.row -->
                     </div>

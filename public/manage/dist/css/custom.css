@@ -20,6 +20,17 @@
     padding: 10px 25px 10px 15px;
 }
 
+.seo {
+    font-size: 10px;
+    color: #ad3419;
+}
+
+.form-text {
+    display: block;
+    margin-top: .25rem;
+    font-size: 12px;
+}
+
 /*Landscape phones and down*/
 @media (max-width: 480px) {
     .btn-edit{

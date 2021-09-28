@@ -36,19 +36,19 @@ class LoginController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $this->validate($request, [
-            'email' => 'required|email:filter',
-            'password' => 'required'
+            'email' => 'required|string|email:filter',
+            'password' => 'required|string'
         ]);
 
         $credential = [
             'email' => $request->email,
             'password' => $request->password,
         ];
-
         $remember_me = !empty($request->remember);
 
         if (Auth::attempt($credential)) {

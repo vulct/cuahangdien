@@ -17,38 +17,31 @@ class CategoryService
         $this->upload = $upload;
     }
 
-    public function get($parent_id = 1)
+    public function get()
     {
-        return Category::
-        when($parent_id == 0, function ($query) use ($parent_id) {
-            $query->where([
-                ['parent_id', $parent_id],
-                ['isDelete', 0]
-            ]);
-        },
-            function ($query) {
-                return $query->where('isDelete', 0);
-            }
-        )->get();
+        return Category::where('isDelete', 0)->get();
     }
 
     public function create($request): bool
     {
         try {
+            $path_image = "";
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            }else{
-                $path_image = "";
             }
-
+            $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
             Category::create([
                 "name" => (string)$request->name,
-                "parent_id" => (int)$request->cate_parent,
-                "image" => $path_image,
-                "description" => (string)$request->description,
+                "meta_title" => (string)$request->meta_title,
                 "slug" => (string)$request->slug,
-                "active" => (int)$request->active
+                "parent_id" => (int)$request->cate_parent,
+                "keyword" => (string)$request->keyword,
+                "icon" => (string)$request->icon,
+                "description" => (string)$request->description,
+                "image" => $path_image,
+                "active" => (int)$request->active,
+                "top" => $top,
             ]);
 
             Session::flash('success', 'Tạo danh mục thành công.');
@@ -72,10 +65,11 @@ class CategoryService
         return false;
     }
 
-    public function update($cate, $request)
+    public function update($cate, $request): bool
     {
         try {
 
+            // Nếu id category khác request input parent_id => update parent_id
             if ($cate->id != $request->input('cate_parent')){
                 $cate->parent_id = (int)$request->input('cate_parent');
             }
@@ -85,9 +79,14 @@ class CategoryService
             }
 
             $cate->name = (string)$request->input('name');
-            $cate->description = (string)$request->input('description');
+            $cate->meta_title = (string)$request->input('meta_title');
             $cate->slug = (string)$request->input('slug');
+            $cate->keyword = (string)$request->input('keyword');
+            $cate->icon = (string)$request->input('icon');
+            $cate->description = (string)$request->input('description');
             $cate->active = (int)$request->input('active');
+            $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
+            $cate->top = $top;
             $cate->save();
             Session::flash('success', 'Cập nhật danh mục thành công.');
             return true;

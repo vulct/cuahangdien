@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\CreateCategoryRequest;
-use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
+use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -21,14 +26,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
         return view('admin.categories.list', [
-            'name_page' => 'Danh Sách Danh Mục',
-            'title' => 'Danh Mục Sản Phẩm',
-            'classify' => 'Danh Mục',
+            'title' => 'Danh sách danh mục',
             'categories' => $this->categoryService->get()
         ]);
     }
@@ -36,40 +39,39 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
         return view('admin.categories.add', [
-            'title' => 'Thêm Mới Danh Mục Sản Phẩm',
-            'classify' => 'Danh Mục',
-            'categories' => $this->categoryService->get(0)
+            'title' => 'Thêm mới danh mục',
+            'categories' => $this->categoryService->get()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param CategoryRequest $request
+     * @return RedirectResponse
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
         $this->categoryService->create($request);
-        return back();
+        return redirect()->route('admin.categories.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
+     * @param Category $category
+     * @return Application|Factory|View
      */
     public function show(Category $category)
     {
 
-        return view('admin.categories.detail',[
-            'categories' => $this->categoryService->get(0),
+        return view('admin.categories.detail', [
+            'categories' => $this->categoryService->get(),
             'cate' => $category
         ]);
     }
@@ -77,15 +79,14 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param Category $category
+     * @return Application|Factory|View
      */
     public function edit(Category $category)
     {
         return view('admin.categories.edit', [
-            'title' => 'Chỉnh Sửa Danh Mục Sản Phẩm',
-            'classify' => 'Danh Mục',
-            'categories' => $this->categoryService->get(0),
+            'title' => 'Chỉnh sửa danh mục',
+            'categories' => $this->categoryService->get(),
             'cate' => $category
         ]);
     }
@@ -93,24 +94,24 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Category $category
+     * @param CategoryRequest $updateCategoryRequest
+     * @return RedirectResponse
      */
-    public function update(Category $category, UpdateCategoryRequest $updateCategoryRequest): \Illuminate\Http\RedirectResponse
+    public function update(Category $category, CategoryRequest $updateCategoryRequest): RedirectResponse
     {
         $result = $this->categoryService->update($category, $updateCategoryRequest);
-        if ($result){
+        if ($result) {
             return redirect()->route('admin.categories.index');
         }
-        return redirect()->back();
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function destroy(Request $request)
     {

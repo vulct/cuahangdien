@@ -18,10 +18,18 @@
                                         <td>{{$cate->name}}</td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
+                                        <th style="width:50%">{{__('Tiêu đề')}}:</th>
+                                        <td>{{$cate->meta_title}}</td>
+                                    </tr>
+                                    <tr style="border-top: none !important;" class="border-bottom">
+                                        <th style="width:50%">{{__('Từ khóa')}}:</th>
+                                        <td>{{$cate->keyword}}</td>
+                                    </tr>
+                                    <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Danh mục cha')}}:</th>
                                         <td>
                                             @foreach($categories as $cate_parent)
-                                                {{ $cate_parent->id == $cate->parent_id ? $cate_parent->name : '' }}
+                                                 {{$name_category = $cate_parent->id == $cate->parent_id ? $cate_parent->name : ''}}
                                             @endforeach
                                         </td>
                                     </tr>
@@ -38,7 +46,7 @@
                                         <td>{{date_format($cate->created_at,'H:i:s d/m/Y')}}</td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
-                                        <th>{{__('Thời gian cập nhật gần nhất')}}:</th>
+                                        <th>{{__('Thời gian cập nhật')}}:</th>
                                         <td>{{date_format($cate->updated_at,'H:i:s d/m/Y')}}</td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
@@ -46,8 +54,12 @@
                                         <td>{!! \App\Helpers\Helper::active($cate->active) !!}</td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
+                                        <th>{{__('Hiển thị trang chủ')}}:</th>
+                                        <td>{!! \App\Helpers\Helper::active($cate->top) !!}</td>
+                                    </tr>
+                                    <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Hình thu nhỏ')}}:</th>
-                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{$cate->image}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
+                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{!empty($cate->image) ? $cate->image : config('app.url').'/storage/uploads/default/no-image.jpg'}}"  alt="Ảnh thu nhỏ" style="width: 200px;" data-holder-rendered="true">
                                         </td>
                                     </tr>
                                     </tbody>

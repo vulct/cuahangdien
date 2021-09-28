@@ -253,8 +253,6 @@
     <script rel="stylesheet" src="{{asset('manage/plugins/jquery.repeater/jquery.repeater.js')}}"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-{{--    <!-- InputMask -->--}}
-{{--    <script src="{{ asset('manage/plugins/inputmask/jquery.mask.min.js') }}"></script>--}}
     <!-- Edit page -->
     <script>
         //Initialize Select2 Elements
