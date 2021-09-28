@@ -166,6 +166,9 @@
                                                 <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
                                                 <input type="text" id="slug" class="form-control"
                                                        value="{{$cate->slug}}" name="slug" required />
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
+                                                    </span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cate_parent">{{__('Danh mục cha')}}</label>

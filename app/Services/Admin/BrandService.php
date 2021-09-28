@@ -21,7 +21,7 @@ class BrandService
 
     public function get()
     {
-        return Brand::orderbyDesc('id')->where('isDelete', 0)->get();
+        return Brand::latest()->where('isDelete', 0)->get();
     }
 
     public function create($request)
@@ -36,6 +36,7 @@ class BrandService
 
             Brand::create([
                 "name" => (string)$request->input('name'),
+                "meta_title" => (string)$request->input('meta_title'),
                 "image" => $path_image,
                 "description" => (string)$request->input('description'),
                 "slug" => (string)$request->input('slug'),
@@ -75,6 +76,7 @@ class BrandService
             }
 
             $brand->name = (string)$brandRequest->input('name');
+            $brand->meta_title = (string)$brandRequest->input('meta_title');
             $brand->image = $path_image;
             $brand->description = (string)$brandRequest->input('description');
             $brand->slug = (string)$brandRequest->input('slug');

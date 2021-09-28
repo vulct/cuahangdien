@@ -52,7 +52,7 @@ class CategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('pages')->where(function ($query) {
+                Rule::unique('categories')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })->ignore($this->category->id)
             ];

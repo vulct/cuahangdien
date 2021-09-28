@@ -7,10 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>
-                            <i class="fa fa-indent" aria-hidden="true"></i>
-                            {{$title}}
-                        </h1>
+                        <h1>{{$title}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -31,8 +28,7 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{route('admin.categories.create')}}" class="btn btn-success float-right">
-                                    <i class="fa fa-plus" title="Thêm mới danh mục"></i>
+                                <a href="{{route('admin.categories.create')}}" class="btn btn-success float-right" title="{{__('Thêm mới danh mục')}}">
                                     {{__('Thêm mới danh mục')}}
                                 </a>
                             </div>

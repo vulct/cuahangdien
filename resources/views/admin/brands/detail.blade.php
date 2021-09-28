@@ -19,6 +19,10 @@
                                         <td>{{$brand->name}}</td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
+                                        <th style="width:50%">{{__('Tiêu đề')}}:</th>
+                                        <td>{{$brand->meta_title}}</td>
+                                    </tr>
+                                    <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Đường dẫn')}}:</th>
                                         <td><a href="{{config('app.url') . '/brand/'. $brand->slug}}">{{config('app.url') . '/brand/'. $brand->slug}}</a></td>
                                     </tr>

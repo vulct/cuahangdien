@@ -12,8 +12,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{config('app.url')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -25,14 +25,16 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới thương hiệu')}}</h3>
+                        <h3 class="card-title">{{__('Thêm mới')}} {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
 
                         <div class="card-tools">
+                            <div class="btn-group mr-5">
+                                <a href="{{route('admin.brands.index')}}"
+                                   class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
+                                        class="hidden-xs"> Trở lại danh sách</span></a>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -40,7 +42,7 @@
                     <div class="card-body">
                         <form action="{{ route('admin.brands.store') }}" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h3 class="card-title">{{__('Tổng quan')}}</h3>
@@ -52,22 +54,60 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="name">{{__('Name')}}</label>
-                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
+                                            <div class="form-group row">
+                                                <label for="name"
+                                                       class="col-sm-2 col-form-label">{{__('Name')}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="name" name="name"
+                                                               value="{{old('name')}}"
+                                                               class="form-control" placeholder="" required/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">{{__('Mô tả')}}</label>
-                                                <textarea id="description" class="summernote" name="description">{{old('description')}}</textarea>
+                                            <div class="form-group row">
+                                                <label for="meta_title"
+                                                       class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="meta_title"
+                                                               name="meta_title"
+                                                               value="{{old('meta_title')}}"
+                                                               class="form-control" placeholder=""/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 100 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-success float-right btn-block">{{__('Save')}}</button>
+
+                                            <div class="form-group row">
+                                                <label for="summernote"
+                                                       class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="summernote" class="summernote"
+                                                              name="description">{{old('description')}}</textarea>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="card card-secondary">
                                         <div class="card-header">
@@ -81,8 +121,12 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}}</label>
-                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug">
+                                                <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
+                                                <input type="text" id="slug" class="form-control"
+                                                       value="{{old('slug')}}" name="slug" required/>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
+                                                    </span>
                                             </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"
@@ -93,6 +137,8 @@
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
+                                </div>
+                                <div class="col-md-6">
                                     <div class="card card-info">
                                         <div class="card-header">
                                             <h3 class="card-title">Files</h3>
@@ -117,6 +163,14 @@
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="btn btn-success d-block w-100">{{__('Save')}}</button>
+                                    </div>
                                 </div>
                             </div>
                             @csrf

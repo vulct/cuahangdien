@@ -8,10 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            {{$title}}
-                        </h1>
+                        <h1>{{$title}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -135,7 +132,7 @@
                                                                class="form-control" placeholder=""/>
                                                     </div>
                                                     <span class="form-text">
-                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự, phân cách nhau bởi dấu ","
                                                     </span>
                                                 </div>
                                             </div>
@@ -171,6 +168,9 @@
                                                 <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
                                                 <input type="text" id="slug" class="form-control"
                                                        value="{{old('slug')}}" name="slug" required/>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
+                                                    </span>
                                             </div>
 
                                             <div class="form-group">

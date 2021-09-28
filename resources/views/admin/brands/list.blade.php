@@ -11,8 +11,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Danh sách thương hiệu của sản phẩm.</h3>
-                                <a href="{{route('admin.brands.create')}}" class="btn btn-primary float-right">{{__('Thêm mới thương hiệu')}}</a>
+                                <a href="{{route('admin.brands.create')}}" class="btn btn-success float-right" title="{{__('Thêm mới thương hiệu')}}">{{__('Thêm mới thương hiệu')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -49,9 +49,9 @@
                                     @foreach($brands as $key => $brand)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="rounded me-4" alt="[130x60]" width="130" height="60" src="{{$brand->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Logo')}}" src="{{$brand->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
                                             <td>{{$brand->name}}</td>
-                                            <td class="txt-slug">{{$brand->slug}}</td>
+                                            <td>{{$brand->slug}}</td>
                                             <td>{{$brand->updated_at}}</td>
                                             <td>{!! \App\Helpers\Helper::active($brand->active) !!}</td>
                                             <td>

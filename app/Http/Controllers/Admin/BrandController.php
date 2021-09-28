@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Brand\CreateBrandRequest;
-use App\Http\Requests\Admin\Brand\UpdateBrandRequest;
+use App\Http\Requests\Admin\BrandRequest;
 use App\Models\Brand;
 use App\Services\Admin\BrandService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -21,13 +25,12 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
         return view('admin.brands.list', [
-            'title' => 'Thương Hiệu Sản Phẩm',
-            'classify' => 'Thương Hiệu',
+            'title' => 'Danh sách thương hiệu',
             'brands' => $this->brandService->get()
         ]);
     }
@@ -35,33 +38,32 @@ class BrandController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
         return view('admin.brands.add', [
-            'title' => 'Thêm Mới Thương Hiệu Sản Phẩm',
-            'classify' => 'Thương Hiệu'
+            'title' => 'Thêm mới thương hiệu'
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param BrandRequest $request
+     * @return RedirectResponse
      */
-    public function store(CreateBrandRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(BrandRequest $request): RedirectResponse
     {
         $this->brandService->create($request);
-        return back();
+        return redirect()->route('admin.brands.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param Brand $brand
+     * @return Application|Factory|View
      */
     public function show(Brand $brand)
     {
@@ -73,14 +75,13 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param Brand $brand
+     * @return Application|Factory|View
      */
     public function edit(Brand $brand)
     {
         return view('admin.brands.edit', [
-            'title' => 'Chỉnh Sửa Thương Hiệu Sản Phẩm',
-            'classify' => 'Thương Hiệu',
+            'title' => 'Chỉnh sửa thương hiệu',
             'brand' => $brand
         ]);
     }
@@ -88,11 +89,11 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Brand $brand
+     * @param BrandRequest $updateBrandRequest
+     * @return RedirectResponse
      */
-    public function update(Brand $brand, UpdateBrandRequest $updateBrandRequest)
+    public function update(Brand $brand, BrandRequest $updateBrandRequest): RedirectResponse
     {
         $result = $this->brandService->update($brand, $updateBrandRequest);
         if ($result) {
@@ -104,10 +105,10 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->brandService->destroy($request);
 
