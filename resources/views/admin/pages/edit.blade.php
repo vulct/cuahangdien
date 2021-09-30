@@ -12,8 +12,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{config('app.url')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới trang nội dung')}}</h3>
+                        <h3 class="card-title">{{__('Chỉnh sửa trang nội dung')}}</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -64,6 +64,25 @@
                                             <div class="form-group">
                                                 <label for="content">{{__('Nội dung')}}</label>
                                                 <textarea id="content" class="summernote" name="content">{{$page->content}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="summernote"
+                                                       class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>
+                                                <textarea id="summernote" class="summernote"
+                                                          name="description">{{old('description') ?? $page->description}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="keyword"
+                                                       class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="keyword"
+                                                           name="keyword"
+                                                           value="{{old('keyword') ?? $page->keyword}}"
+                                                           class="form-control" placeholder=""/>
+                                                </div>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự, phân cách nhau bởi dấu ","
+                                                    </span>
                                             </div>
                                             <div class="custom-control custom-checkbox pb-2">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"

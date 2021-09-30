@@ -12,8 +12,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{config('app.url')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới trang nội dung')}}</h3>
+                        <h3 class="card-title">{{__('Thêm mới trang nội dung')}} {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -53,16 +53,41 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="name">{{__('Name')}}</label>
+                                                <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
                                                 <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                </span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}}</label>
+                                                <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
                                                 <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug">
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
+                                                </span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="content">{{__('Nội dung')}}</label>
+                                                <label for="content">{{__('Nội dung')}} <span class="text-danger">*</span></label>
                                                 <textarea id="content" class="summernote" name="content">{{old('content')}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="summernote"
+                                                       class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>
+                                                <textarea id="summernote" class="summernote"
+                                                          name="description">{{old('description')}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="keyword"
+                                                       class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="keyword"
+                                                           name="keyword"
+                                                           value="{{old('keyword')}}"
+                                                           class="form-control" placeholder=""/>
+                                                </div>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự, phân cách nhau bởi dấu ","
+                                                    </span>
                                             </div>
                                             <div class="custom-control custom-checkbox pb-2">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"

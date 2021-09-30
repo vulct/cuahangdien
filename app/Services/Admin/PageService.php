@@ -19,6 +19,8 @@ class PageService
             Page::create([
                 "name" => (string)$request->input('name'),
                 "content" => (string)$request->input('content'),
+                "keyword" => (string)$request->input('keyword'),
+                "description" => (string)$request->input('description'),
                 "slug" => (string)$request->input('slug'),
                 "active" => (int)$request->input('active'),
             ]);
@@ -52,6 +54,8 @@ class PageService
 
             $page->name = (string)$request->input('name');
             $page->content = (string)$request->input('content');
+            $page->description = (string)$request->input('description');
+            $page->keyword = (string)$request->input('keyword');
             $page->slug = (string)$request->input('slug');
             $page->active = (int)$request->input('active');
             $page->save();

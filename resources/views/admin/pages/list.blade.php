@@ -11,8 +11,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Danh sách trang nội dung hệ thống.</h3>
-                                <a href="{{route('admin.brands.create')}}" class="btn btn-primary float-right">{{__('Thêm trang mới')}}</a>
+                                <a href="{{route('admin.pages.create')}}" class="btn btn-primary float-right">{{__('Thêm trang mới')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -53,7 +53,6 @@
                                             <td>{{$page->updated_at}}</td>
                                             <td>{!! \App\Helpers\Helper::active($page->active) !!}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.pages.show', $page->slug)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
                                                 <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.pages.edit', $page->slug)}}"><i class="fas fa-pencil-alt"></i></a>
                                                 <button class="btn btn-danger btn-sm btn-delete" data-url="pages/destroy" onclick="removeFunction('{{$page->slug}}')"><i class="fas fa-trash"></i></button>
                                             </td>
