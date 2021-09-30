@@ -28,14 +28,14 @@ class BrandRequest extends FormRequest
             'name' => [
                 'required',
                 'min:3',
-                'max:255'
+                'max:100'
             ],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
                 'min:3',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                'max:255',
+                'max:120',
                 Rule::unique('brands')->where(function($query) {
                     $query->where('isDelete', 0);
                 })
@@ -46,7 +46,7 @@ class BrandRequest extends FormRequest
             $rules['slug'] = [
                 'required',
                 'string',
-                'max:255',
+                'max:120',
                 Rule::unique('brands')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })->ignore($this->brand->id)

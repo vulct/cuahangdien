@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageRequest;
 use App\Models\Page;
 use App\Services\Admin\PageService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -19,13 +22,12 @@ class PageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
         return view('admin.pages.list', [
-            'title' => 'Danh Sách Trang Nội Dung',
-            'classify' => 'Trang Nội Dung',
+            'title' => 'Danh sách trang nội dung',
             'pages' => $this->pageService->get()
         ]);
     }
@@ -33,13 +35,12 @@ class PageController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
         return view('admin.pages.add', [
-            'title' => 'Thêm Mới Trang Nội Dung',
-            'classify' => 'Trang Nội Dung'
+            'title' => 'Thêm mới trang nội dung',
         ]);
     }
 
@@ -51,33 +52,24 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-//        dd($request);
-        $this->pageService->create($request);
+        $result = $this->pageService->create($request);
+        if ($result) {
+            return redirect()->route('admin.pages.index');
+        }
         return back();
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View|\Illuminate\Http\Response
      */
     public function edit(Page $page)
     {
         return view('admin.pages.edit', [
-            'title' => 'Chỉnh Sửa Trang Nội Dung',
-            'classify' => 'Trang Nội Dung',
+            'title' => 'Chỉnh sửa trang nội dung',
             'page' => $page
         ]);
     }
@@ -111,7 +103,7 @@ class PageController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa thương hiệu thành công'
+                'message' => 'Xóa trang nội dung thành công'
             ]);
         }
 

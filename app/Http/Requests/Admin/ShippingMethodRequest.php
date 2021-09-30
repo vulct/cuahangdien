@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\ShippingMethod;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,15 +27,17 @@ class ShippingMethodRequest extends FormRequest
             'name' => [
                 'required',
                 'min:3',
-                'max:255'
-            ]
+                'max:200'
+            ],
+            'description' => 'string|nullable|max:300',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'tên phương thức vận chuyển'
+            'name' => 'tên phương thức vận chuyển',
+            'description' => 'mô tả'
         ];
     }
 }

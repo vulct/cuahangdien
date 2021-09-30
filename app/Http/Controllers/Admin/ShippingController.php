@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ShippingMethod\ShippingMethodRequest;
+use App\Http\Requests\Admin\ShippingMethodRequest;
 use App\Models\ShippingMethod;
 use App\Services\Admin\ShippingService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ShippingController extends Controller
 {
@@ -21,13 +25,12 @@ class ShippingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
         return view('admin.shipping_methods.list', [
-            'title' => 'Phương Thức Vận Chuyển',
-            'classify' => 'Vận Chuyển',
+            'title' => 'Danh sách phương thức vận chuyển',
             'shipping_methods' => $this->shippingService->get()
         ]);
     }
@@ -35,13 +38,12 @@ class ShippingController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
         return view('admin.shipping_methods.add', [
-            'title' => 'Thêm Mới Phương Thức Vận Chuyển',
-            'classify' => 'Vận Chuyển'
+            'title' => 'Thêm mới phương thức vận chuyển',
         ]);
     }
 
@@ -61,7 +63,7 @@ class ShippingController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function show(ShippingMethod $shippingMethod)
     {
@@ -74,13 +76,12 @@ class ShippingController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function edit(ShippingMethod $shippingMethod)
     {
         return view('admin.shipping_methods.edit', [
-            'title' => 'Chỉnh Sửa Thương Hiệu Sản Phẩm',
-            'classify' => 'Thương Hiệu',
+            'title' => 'Chỉnh sửa phương thức vận chuyển',
             'shipping' => $shippingMethod
         ]);
     }

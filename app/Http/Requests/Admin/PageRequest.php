@@ -30,14 +30,16 @@ class PageRequest extends FormRequest
                 'required',
                 'string',
                 'min:3',
-                'max:255'
+                'max:200'
             ],
+            'keyword' => 'string|max:200|nullable',
+            'description' => 'string|nullable',
             'content' => 'required',
             'slug' => [
                 'required',
                 'min:3',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                'max:255',
+                'max:120',
                 Rule::unique('pages')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })
@@ -48,7 +50,7 @@ class PageRequest extends FormRequest
             $rules['slug'] = [
                 'required',
                 'string',
-                'max:255',
+                'max:120',
                 Rule::unique('pages')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })->ignore($this->page->id)
@@ -63,7 +65,9 @@ class PageRequest extends FormRequest
         return [
             'name' => 'tiêu đề trang',
             'slug' => 'đường dẫn (URL)',
-            'content' => 'nội dung'
+            'content' => 'nội dung',
+            'keyword' => 'từ khóa',
+            'description' => 'mô tả',
         ];
     }
 }
