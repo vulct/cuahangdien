@@ -8,7 +8,6 @@ use App\Models\Product;
 use App\Services\Admin\BrandService;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\ProductService;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -32,8 +31,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('admin.products.list', [
-            'title' => 'Danh Sách Sản Phẩm',
-            'classify' => 'Sản Phẩm',
+            'title' => 'Danh sách sản phẩm',
             'products' => $this->productService->get()
         ]);
     }
@@ -46,10 +44,9 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.products.add', [
-            'title' => 'Thêm Mới Sản Phẩm',
-            'classify' => 'Sản Phẩm',
-            'categories' => $this->categoryService->get(),
-            'brands' => $this->brandService->get()
+            'title' => 'Thêm mới sản phẩm',
+            'categories' => $this->categoryService->get(1),
+            'brands' => $this->brandService->get(1)
         ]);
     }
 
@@ -76,8 +73,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('admin.products.detail', [
-            'brands' => $this->brandService->get(),
-            'categories' => $this->categoryService->get(),
+            'brands' => $this->brandService->get(1),
+            'categories' => $this->categoryService->get(1),
             'product' => $product
         ]);
     }
@@ -91,10 +88,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('admin.products.edit', [
-            'title' => 'Chỉnh Sửa Thông Tin Sản Phẩm',
-            'classify' => 'Sản Phẩm',
-            'categories' => $this->categoryService->get(),
-            'brands' => $this->brandService->get(),
+            'title' => 'Chỉnh sửa thông tin sản phẩm',
+            'categories' => $this->categoryService->get(1),
+            'brands' => $this->brandService->get(1),
             'product' => $product
         ]);
     }

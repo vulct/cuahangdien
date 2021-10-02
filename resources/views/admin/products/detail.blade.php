@@ -22,6 +22,10 @@
                                         <td><a href="{{config('app.url') . '/product/'. $product->slug}}">{{config('app.url') . '/product/'. $product->slug}}</a></td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
+                                        <th style="width:50%">{{__('Tiêu đề')}}:</th>
+                                        <td>{{$product->meta_title}}</td>
+                                    </tr>
+                                    <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Mô tả')}}:</th>
                                         <td>{!! $product->description !!}</td>
                                     </tr>

@@ -30,8 +30,8 @@ class ProductService
     {
 
         try {
-            $count_Category = Category::where('id', (int)$request->input('category'))->where('isDelete', 0)->first();
-            $count_Brand = Brand::where('id', (int)$request->input('brand'))->where('isDelete', 0)->first();
+            $count_Category = Category::where('id', (int)$request->input('category'))->where(['isDelete' => 0, 'active' => 1])->first();
+            $count_Brand = Brand::where('id', (int)$request->input('brand'))->where(['isDelete' => 0, 'active' => 1])->first();
             if ($count_Category !== null || $count_Brand !== null) {
                 $category_id = (int)$request->input('category');
                 $brand_id = (int)$request->input('brand');
@@ -49,6 +49,8 @@ class ProductService
             // add product
             $product_id = Product::create([
                 "name" => (string)$request->input('name'),
+                "meta_title" => (string)$request->input('meta_title'),
+                "keyword" => (string)$request->input('keyword'),
                 "image" => $path_image,
                 "description" => (string)$request->input('description'),
                 "content" => (string)$request->input('content'),
@@ -150,8 +152,10 @@ class ProductService
 
             // update detail product
             $product->name = (string)$request->input('name');
+            $product->meta_title = (string)$request->input('meta_title');
             $product->image = $path_image;
             $product->description = (string)$request->input('description');
+            $product->keyword = (string)$request->input('keyword');
             $product->content = (string)$request->input('content');
             $product->warranty = (string)$request->input('warranty');
             $product->unit = (string)$request->input('unit') === null ? (string)$request->input('unit') : 'Cái';

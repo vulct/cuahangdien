@@ -169,7 +169,7 @@
                                 <div class="col-md-12 ">
                                     <div class="form-group">
                                         <button type="submit"
-                                                class="btn btn-success d-block w-100">{{__('Save')}}</button>
+                                                class="btn btn-success d-block w-100">{{__('Add')}}</button>
                                     </div>
                                 </div>
                             </div>

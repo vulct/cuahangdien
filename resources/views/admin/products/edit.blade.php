@@ -12,8 +12,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$classify}}</li>
+                            <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -214,6 +214,19 @@
                                             <div class="form-group">
                                                 <label for="unit">{{__('Đơn vị tính')}} <span class="text-muted">{{__('(Đơn vị mặc định: Cái)')}}</span></label>
                                                 <input type="text" id="unit" class="form-control" value="{{$product->unit}}" name="unit" placeholder="Cái">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="keyword"
+                                                       class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="keyword"
+                                                           name="keyword"
+                                                           value="{{$product->keyword}}"
+                                                           class="form-control" placeholder=""/>
+                                                </div>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự, phân cách nhau bởi dấu ","
+                                                    </span>
                                             </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"

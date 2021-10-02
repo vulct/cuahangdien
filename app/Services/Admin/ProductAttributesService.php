@@ -13,6 +13,7 @@ class ProductAttributesService
         try {
             return ProductAttributes::create([
                 "type_name" => $request['type_name'] === null ? "" : $request['type_name'],
+                "size" => $request['size'] === null ? "" : $request['size'],
                 "codename" => $request['codename'],
                 "price" => $request['price'],
                 "discount" => $request['discount'],

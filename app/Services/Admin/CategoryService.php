@@ -17,9 +17,9 @@ class CategoryService
         $this->upload = $upload;
     }
 
-    public function get()
+    public function get($active = 0)
     {
-        return Category::where('isDelete', 0)->get();
+        return Category::where(['isDelete' => 0, 'active' => $active])->get();
     }
 
     public function create($request): bool
