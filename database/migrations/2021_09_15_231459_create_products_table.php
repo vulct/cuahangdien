@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('slug', 120)->index();
             $table->string('warranty', 255);
             $table->string('unit', 255);
+            $table->string('keyword');
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('isDelete')->default(0);
             $table->integer('view')->default(0);

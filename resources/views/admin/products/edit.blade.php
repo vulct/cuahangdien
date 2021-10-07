@@ -27,11 +27,13 @@
                     <div class="card-header">
                         <h3 class="card-title">{{__('Sửa thông tin sản phẩm')}} {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
                         <div class="card-tools">
+                            <div class="btn-group mr-5">
+                                <a href="{{route('admin.products.index')}}"
+                                   class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
+                                        class="hidden-xs"> Trở lại danh sách</span></a>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -40,7 +42,7 @@
                         <form action="{{ route('admin.products.update',$product->slug) }}" method="post" enctype="multipart/form-data">
                             @method('PATCH')
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h3 class="card-title">{{__('Tổng quan')}}</h3>
@@ -52,152 +54,440 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="name" class="form-control" value="{{$product->name}}" name="name" placeholder="Ổ cắm kéo dài chống sét lan truyền thế hệ mới" required>
+                                            <div class="form-group row">
+                                                <label for="name"
+                                                       class="col-sm-2 col-form-label">{{__('Name')}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="name" name="name"
+                                                               value="{{$product->name}}"
+                                                               class="form-control"
+                                                               placeholder="Tủ điện nhựa âm tường cửa mờ" required/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">{{__('Mô tả')}}</label>
-                                                <textarea id="description" class="summernote" name="description" >{{$product->description}}</textarea>
+                                            <div class="form-group row">
+                                                <label for="meta_title"
+                                                       class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="meta_title"
+                                                               name="meta_title"
+                                                               value="{{$product->meta_title}}"
+                                                               class="form-control"
+                                                               placeholder="Tủ điện nhựa âm tường cửa mờ Schneider | MIP22104T"/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 100 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="content">{{__('Nội dung')}}</label>
-                                                <textarea id="content" class="summernote" name="content">{{$product->content}}</textarea>
+                                            <div class="form-group row">
+                                                <label for="summernote"
+                                                       class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="summernote" class="summernote"
+                                                              name="description">{{$product->description}}</textarea>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 300 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputStatus">{{__('Danh mục sản phẩm')}} <span class="text-danger">*</span></label>
-                                                <select id="inputStatus" name="category" class="form-control select2"
-                                                        style="width: 100%" required>
-                                                    <option value="">Trống</option>
-                                                    @foreach($categories as $cate_parent)
-                                                        <option value="{{$cate_parent->id}}" {{ $product->category->id === $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group row">
+                                                <label for="content"
+                                                       class="col-sm-2 col-form-label">{{__('Nội dung')}}</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="content" class="summernote"
+                                                              name="content">{{$product->content}}</textarea>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputBrand">{{__('Thương hiệu sản phẩm')}} <span class="text-danger">*</span></label>
-                                                <select id="inputBrand" name="brand" class="form-control select2"
-                                                        style="width: 100%" required>
-                                                    <option value="">Trống</option>
-                                                    @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}" {{ $product->brand->id === $brand->id ? "selected" :""}}>{{$brand->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group row">
+                                                <label for="inputStatus"
+                                                       class="col-sm-2 col-form-label">{{__('Danh mục sản phẩm')}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <select id="inputStatus" name="category"
+                                                            class="form-control select2"
+                                                            style="width: 100%" required>
+                                                        <option value="">Trống</option>
+                                                        @foreach($categories as $cate_parent)
+                                                            <option value="{{$cate_parent->id}}" {{ $product->category->id === $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-success float-right btn-block">{{__('Edit')}}</button>
+                                            <div class="form-group row">
+                                                <label for="inputBrand"
+                                                       class="col-sm-2 col-form-label">{{__('Thương hiệu sản phẩm')}}
+                                                    <span class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <select id="inputBrand" name="brand" class="form-control select2"
+                                                            style="width: 100%" required>
+                                                        <option value="">Trống</option>
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{$brand->id}}" {{ $product->brand->id === $brand->id ? "selected" :""}}>{{$brand->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="card card-secondary">
                                         <div class="card-header">
                                             <h3 class="card-title">{{__('Customize')}}</h3>
                                             <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                        title="Collapse">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="slug" class="form-control" value="{{$product->slug}}" name="slug" placeholder="o-cam-keo-dai-chong-set-lan-truyen-the-he-moi" required>
+                                            <div class="form-group row">
+                                                <label for="slug" class="col-sm-2 col-form-label">{{__('Đường dẫn')}}
+                                                    <span class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-pencil-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" id="slug" class="form-control"
+                                                               value="{{$product->slug}}" name="slug"
+                                                               placeholder="tu-dien-nhua-am-tuong-cua-mo" required/>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div class="form-group repeater">
                                                 <div data-repeater-list="group-a">
                                                     @if(count($product['attributes']) > 0)
                                                         @foreach($product['attributes'] as $att)
-                                                        <div data-repeater-item="">
-                                                            <div class="row">
-                                                                <div class="col-md-6 col-sm-12 form-group">
-                                                                    <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
-                                                                    <input type="hidden" name="attribute_id" value="{{$att->id}}">
-                                                                    <input type="text" class="form-control" name="type_name" value="{{$att->type_name}}" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
-                                                                </div>
-                                                                <div class="col-md-6 col-sm-12 form-group">
-                                                                    <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" name="codename" value="{{$att->codename}}"  id="codename" placeholder="PM1W-VN" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-5 col-sm-12 form-group">
-                                                                    <label for="price">{{__('Giá gốc (VNĐ)')}}</label>
-                                                                    <input type="number" class="form-control" id="price" name="price" value="{{round($att->price,2)}}" placeholder="276,000 VNĐ">
-                                                                </div>
-                                                                <div class="col-md-5 col-sm-12 form-group">
-                                                                    <label for="discount">{{__('Chiết khấu (%)')}}</label>
-                                                                    <input type="number" class="form-control" id="discount" name="discount" value="{{round($att->discount)}}" placeholder="30%">
-                                                                </div>
-                                                                <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
-                                                                    <div><label>&nbsp;</label></div>
-                                                                    <button type="button" class="btn btn-danger" data-repeater-delete="">
-                                                                        <i class="fas fa-trash font-size-10"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                    @elseif(old('group-a'))
-                                                                @for( $i =0; $i < count(old('group-a')); $i++)
-                                                                    <div data-repeater-item="">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 col-sm-12 form-group">
-                                                                                <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
-                                                                                <input type="text" class="form-control" name="type_name" value="{{old("group-a.$i.type_name")}}" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
-                                                                            </div>
-                                                                            <div class="col-md-6 col-sm-12 form-group">
-                                                                                <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
-                                                                                <input type="text" class="form-control" name="codename" value="{{old("group-a.$i.codename")}}"  id="codename" placeholder="PM1W-VN" required>
+                                                            <div data-repeater-item="">
+                                                                <div class="form-group row">
+                                                                    <label for="codename"
+                                                                           class="col-sm-2 col-form-label">{{__('Mã sản phẩm')}}<span class="text-danger">*</span></label>
+                                                                    <div class="col-sm-10 row">
+                                                                        <div class="col-sm-11">
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                                </div>
+                                                                                <input type="text" id="codename"
+                                                                                       name="codename"
+                                                                                       value="{{$att->codename}}"
+                                                                                       class="form-control" placeholder="PM1W-VN"/>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-5 col-sm-12 form-group">
-                                                                                <label for="price">{{__('Giá gốc (VNĐ)')}}</label>
-                                                                                <input type="number" class="form-control" id="price" name="price" value="{{old("group-a.$i.price")}}" placeholder="276,000 VNĐ">
+                                                                        <div class="col-sm-1">
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                    data-repeater-delete="">
+                                                                                <i class="fas fa-trash font-size-10"></i>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="inputTypeProduct" class="col-sm-2 col-form-label">{{__('Mẫu sản phẩm')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
                                                                             </div>
-                                                                            <div class="col-md-5 col-sm-12 form-group">
-                                                                                <label for="discount">{{__('Chiết khấu (%)')}}</label>
-                                                                                <input type="number" class="form-control" id="discount" name="discount" value="{{old("group-a.$i.discount")}}" placeholder="30%">
+                                                                            <input type="text" class="form-control"
+                                                                                   name="type_name" id="inputTypeProduct"
+                                                                                   value="{{$att->type_name}}"
+                                                                                   placeholder="1 ổ cắm, 230V - 10A">
+                                                                        </div>
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="size" class="col-sm-2 col-form-label">{{__('Kích thước')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
                                                                             </div>
-                                                                            <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
-                                                                                <div><label>&nbsp;</label></div>
-                                                                                <button type="button" class="btn btn-danger" data-repeater-delete="">
-                                                                                    <i class="fas fa-trash font-size-10"></i>
-                                                                                </button>
+                                                                            <input type="text" class="form-control"
+                                                                                   name="size" id="size"
+                                                                                   value="{{$att->size}}"
+                                                                                   placeholder="150x252x98 mm">
+                                                                        </div>
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="price" class="col-sm-2 col-form-label">{{__('Giá bán (VNĐ)')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
                                                                             </div>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="price" id="price"
+                                                                                   value="{{round($att->price,2)}}"
+                                                                                   placeholder="276,000 VNĐ">
                                                                         </div>
                                                                     </div>
-                                                                @endfor
-                                                    @else
-                                                        <div data-repeater-item="">
-                                                            <div class="row">
-                                                                <div class="col-md-6 col-sm-12 form-group">
-                                                                    <label for="inputTypeProduct">{{__('Mẫu sản phẩm')}}</label>
-                                                                    <input type="text" class="form-control" name="type_name" id="inputTypeProduct" placeholder="1 ổ cắm, 230V - 10A">
                                                                 </div>
-                                                                <div class="col-md-6 col-sm-12 form-group">
-                                                                    <label for="codename">{{__('Mã sản phẩm')}} <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" name="codename" id="codename" placeholder="PM1W-VN" required>
+                                                                <div class="form-group row">
+                                                                    <label for="discount" class="col-sm-2 col-form-label">{{__('Chiết khấu (%)')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="discount" id="discount"
+                                                                                   value="{{round($att->discount,2)}}"
+                                                                                   placeholder="276,000 VNĐ">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-5 col-sm-12 form-group">
-                                                                    <label for="price">{{__('Giá bán (VNĐ)')}}</label>
-                                                                    <input type="text" data-input-mask="money" class="form-control" id="price" name="price" placeholder="276,000 VNĐ">
+                                                        @endforeach
+                                                    @elseif(old('group-a'))
+                                                        @for( $i =0; $i < count(old('group-a')); $i++)
+                                                            <div data-repeater-item="">
+                                                                <div class="form-group row">
+                                                                    <label for="codename"
+                                                                           class="col-sm-2 col-form-label">{{__('Mã sản phẩm')}}<span class="text-danger">*</span></label>
+                                                                    <div class="col-sm-10 row">
+                                                                        <div class="col-sm-11">
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                                </div>
+                                                                                <input type="text" id="codename"
+                                                                                       name="codename"
+                                                                                       value="{{old("group-a.$i.codename")}}"
+                                                                                       class="form-control" placeholder="PM1W-VN"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-1">
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                    data-repeater-delete="">
+                                                                                <i class="fas fa-trash font-size-10"></i>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-5 col-sm-12 form-group">
-                                                                    <label for="discount">{{__('Chiết khấu (%)')}}</label>
-                                                                    <input type="number" class="form-control" id="discount" name="discount" placeholder="30%">
+                                                                <div class="form-group row">
+                                                                    <label for="inputTypeProduct" class="col-sm-2 col-form-label">{{__('Mẫu sản phẩm')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="text" class="form-control"
+                                                                                   name="type_name" id="inputTypeProduct"
+                                                                                   value="{{old("group-a.$i.type_name")}}"
+                                                                                   placeholder="1 ổ cắm, 230V - 10A">
+                                                                        </div>
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-2 col-sm-12 form-group" style="text-align: right;">
-                                                                    <div><label>&nbsp;</label></div>
-                                                                    <button type="button" class="btn btn-danger" data-repeater-delete="">
-                                                                        <i class="fas fa-trash font-size-10"></i>
-                                                                    </button>
+                                                                <div class="form-group row">
+                                                                    <label for="size" class="col-sm-2 col-form-label">{{__('Kích thước')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="text" class="form-control"
+                                                                                   name="size" id="size"
+                                                                                   value="{{old("group-a.$i.size")}}"
+                                                                                   placeholder="150x252x98 mm">
+                                                                        </div>
+                                                                        <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="price" class="col-sm-2 col-form-label">{{__('Giá bán (VNĐ)')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="price" id="price"
+                                                                                   value="{{old("group-a.$i.price")}}"
+                                                                                   placeholder="276,000 VNĐ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="discount" class="col-sm-2 col-form-label">{{__('Chiết khấu (%)')}}</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="discount" id="discount"
+                                                                                   value="{{old("group-a.$i.discount")}}"
+                                                                                   placeholder="276,000 VNĐ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endfor
+                                                    @else
+                                                        <div data-repeater-item="">
+                                                            <div class="form-group row">
+                                                                <label for="codename"
+                                                                       class="col-sm-2 col-form-label">{{__('Mã sản phẩm')}}<span class="text-danger">*</span></label>
+                                                                <div class="col-sm-10 row">
+                                                                    <div class="col-sm-11">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <input type="text" id="codename"
+                                                                                   name="codename"
+                                                                                   value="{{old('codename')}}"
+                                                                                   class="form-control" placeholder="PM1W-VN"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-1">
+                                                                        <button type="button" class="btn btn-danger"
+                                                                                data-repeater-delete="">
+                                                                            <i class="fas fa-trash font-size-10"></i>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="inputTypeProduct" class="col-sm-2 col-form-label">{{__('Mẫu sản phẩm')}}</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                               name="type_name" id="inputTypeProduct"
+                                                                               value="{{old('type_name')}}"
+                                                                               placeholder="1 ổ cắm, 230V - 10A">
+                                                                    </div>
+                                                                    <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="size" class="col-sm-2 col-form-label">{{__('Kích thước')}}</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                               name="size" id="size"
+                                                                               value="{{old('size')}}"
+                                                                               placeholder="150x252x98 mm">
+                                                                    </div>
+                                                                    <span class="form-text">
+                                                                        <i class="fa fa-info-circle"></i> Tối đa 120 kí tự
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="price" class="col-sm-2 col-form-label">{{__('Giá bán (VNĐ)')}}</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <input type="number" class="form-control"
+                                                                               name="price" id="price"
+                                                                               value="{{old('price')}}"
+                                                                               placeholder="276,000 VNĐ">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="discount" class="col-sm-2 col-form-label">{{__('Chiết khấu (%)')}}</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <input type="number" class="form-control"
+                                                                               name="discount" id="discount"
+                                                                               value="{{old('discount')}}"
+                                                                               placeholder="276,000 VNĐ">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -208,12 +498,17 @@
                                                 </button>
                                             </div>
                                             <div class="form-group">
-                                                <label for="warranty">{{__('Bảo hành')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="warranty" class="form-control" value="{{$product->warranty}}" name="warranty" placeholder="12 tháng" required>
+                                                <label for="warranty">{{__('Bảo hành')}} <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" id="warranty" class="form-control"
+                                                       value="{{$product->warranty}}" name="warranty"
+                                                       placeholder="12 tháng" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="unit">{{__('Đơn vị tính')}} <span class="text-muted">{{__('(Đơn vị mặc định: Cái)')}}</span></label>
-                                                <input type="text" id="unit" class="form-control" value="{{$product->unit}}" name="unit" placeholder="Cái">
+                                                <label for="unit">{{__('Đơn vị tính')}} <span
+                                                        class="text-muted">{{__('(Đơn vị mặc định: Cái)')}}</span></label>
+                                                <input type="text" id="unit" class="form-control"
+                                                       value="{{$product->unit}}" name="unit" placeholder="Cái">
                                             </div>
                                             <div class="form-group">
                                                 <label for="keyword"
@@ -221,7 +516,7 @@
                                                 <div class="input-group">
                                                     <input type="text" id="keyword"
                                                            name="keyword"
-                                                           value="{{$product->keyword}}"
+                                                           value="{{$product->keyword }}"
                                                            class="form-control" placeholder=""/>
                                                 </div>
                                                 <span class="form-text">
@@ -230,8 +525,9 @@
                                             </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="customCheckbox2"
-                                                       name="active" value="1" {{$product->active === 1 ? 'checked="': ""}}  />
-                                                <label for="customCheckbox2" class="custom-control-label">Hoạt động</label>
+                                                       name="active" value="1" {{$product->active === 1 ? 'checked="': ""}}/>
+                                                <label for="customCheckbox2" class="custom-control-label">Hoạt
+                                                    động</label>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -242,7 +538,8 @@
                                             <h3 class="card-title">Files</h3>
 
                                             <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                        title="Collapse">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </div>
@@ -264,6 +561,14 @@
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="btn btn-success d-block w-100">{{__('Edit')}}</button>
+                                    </div>
                                 </div>
                             </div>
                             @csrf

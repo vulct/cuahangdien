@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="meta_title"
-                                                       class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</span></label>
+                                                       class="col-sm-2 col-form-label">{{__('Tiêu đề')}}</label>
                                                 <div class="col-sm-10">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">

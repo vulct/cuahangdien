@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{$title ?? ''}}</h1>
+                        <h1>{{$title}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{config('app.url_admin')}}">{{__('Trang chủ')}}</a></li>
-                            <li class="breadcrumb-item active">{{$title ?? ''}}</li>
+                            <li class="breadcrumb-item active">{{$title}}</li>
                         </ol>
                     </div>
                 </div>
@@ -27,8 +27,8 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách phương thức vận chuyển.</h3>
-                                <a href="{{route('admin.shipping_methods.create')}}" class="btn btn-success float-right">{{__('Thêm mới phương thức')}}</a>
+                                <h3 class="card-title">{{$title}}.</h3>
+                                <a href="{{route('admin.banners.create')}}" class="btn btn-success float-right" title="{{__('Thêm mới banner')}}">{{__('Thêm mới banner')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -36,8 +36,10 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tên</th>
-                                        <th>Mô tả</th>
+                                        <th>Ảnh</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Đường dẫn</th>
+                                        <th>Thông tin</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
@@ -45,17 +47,18 @@
                                     </thead>
                                     <tbody>
                                     @php $i= 0; @endphp
-                                    @foreach($shipping_methods as $key => $method)
+                                    @foreach($banners as $key => $banner)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{$method->name}}</td>
-                                            <td>{!! $method->description !!}</td>
-                                            <td>{{$method->updated_at}}</td>
-                                            <td>{!! \App\Helpers\Helper::active($method->active) !!}</td>
+                                            <td><img class="rounded" alt="{{$banner->alt}}" src="{{$banner->image}}" data-holder-rendered="true" style="object-fit: cover; width: 120px; height: auto;"></td>
+                                            <td>{{$banner->title}}</td>
+                                            <td>{{$banner->url}}</td>
+                                            <td>{{$banner->alt}}</td>
+                                            <td>{{$banner->updated_at}}</td>
+                                            <td>{!! \App\Helpers\Helper::active($banner->active) !!}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm btn-show" data-url="{{route('admin.shipping_methods.show', $method->id)}}" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
-                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.shipping_methods.edit', $method->id)}}"><i class="fas fa-pencil-alt"></i></a>
-                                                <button class="btn btn-danger btn-sm btn-delete" data-url="shipping_methods/destroy" onclick="removeFunction('{{$method->id}}')"><i class="fas fa-trash"></i></button>
+                                                <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.banners.edit', $banner->id)}}"><i class="fas fa-pencil-alt"></i></a>
+                                                <button class="btn btn-danger btn-sm btn-delete" data-url="banners/destroy" onclick="removeFunction('{{$banner->id}}')"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -63,8 +66,10 @@
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tên</th>
-                                        <th>Mô tả</th>
+                                        <th>Ảnh</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Đường dẫn</th>
+                                        <th>Thông tin</th>
                                         <th>Cập nhật</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
@@ -87,6 +92,7 @@
 
 @push('stylesheets')
     <!-- DataTables -->
+
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">

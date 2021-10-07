@@ -6,7 +6,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('admin.dashboard')}}" class="nav-link">Home</a>
+            <a href="{{config('app.url_admin')}}" class="nav-link">Home</a>
         </li>
     </ul>
 
@@ -199,7 +199,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ (request()->is('admin/products*')) || (request()->is('admin/categories*')) ? 'menu-open' : '' }}">
+                <li class="nav-item {{ (request()->is('admin/products*')) || (request()->is('admin/categories*')) || (request()->is('admin/brands*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('admin/products*')) || (request()->is('admin/categories*')) ? 'active' : '' }}">
                         <i class="nav-icon  fas fa-folder-open "></i>
                         <p>
@@ -221,18 +221,25 @@
                                 <p>Danh mục</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-handshake"></i>
+                                <p>Thương hiệu</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-handshake"></i>
-                        <p>Thương hiệu</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{route('admin.shipping_methods.index')}}" class="nav-link {{ (request()->is('admin/shipping_methods*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-dolly"></i>
                         <p>Vận chuyển</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.comments.index')}}" class="nav-link {{ (request()->is('admin/comments*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <p>Đánh giá sản phẩm</p>
                     </a>
                 </li>
                 <!-- Nội dung -->
@@ -241,7 +248,7 @@
                     <span style="text-transform: uppercase">Nội dung</span>
                 </li>
                 <li class="nav-item ">
-                    <a href="http://localhost/s-cart/public/sc_admin/banner" class="nav-link">
+                    <a href="{{route('admin.banners.index')}}" class="nav-link {{ (request()->is('admin/banners*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-image"></i>
                         <p>
                             Banner

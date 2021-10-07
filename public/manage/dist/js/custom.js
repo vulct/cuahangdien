@@ -145,8 +145,53 @@ function removeFunction(slug){
                         }, 500);
                     }else {
                         Swal.fire(
-                            'Deleted!',
+                            'Delete Error!',
                             'Xóa không thành công, vui lòng thử lại.',
+                            'error'
+                        )
+                    }
+
+                }
+            })
+        }
+    })
+}
+
+
+function changeStatusComment(id) {
+    const url = "comments/update";
+    const status = $(".btn-change").attr('data-status');
+    Swal.fire({
+        title: 'Bạn đã chắc chắn thay đổi trạng thái đánh giá?',
+        text: "Sau khi thay đổi, đánh giá sẽ được ẩn hoặc hiện.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Đồng ý, tiến hành cập nhật!'
+    }).then((confirm) => {
+        if (confirm.isConfirmed) {
+            $.ajax({
+                method: 'PATCH',
+                data: {
+                    comment:id,
+                    status:status
+                },
+                url: url,
+                success: function (data){
+                    if (data.error === false){
+                        Swal.fire(
+                            'Updated!',
+                            data.message,
+                            'success'
+                        )
+                        setTimeout(function (){
+                            location.reload();
+                        }, 500);
+                    }else {
+                        Swal.fire(
+                            'Update Error!',
+                            'Cập nhật không thành công, vui lòng thử lại.',
                             'error'
                         )
                     }

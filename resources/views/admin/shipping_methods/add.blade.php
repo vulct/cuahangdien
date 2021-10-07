@@ -25,14 +25,16 @@
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('Thêm mới phương thức vận chuyển')}}</h3>
+                        <h3 class="card-title">{{__('Thêm mới')}} {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
 
                         <div class="card-tools">
+                            <div class="btn-group mr-5">
+                                <a href="{{route('admin.shipping_methods.index')}}"
+                                   class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
+                                        class="hidden-xs"> Trở lại danh sách</span></a>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -53,7 +55,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="name">{{__('Name')}}</label>
+                                                <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
                                                 <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
                                             </div>
                                             <div class="form-group">

@@ -19,6 +19,9 @@ class CategoryService
 
     public function get($active = 0)
     {
+        if ($active === 0 ){
+            return Category::where('isDelete', 0)->get();
+        }
         return Category::where(['isDelete' => 0, 'active' => $active])->get();
     }
 

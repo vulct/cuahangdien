@@ -59,7 +59,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         if ($this->productService->create($request)) {
-            return redirect()->route('admin.products.list');
+            return redirect()->route('admin.products.index');
         }
         return back()->withInput();
     }

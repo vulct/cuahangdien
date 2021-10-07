@@ -15,9 +15,9 @@ class CreateProductAttributesTable extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name')->nullable();
-            $table->string('codename');
-            $table->string('size')->nullable();
+            $table->string('type_name', 120)->nullable();
+            $table->string('codename', 120);
+            $table->string('size', 120)->nullable();
             $table->decimal('price', 13, 2)->nullable()->default(null);
             $table->decimal('discount', 13, 2)->nullable()->default(null);
             $table->timestamps();

@@ -3,7 +3,6 @@
 
 namespace App\Services\Admin;
 
-
 use App\Models\Brand;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +20,9 @@ class BrandService
 
     public function get($active = 0)
     {
+        if ($active === 0 ){
+            return Brand::where('isDelete', 0)->get();
+        }
         return Brand::latest()->where(['isDelete' => 0, 'active' => $active])->get();
     }
 

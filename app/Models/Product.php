@@ -18,6 +18,7 @@ class Product extends Model
         "slug",
         "warranty",
         "unit",
+        "keyword",
         "active",
         "isDelete",
         "view",
@@ -38,6 +39,11 @@ class Product extends Model
     public function attributes()
     {
         return $this->hasMany(ProductAttributes::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 
     public function getRouteKeyName(): string

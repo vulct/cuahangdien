@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class ProductReview extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'email',
         'content',
         'rating',
         'active',
-        'isDelete'
+        'isDelete',
+        "product_id"
     ];
+
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

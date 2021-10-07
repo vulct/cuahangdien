@@ -5,7 +5,6 @@ namespace App\Services\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductAttributes;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -158,13 +157,14 @@ class ProductService
             $product->keyword = (string)$request->input('keyword');
             $product->content = (string)$request->input('content');
             $product->warranty = (string)$request->input('warranty');
-            $product->unit = (string)$request->input('unit') === null ? (string)$request->input('unit') : 'Cái';
+            $product->unit = (string)$request->input('unit') === null ?  'Cái' : (string)$request->input('unit');
             $product->slug = (string)$request->input('slug');
             $product->category_id = $category_id;
             $product->brand_id = $brand_id;
             $product->save();
 
             Session::flash('success', 'Cập nhật thông tin sản phẩm thành công');
+            return true;
         } catch (\Exception $err) {
             Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại');
             \Log::info($err->getMessage());

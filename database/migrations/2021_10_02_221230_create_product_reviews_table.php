@@ -18,6 +18,12 @@ class CreateProductReviewsTable extends Migration
             $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
         });
+
+        Schema::table('product_reviews', function (Blueprint $table) {
+            $table->foreignId('product_id')
+                ->nullable()->default(0)->index()
+                ->constrained();
+        });
     }
 
     public function down()

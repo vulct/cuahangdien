@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Danh sách sản phẩm.</h3>
-                                <a href="{{route('admin.products.create')}}" class="btn btn-primary float-right">{{__('Thêm mới sản phẩm')}}</a>
+                                <a href="{{route('admin.products.create')}}" class="btn btn-success float-right">{{__('Thêm mới sản phẩm')}}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
