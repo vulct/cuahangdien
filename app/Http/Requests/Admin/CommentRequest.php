@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductReviewRequest extends FormRequest
+class CommentRequest extends FormRequest
 {
     public function rules(): array
     {

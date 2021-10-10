@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductReview;
-use App\Services\Admin\ProductReviewService;
+use App\Http\Requests\Admin\CommentRequest;
+use App\Models\Comment;
+use App\Services\Admin\CommentService;
 use Illuminate\Http\Request;
 
-class ProductReviewController extends Controller
+class CommentController extends Controller
 {
-    protected $productReviewService;
+    protected $commentService;
 
-    public function __construct(ProductReviewService $productReviewService)
+    public function __construct(CommentService $commentService)
     {
-        $this->productReviewService = $productReviewService;
+        $this->commentService = $commentService;
     }
 
     public function index()
     {
         return view('admin.comments.list', [
             'title' => 'Danh sách đánh giá sản phẩm',
-            'reviews' => $this->productReviewService->get()
+            'reviews' => $this->commentService->get()
         ]);
     }
 
@@ -34,12 +35,12 @@ class ProductReviewController extends Controller
         //
     }
 
-    public function show(ProductReview $productReview)
+    public function show(Comment $productReview)
     {
         //
     }
 
-    public function edit(ProductReview $productReview)
+    public function edit(Comment $productReview)
     {
         //
     }
@@ -47,7 +48,7 @@ class ProductReviewController extends Controller
     public function update(Request $request)
     {
 
-        $result = $this->productReviewService->update($request);
+        $result = $this->commentService->update($request);
 
         if ($result) {
             return response()->json([
@@ -63,7 +64,7 @@ class ProductReviewController extends Controller
 
     public function destroy(Request $request)
     {
-        $result = $this->productReviewService->destroy($request);
+        $result = $this->commentService->destroy($request);
 
         if ($result) {
             return response()->json([

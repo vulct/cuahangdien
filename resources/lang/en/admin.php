@@ -214,7 +214,7 @@ return [
       'content'                           => 'Content',
       'keyword'                           => 'Keyword',
       'description'                       => 'Description',
-      'comment'                           => 'Comment',
+      'comment'                           => 'CommentService',
       'discount_percent'                  => 'Discount percent',
       'origin_price'                      => 'Origin price',
       'last_modify'                       => 'Last modify',

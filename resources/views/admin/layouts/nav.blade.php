@@ -263,14 +263,55 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a href="http://localhost/s-cart/public/sc_admin/news" class="nav-link">
+                <li class="nav-item {{(request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{(request()->is('admin/blogs*')) ? 'active' : ''}}">
                         <i class="nav-icon far fa-file-powerpoint"></i>
                         <p>
                             Tin tức
                         </p>
                     </a>
+
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
+                                <i class="far fa-file-image nav-icon"></i>
+                                <p>Sản phẩm</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- Blogs -->
+                <li class="nav-item {{ (request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/blogs*')) ? 'active' : '' }}">
+                        <i class="nav-icon far fa-file-powerpoint"></i>
+                        <p>
+                            Tin tức
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
+                                <i class="far fa-file-image nav-icon"></i>
+                                <p>Sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{route('admin.categories.index')}}" class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}">
+                                <i class="fas fa-folder-open nav-icon"></i>
+                                <p>Danh mục</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-handshake"></i>
+                                <p>Thương hiệu</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Marketing -->
                 <li class="nav-header">
                     <i class="nav-icon  fas fa-sort-amount-up "></i>

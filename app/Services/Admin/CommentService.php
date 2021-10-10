@@ -2,25 +2,25 @@
 
 namespace App\Services\Admin;
 
-use App\Models\ProductReview;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Session;
 
-class ProductReviewService
+class CommentService
 {
 
     public function get()
     {
-        return ProductReview::latest()->where('isDelete', 0)->get();
+        return CommentService::latest()->where('isDelete', 0)->get();
     }
 
     public function destroy($request)
     {
         $id = $request->input('slug');
 
-        $comment = ProductReview::where(['id' => $id, 'isDelete' => 0])->first();
+        $comment = Comment::where(['id' => $id, 'isDelete' => 0])->first();
 
         if ($comment) {
-            return ProductReview::where(['id' => $id, 'isDelete' => 0])->update(['isDelete' => 1]);
+            return Comment::where(['id' => $id, 'isDelete' => 0])->update(['isDelete' => 1]);
         }
 
         return false;
@@ -34,10 +34,10 @@ class ProductReviewService
             $status = (int)$request->status;
             $status === 0 ?  $statusUpdate = 1 : $statusUpdate = 0;
 
-            $comment = ProductReview::where(['id' => $id, 'isDelete' => 0])->first();
+            $comment = Comment::where(['id' => $id, 'isDelete' => 0])->first();
 
             if ($comment) {
-                return ProductReview::where(['id' => $id, 'isDelete' => 0])->update(['active' => $statusUpdate]);
+                return Comment::where(['id' => $id, 'isDelete' => 0])->update(['active' => $statusUpdate]);
             }
 
             return false;
