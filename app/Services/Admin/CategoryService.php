@@ -17,12 +17,12 @@ class CategoryService
         $this->upload = $upload;
     }
 
-    public function get($active = 0)
+    public function get($active = 0, $type = 0)
     {
         if ($active === 0 ){
-            return Category::where('isDelete', 0)->get();
+            return Category::where(['isDelete' => 0, 'type' => $type])->get();
         }
-        return Category::where(['isDelete' => 0, 'active' => $active])->get();
+        return Category::where(['isDelete' => 0, 'active' => $active, 'type' => $type])->get();
     }
 
     public function create($request): bool
@@ -33,7 +33,11 @@ class CategoryService
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
             }
+            // Show in home
             $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
+
+            // Check type category
+            $type = in_array((int)$request->type,[0,1]) ? (int)$request->type : 0;
             Category::create([
                 "name" => (string)$request->name,
                 "meta_title" => (string)$request->meta_title,
@@ -43,6 +47,7 @@ class CategoryService
                 "icon" => (string)$request->icon,
                 "description" => (string)$request->description,
                 "image" => $path_image,
+                "type" => $type,
                 "active" => (int)$request->active,
                 "top" => $top,
             ]);

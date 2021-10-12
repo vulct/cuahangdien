@@ -294,7 +294,7 @@
                         <li class="nav-item">
                             <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
                                 <i class="far fa-file-image nav-icon"></i>
-                                <p>Sản phẩm</p>
+                                <p>Bài đăng</p>
                             </a>
                         </li>
                         <li class="nav-item ">

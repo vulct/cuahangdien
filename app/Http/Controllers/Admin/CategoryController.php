@@ -44,7 +44,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.add', [
             'title' => 'Thêm mới danh mục',
-            'categories' => $this->categoryService->get()
+            'categories' => $this->categoryService->get(1,0)
         ]);
     }
 
@@ -70,7 +70,7 @@ class CategoryController extends Controller
     {
 
         return view('admin.categories.detail', [
-            'categories' => $this->categoryService->get(),
+            'categories' => $this->categoryService->get(1,0),
             'cate' => $category
         ]);
     }
@@ -85,7 +85,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', [
             'title' => 'Chỉnh sửa danh mục',
-            'categories' => $this->categoryService->get(),
+            'categories' => $this->categoryService->get(1,0),
             'cate' => $category
         ]);
     }
@@ -109,10 +109,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
+     * @param CategoryRequest $request
      * @return JsonResponse
      */
-    public function destroy(Request $request)
+    public function destroy(CategoryRequest $request)
     {
         $result = $this->categoryService->destroy($request);
 

@@ -21,8 +21,10 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id');
             $table->string('keyword', 200)->nullable();
             $table->string('icon', 200)->nullable();
-            $table->text('description');
-            $table->string('image',255);
+            $table->text('description')->nullable();
+            $table->string('image',255)->nullable();
+            $table->tinyInteger('type')->default(0);
+            // 0 - đánh giá sản phẩm, 1 - bình luận tin tức.
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('top')->default(0);
             $table->tinyInteger('isDelete')->default(0);
