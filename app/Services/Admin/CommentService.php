@@ -10,7 +10,7 @@ class CommentService
 
     public function get()
     {
-        return CommentService::latest()->where('isDelete', 0)->get();
+        return Comment::latest()->where('isDelete', 0)->get();
     }
 
     public function destroy($request)
