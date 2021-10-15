@@ -33,7 +33,7 @@ class PageRequest extends FormRequest
                 'max:200'
             ],
             'keyword' => 'string|max:200|nullable',
-            'description' => 'string|nullable',
+            'description' => 'string|nullable|max:300',
             'content' => 'required',
             'slug' => [
                 'required',

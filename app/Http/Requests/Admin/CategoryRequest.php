@@ -35,6 +35,7 @@ class CategoryRequest extends FormRequest
             'keyword' => 'string|max:200|nullable',
             'icon' => 'string|max:200|nullable',
             'description' => 'string|nullable',
+            'parent_id' => 'numeric|nullable',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
@@ -68,11 +69,13 @@ class CategoryRequest extends FormRequest
             'slug' => 'đường dẫn (URL)',
             'image' => 'hình ảnh',
             'meta_title' => 'tiêu đề',
+            'parent_id' => 'thư mục cha',
             'keyword' => 'từ khóa',
             'description' => 'mô tả',
             'cate_parent' => 'danh mục cha',
             'active' => 'trạng thái',
             'top' => 'hiển thị',
+            'type' => 'loại thư mục'
         ];
     }
 }

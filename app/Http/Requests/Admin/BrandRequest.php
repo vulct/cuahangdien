@@ -30,6 +30,8 @@ class BrandRequest extends FormRequest
                 'min:3',
                 'max:100'
             ],
+            'meta_title' => 'string|nullable|max:100',
+            'description' => 'string|nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
@@ -61,7 +63,10 @@ class BrandRequest extends FormRequest
         return [
             'name' => 'tên thương hiệu',
             'slug' => 'đường dẫn (URL)',
-            'image' => 'hình ảnh'
+            'image' => 'hình ảnh',
+            'description' => 'mô tả',
+            'meta_title' => 'tiêu đề',
+            'active' => 'trạng thái',
         ];
     }
 }

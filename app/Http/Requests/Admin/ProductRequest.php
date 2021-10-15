@@ -30,10 +30,14 @@ class ProductRequest extends FormRequest
                 'required',
                 'string',
                 'min:3',
-                'max:255'
+                'max:200'
             ],
-            'type_name' => 'string',
-            'codename' => 'string',
+            'description' => 'string|nullable|max:300',
+            'meta_title' => 'string|nullable|max:100',
+            'keyword' => 'string|max:200|nullable',
+            'type_name' => 'string|max:120',
+            'codename' => 'string|max:120',
+            'size' => 'nullable|max:120|string',
             'price' => 'integer',
             'discount' => 'integer',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -73,7 +77,13 @@ class ProductRequest extends FormRequest
             'image' => 'hình ảnh',
             'warranty' => 'bảo hành',
             'unit' => 'đơn vị tính',
-            'discount' => 'chiết khấu'
+            'discount' => 'chiết khấu',
+            'meta_title' => 'tiêu đề',
+            'keyword' => 'từ khóa',
+            'description' => 'mô tả',
+            'category' => 'danh mục',
+            'brand' => 'thương hiệu',
+            'size' => 'kích thước'
         ];
     }
 
