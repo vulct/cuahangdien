@@ -12,12 +12,13 @@ class Comment extends Model
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'content',
         'rating',
         'type',
         'active',
-        'isDelete',
-        "product_id"
+        'post_id',
+        'product_id'
     ];
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
