@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfosTable extends Migration
+class CreateInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('infos', function (Blueprint $table) {
+        Schema::create('info', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200)->nullable();
             $table->string('keyword', 255)->nullable();
@@ -26,6 +26,7 @@ class CreateInfosTable extends Migration
             $table->string('address', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('tax_code', 255)->nullable();
+            $table->string('business_license', 255)->nullable();
             $table->string('map_address', 255)->nullable();
             $table->string('map_iframe', 255)->nullable();
             // contact
@@ -43,6 +44,6 @@ class CreateInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infos');
+        Schema::dropIfExists('info');
     }
 }

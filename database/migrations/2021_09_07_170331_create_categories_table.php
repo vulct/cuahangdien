@@ -24,7 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->text('description')->nullable();
             $table->string('image',255)->nullable();
             $table->tinyInteger('type')->default(0);
-            // 0 - đánh giá sản phẩm, 1 - bình luận tin tức.
+            // 0 - thư mục sản phẩm, 1 - thư mục bài đăng.
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('top')->default(0);
             $table->tinyInteger('isDelete')->default(0);
