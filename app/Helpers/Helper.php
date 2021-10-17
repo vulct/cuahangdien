@@ -78,4 +78,10 @@ class Helper
         return $top == 0 ? '<span class="d-block badge bg-danger p-2">Không hiển thị</span>'
             : '<span class="d-block badge bg-success p-2">Hiển thị</span>';
     }
+
+    public static function view($active = 0): string
+    {
+        return $active == 0 ? '<span class="d-block badge bg-danger p-2">Đã xem</span>'
+            : '<span class="d-block badge bg-success p-2">Chưa xem</span>';
+    }
 }

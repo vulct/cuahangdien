@@ -149,7 +149,7 @@
                 <img src="/storage/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{Auth::user()->name ?? 'Admin'}}</a>
             </div>
         </div>
 
@@ -230,16 +230,44 @@
                     </ul>
                 </li>
 
+                <!-- Blogs -->
+                <li class="nav-item {{ (request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/blogs*')) ? 'active' : '' }}">
+                        <i class="nav-icon far fa-file-powerpoint"></i>
+                        <p>
+                            Tin tức
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
+                                <i class="far fa-file-image nav-icon"></i>
+                                <p>Bài đăng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{route('admin.categories.index')}}" class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}">
+                                <i class="fas fa-folder-open nav-icon"></i>
+                                <p>Danh mục</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Phương thức vận chuyển -->
                 <li class="nav-item">
                     <a href="{{route('admin.shipping_methods.index')}}" class="nav-link {{ (request()->is('admin/shipping_methods*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-dolly"></i>
                         <p>Vận chuyển</p>
                     </a>
                 </li>
+                <!-- Thương hiệu -->
                 <li class="nav-item">
-                    <a href="{{route('admin.comments.index')}}" class="nav-link {{ (request()->is('admin/comments*')) ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-comments"></i>
-                        <p>Đánh giá sản phẩm</p>
+                    <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>Thương hiệu</p>
                     </a>
                 </li>
                 <!-- Nội dung -->
@@ -280,66 +308,33 @@
                         </li>
                     </ul>
                 </li>
-                <!-- Blogs -->
-                <li class="nav-item {{ (request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ (request()->is('admin/blogs*')) ? 'active' : '' }}">
-                        <i class="nav-icon far fa-file-powerpoint"></i>
-                        <p>
-                            Tin tức
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
 
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
-                                <i class="far fa-file-image nav-icon"></i>
-                                <p>Bài đăng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{route('admin.categories.index')}}" class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}">
-                                <i class="fas fa-folder-open nav-icon"></i>
-                                <p>Danh mục</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-handshake"></i>
-                                <p>Thương hiệu</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
                 <!-- Marketing -->
                 <li class="nav-header">
                     <i class="nav-icon  fas fa-sort-amount-up "></i>
                     <span style="text-transform: uppercase">Marketing</span>
                 </li>
+                <!-- Đánh giá sản phẩm -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon  fas fa-users "></i>
-                        <p>
-                            Quản lý khách hàng
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                    <a href="{{route('admin.reviews.index')}}" class="nav-link {{ (request()->is('admin/reviews*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p>Đánh giá sản phẩm</p>
                     </a>
-
-                    <ul class="nav nav-treeview" style="display: none;">
-                        <li class="nav-item ">
-                            <a href="http://localhost/s-cart/public/sc_admin/customer" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p>Khách hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="http://localhost/s-cart/public/sc_admin/subscribe" class="nav-link">
-                                <i class="fas fa-user-circle nav-icon"></i>
-                                <p>Đăng ký</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <!-- Bình luận bài viết -->
+                <li class="nav-item">
+                    <a href="{{route('admin.comments')}}" class="nav-link {{ (request()->is('admin/comments*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <p>Bình luận bài viết</p>
+                    </a>
+                </li>
+                <!-- Liên hệ -->
+                <li class="nav-item">
+                    <a href="{{route('admin.contacts')}}" class="nav-link {{ (request()->is('admin/contacts*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-file-signature"></i>
+                        <p>Liên hệ</p>
+                    </a>
                 </li>
                 <!-- Thiết lập cửa hàng -->
                 <li class="nav-header">
@@ -347,18 +342,10 @@
                     <span style="text-transform: uppercase"> Thiết lập cửa hàng</span>
                 </li>
                 <li class="nav-item ">
-                    <a href="http://localhost/s-cart/public/sc_admin/store_info" class="nav-link">
+                    <a href="{{route('admin.info.index')}}" class="nav-link {{ (request()->is('admin/info*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-h-square"></i>
                         <p>
                             Thông tin cửa hàng
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="http://localhost/s-cart/public/sc_admin/store_config" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Cấu hình cửa hàng
                         </p>
                     </a>
                 </li>

@@ -92,7 +92,6 @@
                                                     </span>
                                                 </div>
                                             </div>
-
                                             <div class="form-group row">
                                                 <label for="summernote"
                                                        class="col-sm-2 col-form-label">{{__('Mô tả')}}</label>

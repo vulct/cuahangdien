@@ -59,6 +59,12 @@ $(document).ready(function () {
     $("#login").click(function () {
         const btnLogin = $("#login");
         const btnLoginText = btnLogin.text();
+        const url_previous = $("#url_previous").val();
+        const url_current = window.location.href;
+        let url_redirect = '/admin/dashboard';
+        if (url_previous !== url_current){
+            url_redirect = url_previous;
+        }
         btnLogin.attr("disabled", true);
         btnLogin.empty();
         btnLogin.append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
@@ -70,7 +76,7 @@ $(document).ready(function () {
             success: function (data) {
                 toastr.success(data.message)
                 setTimeout(function () {
-                    window.location.href = '/admin/dashboard';
+                    window.location.href = url_redirect;
                 }, 500);
 
             },

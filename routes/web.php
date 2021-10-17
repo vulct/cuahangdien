@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
@@ -43,8 +44,17 @@ Route::middleware(['auth'])->group(function () {
             #Pages
             Route::resource('/pages', PageController::class);
 
+            #Reviews
+            Route::resource('/reviews', CommentController::class);
+
             #Comments
-            Route::resource('/comments', CommentController::class);
+            Route::get('/comments', [CommentController::class, 'listCommentPost'])->name('comments');
+
+            #Contacts
+            Route::get('/contacts', [CommentController::class, 'listContact'])->name('contacts');
+
+            #Info
+            Route::resource('/info', InfoController::class);
 
             #Banners
             Route::resource('/banners',BannerController::class);

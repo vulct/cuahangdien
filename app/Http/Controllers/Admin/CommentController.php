@@ -17,11 +17,30 @@ class CommentController extends Controller
         $this->commentService = $commentService;
     }
 
+    // get list reviews product
     public function index()
     {
-        return view('admin.comments.list', [
+        return view('admin.reviews.list', [
             'title' => 'Danh sách đánh giá sản phẩm',
             'reviews' => $this->commentService->get()
+        ]);
+    }
+
+    // get list comments product
+    public function listCommentPost()
+    {
+        return view('admin.comments.list', [
+            'title' => 'Danh sách bình luận bài viết',
+            'comments' => $this->commentService->get(1)
+        ]);
+    }
+
+    // get list comments product
+    public function listContact()
+    {
+        return view('admin.contacts.list', [
+            'title' => 'Danh sách liên hệ',
+            'contacts' => $this->commentService->get(2)
         ]);
     }
 
@@ -53,7 +72,7 @@ class CommentController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Cập nhật trạng thái đánh giá thành công'
+                'message' => 'Cập nhật trạng thái thành công'
             ]);
         }
 
@@ -62,14 +81,14 @@ class CommentController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): \Illuminate\Http\JsonResponse
     {
         $result = $this->commentService->destroy($request);
 
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa đánh giá thành công'
+                'message' => 'Xóa thành công'
             ]);
         }
 

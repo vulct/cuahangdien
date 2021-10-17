@@ -38,22 +38,24 @@
                                         <th>Tác giả</th>
                                         <th>Email</th>
                                         <th>Nội dung</th>
+                                        <th>Đánh giá</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @php $i= 0; @endphp
-                                    @foreach($comments as $key => $comment)
+                                    @foreach($reviews as $key => $review)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{$comment->name}}</td>
-                                            <td>{{$comment->email}}</td>
-                                            <td>{{$comment->content}}</td>
-                                            <td>{!! \App\Helpers\Helper::show($comment->active) !!}</td>
+                                            <td>{{$review->name}}</td>
+                                            <td>{{$review->email}}</td>
+                                            <td>{{$review->content}}</td>
+                                            <td>{{$review->rating}}</td>
+                                            <td>{!! \App\Helpers\Helper::show($review->active) !!}</td>
                                             <td>
-                                                <a class="btn btn-info btn-sm btn-change" data-status="{{$comment->active}}" onclick="changeStatusComment('{{$comment->id}}')"><i class="fas fa-exchange-alt"></i></a>
-                                                <button class="btn btn-danger btn-sm btn-delete" data-url="reviews/destroy" onclick="removeFunction('{{$comment->id}}')"><i class="fas fa-trash"></i></button>
+                                                <a class="btn btn-info btn-sm btn-change" data-status="{{$review->active}}" onclick="changeStatusComment('{{$review->id}}')"><i class="fas fa-exchange-alt"></i></a>
+                                                <button class="btn btn-danger btn-sm btn-delete" data-url="reviews/destroy" onclick="removeFunction('{{$review->id}}')"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -64,6 +66,7 @@
                                         <th>Tác giả</th>
                                         <th>Email</th>
                                         <th>Nội dung</th>
+                                        <th>Đánh giá</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
                                     </tr>

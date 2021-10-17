@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Session;
 class CommentService
 {
 
-    public function get()
+    public function get($type = 0)
     {
-        return Comment::latest()->where('isDelete', 0)->get();
+        return Comment::latest()->where(['isDelete' => 0, 'type' => $type])->get();
     }
 
     public function destroy($request)

@@ -37,6 +37,7 @@
                                         <th>#</th>
                                         <th>Tác giả</th>
                                         <th>Email</th>
+                                        <th>Số điện thoại</th>
                                         <th>Nội dung</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
@@ -44,16 +45,16 @@
                                     </thead>
                                     <tbody>
                                     @php $i= 0; @endphp
-                                    @foreach($comments as $key => $comment)
+                                    @foreach($contacts as $key => $contact)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{$comment->name}}</td>
-                                            <td>{{$comment->email}}</td>
-                                            <td>{{$comment->content}}</td>
-                                            <td>{!! \App\Helpers\Helper::show($comment->active) !!}</td>
+                                            <td>{{$contact->name}}</td>
+                                            <td>{{$contact->email}}</td>
+                                            <td>{{$contact->content}}</td>
+                                            <td>{!! \App\Helpers\Helper::view($contact->active) !!}</td>
                                             <td>
-                                                <a class="btn btn-info btn-sm btn-change" data-status="{{$comment->active}}" onclick="changeStatusComment('{{$comment->id}}')"><i class="fas fa-exchange-alt"></i></a>
-                                                <button class="btn btn-danger btn-sm btn-delete" data-url="reviews/destroy" onclick="removeFunction('{{$comment->id}}')"><i class="fas fa-trash"></i></button>
+                                                <a class="btn btn-info btn-sm btn-change" data-status="{{$contact->active}}" onclick="changeStatusComment('{{$contact->id}}')"><i class="fas fa-exchange-alt"></i></a>
+                                                <button class="btn btn-danger btn-sm btn-delete" data-url="reviews/destroy" onclick="removeFunction('{{$contact->id}}')"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -63,6 +64,7 @@
                                         <th>#</th>
                                         <th>Tác giả</th>
                                         <th>Email</th>
+                                        <th>Số điện thoại</th>
                                         <th>Nội dung</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
