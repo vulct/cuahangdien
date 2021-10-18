@@ -22,7 +22,10 @@ class CreatePostsTable extends Migration
             $table->string('image', 255)->nullable();
             $table->string('slug', 120)->index();
             $table->string('keyword');
-            $table->tinyInteger('category')->nullable(); // nếu là bảng giá kèm theo bảng giá của danh mục đó.
+            $table->tinyInteger('category_price')->nullable();
+            // nếu là bảng giá kèm theo bảng giá của danh mục đó.
+            $table->tinyInteger('type')->default(0);
+            // 0 - tin tức, 1 - bảng giá.
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('isDelete')->default(0);
             $table->integer('view')->default(0);

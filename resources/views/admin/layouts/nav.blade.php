@@ -231,24 +231,30 @@
                 </li>
 
                 <!-- Blogs -->
-                <li class="nav-item {{ (request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
+                <li class="nav-item {{ (request()->is('admin/post_categories*')) || (request()->is('admin/posts*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('admin/blogs*')) ? 'active' : '' }}">
                         <i class="nav-icon far fa-file-powerpoint"></i>
                         <p>
-                            Tin tức
+                            Bài đăng
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
+                            <a href="{{route('admin.posts.index')}}" class="nav-link {{ (request()->is('admin/posts*')) ? 'active' : '' }}">
                                 <i class="far fa-file-image nav-icon"></i>
-                                <p>Bài đăng</p>
+                                <p>Tin tức</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.price')}}" class="nav-link {{ (request()->is('admin/price_list*')) ? 'active' : '' }}">
+                                <i class="fas fa-money-check-alt nav-icon"></i>
+                                <p>Bảng giá</p>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="{{route('admin.categories.index')}}" class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}">
+                            <a href="{{route('admin.categories_post')}}" class="nav-link {{ (request()->is('admin/post_categories*')) ? 'active' : '' }}">
                                 <i class="fas fa-folder-open nav-icon"></i>
                                 <p>Danh mục</p>
                             </a>

@@ -19,6 +19,8 @@ class CategoryService
 
     public function get($active = 0, $type = 0)
     {
+        // 0 - thư mục sản phẩm, 1 - thư mục bài đăng.
+
         if ($active === 0 ){
             return Category::where(['isDelete' => 0, 'type' => $type])->get();
         }
@@ -67,7 +69,7 @@ class CategoryService
         $category = Category::where('slug', $slug)->first();
 
         if ($category) {
-            return DB::table('categories')->where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
+            return Category::where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
         }
 
         return false;

@@ -17,6 +17,8 @@ class Post extends Model
         'image',
         'slug',
         'keyword',
+        'category_price',
+        'type',
         'active',
         'isDelete',
         'view',

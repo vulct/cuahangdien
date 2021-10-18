@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ShippingController;
@@ -31,6 +32,15 @@ Route::middleware(['auth'])->group(function () {
 
             #Categories
             Route::resource('/categories',CategoryController::class);
+
+            #Post category list
+            Route::get('/post_categories',[CategoryController::class,'getCategoriesOfPost'])->name('categories_post');
+
+            #Posts
+            Route::resource('/posts',PostController::class);
+
+            #Price list
+            Route::get('/price_list',[PostController::class,'getPriceList'])->name('price');
 
             #Brands
             Route::resource('/brands',BrandController::class);
