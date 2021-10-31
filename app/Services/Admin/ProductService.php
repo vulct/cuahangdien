@@ -42,8 +42,8 @@ class ProductService
             // upload image product
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            } else {
-                $path_image = '/storage/uploads/default/no-image.jpg';
+            }else{
+                $path_image = '/storage/default/image-available.jpg';
             }
             // add product
             $product_id = Product::create([

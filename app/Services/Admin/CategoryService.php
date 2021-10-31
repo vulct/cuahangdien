@@ -30,11 +30,13 @@ class CategoryService
     public function create($request): bool
     {
         try {
-            $path_image = "";
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
+            }else{
+                $path_image = '/storage/default/image-available.jpg';
             }
+
             // Show in home
             $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
 

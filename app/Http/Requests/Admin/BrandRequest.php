@@ -32,7 +32,7 @@ class BrandRequest extends FormRequest
             ],
             'meta_title' => 'string|nullable|max:100',
             'description' => 'string|nullable',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
                 'min:3',

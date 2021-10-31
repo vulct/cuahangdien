@@ -18,7 +18,7 @@ class Helper
                 if ($category->parent_id !== 0 && isset($category_parent->name)){
                     $name_parent = $category_parent->name;
                 }
-                $image = !empty($category->image) ? $category->image : config('app.url').'/storage/uploads/default/no-image.jpg' ;
+                $image = $category->image;
                 $slug = $category->slug;
                 $html .= '
                     <tr>
