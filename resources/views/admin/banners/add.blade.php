@@ -55,6 +55,52 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Bảng kích thước: </label>
+                                                <div class="col-sm-4">
+                                                    <img src="/storage/default/banner.jpg" width="100%" alt="">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: center; font-weight: bold">Bảng quy định kích thước</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Vị trí 1</td>
+                                                            <td>Vị trí 2,3</td>
+                                                            <td>Vị trí 4,5</td>
+                                                            <td>Vị trí 6,7</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>1300 x 804 px</td>
+                                                            <td>655 x 283 px</td>
+                                                            <td>300 x 264 px</td>
+                                                            <td>358 x 205 px</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="sort"
+                                                       class="col-sm-2 col-form-label">{{__('Vị trí')}}<span class="text-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <select class="form-control" id="sort" name="sort">
+                                                            <option value="0">Vị trí 1</option>
+                                                            <option value="1">Vị trí 2</option>
+                                                            <option value="2">Vị trí 3</option>
+                                                            <option value="3">Vị trí 4</option>
+                                                            <option value="4">Vị trí 5</option>
+                                                            <option value="5">Vị trí 6</option>
+                                                            <option value="6">Vị trí 7</option>
+                                                        </select>
+                                                    </div>
+                                                    <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Theo hình mô tả phía trên
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label" for="exampleInputFile">{{__('Hình ảnh ')}}<span class="text-danger">*</span></label>
                                                 <div class="col-sm-10">
                                                     <div class="custom-file mt-2">
@@ -62,6 +108,9 @@
                                                                accept="image/*" name="image">
                                                         <label class="custom-file-label"
                                                                for="exampleInputFile">{{__('Choose File')}}</label>
+                                                        <span class="form-text">
+                                                            <i class="fa fa-info-circle"></i> Vui lòng chọn ảnh theo kích thước quy định
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,6 +192,8 @@
 @push('stylesheets')
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.css') }}">
 @endpush
 
 @push('scripts')
@@ -152,4 +203,6 @@
     <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
     <!-- Edit page -->
     <script src="{{asset('manage/dist/js/pages/edit-form.js')}}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush

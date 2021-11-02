@@ -21,17 +21,18 @@ class BannerRequest extends FormRequest
                 'min:3',
                 'max:100'
             ],
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'url' => [
                 'min:3',
                 'max:120',
                 'nullable'
             ],
-            'alt' => 'string|min:3|max:100|nullable'
+            'alt' => 'string|min:3|max:100|nullable',
+            'sort' => 'numeric'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH', 'DELETE'])) {
-            $rules['image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+            $rules['image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240';
         }
 
         return $rules;
@@ -43,7 +44,8 @@ class BannerRequest extends FormRequest
             'title' => 'tiêu đề',
             'url' => 'đường dẫn (URL)',
             'image' => 'hình ảnh',
-            'alt' => 'thông tin'
+            'alt' => 'thông tin',
+            'sort' => 'thứ tự'
         ];
     }
 }

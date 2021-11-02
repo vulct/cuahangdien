@@ -19,25 +19,101 @@ class BannerService
         return Banner::latest()->where('isDelete', 0)->get();
     }
 
-    public function create($request)
+    function getWidthHeight($sort): array
+    {
+        $sort = (int)$sort;
+        $data = [];
+        switch ($sort){
+            case 0:
+                $data = [
+                    'width' => 1300,
+                    'height' => 804
+                ];
+                break;
+            case 1:
+            case 2:
+                $data = [
+                    'width' => 655,
+                    'height' => 283
+                ];
+                break;
+            case 3:
+            case 4:
+                $data = [
+                    'width' => 300,
+                    'height' => 264
+                ];
+                break;
+            case 5:
+            case 6:
+                $data = [
+                    'width' => 358,
+                    'height' => 205
+                ];
+                break;
+        }
+        return $data;
+    }
+
+    public function checkSizeImageToSort($sort, $file): bool
+    {
+
+        $image = getimagesize($file);
+        $width = $image[0];
+        $height = $image[1];
+
+        switch ($sort){
+            case 0:
+                if ($width == 1300 && $height == 804)
+                    return true;
+                break;
+            case 1:
+            case 2:
+                if ($width == 655 && $height == 283)
+                    return true;
+                break;
+            case 3:
+            case 4:
+                if ($width == 300 && $height == 264)
+                    return true;
+                break;
+            case 5:
+            case 6:
+                if ($width == 358 && $height == 205)
+                    return true;
+                break;
+        }
+        return false;
+    }
+
+    public function create($request): bool
     {
         try {
 
+
+            $path_image = "";
             if ($request->hasFile('image')) {
-                $path_image = $this->upload->store($request->file('image'));
-            }else{
-                $path_image = '/storage/default/image-available.jpg';
+                if ($this->checkSizeImageToSort((int)$request->input('sort'),$request->file('image'))){
+                    $path_image = $this->upload->store($request->file('image'));
+                }else{
+                    $data  = $this->getWidthHeight((int)$request->input('sort'));
+                    Session::flash('error', 'Tải ảnh không thành công, vui lòng kiểm tra lại định dạng, kích thước yêu cầu: ' . $data['width'] . 'x' . $data['height'] . ' px.' );
+                    return false;
+                }
             }
 
-            Banner::create([
-                "title" => (string)$request->input('title'),
-                "image" => $path_image,
-                "alt" => (string)$request->input('alt'),
-                "url" => (string)$request->input('url'),
-                "active" => (int)$request->input('active'),
-            ]);
+            if ($path_image !== ""){
+                Banner::create([
+                    "title" => (string)$request->input('title'),
+                    "image" => $path_image,
+                    "alt" => (string)$request->input('alt'),
+                    "url" => (string)$request->input('url'),
+                    "sort" => (int)$request->input('sort'),
+                    "active" => (int)$request->input('active'),
+                ]);
 
-            Session::flash('success', 'Tạo banner thành công.');
+                Session::flash('success', 'Tạo banner thành công.');
+            }
 
         } catch (\Exception $exception) {
             Session::flash('error', $exception->getMessage());
@@ -47,7 +123,7 @@ class BannerService
 
     }
 
-    public function destroy($request)
+    public function destroy($request): bool
     {
         $id = $request->input('slug');
 
@@ -60,7 +136,7 @@ class BannerService
         return false;
     }
 
-    public function update($banner, $bannerRequest)
+    public function update($banner, $bannerRequest): bool
     {
         try {
             $path_image = $banner->image;
@@ -68,12 +144,22 @@ class BannerService
             if ($bannerRequest->hasFile('image')) {
                 $path_image = $this->upload->store($bannerRequest->file('image'));
             }
+            if ($bannerRequest->hasFile('image')) {
+                if ($this->checkSizeImageToSort((int)$bannerRequest->input('sort'),$bannerRequest->file('image'))){
+                    $path_image = $this->upload->store($bannerRequest->file('image'));
+                }else{
+                    $data  = $this->getWidthHeight((int)$bannerRequest->input('sort'));
+                    Session::flash('error', 'Tải ảnh không thành công, vui lòng kiểm tra lại định dạng, kích thước yêu cầu: ' . $data['width'] . 'x' . $data['height'] . ' px.' );
+                    return false;
+                }
+            }
 
             $banner->title = (string)$bannerRequest->input('title');
             $banner->image = $path_image;
             $banner->alt = (string)$bannerRequest->input('alt');
             $banner->url = (string)$bannerRequest->input('url');
             $banner->active = (int)$bannerRequest->input('active');
+            $banner->sort = (int)$bannerRequest->input('sort');
             $banner->save();
             Session::flash('success', 'Cập nhật banner thành công.');
             return true;

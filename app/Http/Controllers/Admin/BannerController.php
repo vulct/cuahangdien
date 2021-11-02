@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BannerRequest;
 use App\Models\Banner;
 use App\Services\BannerService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class BannerController extends Controller
 {
@@ -32,19 +33,14 @@ class BannerController extends Controller
         ]);
     }
 
-    public function store(BannerRequest $request)
+    public function store(BannerRequest $request): RedirectResponse
     {
-        $result = $this->bannerService->create($request);;
+        $result = $this->bannerService->create($request);
         if ($result) {
             return redirect()->route('admin.banners.index');
         }
         return back();
 
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit(Banner $banner)
@@ -55,7 +51,7 @@ class BannerController extends Controller
         ]);
     }
 
-    public function update(Banner $banner, BannerRequest $bannerRequest)
+    public function update(Banner $banner, BannerRequest $bannerRequest): RedirectResponse
     {
         $result = $this->bannerService->update($banner, $bannerRequest);
         if ($result) {
@@ -64,7 +60,7 @@ class BannerController extends Controller
         return back();
     }
 
-    public function destroy(BannerRequest $bannerRequest)
+    public function destroy(BannerRequest $bannerRequest): JsonResponse
     {
         $result = $this->bannerService->destroy($bannerRequest);
 
