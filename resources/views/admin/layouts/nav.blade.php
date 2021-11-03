@@ -44,7 +44,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="/storage/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{asset('/storage/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -221,12 +221,6 @@
                                 <p>Danh mục</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.brands.index')}}" class="nav-link {{ (request()->is('admin/brands*')) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-handshake"></i>
-                                <p>Thương hiệu</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
@@ -248,7 +242,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.price')}}" class="nav-link {{ (request()->is('admin/price_list*')) ? 'active' : '' }}">
+                            <a href="{{route('admin.tariffs.index')}}" class="nav-link {{ (request()->is('admin/tariffs*')) ? 'active' : '' }}">
                                 <i class="fas fa-money-check-alt nav-icon"></i>
                                 <p>Bảng giá</p>
                             </a>
@@ -297,25 +291,6 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item {{(request()->is('admin/blogs*')) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{(request()->is('admin/blogs*')) ? 'active' : ''}}">
-                        <i class="nav-icon far fa-file-powerpoint"></i>
-                        <p>
-                            Tin tức
-                        </p>
-                    </a>
-
-                    <ul class="nav nav-treeview" style="display: none;">
-                        <li class="nav-item">
-                            <a href="{{route('admin.products.index')}}" class="nav-link {{ (request()->is('admin/products*')) ? 'active' : '' }}">
-                                <i class="far fa-file-image nav-icon"></i>
-                                <p>Sản phẩm</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-
                 <!-- Marketing -->
                 <li class="nav-header">
                     <i class="nav-icon  fas fa-sort-amount-up "></i>
