@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Services\BannerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
@@ -60,9 +61,9 @@ class BannerController extends Controller
         return back();
     }
 
-    public function destroy(BannerRequest $bannerRequest): JsonResponse
+    public function destroy(Request $request): JsonResponse
     {
-        $result = $this->bannerService->destroy($bannerRequest);
+        $result = $this->bannerService->destroy($request);
 
         if ($result) {
             return response()->json([

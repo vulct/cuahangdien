@@ -30,7 +30,7 @@
 
                         <div class="card-tools">
                             <div class="btn-group mr-5">
-                                <a href="{{route('admin.categories.index')}}"
+                                <a href="{{isset($type) ? route('admin.categories_post') : route('admin.categories.index')}}"
                                    class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
                                         class="hidden-xs"> Trở lại danh sách</span></a>
                             </div>
@@ -41,7 +41,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.categories.store') }}" method="post"
+                        <form action="{{ isset($type) ?  route('admin.categories_post.store') : route('admin.categories.store') }}" method="post"
                               enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
@@ -70,6 +70,9 @@
                                                         <input type="text" id="name" name="name"
                                                                value="{{old('name')}}"
                                                                class="form-control" placeholder="" required/>
+                                                        @if( isset($type) )
+                                                            <input type="hidden" name="type" value="1">
+                                                        @endif
                                                     </div>
                                                     <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
@@ -172,7 +175,7 @@
                                                         <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
                                                     </span>
                                             </div>
-
+                                            @if(!isset($type))
                                             <div class="form-group">
                                                 <label for="inputStatus">{{__('Danh mục cha')}}</label>
                                                 <select id="inputStatus" name="cate_parent" class="form-control select2"
@@ -181,6 +184,7 @@
                                                     {!! \App\Helpers\Helper::categoryOption($categories) !!}
                                                 </select>
                                             </div>
+                                            @endif
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="active"
                                                        name="active" value="1" checked=""/>

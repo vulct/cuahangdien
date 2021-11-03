@@ -44,7 +44,7 @@ class BrandRequest extends FormRequest
             ]
         ];
 
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+        if (in_array($this->method(), ['PUT', 'PATCH', 'DELETE'])) {
             $rules['slug'] = [
                 'required',
                 'string',
