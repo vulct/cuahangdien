@@ -55,7 +55,7 @@ class ProductRequest extends FormRequest
             'brand' => 'integer|required'
         ];
 
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+        if (in_array($this->method(), ['PUT', 'PATCH', 'DELETE'])) {
             $rules['slug'] = [
                 'required',
                 'string',
@@ -84,14 +84,6 @@ class ProductRequest extends FormRequest
             'category' => 'danh mục',
             'brand' => 'thương hiệu',
             'size' => 'kích thước'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'category.not_in' => 'Vui lòng chọn danh mục sản phẩm.',
-            'brand.not_in' => 'Vui lòng chọn thương hiệu sản phẩm.'
         ];
     }
 }

@@ -193,4 +193,17 @@ class ProductService
     {
         return $this->productAttributeService->create($product_id, $data);
     }
+
+    public function destroy($request): bool
+    {
+        $slug = $request->input('slug');
+
+        $post = Product::where('slug', $slug)->first();
+
+        if ($post) {
+            return Product::where('slug', $slug)->update(['isDelete' => 1]);
+        }
+
+        return false;
+    }
 }

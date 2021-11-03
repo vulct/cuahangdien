@@ -123,7 +123,7 @@
                                                             style="width: 100%" required>
                                                         <option value="">Trống</option>
                                                         @foreach($categories as $cate_parent)
-                                                            <option value="{{$cate_parent->id}}" {{ $product->category->id === $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
+                                                            <option value="{{$cate_parent->id}}" {{ $product->category_id === $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
