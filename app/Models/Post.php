@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
@@ -17,8 +18,6 @@ class Post extends Model
         'image',
         'slug',
         'keyword',
-        'category_price',
-        'type',
         'active',
         'isDelete',
         'view',
@@ -28,5 +27,10 @@ class Post extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function category(): HasOne
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

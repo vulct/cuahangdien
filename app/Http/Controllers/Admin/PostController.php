@@ -35,7 +35,7 @@ class PostController extends Controller
     public function index()
     {
         return view('admin.posts.list', [
-            'title' => 'Danh sách bài viết',
+            'title' => 'Danh sách tin tức',
             'posts' => $this->postService->get()
         ]);
     }
@@ -66,17 +66,6 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Post $post
-     * @return Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Post $post
@@ -101,6 +90,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $result = $this->postService->update($post, $request);
+
         if ($result) {
             return redirect()->route('admin.posts.index');
         }
@@ -113,14 +103,14 @@ class PostController extends Controller
      * @param Post $post
      * @return JsonResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        $result = $this->postService->destroy($post);
+        $result = $this->postService->destroy($request);
 
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa danh mục thành công'
+                'message' => 'Xóa bài viết thành công'
             ]);
         }
 

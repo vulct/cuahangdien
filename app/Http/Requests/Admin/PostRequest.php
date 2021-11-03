@@ -14,7 +14,7 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -35,7 +35,7 @@ class PostRequest extends FormRequest
             'description' => 'string|nullable|max:300',
             'content' => 'required',
             'category_id' => 'numeric|required',
-            'category' => 'numeric|nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
                 'min:3',
@@ -47,7 +47,7 @@ class PostRequest extends FormRequest
             ]
         ];
 
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+        if (in_array($this->method(), ['PUT', 'PATCH', 'DELETE'])) {
             $rules['slug'] = [
                 'required',
                 'string',
@@ -70,7 +70,7 @@ class PostRequest extends FormRequest
             'keyword' => 'từ khóa',
             'description' => 'mô tả',
             'category_id' => 'thể loại',
-            'category' => 'danh mục'
+            'image' => 'hình ảnh'
         ];
     }
 }
