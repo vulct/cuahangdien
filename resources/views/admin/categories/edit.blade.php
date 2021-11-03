@@ -29,7 +29,7 @@
 
                         <div class="card-tools">
                             <div class="btn-group mr-5">
-                                <a href="{{route('admin.categories.index')}}"
+                                <a href="{{isset($type) ? route('admin.categories_post') : route('admin.categories.index')}}"
                                    class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span
                                         class="hidden-xs"> Trở lại danh sách</span></a>
                             </div>
@@ -40,7 +40,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.categories.update', $cate->slug) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ isset($type) ? route('admin.categories_post.update', $cate->slug) : route('admin.categories.update', $cate->slug) }}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card card-primary">
@@ -68,6 +68,9 @@
                                                         <input type="text" id="name" name="name"
                                                                value="{{$cate->name}}"
                                                                class="form-control" placeholder="" required/>
+                                                        @if( isset($type) )
+                                                            <input type="hidden" name="type" value="1">
+                                                        @endif
                                                     </div>
                                                     <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
@@ -170,6 +173,7 @@
                                                         <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
                                                     </span>
                                             </div>
+                                            @if(!isset($type))
                                             <div class="form-group">
                                                 <label for="cate_parent">{{__('Danh mục cha')}}</label>
                                                 <select id="cate_parent" name="cate_parent" class="form-control select2"
@@ -178,6 +182,7 @@
                                                     {!! \App\Helpers\Helper::categoryOption($categories, 0, '',$cate->parent_id) !!}
                                                 </select>
                                             </div>
+                                            @endif
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="active"
                                                        name="active" value="1" @if($cate->active == 1) checked="" @endif/>

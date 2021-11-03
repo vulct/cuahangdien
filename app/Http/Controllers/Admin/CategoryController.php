@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -35,6 +36,20 @@ class CategoryController extends Controller
     }
 
     /**
+     * Get category of posts
+     */
+
+    public function getCategoriesOfPost ()
+    {
+        return view('admin.categories.list', [
+            'title' => 'Danh sách danh mục bài viết',
+            'categories' => $this->categoryService->get(1,1),
+            'create' => route('admin.categories_post.create')
+        ]);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Application|Factory|View
@@ -47,16 +62,32 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function createCategoriesOfPost()
+    {
+        return view('admin.categories.add', [
+            'title' => 'Thêm mới danh mục bài viết',
+            'categories' => $this->categoryService->get(1,1),
+            'type' => 1
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param CategoryRequest $request
      * @return RedirectResponse
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): RedirectResponse
     {
         $this->categoryService->create($request);
         return redirect()->route('admin.categories.index');
+    }
+
+    public function storeCategoriesOfPost(CategoryRequest $request): RedirectResponse
+    {
+
+        $this->categoryService->create($request);
+        return redirect()->route('admin.categories_post');
     }
 
     /**
@@ -70,6 +101,15 @@ class CategoryController extends Controller
 
         return view('admin.categories.detail', [
             'categories' => $this->categoryService->get(1,0),
+            'cate' => $category
+        ]);
+    }
+
+    public function showCategoriesOfPost(Category $category)
+    {
+
+        return view('admin.categories.detail', [
+            'categories' => $this->categoryService->get(1,1),
             'cate' => $category
         ]);
     }
@@ -89,6 +129,16 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function editCategoriesOfPost(Category $category)
+    {
+        return view('admin.categories.edit', [
+            'title' => 'Chỉnh sửa danh mục bài viết',
+            'categories' => $this->categoryService->get(1,1),
+            'cate' => $category,
+            'type' => 1
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -105,13 +155,21 @@ class CategoryController extends Controller
         return back();
     }
 
+    public function updateCategoriesOfPost(Category $category, CategoryRequest $updateCategoryRequest): RedirectResponse
+    {
+        $result = $this->categoryService->update($category, $updateCategoryRequest);
+        if ($result) {
+            return redirect()->route('admin.categories_post');
+        }
+        return back();
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param CategoryRequest $request
      * @return JsonResponse
      */
-    public function destroy(CategoryRequest $request)
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->categoryService->destroy($request);
 

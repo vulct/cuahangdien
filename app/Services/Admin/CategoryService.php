@@ -37,7 +37,7 @@ class CategoryService
                 $path_image = '/storage/default/image-available.jpg';
             }
 
-            // Show in home
+            // Show in home default with root category
             $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
 
             // Check type category

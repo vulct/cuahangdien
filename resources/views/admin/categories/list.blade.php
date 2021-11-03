@@ -28,7 +28,7 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{route('admin.categories.create')}}" class="btn btn-success float-right" title="{{__('Thêm mới danh mục')}}">
+                                <a href="{{$create ?? route('admin.categories.create')}}" class="btn btn-success float-right" title="{{__('Thêm mới danh mục')}}">
                                     {{__('Thêm mới danh mục')}}
                                 </a>
                             </div>
@@ -48,7 +48,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {!! \App\Helpers\Helper::category($categories) !!}
+                                    @if(isset($create))
+                                        {!! \App\Helpers\Helper::category_post($categories) !!}
+                                    @else
+                                        {!! \App\Helpers\Helper::category($categories) !!}
+                                    @endif
+
                                     </tbody>
                                     <tfoot>
                                     <tr>
