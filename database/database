@@ -1,0 +1,410 @@
+/*
+MySQL Backup
+Database: cuahangdien
+Backup Time: 2021-11-03 13:57:21
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS `cuahangdien`.`banners`;
+DROP TABLE IF EXISTS `cuahangdien`.`brands`;
+DROP TABLE IF EXISTS `cuahangdien`.`categories`;
+DROP TABLE IF EXISTS `cuahangdien`.`comments`;
+DROP TABLE IF EXISTS `cuahangdien`.`contacts`;
+DROP TABLE IF EXISTS `cuahangdien`.`failed_jobs`;
+DROP TABLE IF EXISTS `cuahangdien`.`info`;
+DROP TABLE IF EXISTS `cuahangdien`.`migrations`;
+DROP TABLE IF EXISTS `cuahangdien`.`order`;
+DROP TABLE IF EXISTS `cuahangdien`.`order_items`;
+DROP TABLE IF EXISTS `cuahangdien`.`pages`;
+DROP TABLE IF EXISTS `cuahangdien`.`password_resets`;
+DROP TABLE IF EXISTS `cuahangdien`.`personal_access_tokens`;
+DROP TABLE IF EXISTS `cuahangdien`.`posts`;
+DROP TABLE IF EXISTS `cuahangdien`.`product_attributes`;
+DROP TABLE IF EXISTS `cuahangdien`.`products`;
+DROP TABLE IF EXISTS `cuahangdien`.`shipping_methods`;
+DROP TABLE IF EXISTS `cuahangdien`.`tariffs`;
+DROP TABLE IF EXISTS `cuahangdien`.`users`;
+CREATE TABLE `banners` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alt` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` tinyint(4) NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `banners_url_index` (`url`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `brands` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `brands_slug_index` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `top` tinyint(4) NOT NULL DEFAULT '0',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `categories_slug_index` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` smallint(6) DEFAULT NULL,
+  `content` varchar(1500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_id` bigint(20) unsigned DEFAULT NULL,
+  `post_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_product_id_index` (`product_id`),
+  KEY `comments_post_id_index` (`post_id`),
+  CONSTRAINT `comments_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `comments_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `contacts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `group` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `info` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hotline1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hotline2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `business_license` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `map_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `map_iframe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zalo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sale` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `order` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` decimal(13,2) NOT NULL,
+  `payment_status` tinyint(4) NOT NULL DEFAULT '0',
+  `shipping_status` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `shipping_method_id` bigint(20) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order_shipping_method_id_index` (`shipping_method_id`),
+  CONSTRAINT `order_shipping_method_id_foreign` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_methods` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `order_items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `quantity` smallint(6) NOT NULL,
+  `price` decimal(13,2) DEFAULT NULL,
+  `discount` decimal(13,2) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_attribute_id` bigint(20) unsigned DEFAULT '0',
+  `order_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_items_product_attribute_id_index` (`product_attribute_id`),
+  KEY `order_items_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+  CONSTRAINT `order_items_product_attribute_id_foreign` FOREIGN KEY (`product_attribute_id`) REFERENCES `product_attributes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `pages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` int(11) NOT NULL DEFAULT '1',
+  `isDelete` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pages_slug_index` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `view` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `category_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `posts_slug_index` (`slug`),
+  KEY `posts_category_id_index` (`category_id`),
+  CONSTRAINT `posts_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `product_attributes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codename` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` decimal(13,2) DEFAULT NULL,
+  `discount` decimal(13,2) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_id` bigint(20) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_attributes_product_id_foreign` (`product_id`),
+  CONSTRAINT `product_attributes_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `warranty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `view` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `category_id` bigint(20) unsigned DEFAULT '0',
+  `brand_id` bigint(20) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `products_slug_index` (`slug`),
+  KEY `products_category_id_index` (`category_id`),
+  KEY `products_brand_id_index` (`brand_id`),
+  CONSTRAINT `products_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `shipping_methods` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `tariffs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link_download` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'link pdf drive',
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `language` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `isDelete` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `category_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tariffs_slug_index` (`slug`),
+  KEY `tariffs_category_id_index` (`category_id`),
+  CONSTRAINT `tariffs_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+BEGIN;
+LOCK TABLES `cuahangdien`.`banners` WRITE;
+DELETE FROM `cuahangdien`.`banners`;
+INSERT INTO `cuahangdien`.`banners` (`id`,`title`,`url`,`alt`,`image`,`sort`,`active`,`isDelete`,`created_at`,`updated_at`) VALUES (1, '', '', '', '/storage/uploads/2021/11/02/den-nang-luong-mat-troi.jpg', 1, 1, 0, '2021-11-02 22:20:30', '2021-11-02 22:20:30');
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`brands` WRITE;
+DELETE FROM `cuahangdien`.`brands`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`categories` WRITE;
+DELETE FROM `cuahangdien`.`categories`;
+INSERT INTO `cuahangdien`.`categories` (`id`,`name`,`meta_title`,`slug`,`parent_id`,`keyword`,`icon`,`description`,`image`,`type`,`active`,`top`,`isDelete`,`created_at`,`updated_at`) VALUES (1, 'Đèn năng lượng mặt trời', '', 'den-nang-luong-mat-troi', 0, '', 'fas fa-bars', '', '/storage/default/image-available.jpg', 0, 1, 1, 0, '2021-11-03 01:23:02', '2021-11-03 01:23:02'),(2, 'Bảng giá thiết bị điện', '', 'bang-gia-thiet-bi-dien', 0, '', 'fas fa-bars', '', '/storage/default/image-available.jpg', 1, 1, 1, 0, '2021-11-03 01:32:05', '2021-11-03 01:32:05'),(3, 'Kiến thức', '', 'kien-thuc', 0, '', 'fas fa-bars', '', '/storage/default/image-available.jpg', 1, 1, 1, 0, '2021-11-03 01:58:34', '2021-11-03 01:58:34'),(4, 'Kiến thức mới', '', 'kien-thuc-moi', 3, '', 'fas fa-bars', '', '/storage/default/image-available.jpg', 1, 1, 0, 1, '2021-11-03 02:09:10', '2021-11-03 02:23:53');
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`comments` WRITE;
+DELETE FROM `cuahangdien`.`comments`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`contacts` WRITE;
+DELETE FROM `cuahangdien`.`contacts`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`failed_jobs` WRITE;
+DELETE FROM `cuahangdien`.`failed_jobs`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`info` WRITE;
+DELETE FROM `cuahangdien`.`info`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`migrations` WRITE;
+DELETE FROM `cuahangdien`.`migrations`;
+INSERT INTO `cuahangdien`.`migrations` (`id`,`migration`,`batch`) VALUES (18, '2014_10_12_000000_create_users_table', 1),(19, '2014_10_12_100000_create_password_resets_table', 1),(20, '2019_08_19_000000_create_failed_jobs_table', 1),(21, '2019_12_14_000001_create_personal_access_tokens_table', 1),(22, '2021_09_07_170331_create_categories_table', 1),(23, '2021_09_14_172447_create_brands_table', 1),(24, '2021_09_15_102718_create_shipping_methods_table', 1),(25, '2021_09_15_231459_create_products_table', 1),(26, '2021_09_16_165440_create_product_attributes_table', 1),(27, '2021_09_23_213015_create_pages_table', 1),(28, '2021_10_04_235947_create_banners_table', 1),(29, '2021_10_12_150756_create_posts_table', 1),(30, '2021_10_13_163558_create_contacts_table', 1),(31, '2021_10_13_164827_create_comments_table', 1),(32, '2021_10_13_214427_create_info_table', 1),(33, '2021_10_14_232130_create_order_table', 1),(34, '2021_10_14_232255_create_order_items_table', 1),(35, '2021_11_01_173600_create_tariffs_table', 1);
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`order` WRITE;
+DELETE FROM `cuahangdien`.`order`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`order_items` WRITE;
+DELETE FROM `cuahangdien`.`order_items`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`pages` WRITE;
+DELETE FROM `cuahangdien`.`pages`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`password_resets` WRITE;
+DELETE FROM `cuahangdien`.`password_resets`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`personal_access_tokens` WRITE;
+DELETE FROM `cuahangdien`.`personal_access_tokens`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`posts` WRITE;
+DELETE FROM `cuahangdien`.`posts`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`product_attributes` WRITE;
+DELETE FROM `cuahangdien`.`product_attributes`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`products` WRITE;
+DELETE FROM `cuahangdien`.`products`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`shipping_methods` WRITE;
+DELETE FROM `cuahangdien`.`shipping_methods`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`tariffs` WRITE;
+DELETE FROM `cuahangdien`.`tariffs`;
+UNLOCK TABLES;
+COMMIT;
+BEGIN;
+LOCK TABLES `cuahangdien`.`users` WRITE;
+DELETE FROM `cuahangdien`.`users`;
+INSERT INTO `cuahangdien`.`users` (`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES (1, 'Điện nước Thuý Anh', 'admin@gmail.com', NULL, '$2y$10$9j.Z7o/d9a/5owkyY9Ij7.b53WpE4ui7vaX.xGuk8m.GTymHw7JgG', '8dvZxPEm8uFK4e9VBVQ44MqAW7bEgAnxph1Er6MRokTqNNyHnydHm1rSa2ik', NULL, NULL);
+UNLOCK TABLES;
+COMMIT;
