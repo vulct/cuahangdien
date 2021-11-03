@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,17 +31,30 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
             Route::get('/dashboard', [HomeController::class, 'index']);
 
-            #Categories
+            #Categories of products
             Route::resource('/categories',CategoryController::class);
 
-            #Post category list
-            Route::get('/post_categories',[CategoryController::class,'getCategoriesOfPost'])->name('categories_post');
+            #Categories of posts
+            Route::get('/categories_post',[CategoryController::class,'getCategoriesOfPost'])->name('categories_post');
+
+            Route::get('/categories_post/create',[CategoryController::class,'createCategoriesOfPost'])->name('categories_post.create');
+
+            Route::post('/categories_post/create',[CategoryController::class,'storeCategoriesOfPost'])->name('categories_post.store');
+
+            Route::get('/categories_post/{category}',[CategoryController::class,'showCategoriesOfPost'])->name('categories_post.show');
+
+            Route::get('/categories_post/{category}/edit',[CategoryController::class,'editCategoriesOfPost'])->name('categories_post.edit');
+
+            Route::patch('/categories_post/{category}',[CategoryController::class,'updateCategoriesOfPost'])->name('categories_post.update');
+
+            Route::delete('/categories_post/destroy',[CategoryController::class,'destroy'])->name('categories_post.destroy');
+
 
             #Posts
             Route::resource('/posts',PostController::class);
 
-            #Price list
-            Route::get('/price_list',[PostController::class,'getPriceList'])->name('price');
+            #Price list - tariff
+            Route::resource('/tariffs',TariffController::class);
 
             #Brands
             Route::resource('/brands',BrandController::class);
