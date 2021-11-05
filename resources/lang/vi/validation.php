@@ -162,5 +162,6 @@ return [
         'title'                 => 'tiêu đề',
         'username'              => 'tên đăng nhập',
         'year'                  => 'năm',
+        'current_password' => 'mật khẩu cũ'
     ],
 ];

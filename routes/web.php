@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\Auth\AccountController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function (){
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');
@@ -82,6 +83,13 @@ Route::middleware(['auth'])->group(function () {
 
             #Banners
             Route::resource('/banners',BannerController::class);
+
+            #Logout
+            Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+            #Info Account Admin
+            Route::resource('/account',AccountController::class);
+            Route::post('/account',[AccountController::class, 'change'])->name('account.change');
         });
     });
 
