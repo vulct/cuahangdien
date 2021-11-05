@@ -26,7 +26,7 @@ class InfoController extends Controller
      */
     public function index()
     {
-        return view('admin.info.index', [
+        return view('admin.info.edit', [
             'title' => 'Thông tin hệ thống',
             'info' => $this->infoService->get()
         ]);
@@ -42,7 +42,7 @@ class InfoController extends Controller
     {
         $result = $this->infoService->create($request);
         if ($result) {
-            return redirect()->route('admin.info.index');
+            return redirect()->route('admin.info.edit');
         }
         return back();
     }

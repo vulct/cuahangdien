@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -30,7 +31,7 @@
                                 <h3 class="card-title">{{$title}}. {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ count($info) < 1 ? route('admin.info.store') : route('admin.info.update', $info[count($info) - 1]->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ $info->isEmpty() ? route('admin.info.store') : route('admin.info.update', $info->id) }}" method="post" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -58,7 +59,7 @@
                                                                     class="fas fa-pencil-alt"></i></span>
                                                             </div>
                                                             <input type="text" id="name" name="name"
-                                                                   value="{{old('name') ?? $info[count($info) - 1]->name ?? ''}}"
+                                                                   value="{{old('name') ?? isset($info->name) ?? ''}}"
                                                                    class="form-control" placeholder="" required/>
                                                         </div>
                                                         <span class="form-text">
@@ -78,7 +79,7 @@
                                                             </div>
                                                             <input type="text" id="keyword"
                                                                    name="keyword"
-                                                                   value="{{old('keyword') ?? $info[count($info) - 1]->keyword ?? ''}}"
+                                                                   value="{{old('keyword') ?? isset($info->keyword) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -98,7 +99,7 @@
                                                             </div>
                                                             <input type="text" id="description"
                                                                    name="description"
-                                                                   value="{{old('description') ?? $info[count($info) - 1]->description ?? ''}}"
+                                                                   value="{{old('description') ?? isset($info->description) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -109,8 +110,8 @@
                                                 <!-- /.logo -->
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label" for="logo">{{__('Logo')}}</label>
-                                                    @if($info[count($info) - 1]->logo)
-                                                        <img class="card-img-right flex-auto d-none d-md-block" src="{{$info[count($info) - 1]->logo}}"
+                                                    @if(isset($info->logo))
+                                                        <img class="card-img-right flex-auto d-none d-md-block" src="{{$info->logo}}"
                                                              alt="Logo" style="width: 100px;"
                                                              data-holder-rendered="true">
                                                     @endif
@@ -126,8 +127,8 @@
                                                 <!-- /.icon -->
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label" for="icon">{{__('Icon')}}</label>
-                                                    @if($info[count($info) - 1]->icon)
-                                                        <img class="card-img-right flex-auto d-none d-md-block" src="{{$info[count($info) - 1]->icon}}"
+                                                    @if(isset($info->icon))
+                                                        <img class="card-img-right flex-auto d-none d-md-block" src="{{$info->icon}}"
                                                              alt="Icon" style="width: 50px;"
                                                              data-holder-rendered="true">
                                                     @endif
@@ -170,7 +171,7 @@
                                                             </div>
                                                             <input type="text" id="hotline1"
                                                                    name="hotline1"
-                                                                   value="{{old('hotline1') ?? $info[count($info) - 1]->hotline1 ?? ''}}"
+                                                                   value="{{old('hotline1') ?? isset($info->hotline1) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -190,7 +191,7 @@
                                                             </div>
                                                             <input type="text" id="hotline2"
                                                                    name="hotline2"
-                                                                   value="{{old('hotline2') ?? $info[count($info) - 1]->hotline2 ?? ''}}"
+                                                                   value="{{old('hotline2') ?? isset($info->hotline2) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -210,7 +211,7 @@
                                                             </div>
                                                             <input type="text" id="phone"
                                                                    name="phone"
-                                                                   value="{{old('phone') ?? $info[count($info) - 1]->phone ?? ''}}"
+                                                                   value="{{old('phone') ?? isset($info->phone) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -230,7 +231,7 @@
                                                             </div>
                                                             <input type="text" id="sale"
                                                                    name="sale"
-                                                                   value="{{old('sale') ?? $info[count($info) - 1]->sale ?? ''}}"
+                                                                   value="{{old('sale') ?? isset($info->sale) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -250,7 +251,7 @@
                                                             </div>
                                                             <input type="text" id="facebook"
                                                                    name="facebook"
-                                                                   value="{{old('facebook') ?? $info[count($info) - 1]->facebook ?? ''}}"
+                                                                   value="{{old('facebook') ?? isset($info->facebook) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -260,7 +261,7 @@
                                                 </div>
                                                 <!-- /.zalo-->
                                                 <div class="form-group row">
-                                                    <label for="facebook"
+                                                    <label for="zalo"
                                                            class="col-sm-2 col-form-label">{{__('Zalo')}}</label>
                                                     <div class="col-sm-10">
                                                         <div class="input-group">
@@ -270,7 +271,7 @@
                                                             </div>
                                                             <input type="text" id="zalo"
                                                                    name="zalo"
-                                                                   value="{{old('zalo') ?? $info[count($info) - 1]->zalo ?? ''}}"
+                                                                   value="{{old('zalo') ?? isset($info->zalo) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -290,7 +291,7 @@
                                                             </div>
                                                             <input type="email" id="email"
                                                                    name="email"
-                                                                   value="{{old('email') ?? $info[count($info) - 1]->email ?? ''}}"
+                                                                   value="{{old('email') ?? isset($info->email) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -327,7 +328,7 @@
                                                             </div>
                                                             <input type="text" id="address"
                                                                    name="address"
-                                                                   value="{{old('address') ?? $info[count($info) - 1]->address ?? ''}}"
+                                                                   value="{{old('address') ?? isset($info->address) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -347,7 +348,7 @@
                                                             </div>
                                                             <input type="text" id="map_address"
                                                                    name="map_address"
-                                                                   value="{{old('map_address') ?? $info[count($info) - 1]->map_address ?? ''}}"
+                                                                   value="{{old('map_address') ?? isset($info->map_address) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -367,7 +368,7 @@
                                                             </div>
                                                             <input type="text" id="map_iframe"
                                                                    name="map_iframe"
-                                                                   value="{{old('map_iframe') ?? $info[count($info) - 1]->map_iframe ?? ''}}"
+                                                                   value="{{old('map_iframe') ?? isset($info->map_iframe) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -404,7 +405,7 @@
                                                             </div>
                                                             <input type="text" id="tax_code"
                                                                    name="tax_code"
-                                                                   value="{{old('tax_code') ?? $info[count($info) - 1]->tax_code ?? ''}}"
+                                                                   value="{{old('tax_code') ?? isset($info->tax_code) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -424,7 +425,7 @@
                                                             </div>
                                                             <input type="text" id="business_license"
                                                                    name="business_license"
-                                                                   value="{{old('business_license') ?? $info[count($info) - 1]->business_license ?? ''}}"
+                                                                   value="{{old('business_license') ?? isset($info->business_license) ?? ''}}"
                                                                    class="form-control" placeholder=""/>
                                                         </div>
                                                         <span class="form-text">
@@ -441,12 +442,12 @@
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <button type="submit"
-                                                    class="btn btn-success d-block w-100">{{count($info) > 0 ? __('Edit'):__('Add')}}</button>
+                                                    class="btn btn-success d-block w-100">{{(count($info) > 0 &&  !$info->isEmpty()) ? __('Edit'):__('Add')}}</button>
                                         </div>
                                     </div>
                                 </div>
                                 @csrf
-                                @if (count($info) > 0) @method('PATCH') @endif
+                                @if (count($info) > 0 && !$info->isEmpty()) @method('PATCH') @endif
                             </div>
                             </form>
                             <!-- /.card-body -->
