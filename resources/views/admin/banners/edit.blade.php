@@ -178,6 +178,7 @@
                                 </div>
                             </div>
                             @csrf
+                            @method('PATCH')
                         </form>
                         <!-- /.row -->
                     </div>
