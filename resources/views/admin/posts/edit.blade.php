@@ -40,7 +40,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.posts.update',$product->slug) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.posts.update',$post->slug) }}" method="post" enctype="multipart/form-data">
                             @method('PATCH')
                             <div class="row">
                                 <div class="col-md-12">
