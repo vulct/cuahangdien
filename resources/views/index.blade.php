@@ -14,10 +14,15 @@
                                 <div class='navbar navbar-default' role='navigation'>
                                     <div class='navbar-collapse collapse' style='padding:0;margin: 0;'>
                                         <ul class='nav navbar-nav lef-nav-bar' style="min-height: 550px;">
+
+                                            @foreach($categories as $cate)
                                             <li class='dropdown ttmenu-full'>
-                                                <a href='/den-chieu-sang' data-toggle='dropdown' class='dropdown-toggle'><span class='icon-wrap'>
-		        <i class='lv1-icon icon navicon icon-2 ii3'></i>
-	        </span> <span>Đèn chiếu sáng</span> </a>
+                                                <a href='/{{$cate->slug}}' data-toggle='dropdown' class='dropdown-toggle'>
+                                                    <span class='icon-wrap'>
+                                                        <i class='lv1-icon icon navicon {{$cate->icon}}'></i>
+                                                    </span>
+                                                    <span>{{$cate->name}}</span>
+                                                </a>
                                                 <ul class='dropdown-menu vertical-menu'>
                                                     <li>
                                                         <div class='ttmenu-content'>
@@ -26,63 +31,16 @@
                                                                     <div class="col-md-12">
                                                                         <h3>Xem thương hiệu</h3>
                                                                         <div class="menu-brands">
-                                                                            <div>
-                                                                                <a href="/hang/anfaco/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/anfaco-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Anfaco" /><span>Anfaco</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/duhal/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/duhal-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Duhal" /><span>Duhal</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/euroto/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/euroto-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Euroto" /><span>Euroto</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/paragon/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/paragon-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Paragon" /><span>Paragon</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/mpe/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/mpe-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="MPE" /><span>MPE</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/rang-dong/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/rang-dong-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Rạng Đông" />
-                                                                                    <span>Rạng Đông</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/sano/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/sano-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Sano" /><span>Sano</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/hufa/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/hufa-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Hufa" /><span>Hufa</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/kingled/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/kingled-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Kingled" /><span>Kingled</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/megaman/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/megaman-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Megaman" /><span>Megaman</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/philips/den-chieu-sang">
-                                                                                    <img class="lazy" data-src="/media/brands/philips-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Philips" /><span>Philips</span>
-                                                                                </a>
-                                                                            </div>
+                                                                                @foreach($data['brands'][$cate->id] as $brands)
 
+                                                                                    @foreach($brands as $brand)
+                                                                                    <div>
+                                                                                        <a href="/hang/{{$brand->slug}}/{{$cate->slug}}">
+                                                                                            <img class="lazy" data-src="{{$brand->image}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="{{$brand->name}}" /><span>{{$brand->name}}</span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    @endforeach
+                                                                                @endforeach
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -169,155 +127,8 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </li><li class='dropdown ttmenu-full'>
-                                                <a href='/den-trang-tri' data-toggle='dropdown' class='dropdown-toggle'><span class='icon-wrap'>
-		        <i class='lv1-icon icon navicon icon-12 ii13'></i>
-	        </span> <span>Đèn Trang Trí</span> </a>
-                                                <ul class='dropdown-menu vertical-menu'>
-                                                    <li>
-                                                        <div class='ttmenu-content'>
-                                                            <div class='tabbable'>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <h3>Xem thương hiệu</h3>
-                                                                        <div class="menu-brands">
-                                                                            <div>
-                                                                                <a href="/hang/euroto/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/euroto-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Euroto" /><span>Euroto</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/hufa/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/hufa-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Hufa" /><span>Hufa</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/khang-dy-venus/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/khang-dy-venus-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Khang Dy Venus" />
-                                                                                    <span>Khang Dy Venus</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/nam-long-netviet/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/namlong-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Nam Long NetViet" />
-                                                                                    <span>Nam Long NetViet</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/sano/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/sano-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Sano" /><span>Sano</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/verona/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/verona-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="VERONA" /><span>VERONA</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/phung-nam/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/phung-nam-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Phụng Nam Lighting" />
-                                                                                    <span>Phụng Nam Lighting</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/duhal/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/duhal-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Duhal" /><span>Duhal</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/paragon/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/paragon-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Paragon" /><span>Paragon</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/panasonic/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/panasonic-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Panasonic" />
-                                                                                    <span>Panasonic</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/hang/philips/den-trang-tri">
-                                                                                    <img class="lazy" data-src="/media/brands/philips-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Philips" /><span>Philips</span>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <h3>Xem theo loại sản phẩm</h3>
-                                                                        <div class="menu-products">
-                                                                            <div>
-                                                                                <a href="/den-chum">
-                                                                                    <img class="lazy" data-src="/media/category/den-chum-nen-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn chùm" />
-                                                                                    <span>Đèn chùm</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-mam">
-                                                                                    <img class="lazy" data-src="/media/category/den-mam-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn mâm" />
-                                                                                    <span>Đèn mâm</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-treo">
-                                                                                    <img class="lazy" data-src="/media/category/TBA-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn thả" /><span>Đèn thả</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-vach-den-tuong">
-                                                                                    <img
-                                                                                        class="lazy"
-                                                                                        data-src="/media/category/den-ngu-va-cau-thang-sm.jpg"
-                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
-                                                                                        alt="Đèn tường trong nhà"
-                                                                                    />
-                                                                                    <span>Đèn tường trong nhà</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-guong">
-                                                                                    <img class="lazy" data-src="/media/category/led-guong-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn Gương / Rọi tranh" />
-                                                                                    <span>Đèn Gương / Rọi tranh</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-ngoai-troi">
-                                                                                    <img
-                                                                                        class="lazy"
-                                                                                        data-src="/media/category/den-ngoai-troi-sm.jpg"
-                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
-                                                                                        alt="Đèn sân vườn, ngoài trời"
-                                                                                    />
-                                                                                    <span>Đèn sân vườn, ngoài trời</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-ban-trang-tri">
-                                                                                    <img
-                                                                                        class="lazy"
-                                                                                        data-src="/media/category/den-ban-trang-tri-sm.jpg"
-                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
-                                                                                        alt="Đèn bàn trang trí"
-                                                                                    />
-                                                                                    <span>Đèn bàn trang trí</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-san">
-                                                                                    <img class="lazy" data-src="/media/category/den-san-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn cây (đèn sàn)" />
-                                                                                    <span>Đèn cây (đèn sàn)</span>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
                                             </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
