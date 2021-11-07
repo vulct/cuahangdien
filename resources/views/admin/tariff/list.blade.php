@@ -49,7 +49,6 @@
                                     @foreach($tariffs as $key => $tariff)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Thumb')}}" src="{{$tariff->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
                                             <td>{{$tariff->name}}</td>
                                             <td>{{$tariff->slug}}</td>
                                             <td>{{$tariff->link_download}}</td>
