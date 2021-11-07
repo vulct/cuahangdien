@@ -125,4 +125,16 @@ class Helper
         return $active == 0 ? '<span class="d-block badge bg-danger p-2">Đã xem</span>'
             : '<span class="d-block badge bg-success p-2">Chưa xem</span>';
     }
+
+    // get url banner with sort
+    public static function bannerWithSort($banners, $sort)
+    {
+        foreach ($banners as $banner){
+            if ($banner->sort === $sort){
+                return $banner;
+            }
+        }
+
+        return false;
+    }
 }

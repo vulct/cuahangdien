@@ -325,21 +325,27 @@
                         </div>
                     </div>
                     <div id="home-banner">
+
                         <div class="left" style="">
                             <div class="slider-wrap" style="">
-                                <a class="impress-banner" href="/san-pham" data-banner-title="">
-                                    <img src="./images/bannertop.jpg" alt="Thiết bị điện dân dung & công nghiệp" class="insdr-insight-1-1">
+                                @php $bannerSort0 = \App\Helpers\Helper::bannerWithSort($banners, 0); @endphp
+                                <a class="impress-banner" href="{{$bannerSort0->url ?? '#'}}" data-banner-title="">
+                                    <img src="{{$bannerSort0->image ?? asset('storage/default/banners/vt1.jpg')}}" alt="{{$bannerSort0->alt ?? ''}}" class="insdr-insight-1-1">
                                 </a>
                             </div>
                             <div class="sub-banner-wrap">
                                 <div class="sub-item">
-                                    <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="/bang-gia">
-                                        <img src="./images/bang-gia-2020.png" alt="Bảng giá Thiết bị điện">
+                                    @php $bannerSort6 = \App\Helpers\Helper::bannerWithSort($banners, 6); @endphp
+                                    <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="{{$bannerSort6->url ?? '#'}}">
+
+                                        <img src="{{$bannerSort6->image ?? '/storage/default/banners/vt7.jpg'}}" alt="{{$bannerSort6->alt ?? ''}}">
                                     </a>
                                 </div>
                                 <div class="sub-item">
-                                    <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="/hang-thanh-ly">
-                                        <img src="./images/chinhsachuudai.jpg" alt="Sản phẩm khuyễn mãi - ưu đãi lớn">
+                                    @php $bannerSort5 = \App\Helpers\Helper::bannerWithSort($banners, 5); @endphp
+                                    <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="{{$bannerSort5->url ?? '#'}}">
+
+                                        <img src="{{$bannerSort5->image ?? '/storage/default/banners/vt6.jpg'}}" alt="{{$bannerSort5->alt ?? ''}}">
                                     </a>
                                 </div>
                             </div>
@@ -347,28 +353,31 @@
                         <div class="right">
 
                             <div class="mini-item mini-f-item">
-                                <a class="impress-banner" href="/thiet-bi-smart-home.html">
-                                    <img src="./images/nha-thong-minh.jpg" alt="Thiết bị smart home - nhà thông minh">
+                                @php $bannerSort1 = \App\Helpers\Helper::bannerWithSort($banners, 1); @endphp
+                                <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="{{$bannerSort1->url ?? '#'}}">
+
+                                    <img src="{{$bannerSort1->image ?? '/storage/default/banners/vt2.jpg'}}" alt="{{$bannerSort1->alt ?? ''}}">
                                 </a>
                             </div>
                             <div class="mini-item mini-f-item">
-                                <a class="impress-banner" href="/den-nang-luong-mat-troi.html">
-                                    <img src="./images/den-nang-luong-mat-troi.jpg" alt="Đèn năng lượng mặt trời">
-                                </a>
-                            </div>
+                                @php $bannerSort2 = \App\Helpers\Helper::bannerWithSort($banners, 2); @endphp
+                                <a class="impress-banner" data-banner-group-code="home_v4_sub_banner" href="{{$bannerSort2->url ?? '#'}}">
 
-                            <div class="mini-item">
-                                <a class="impress-banner" href="https://www.thietbidiendgp.vn/fpt-ihome.html">
-                                    <img src="./images/sp7.jpg" alt="Thiết bị cảnh báo đột nhập FPT iHome">
+                                    <img src="{{$bannerSort2->image ?? '/storage/default/banners/vt3.jpg'}}" alt="{{$bannerSort2->alt ?? ''}}">
                                 </a>
                             </div>
                             <div class="mini-item">
-                                <a class="impress-banner" href="https://www.thietbidiendgp.vn/products/den-led-panel-tron-am-smart-wifi-1">
-                                    <img src="./images/sp1.jpg" alt="den led smart home">
+                                @php $bannerSort4 = \App\Helpers\Helper::bannerWithSort($banners, 4); @endphp
+                                <a class="impress-banner" href="{{$bannerSort4->url ?? '#'}}">
+                                    <img src="{{$bannerSort4->image ?? '/storage/default/banners/vt5.jpg'}}" alt="{{$bannerSort4->alt ?? ''}}">
                                 </a>
                             </div>
-
-
+                            <div class="mini-item">
+                                @php $bannerSort3 = \App\Helpers\Helper::bannerWithSort($banners, 3); @endphp
+                                <a class="impress-banner" href="{{$bannerSort3->url ?? '#'}}">
+                                    <img src="{{$bannerSort3->image ?? '/storage/default/banners/vt4.jpg'}}" alt="{{$bannerSort3->alt ?? ''}}">
+                                </a>
+                            </div>
                         </div>
 
                     </div>
@@ -381,30 +390,37 @@
                     data-section-type="static-slideshow"
                     data-section-id="static-slideshow"
                     data-section-data>
-        {
-        "enable_autoplay": true,
-        "autoplay_duration": 8
-        }
-    </script>
+                {
+                "enable_autoplay": true,
+                "autoplay_duration": 8
+                }
+            </script>
             <section class="slideshow slideshow-dots-large">
-                <div class="slideshow-slide slideshow-height-large">
-                    <div class="slideshow-background slideshow-background--static-slideshow-1 slideshow-height-large " data-rimg="lazy" data-rimg-template=""
-                         data-themecolor="#4d4d4d"
-                         data-slidecolor="#ffffff" style="background-image: url('/images/bannertop.jpg');">
-                        <div data-rimg-canvas></div>
-                        <div class="slideshow-slide-overlay slideshow-slide-overlay--static-slideshow-1"></div>
-                    </div>
+                @php $i = 1; @endphp
+                @foreach($banners as $banner)
+                    @if($banner->sort === 0)
+                        <div class="slideshow-slide slideshow-height-large">
+                            <div class="slideshow-background slideshow-background--static-slideshow-1 slideshow-height-large " data-rimg="lazy" data-rimg-template=""
+                                 data-themecolor="#4d4d4d"
+                                 data-slidecolor="#ffffff" style="background-image: url('{{$banner->image}}');">
+                                <div data-rimg-canvas></div>
+                                <div class="slideshow-slide-overlay slideshow-slide-overlay--static-slideshow-1"></div>
+                            </div>
+                        </div>
+                        @php $i++; @endphp
+                    @endif
+                @endforeach
 
-                </div>
-                <div class="slideshow-slide slideshow-height-large">
-                    <div class="slideshow-background slideshow-background--static-slideshow-0 slideshow-height-large"
-                         data-rimg="lazy"
-                         data-themecolor="#4d4d4d"
-                         data-slidecolor="#ffffff" style="background-image: url('/images/banner1.jpg');">
-                        <div class="slideshow-slide-overlay slideshow-slide-overlay--static-slideshow-0"></div>
+                @if($i <= 1)
+                    <div class="slideshow-slide slideshow-height-large">
+                        <div class="slideshow-background slideshow-background--static-slideshow-1 slideshow-height-large " data-rimg="lazy" data-rimg-template=""
+                             data-themecolor="#4d4d4d"
+                             data-slidecolor="#ffffff" style="background-image: url('{{asset('/storage/default/banners/vt1.jpg')}}');">
+                            <div data-rimg-canvas></div>
+                            <div class="slideshow-slide-overlay slideshow-slide-overlay--static-slideshow-1"></div>
+                        </div>
                     </div>
-
-                </div>
+                @endif
                 <style>
                     /*.slideshow-slide-overlay--static-slideshow-1 {
                     background-color: #111111;
@@ -451,6 +467,7 @@
                 </style>
             </section>
         </div>
+
         <div id="shopify-section-static-highlights-banners" class="shopify-section highlights-banners--section">
             <script type="application/json" data-section-type="static-highlights-banners" data-section-id="static-highlights-banners">
             </script>
@@ -931,7 +948,8 @@
                             </div>
                         </div>
                     </article>
-                </div><div class='_links'><a href='/den-chum.html' title='Đèn chùm, Đèn Trang Trí'>Đèn chùm</a> / <a href='/den-mam' title='Đèn mâm, Đèn Trang Trí'>Đèn mâm</a> / <a href='/den-treo.html' title='Đèn thả, Đèn Trang Trí'>Đèn thả</a> / <a href='/den-vach-den-tuong.html' title='Đèn tường trong nhà, Đèn Trang Trí'>Đèn tường trong nhà</a> / <a href='/den-guong.html' title='Đèn Gương / Rọi tranh, Đèn Trang Trí'>Đèn Gương / Rọi tranh</a> / <a href='/den-ngoai-troi.html' title='Đèn sân vườn, ngoài trời, Đèn Trang Trí'>Đèn sân vườn, ngoài trời</a> / <a href='/den-ban-trang-tri.html' title='Đèn bàn trang trí, Đèn Trang Trí'>Đèn bàn trang trí</a> / <a href='/den-san.html' title='Đèn cây (đèn sàn), Đèn Trang Trí'>Đèn cây (đèn sàn)</a> / <a href='/phu-kien-linh-kien-den-trang-tri.html' title='Phụ kiện & Linh kiện, Đèn Trang Trí'>Phụ kiện & Linh kiện</a> / <a href='/den-trang-tri-khac.html' title='Đèn trang trí khác, Đèn Trang Trí'>Đèn trang trí khác</a></a></section></div>
+                </div><div class='_links'>
+                    <a href='/den-chum.html' title='Đèn chùm, Đèn Trang Trí'>Đèn chùm</a> / <a href='/den-mam' title='Đèn mâm, Đèn Trang Trí'>Đèn mâm</a> / <a href='/den-treo.html' title='Đèn thả, Đèn Trang Trí'>Đèn thả</a> / <a href='/den-vach-den-tuong.html' title='Đèn tường trong nhà, Đèn Trang Trí'>Đèn tường trong nhà</a> / <a href='/den-guong.html' title='Đèn Gương / Rọi tranh, Đèn Trang Trí'>Đèn Gương / Rọi tranh</a> / <a href='/den-ngoai-troi.html' title='Đèn sân vườn, ngoài trời, Đèn Trang Trí'>Đèn sân vườn, ngoài trời</a> / <a href='/den-ban-trang-tri.html' title='Đèn bàn trang trí, Đèn Trang Trí'>Đèn bàn trang trí</a> / <a href='/den-san.html' title='Đèn cây (đèn sàn), Đèn Trang Trí'>Đèn cây (đèn sàn)</a> / <a href='/phu-kien-linh-kien-den-trang-tri.html' title='Phụ kiện & Linh kiện, Đèn Trang Trí'>Phụ kiện & Linh kiện</a> / <a href='/den-trang-tri-khac.html' title='Đèn trang trí khác, Đèn Trang Trí'>Đèn trang trí khác</a></div></section></div>
 
         <div style='text-align: center; margin: 20px auto; width:200px'><a class='button-primary' href='/san-pham.html'  style='background: #ffb354; border: 1px solid #ffb354;padding: 0.875rem 1.75rem;font-size: 1.3125rem;width: 100%;'>Xem tất cả</a></div>
         <div class="shopify-section highlights-banners--section">

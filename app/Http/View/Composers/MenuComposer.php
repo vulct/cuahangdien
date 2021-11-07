@@ -8,8 +8,6 @@ use Illuminate\View\View;
 class MenuComposer
 {
 
-    protected $users;
-
     public function __construct()
     {
 
