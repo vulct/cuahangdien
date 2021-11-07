@@ -40,7 +40,7 @@ class TariffController extends Controller
     public function store(TariffRequest $request): RedirectResponse
     {
         $this->tariffService->create($request);
-        return redirect()->route('admin.tariff.index');
+        return redirect()->route('admin.tariff.list');
     }
 
     public function edit(Tariff $tariff)
