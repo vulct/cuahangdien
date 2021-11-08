@@ -31,8 +31,8 @@
                                                                     <div class="col-md-12">
                                                                         <h3>Xem thương hiệu</h3>
                                                                         <div class="menu-brands">
+                                                                            @if(isset($data['brands'][$cate->id]))
                                                                                 @foreach($data['brands'][$cate->id] as $brands)
-
                                                                                     @foreach($brands as $brand)
                                                                                     <div>
                                                                                         <a href="/hang/{{$brand->slug}}/{{$cate->slug}}">
@@ -41,6 +41,7 @@
                                                                                     </div>
                                                                                     @endforeach
                                                                                 @endforeach
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -48,77 +49,16 @@
                                                                     <div class="col-md-12">
                                                                         <h3>Xem theo loại sản phẩm</h3>
                                                                         <div class="menu-products grid-3r">
-                                                                            <div>
-                                                                                <a href="/bong-den">
-                                                                                    <img class="lazy" data-src="/media/category/bong-den-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Bóng đèn" />
-                                                                                    <span>Bóng đèn</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-am-tran">
-                                                                                    <img class="lazy" data-src="/media/category/led-am-tran-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn âm trần" />
-                                                                                    <span>Đèn âm trần</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-op-tran">
-                                                                                    <img class="lazy" data-src="/media/category/led-op-tran-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn ốp trần" />
-                                                                                    <span>Đèn ốp trần</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-panel">
-                                                                                    <img class="lazy" data-src="/media/category/led-panel-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn Panel tấm" />
-                                                                                    <span>Đèn Panel tấm</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-tuyp">
-                                                                                    <img class="lazy" data-src="/media/category/led-batten-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn Tuýp" />
-                                                                                    <span>Đèn Tuýp</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-chieu-diem">
-                                                                                    <img
-                                                                                        class="lazy"
-                                                                                        data-src="/media/category/den-chieu-diem-trang-tri-sm.jpg"
-                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
-                                                                                        alt="Đèn chiếu điểm"
-                                                                                    />
-                                                                                    <span>Đèn chiếu điểm</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-pha">
-                                                                                    <img class="lazy" data-src="./media/category/den-pha-led-1-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn pha" />
-                                                                                    <span>Đèn pha</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-duong">
-                                                                                    <img class="lazy" data-src="./media/category/den-duong-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn đường" />
-                                                                                    <span>Đèn đường</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-nha-xuong">
-                                                                                    <img class="lazy" data-src="./media/category/den-led-cong-nghiep-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn nhà xưởng" />
-                                                                                    <span>Đèn nhà xưởng</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-led-day">
-                                                                                    <img class="lazy" data-src="./media/category/den-led-day-16-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn led dây" />
-                                                                                    <span>Đèn led dây</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a href="/den-bao">
-                                                                                    <img class="lazy" data-src="./media/category/den-exits-sm.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="Đèn chuyên dụng" />
-                                                                                    <span>Đèn chuyên dụng</span>
-                                                                                </a>
-                                                                            </div>
+                                                                            @if(isset($data['subcategory'][$cate->id]))
+                                                                                @foreach($data['subcategory'][$cate->id] as $subcategory)
+                                                                                    <div>
+                                                                                        <a href="/{{$subcategory->name}}">
+                                                                                            <img class="lazy" data-src="{{asset($subcategory->image)}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" alt="{{$subcategory->name}}" />
+                                                                                            <span>{{$subcategory->name}}</span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -11,9 +11,9 @@ class CreateBannersTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->string('title',100)->nullable();
-            $table->string('url',120)->index();
-            $table->string('alt',300);
-            $table->string('image',255)->nullable();
+            $table->string('url',120)->nullable();
+            $table->string('alt',300)->nullable();
+            $table->string('image',255);
             $table->tinyInteger('sort')->default(0);
             // sort number: 0 -> 6
             //0. 1300 x 804

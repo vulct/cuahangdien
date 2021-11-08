@@ -48,7 +48,7 @@ class CategoryService
                 "slug" => (string)$request->slug,
                 "parent_id" => (int)$request->cate_parent,
                 "keyword" => (string)$request->keyword,
-                "icon" => (string)$request->icon,
+                "icon" => (string)$request->icon ?? 'fas fa-bars',
                 "description" => (string)$request->description,
                 "image" => $path_image,
                 "type" => $type,
@@ -94,7 +94,7 @@ class CategoryService
             $cate->meta_title = (string)$request->input('meta_title');
             $cate->slug = (string)$request->input('slug');
             $cate->keyword = (string)$request->input('keyword');
-            $cate->icon = (string)$request->input('icon');
+            $cate->icon = (string)$request->input('icon') ?? 'fas fa-bars';
             $cate->description = (string)$request->input('description');
             $cate->active = (int)$request->input('active');
             $cate->top = (int)$request->top;

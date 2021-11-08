@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\BannerComposer;
+use App\Http\View\Composers\BrandsWithCategoryComposer;
 use App\Http\View\Composers\MenuComposer;
-use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,5 +30,7 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(['guest.layouts.menu','index'], MenuComposer::class);
 
         View::composer('index', BannerComposer::class);
+
+        View::composer('index', BrandsWithCategoryComposer::class);
     }
 }
