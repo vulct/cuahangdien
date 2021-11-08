@@ -20,6 +20,8 @@
     <link href="{{ asset('guest/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('guest/css/arcontactus.css') }}" rel="stylesheet"/>
     <link href="{{ asset('guest/css/custom.css') }}" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{ asset('guest/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style push -->
     @stack('stylesheets')
 </head>
