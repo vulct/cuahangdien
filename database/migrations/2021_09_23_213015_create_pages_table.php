@@ -20,8 +20,12 @@ class CreatePagesTable extends Migration
             $table->string('keyword', 200)->nullable();
             $table->string('description', 300)->nullable();
             $table->longText('content');
-            $table->integer('active')->default(1);
-            $table->integer('isDelete')->default(0);
+            $table->tinyInteger('type')->default(0);
+            //0 - về chúng tôi, 1 - tuyển dụng, 2 - hướng dẫn mua hàng
+            // 3 - thanh toán vận chuyển, 4 - bảo hành đổi trả,
+            // 5 - chính sách bảo mật
+            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
         });
     }

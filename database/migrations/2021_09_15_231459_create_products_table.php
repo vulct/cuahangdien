@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name', 200);
             $table->string('meta_title', 100)->nullable();
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('description', 300)->nullable();
             $table->string('image', 255)->nullable();
             $table->string('slug', 120)->index();
