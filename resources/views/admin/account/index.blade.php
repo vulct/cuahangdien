@@ -28,8 +28,8 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#change-password" data-toggle="tab">Password</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Thông tin</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#change-password" data-toggle="tab">Mật khẩu</a></li>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -39,9 +39,9 @@
                                             @method('PATCH')
                                             @csrf
                                             <div class="form-group row">
-                                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                                <label for="inputName" class="col-sm-2 col-form-label">Tên</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" value="{{Auth::user()->name}}">
+                                                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Tên" value="{{Auth::user()->name}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -51,9 +51,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="current_password" class="col-sm-2 col-form-label">Password</label>
+                                                <label for="current_password" class="col-sm-2 col-form-label">Mật khẩu</label>
                                                 <div class="col-sm-10">
-                                                    <input type="password" class="form-control" id="current_password" name="password" placeholder="Password">
+                                                    <input type="password" class="form-control" id="current_password" name="password" placeholder="Mật khẩu">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
