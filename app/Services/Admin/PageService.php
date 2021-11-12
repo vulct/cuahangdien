@@ -34,7 +34,7 @@ class PageService
             // get page with type
             $page_type = $this->getPageWithType($type);
 
-            if ($page_type->isEmpty()){
+            if ($page_type->isEmpty() && $page_type->count() > 1){
                 Page::create([
                     "name" => (string)$request->input('name'),
                     "content" => (string)$request->input('content'),
@@ -79,7 +79,14 @@ class PageService
             $type = (int)$request->input('type');
             // get page with type
             $page_type = $this->getPageWithType($type);
-            if ($page_type->isEmpty()){
+
+            if ($page_type->count() > 1){
+                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
+                return false;
+            }else if($page_type->count() === 1 && isset($page_type[0])) {
+                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
+                return false;
+            }else{
                 $page->name = (string)$request->input('name');
                 $page->content = (string)$request->input('content');
                 $page->description = (string)$request->input('description');
@@ -90,9 +97,7 @@ class PageService
                 $page->save();
                 Session::flash('success', 'Cập nhật trang nội dung thành công.');
                 return true;
-            }else{
-                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
-                return false;
+
             }
 
         } catch (\Exception $exception) {
