@@ -97,14 +97,14 @@
                             </li>
 
                             <li class="navmenu-item navmenu-id-about">
-                                <a class="navmenu-link " href="/pages/ve-chung-toi.html">Về chúng tôi</a>
+                                <a class="navmenu-link " href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng tôi</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
                                 <a class="navmenu-link " href="/pages/contact.html">Liên hệ</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
                                 <a class="navmenu-link "
-                                   href="https://www.google.com/maps/place/C%C3%B4ng+Ty+TNHH+K%E1%BB%B9+Thu%E1%BA%ADt+%C4%90i%E1%BB%87n+%C4%90%E1%BA%B7ng+Gia+Ph%C3%A1t/&#64;10.830114,106.7556271,15z/data=!4m8!1m2!2m1!1zVGhp4bq_dCBi4buLIMSRaeG7h24gxJHhurduZyBnaWEgcGjDoXQ!3m4!1s0x0:0x36e529046861a648!8m2!3d10.831288!4d106.758627"
+                                   href="{{$info->map_address ?? '#'}}"
                                    target="_blank">Bản đồ</a>
                             </li>
                         </ul>
@@ -135,7 +135,7 @@
                                 <a class="navmenu-link" href="/blogs.html">Tin tức</a>
                             </li>
                             <li class="navmenu-item navmenu-id-submit-your-creation">
-                                <a class="navmenu-link" href="/pages/tuyen-dung.html">Tuyển dụng</a>
+                                <a class="navmenu-link" href="{{isset($pages[1]) ? '/pages/'.$pages[1][0]->slug.'.html' : '#'}}">Tuyển dụng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-search">
                                 <a class="navmenu-link " href="/search.html">Tìm kiếm</a>
@@ -161,14 +161,14 @@
                                 <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
-                                <a class="navmenu-link" href="/pages/huong-dan-mua-hang.html">Hướng dẫn mua hàng</a>
+                                <a class="navmenu-link" href="{{isset($pages[2]) ? '/pages/'.$pages[2][0]->slug.'.html' : '#'}}">Hướng dẫn mua hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
-                                <a class="navmenu-link" href="/pages/thanh-toan-van-chuyen.html">Thanh toán & Vận
+                                <a class="navmenu-link" href="{{isset($pages[3]) ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">Thanh toán & Vận
                                     chuyển</a>
                             </li>
                             <li class="navmenu-item navmenu-id-returns">
-                                <a class="navmenu-link" href="/pages/bao-hanh-doi-tra.html">Bảo hành & Đổi trả</a>
+                                <a class="navmenu-link" href="{{isset($pages[4]) ? '/pages/'.$pages[4][0]->slug.'.html' : '#'}}">Bảo hành & Đổi trả</a>
                             </li>
 
                             <li class="navmenu-item navmenu-id-submit-feedback">
@@ -186,33 +186,39 @@
                         <p><b>Địa chỉ:</b> Số 08B, Tổ 8, Đường 2, Khu Phố 6, Phường Trường Thọ, Quận Thủ Đức, TP. Hồ Ch&#237;
                             Minh </p>
                         <p>MST: 0312482140</p>
+                        @if(isset($info->phone))
                         <p>
-                            <img src="/images/svg/phone.svg" alt="phone support" width="20" height="20"/>
+                            <img src="{{asset('/images/svg/phone.svg')}}" alt="phone support" width="20" height="20"/>
                             <a href="tel:(028) 3731 3963">(028) 3731 3963</a> - <a href="tel:(028) 3728 0609">(028) 3728
-                                0609</a></p>
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px"
-                                 viewBox="0 0 70.07 70.07" style="enable-background:new 0 0 70.07 70.07;"
-                                 xml:space="preserve"><g>
-                                    <g>
+                                0609</a>
+                        </p>
+                        @endif
+                        @if(isset($info->phone))
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px"
+                                     viewBox="0 0 70.07 70.07" style="enable-background:new 0 0 70.07 70.07;"
+                                     xml:space="preserve"><g>
                                         <g>
-                                            <path
-                                                d="M65.094,32.195h-6.982h-0.934c-2.064,0-3.738,1.674-3.738,3.745v0.406c0,2.073,1.674,3.748,3.741,3.748h6.989h0.924    c2.068,0,3.747-1.682,3.747-3.748l-0.004-0.411C68.841,33.869,67.162,32.195,65.094,32.195z"
-                                                data-original="#000000" class="active-path" data-old_color="#000000"
-                                                fill="#FFFFFF"/>
-                                            <path
-                                                d="M65.098,22.852h-1.649V4.734c0-2.604-2.13-4.734-4.735-4.734H27.475c-2.604,0-4.734,2.131-4.734,4.734v12.999    c-6.301,3.562-12.8,7.283-12.814,7.292C6.399,26.477,1.23,31.162,1.23,42.225c0,0.988,0.065,1.9,0.156,2.781    c0.029,0.258,0.061,0.506,0.096,0.755c0.091,0.647,0.205,1.266,0.341,1.854c0.049,0.21,0.087,0.429,0.14,0.63    c0.183,0.68,0.395,1.318,0.633,1.925c0.12,0.301,0.25,0.575,0.381,0.857c0.14,0.297,0.281,0.589,0.432,0.862    c0.175,0.329,0.35,0.646,0.542,0.947c0.046,0.07,0.096,0.134,0.143,0.205c4.556,6.887,12.961,6.918,12.961,6.918h5.686v5.379    c0,2.601,2.13,4.731,4.734,4.731h31.238c2.605,0,4.735-2.131,4.735-4.731v-6.561h0.722v-0.004h0.921    c2.071,0,3.75-1.675,3.746-3.746l0.004-0.408c-0.004-2.068-1.679-3.738-3.747-3.738H64.17h-6.059h-0.934    c-2.068,0-3.738,1.674-3.738,3.741v0.415c0,2.062,1.674,3.743,3.741,3.743h2.974v2.534h-34.12V27.323    c1.714-1.087,3.301-2.133,4.206-2.834c4.585-3.546,8.937-6.37,9.526-8.931c0.767-3.323-1.784-6.123-6.209-3.824    c-1.394,0.724-4.255,2.311-7.523,4.146V7.502l34.12,0.005V22.85h-2.043v0.004h-0.929c-2.069,0-3.748,1.674-3.748,3.747v0.406    c0,2.072,1.679,3.742,3.743,3.742h0.929h6.059h0.931c2.066,0,3.741-1.674,3.741-3.742V26.59    C68.841,24.531,67.167,22.852,65.098,22.852z M43.09,62.976c1.312,0,2.37,1.059,2.37,2.368c0,1.312-1.059,2.367-2.37,2.367    c-1.307,0-2.363-1.058-2.363-2.367C40.729,64.039,41.788,62.976,43.09,62.976z M48.093,4.558h-9.996    c-0.314,0-0.574-0.255-0.574-0.57c0-0.32,0.26-0.575,0.574-0.575h9.996c0.314,0,0.57,0.254,0.57,0.575    C48.663,4.302,48.407,4.558,48.093,4.558z"
-                                                data-original="#000000" class="active-path" data-old_color="#000000"
-                                                fill="#FFFFFF"/>
-                                            <path
-                                                d="M65.094,41.538H64.17h-6.992c-2.064,0-3.743,1.679-3.743,3.746v0.41c0,2.069,1.675,3.743,3.743,3.743h0.929h6.059h0.926    c2.071,0,3.741-1.674,3.746-3.743v-0.41C68.837,43.217,67.167,41.538,65.094,41.538z"
-                                                data-original="#000000" class="active-path" data-old_color="#000000"
-                                                fill="#FFFFFF"/>
+                                            <g>
+                                                <path
+                                                    d="M65.094,32.195h-6.982h-0.934c-2.064,0-3.738,1.674-3.738,3.745v0.406c0,2.073,1.674,3.748,3.741,3.748h6.989h0.924    c2.068,0,3.747-1.682,3.747-3.748l-0.004-0.411C68.841,33.869,67.162,32.195,65.094,32.195z"
+                                                    data-original="#000000" class="active-path" data-old_color="#000000"
+                                                    fill="#FFFFFF"/>
+                                                <path
+                                                    d="M65.098,22.852h-1.649V4.734c0-2.604-2.13-4.734-4.735-4.734H27.475c-2.604,0-4.734,2.131-4.734,4.734v12.999    c-6.301,3.562-12.8,7.283-12.814,7.292C6.399,26.477,1.23,31.162,1.23,42.225c0,0.988,0.065,1.9,0.156,2.781    c0.029,0.258,0.061,0.506,0.096,0.755c0.091,0.647,0.205,1.266,0.341,1.854c0.049,0.21,0.087,0.429,0.14,0.63    c0.183,0.68,0.395,1.318,0.633,1.925c0.12,0.301,0.25,0.575,0.381,0.857c0.14,0.297,0.281,0.589,0.432,0.862    c0.175,0.329,0.35,0.646,0.542,0.947c0.046,0.07,0.096,0.134,0.143,0.205c4.556,6.887,12.961,6.918,12.961,6.918h5.686v5.379    c0,2.601,2.13,4.731,4.734,4.731h31.238c2.605,0,4.735-2.131,4.735-4.731v-6.561h0.722v-0.004h0.921    c2.071,0,3.75-1.675,3.746-3.746l0.004-0.408c-0.004-2.068-1.679-3.738-3.747-3.738H64.17h-6.059h-0.934    c-2.068,0-3.738,1.674-3.738,3.741v0.415c0,2.062,1.674,3.743,3.741,3.743h2.974v2.534h-34.12V27.323    c1.714-1.087,3.301-2.133,4.206-2.834c4.585-3.546,8.937-6.37,9.526-8.931c0.767-3.323-1.784-6.123-6.209-3.824    c-1.394,0.724-4.255,2.311-7.523,4.146V7.502l34.12,0.005V22.85h-2.043v0.004h-0.929c-2.069,0-3.748,1.674-3.748,3.747v0.406    c0,2.072,1.679,3.742,3.743,3.742h0.929h6.059h0.931c2.066,0,3.741-1.674,3.741-3.742V26.59    C68.841,24.531,67.167,22.852,65.098,22.852z M43.09,62.976c1.312,0,2.37,1.059,2.37,2.368c0,1.312-1.059,2.367-2.37,2.367    c-1.307,0-2.363-1.058-2.363-2.367C40.729,64.039,41.788,62.976,43.09,62.976z M48.093,4.558h-9.996    c-0.314,0-0.574-0.255-0.574-0.57c0-0.32,0.26-0.575,0.574-0.575h9.996c0.314,0,0.57,0.254,0.57,0.575    C48.663,4.302,48.407,4.558,48.093,4.558z"
+                                                    data-original="#000000" class="active-path" data-old_color="#000000"
+                                                    fill="#FFFFFF"/>
+                                                <path
+                                                    d="M65.094,41.538H64.17h-6.992c-2.064,0-3.743,1.679-3.743,3.746v0.41c0,2.069,1.675,3.743,3.743,3.743h0.929h6.059h0.926    c2.071,0,3.741-1.674,3.746-3.743v-0.41C68.837,43.217,67.167,41.538,65.094,41.538z"
+                                                    data-original="#000000" class="active-path" data-old_color="#000000"
+                                                    fill="#FFFFFF"/>
+                                            </g>
                                         </g>
-                                    </g>
-                                </g> </svg>
-                            <a href="tel:0909257877">0909 257 877</a></p>
+                                    </g> </svg>
+                                <a href="tel:{{$info->phone}}">{{$info->phone}}</a>
+                            </p>
+                        @endif
                         <p>
                             <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1"
                                  enable-background="new 0 0 479.058 479.058" height="20px" viewBox="0 0 479.058 479.058"
@@ -224,9 +230,9 @@
                                         fill="#FFFFFF"/>
                                 </g>
                             </svg>
-                            <a href="mailto:sale@thietbidiendgp.vn">sale@thietbidiendgp.vn</a></p>
+                            {!! isset($info->email) ? '<a href="mailto:'.$info->email.'">'.$info->email.'</a></p>' : '' !!}
                         <div><a class="RRQQWe"
-                                href="https://maps.google.com/maps?cid=3955612946622686792&_ga=2.269134454.624368395.1594018748-1236053085.1594018748"
+                                href="{{$info->map_address ?? "#"}}"
                                 target="_blank">
                                 <div class="fbNEY">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -248,14 +254,6 @@
                     </div>
                 </div>
             </div>
-            <div class="site-footer-license clearfix">
-                <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=48883" target="_blank"
-                   rel="nofollow noreferrer"><img data-src="/images/bo-cong-thuong.png" width="150" height="75"
-                                                  class="lazy"
-                                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="/></a>
-                <p>GPĐKKD số 0312482140 do Sở KHĐT TP. HCM cấp ngày 28/09/2013. <br/>Chịu trách nhiệm nội dung: Ông Đặng
-                    Hồng Thái.</p>
-            </div>
         </div>
 
 
@@ -264,7 +262,7 @@
                 <div class="site-footer-left">
 
                     <p class="site-footer-credits" style="margin-top:5px">
-                        Copyright © 2020 - www.thietbidiendgp.vn. All Rights Reserved.
+                        Copyright © {{date("Y")}} - {{config('app.url')}}. All Rights Reserved.
                     </p>
 
                 </div>
@@ -272,7 +270,7 @@
                     <nav class="site-footer-navigation" style="float:right;margin-top:5px">
                         <ul class="navmenu  navmenu-depth-1  ">
                             <li class="navmenu-item navmenu-id-terms-conditions">
-                                <a class="navmenu-link" href="/pages/chinh-sach-bao-mat.html">Điều khoản &amp; Chính
+                                <a class="navmenu-link" href="{{isset($pages[5]) ? '/pages/'.$pages[5][0]->slug.'.html' : '#'}}">Điều khoản &amp; Chính
                                     sách</a>
                             </li>
                         </ul>

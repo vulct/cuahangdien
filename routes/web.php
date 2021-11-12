@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Admin\PageController;
@@ -50,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
 
             Route::delete('/categories_post/destroy',[CategoryController::class,'destroy'])->name('categories_post.destroy');
 
-
             #Posts
             Route::resource('/posts',PostController::class);
 
@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
 
             #Info
             Route::resource('/info', InfoController::class);
+
+            #Contact with staff
+            Route::resource('/groups',GroupController::class);
 
             #Banners
             Route::resource('/banners',BannerController::class);

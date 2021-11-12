@@ -252,6 +252,14 @@
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a href="{{route('admin.groups.index')}}" class="nav-link {{ (request()->is('admin/groups*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Thông tin nhân viên
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a href="{{route('admin.account.index')}}" class="nav-link {{ (request()->is('admin/account*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-wrench"></i>
                         <p>

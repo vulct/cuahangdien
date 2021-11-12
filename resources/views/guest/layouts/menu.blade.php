@@ -18,7 +18,7 @@
                     <div class="navmenu-meganav--scroller">
                         <ul class="navmenu navmenu-depth-2">
                             @foreach($categories as $cate)
-                                <li><a class="navmenu-link" href="/san-pham/{{$cate->slug}}">{{$cate->name}}</a></li>
+                                <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}">{{$cate->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -31,7 +31,6 @@
                 data-navmenu-trigger data-navmenu-meganav-trigger>
                 <a class="navmenu-link navmenu-link-parent " href="/bang-gia.html">
                     Bảng giá
-
                 </a>
 
             </li>
@@ -45,7 +44,7 @@
                 <a class="navmenu-link" href="/blogs.html">Tin tức</a>
             </li>
             <li class="navmenu-item">
-                <a class="navmenu-link" href="/pages/ve-chung-toi.html">Về chúng tôi</a>
+                <a class="navmenu-link" href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng tôi</a>
             </li>
             <li class="navmenu-item">
                 <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>

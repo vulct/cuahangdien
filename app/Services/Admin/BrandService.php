@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 
 use App\Models\Brand;
 use App\Services\UploadService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
@@ -24,6 +25,19 @@ class BrandService
             return Brand::where('isDelete', 0)->get();
         }
         return Brand::latest()->where(['isDelete' => 0, 'active' => $active])->get();
+    }
+
+    public function getBrandsWithCategory(): \Illuminate\Support\Collection
+    {
+        // SELECT p.category_id, b.id, b.name, b.slug, b.image  FROM products p
+        // INNER JOIN brands b ON p.brand_id = b.id WHERE b.isDelete = 0 AND b.active = 1
+        // GROUP BY p.category_id, b.id, b.name, b.slug, b.image
+        return DB::table('products')
+            ->select('products.category_id','brands.id', 'brands.slug', 'brands.image', 'brands.name')
+            ->join('brands', 'brands.id', '=', 'products.brand_id')
+            ->where(['brands.isDelete' => 0, 'brands.active' => 0])
+            ->groupBy('products.category_id', 'brands.id', 'brands.name', 'brands.slug', 'brands.image')
+            ->get();
     }
 
     public function create($request)

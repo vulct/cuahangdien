@@ -57,7 +57,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Bảng kích thước: </label>
                                                 <div class="col-sm-4">
-                                                    <img src="/storage/default/banner.jpg" width="100%" alt="">
+                                                    <img src="{{asset('storage/default/banner.jpg')}}" width="100%" alt="">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <table class="table table-bordered">

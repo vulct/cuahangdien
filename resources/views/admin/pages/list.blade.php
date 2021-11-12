@@ -38,7 +38,7 @@
                                         <th>#</th>
                                         <th>Tên</th>
                                         <th>Đường dẫn</th>
-                                        <th>Cập nhật</th>
+                                        <th>Loại trang</th>
                                         <th>Trạng thái</th>
                                         <th>&nbsp;</th>
                                     </tr>
@@ -50,7 +50,7 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{$page->name}}</td>
                                             <td>{{$page->slug}}</td>
-                                            <td>{{$page->updated_at}}</td>
+                                            <td>{!! \App\Helpers\Helper::getNameTypeOfPage($page->type) !!}</td>
                                             <td>{!! \App\Helpers\Helper::active($page->active) !!}</td>
                                             <td>
                                                 <a class="btn btn-info btn-sm btn-edit" href="{{route('admin.pages.edit', $page->slug)}}"><i class="fas fa-pencil-alt"></i></a>

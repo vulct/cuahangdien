@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('name', 200)->nullable();
             $table->string('phone', 255)->nullable();
+            $table->string('image', 255)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('isDelete')->default(0);
             $table->tinyInteger('type')->default(0);

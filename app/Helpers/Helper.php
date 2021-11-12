@@ -137,4 +137,20 @@ class Helper
 
         return false;
     }
+
+    // get name type of page
+    public static function getNameTypeOfPage($type)
+    {
+        //0 - về chúng tôi, 1 - tuyển dụng, 2 - hướng dẫn mua hàng
+        // 3 - thanh toán vận chuyển, 4 - bảo hành đổi trả,
+        // 5 - chính sách bảo mật
+        switch ($type){
+            case 0 : return 'Về chúng tôi';
+            case 1 : return 'Tuyển dụng';
+            case 2 : return 'Hướng dẫn mua hàng';
+            case 3 : return 'Thanh toán vận chuyển';
+            case 4 : return 'Bảo hành đổi trả';
+            case 5 : return 'Chính sách bảo mật';
+        }
+    }
 }

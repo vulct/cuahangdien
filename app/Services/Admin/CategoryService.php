@@ -21,10 +21,16 @@ class CategoryService
     {
         // 0 - thư mục sản phẩm, 1 - thư mục bài đăng.
 
-        if ($active === 0 ){
+        if ($active === 0) {
             return Category::where(['isDelete' => 0, 'type' => $type])->get();
         }
         return Category::where(['isDelete' => 0, 'active' => $active, 'type' => $type])->get();
+    }
+
+    public function getParentCategory(): \Illuminate\Support\Collection
+    {
+        return DB::table('categories')
+            ->where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'parent_id' => 0])->get();
     }
 
     public function create($request): bool
@@ -33,7 +39,7 @@ class CategoryService
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            }else{
+            } else {
                 $path_image = '/storage/default/image-available.jpg';
             }
 
@@ -41,7 +47,7 @@ class CategoryService
             $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
 
             // Check type category
-            $type = in_array((int)$request->type,[0,1]) ? (int)$request->type : 0;
+            $type = in_array((int)$request->type, [0, 1]) ? (int)$request->type : 0;
             Category::create([
                 "name" => (string)$request->name,
                 "meta_title" => (string)$request->meta_title,
@@ -82,7 +88,7 @@ class CategoryService
         try {
 
             // Nếu id category khác request input parent_id => update parent_id
-            if ($cate->id != $request->input('cate_parent')){
+            if ($cate->id != $request->input('cate_parent')) {
                 $cate->parent_id = (int)$request->input('cate_parent');
             }
 
@@ -101,8 +107,7 @@ class CategoryService
             $cate->save();
             Session::flash('success', 'Cập nhật danh mục thành công.');
             return true;
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }

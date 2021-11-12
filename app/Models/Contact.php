@@ -10,9 +10,10 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
-        'group',
+        'type',
         'name',
         'phone',
+        'image',
         'active',
         'isDelete',
     ];

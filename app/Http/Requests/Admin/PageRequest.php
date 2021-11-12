@@ -35,6 +35,7 @@ class PageRequest extends FormRequest
             'keyword' => 'string|max:200|nullable',
             'description' => 'string|nullable|max:300',
             'content' => 'required',
+            'type' => 'numeric',
             'slug' => [
                 'required',
                 'min:3',
@@ -67,6 +68,7 @@ class PageRequest extends FormRequest
             'slug' => 'đường dẫn (URL)',
             'content' => 'nội dung',
             'keyword' => 'từ khóa',
+            'type' => 'thể loại trang' ,
             'description' => 'mô tả',
         ];
     }

@@ -77,6 +77,23 @@
                                                           name="description">{{old('description')}}</textarea>
                                             </div>
                                             <div class="form-group">
+                                                <label for="type"
+                                                       class="col-sm-2 col-form-label">{{__('Loại trang')}}<span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="type" name="type">
+                                                        <option value="0">Về chúng tôi</option>
+                                                        <option value="1">Tuyển dụng</option>
+                                                        <option value="2">Hướng dẫn mua hàng</option>
+                                                        <option value="3">Thanh toán vận chuyển</option>
+                                                        <option value="4">Bảo hành đổi trả</option>
+                                                        <option value="5">Chính sách bảo mật</option>
+                                                    </select>
+                                                </div>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Loại trang được hiển thị
+                                                    </span>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="keyword"
                                                        class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
                                                 <div class="input-group">

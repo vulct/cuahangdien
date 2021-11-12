@@ -15,6 +15,7 @@ class Page extends Model
         'keyword',
         'description',
         'content',
+        'type',
         'active',
         'isDelete'
     ];

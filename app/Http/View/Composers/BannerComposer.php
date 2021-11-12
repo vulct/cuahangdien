@@ -2,14 +2,20 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Banner;
+use App\Services\BannerService;
 use Illuminate\View\View;
 
 class BannerComposer
 {
+    protected $banners = [];
+
+    public function __construct(BannerService $bannerService)
+    {
+        $this->banners = $bannerService->getBannerIsActive();
+    }
+
     public function compose(View $view)
     {
-        $banner = Banner::where(['isDelete' => 0, 'active' => 1])->get();
-        $view->with('banners', $banner);
+        $view->with('banners', $this->banners);
     }
 }

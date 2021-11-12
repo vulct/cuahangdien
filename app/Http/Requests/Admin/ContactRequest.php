@@ -24,23 +24,20 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'group' => [
-                'required',
-                'string',
-                'min:3',
-                'max:200'
-            ],
+            'type' => 'required|numeric',
             'name' => 'string|required|max:200',
-            'phone' => 'required|string|max:255',
+            'phone' => 'string|required|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
     public function attributes()
     {
         return [
-            'group' => 'tên bộ phận',
+            'type' => 'tên bộ phận',
             'name' => 'tên nhân viên',
             'phone' => 'số điện thoại',
+            'image' => 'ảnh đại diện'
         ];
     }
 }

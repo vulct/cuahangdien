@@ -72,6 +72,23 @@
                                                           name="description">{{old('description') ?? $page->description}}</textarea>
                                             </div>
                                             <div class="form-group">
+                                                <label for="type"
+                                                       class="col-sm-2 col-form-label">{{__('Loại trang')}}<span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="type" name="type">
+                                                        <option value="0" {{ $page->type == 0 ? 'selected' : '' }}>Về chúng tôi</option>
+                                                        <option value="1" {{ $page->type == 1 ? 'selected' : '' }}>Tuyển dụng</option>
+                                                        <option value="2" {{ $page->type == 2 ? 'selected' : '' }}>Hướng dẫn mua hàng</option>
+                                                        <option value="3" {{ $page->type == 3 ? 'selected' : '' }}>Thanh toán vận chuyển</option>
+                                                        <option value="4" {{ $page->type == 4 ? 'selected' : '' }}>Bảo hành đổi trả</option>
+                                                        <option value="5" {{ $page->type == 5 ? 'selected' : '' }}>Chính sách bảo mật</option>
+                                                    </select>
+                                                </div>
+                                                <span class="form-text">
+                                                        <i class="fa fa-info-circle"></i> Loại trang được hiển thị
+                                                    </span>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="keyword"
                                                        class="col-sm-2 col-form-label">{{__('Từ khóa')}}</label>
                                                 <div class="input-group">

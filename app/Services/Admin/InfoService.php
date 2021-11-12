@@ -9,7 +9,7 @@ class InfoService
 {
     public function get()
     {
-        return Info::latest('id')->get();
+        return Info::latest('id')->first();
     }
 
     public function create($request)

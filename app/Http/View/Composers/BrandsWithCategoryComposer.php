@@ -2,21 +2,32 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+use App\Services\Admin\BrandService;
+use App\Services\Admin\CategoryService;
 use Illuminate\View\View;
 
 class BrandsWithCategoryComposer
 {
+    protected $subcategory = [];
+    protected $brands = [];
+
+    public function __construct(CategoryService $categoryService, BrandService $brandService)
+    {
+        $this->subcategory = $categoryService->get(1,0);
+
+        $this->brands = $brandService->getBrandsWithCategory();
+
+    }
+
     public function compose(View $view)
     {
-        $getList = Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0])->get();
+        //$getList = Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0])->get();
 
         $data = array();
 
         // lấy danh mục con
-        foreach ($getList as $cate){
-            foreach ($getList as $item) {
+        foreach ($this->subcategory as $cate){
+            foreach ($this->subcategory as $item) {
                 if ($item->parent_id == $cate->id) {
                     $data['subcategory'][$item->parent_id][] = $item;
                 }
@@ -24,24 +35,7 @@ class BrandsWithCategoryComposer
         }
 
         // lấy thương hiệu
-        //SELECT b.id, b.slug, b.image FROM products p INNER JOIN brands b ON p.brand_id = b.id WHERE p.category_id = 6 AND p.brand_id = b.id GROUP BY b.id
-
-        foreach ($getList as $cate) {
-            if ($cate->parent_id === 0){
-                $data['brands'][$cate->id][] = DB::table('products')
-                    ->select('brands.id', 'brands.slug', 'brands.image', 'brands.name')
-                    ->join('brands', 'brands.id', '=', 'products.brand_id')
-                    ->where('products.category_id', '=', $cate->id)
-                    ->groupBy('brands.id')
-                    ->get();
-            }
-        }
-
-
-        //echo '<pre>';
-        //var_dump($data['brands'][1]);
-        //echo '</pre>';
-        //die();
+        $data['brands'][] = $this->brands;
 
         $view->with('data', $data);
     }

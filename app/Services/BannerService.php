@@ -19,6 +19,13 @@ class BannerService
         return Banner::latest()->where('isDelete', 0)->get();
     }
 
+    public function getBannerIsActive()
+    {
+
+        return Banner::where(['isDelete' => 0, 'active' => 1])->get();
+
+    }
+
     function getWidthHeight($sort): array
     {
         $sort = (int)$sort;
