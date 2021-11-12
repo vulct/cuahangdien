@@ -34,7 +34,7 @@ class PageService
             // get page with type
             $page_type = $this->getPageWithType($type);
 
-            if (empty($page_type)){
+            if ($page_type->isEmpty()){
                 Page::create([
                     "name" => (string)$request->input('name'),
                     "content" => (string)$request->input('content'),
@@ -46,6 +46,7 @@ class PageService
                 ]);
 
                 Session::flash('success', 'Tạo trang nội dung thành công.');
+
             }else{
                 Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
                 return false;
@@ -59,7 +60,7 @@ class PageService
         return true;
     }
 
-    public function destroy($request)
+    public function destroy($request): bool
     {
         $slug = $request->input('slug');
 
@@ -72,13 +73,13 @@ class PageService
         return false;
     }
 
-    public function update($page, $request)
+    public function update($page, $request): bool
     {
         try {
             $type = (int)$request->input('type');
             // get page with type
             $page_type = $this->getPageWithType($type);
-            if (empty($page_type)){
+            if ($page_type->isEmpty()){
                 $page->name = (string)$request->input('name');
                 $page->content = (string)$request->input('content');
                 $page->description = (string)$request->input('description');
