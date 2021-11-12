@@ -31,7 +31,7 @@
                                 <h3 class="card-title">{{$title}}. {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ $info->isEmpty() ? route('admin.info.store') : route('admin.info.update', $info->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ empty($info) ? route('admin.info.store') : route('admin.info.update', $info->id) }}" method="post" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
