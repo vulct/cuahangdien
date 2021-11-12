@@ -24,7 +24,7 @@ class GroupService
     {
         try {
 
-            $count = count($this->get());
+            $count = $this->get()->count();
 
             if ($count < 4){
                 if ($request->hasFile('image')) {
