@@ -31,7 +31,7 @@
                                 <h3 class="card-title">{{$title}}. {!! __('<span class="text-muted">(Vui lòng điền các trường có chứa dấu <span class="text-danger">*</span>)</span>') !!}</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ !isset($info) ? route('admin.info.store') : route('admin.info.update', $info->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{$action}}" method="post" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -459,10 +459,6 @@
 @push('stylesheets')
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('manage/plugins/summernote/summernote-bs4.min.css')}}">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('manage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.css') }}">
 @endpush
@@ -470,25 +466,15 @@
 @push('scripts')
     <!-- Summernote -->
     <script src="{{asset('manage/plugins/summernote/summernote-bs4.min.js')}}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{asset('manage/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/jszip/jszip.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/pdfmake/pdfmake.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/pdfmake/vfs_fonts.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('manage/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{ asset('manage/dist/js/pages/datatable.js') }}"></script>
+    <!-- File input -->
+    <script src="{{asset('manage/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('manage/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $('.summernote').summernote({
             height: 300
         });
+        // Customize input file
+        bsCustomFileInput.init();
     </script>
 @endpush

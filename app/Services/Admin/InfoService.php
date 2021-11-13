@@ -25,18 +25,32 @@ class InfoService
         try {
             if ($request->hasFile('logo')) {
                 $path_logo = $this->upload->store($request->file('logo'));
-            }else{
+            } else {
                 $path_logo = null;
             }
 
             if ($request->hasFile('icon')) {
                 $path_icon = $this->upload->store($request->file('icon'));
-            }else{
+            } else {
                 $path_icon = null;
             }
 
             Info::create([
-                $request->all(),
+                "name" => (string)$request->input('name'),
+                "keyword" => (string)$request->input('keyword'),
+                "description" => (string)$request->input('description'),
+                "hotline1" => (string)$request->input('hotline1'),
+                "hotline2" => (string)$request->input('hotline2'),
+                "phone" => (string)$request->input('phone'),
+                "address" => (string)$request->input('address'),
+                "email" => (string)$request->input('email'),
+                "tax_code" => (string)$request->input('tax_code'),
+                "business_license" => (string)$request->input('business_license'),
+                "map_address" => (string)$request->input('map_address'),
+                "map_iframe" => (string)$request->input('map_iframe'),
+                "facebook" => (string)$request->input('facebook'),
+                "zalo" => (string)$request->input('zalo'),
+                "sale" => (string)$request->input('sale'),
                 "logo" => $path_logo,
                 "icon" => $path_icon,
             ]);
@@ -56,13 +70,13 @@ class InfoService
         try {
             if ($request->hasFile('logo')) {
                 $path_logo = $this->upload->store($request->file('logo'));
-            }else{
+            } else {
                 $path_logo = $info->logo;
             }
 
             if ($request->hasFile('icon')) {
                 $path_icon = $this->upload->store($request->file('icon'));
-            }else{
+            } else {
                 $path_icon = $info->icon;
             }
 

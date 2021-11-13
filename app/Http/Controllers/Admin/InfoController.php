@@ -23,9 +23,16 @@ class InfoController extends Controller
 
     public function index()
     {
+        $info = $this->infoService->get();
+        if (is_null($info)){
+            $action = route('admin.info.store');
+        }else{
+            $action = route('admin.info.update', $info->id);
+        }
         return view('admin.info.edit', [
             'title' => 'Thông tin hệ thống',
-            'info' => $this->infoService->get()
+            'action' => $action,
+            'info' => $info
         ]);
     }
 
@@ -34,7 +41,7 @@ class InfoController extends Controller
     {
         $result = $this->infoService->create($request);
         if ($result) {
-            return redirect()->route('admin.info.edit');
+            return redirect()->route('admin.info.index');
         }
         return back();
     }
