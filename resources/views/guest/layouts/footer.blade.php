@@ -7,72 +7,48 @@
         <div class="row">
             <div class="contact-group">
                 <ul>
-
-
-                    <li class="item">
-                        <div class="avatar">
-                            <img src="/images/team/avatar.jpg" data-src="/images/team/dgp.jpg" class="lazy" width="62"
-                                 height="62">
-                        </div>
-                        <div class="detail">
-                            <p class="title">Kinh doanh</p>
-                            <p class="name">PKD ĐGP</p>
-                        </div>
-                        <div class="links">
-                            <a href="tel:0708757877" title="Bấm để Gọi tư vấn"> 0708 75 7877</a>
-                            <a href="https://zalo.me/0708757877" title="Bấm để Chát tư vấn" target="_blank"
-                               class="zalo"> Chát Zalo</a>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="avatar">
-                            <img src="/images/team/avatar.jpg" data-src="/images/team/loan.jpg" class="lazy" width="62"
-                                 height="62">
-                        </div>
-                        <div class="detail">
-                            <p class="title">Kinh doanh</p>
-                            <p class="name">Lê Loan</p>
-                        </div>
-                        <div class="links">
-                            <a href="tel:0938 39 7877" title="Bấm để Gọi tư vấn"> 0938 39 7877</a>
-                            <a href="https://zalo.me/0938397877" title="Bấm để Chát tư vấn" target="_blank"
-                               class="zalo"> Chát Zalo</a>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="avatar">
-                            <img src="/images/team/avatar.jpg" data-src="/images/team/thanhquy.jpg" class="lazy"
-                                 width="62" height="62">
-                        </div>
-                        <div class="detail">
-                            <p class="title">Kinh doanh</p>
-                            <p class="name">Thanh Quy</p>
-                        </div>
-                        <div class="links">
-                            <a href="tel:0909 61 7877" title="Bấm để Gọi tư vấn"> 0909 61 7877</a>
-                            <a href="https://zalo.me/0909617877" title="Bấm để Chát tư vấn" target="_blank"
-                               class="zalo"> Chát Zalo</a>
-                        </div>
-                    </li>
-
-
-                    <li class="item tech">
-                        <div class="avatar ">
-                            <img src="/images/team/avatar.jpg" data-src="/images/team/dang-hong-thai-2.jpg" class="lazy"
-                                 width="62" height="62">
-                        </div>
-                        <div class="detail">
-                            <p class="title"><span style="color:#0fc2db">Kinh doanh</span><span
-                                    style="color:#fff"> / </span>Kỹ thuật</p>
-                            <p class="name">Đặng Hồng Thái</p>
-                        </div>
-                        <div class="links">
-                            <a href="tel:0909 25 7877" title="Bấm để Gọi tư vấn"> 0909 25 7877</a>
-                            <a href="https://zalo.me/0909257877" title="Bấm để Chát tư vấn" target="_blank"
-                               class="zalo"> Chát Zalo</a>
-                        </div>
-                    </li>
-
+                    @foreach($staffs as $staff)
+                        @if($staff->type === 0)
+                            <li class="item">
+                                <div class="avatar">
+                                    <img src="{{asset($staff->image)}}" data-src="{{$staff->image}}" class="lazy"
+                                         width="62"
+                                         height="62" alt="avatar">
+                                </div>
+                                <div class="detail">
+                                    <p class="title">Kinh doanh</p>
+                                    <p class="name">{{$staff->name}}</p>
+                                </div>
+                                <div class="links">
+                                    <a href="tel:{{$staff->phone}}" title="Bấm để Gọi tư vấn"> {{$staff->phone}}</a>
+                                    <a href="https://zalo.me/{{$staff->phone}}" title="Bấm để Chát tư vấn"
+                                       target="_blank"
+                                       class="zalo"> Chat Zalo</a>
+                                </div>
+                            </li>
+                        @endif
+                    @endforeach
+                    @foreach($staffs as $staff)
+                        @if($staff->type === 1)
+                            <li class="item tech">
+                                <div class="avatar ">
+                                    <img src="{{asset($staff->image)}}" data-src="{{$staff->image}}" class="lazy"
+                                         width="62" height="62" alt="avatar">
+                                </div>
+                                <div class="detail">
+                                    <p class="title"><span style="color:#0fc2db">Kinh doanh</span><span
+                                            style="color:#fff"> / </span>Kỹ thuật</p>
+                                    <p class="name">{{$staff->name}}</p>
+                                </div>
+                                <div class="links">
+                                    <a href="tel:{{$staff->phone}}" title="Bấm để Gọi tư vấn"> {{$staff->phone}}</a>
+                                    <a href="https://zalo.me/{{$staff->phone}}" title="Bấm để Chát tư vấn"
+                                       target="_blank"
+                                       class="zalo"> Chat Zalo</a>
+                                </div>
+                            </li>
+                        @endif
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -97,7 +73,9 @@
                             </li>
 
                             <li class="navmenu-item navmenu-id-about">
-                                <a class="navmenu-link " href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng tôi</a>
+                                <a class="navmenu-link "
+                                   href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng
+                                    tôi</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
                                 <a class="navmenu-link " href="/pages/contact.html">Liên hệ</a>
@@ -135,7 +113,9 @@
                                 <a class="navmenu-link" href="/blogs.html">Tin tức</a>
                             </li>
                             <li class="navmenu-item navmenu-id-submit-your-creation">
-                                <a class="navmenu-link" href="{{isset($pages[1]) ? '/pages/'.$pages[1][0]->slug.'.html' : '#'}}">Tuyển dụng</a>
+                                <a class="navmenu-link"
+                                   href="{{isset($pages[1]) ? '/pages/'.$pages[1][0]->slug.'.html' : '#'}}">Tuyển
+                                    dụng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-search">
                                 <a class="navmenu-link " href="/search.html">Tìm kiếm</a>
@@ -161,14 +141,20 @@
                                 <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
-                                <a class="navmenu-link" href="{{isset($pages[2]) ? '/pages/'.$pages[2][0]->slug.'.html' : '#'}}">Hướng dẫn mua hàng</a>
+                                <a class="navmenu-link"
+                                   href="{{isset($pages[2]) ? '/pages/'.$pages[2][0]->slug.'.html' : '#'}}">Hướng dẫn
+                                    mua hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
-                                <a class="navmenu-link" href="{{isset($pages[3]) ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">Thanh toán & Vận
+                                <a class="navmenu-link"
+                                   href="{{isset($pages[3]) ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">Thanh toán &
+                                    Vận
                                     chuyển</a>
                             </li>
                             <li class="navmenu-item navmenu-id-returns">
-                                <a class="navmenu-link" href="{{isset($pages[4]) ? '/pages/'.$pages[4][0]->slug.'.html' : '#'}}">Bảo hành & Đổi trả</a>
+                                <a class="navmenu-link"
+                                   href="{{isset($pages[4]) ? '/pages/'.$pages[4][0]->slug.'.html' : '#'}}">Bảo hành &
+                                    Đổi trả</a>
                             </li>
 
                             <li class="navmenu-item navmenu-id-submit-feedback">
@@ -179,19 +165,18 @@
                 </div>
                 <div class="site-footer-block-item  site-footer-block-newsletter">
                     <h5 class="site-footer-block-title">
-                        Thiết Bị Điện Đặng Gia Phát
+                        {{$info->name ?? ""}}
                     </h5>
                     <div class="site-footer-block-content site-footer-contact" style="margin-bottom: .25rem;">
-                        <p><b>CÔNG TY TNHH KỸ THUẬT ĐIỆN ĐẶNG GIA PHÁT</b></p>
-                        <p><b>Địa chỉ:</b> Số 08B, Tổ 8, Đường 2, Khu Phố 6, Phường Trường Thọ, Quận Thủ Đức, TP. Hồ Ch&#237;
-                            Minh </p>
-                        <p>MST: 0312482140</p>
-                        @if(isset($info->phone))
-                        <p>
-                            <img src="{{asset('/images/svg/phone.svg')}}" alt="phone support" width="20" height="20"/>
-                            <a href="tel:(028) 3731 3963">(028) 3731 3963</a> - <a href="tel:(028) 3728 0609">(028) 3728
-                                0609</a>
-                        </p>
+                        <p><b>{{$info->name ?? ""}}</b></p>
+                        <p> {!! isset($info->address) ? '<b>Địa chỉ: </b>' . $info->address : "" !!}</p>
+                        <p>{{ isset($info->business_license) ? 'MST: '.$info->business_license : "" }}</p>
+                        @if(isset($info->hotline1))
+                            <p>
+                                <img src="{{asset('guest/images/svg/phone.svg')}}" alt="phone support" width="20"
+                                     height="20"/>
+                                <a href="tel:{{$info->hotline1}}">{{$info->hotline1}}</a> {!! isset($info->hotline2) ? '- <a href="tel:{{$info->hotline2}}">{{$info->hotline2}}</a>' : "" !!}
+                            </p>
                         @endif
                         @if(isset($info->phone))
                             <p>
@@ -220,17 +205,21 @@
                             </p>
                         @endif
                         <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1"
-                                 enable-background="new 0 0 479.058 479.058" height="20px" viewBox="0 0 479.058 479.058"
-                                 width="20px">
-                                <g>
-                                    <path
-                                        d="m434.146 59.882h-389.234c-24.766 0-44.912 20.146-44.912 44.912v269.47c0 24.766 20.146 44.912 44.912 44.912h389.234c24.766 0 44.912-20.146 44.912-44.912v-269.47c0-24.766-20.146-44.912-44.912-44.912zm0 29.941c2.034 0 3.969.422 5.738 1.159l-200.355 173.649-200.356-173.649c1.769-.736 3.704-1.159 5.738-1.159zm0 299.411h-389.234c-8.26 0-14.971-6.71-14.971-14.971v-251.648l199.778 173.141c2.822 2.441 6.316 3.655 9.81 3.655s6.988-1.213 9.81-3.655l199.778-173.141v251.649c-.001 8.26-6.711 14.97-14.971 14.97z"
-                                        data-original="#000000" class="active-path" data-old_color="#000000"
-                                        fill="#FFFFFF"/>
-                                </g>
-                            </svg>
-                            {!! isset($info->email) ? '<a href="mailto:'.$info->email.'">'.$info->email.'</a></p>' : '' !!}
+                            @if(isset($info->email))
+                                <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1"
+                                     enable-background="new 0 0 479.058 479.058" height="20px"
+                                     viewBox="0 0 479.058 479.058"
+                                     width="20px">
+                                    <g>
+                                        <path
+                                            d="m434.146 59.882h-389.234c-24.766 0-44.912 20.146-44.912 44.912v269.47c0 24.766 20.146 44.912 44.912 44.912h389.234c24.766 0 44.912-20.146 44.912-44.912v-269.47c0-24.766-20.146-44.912-44.912-44.912zm0 29.941c2.034 0 3.969.422 5.738 1.159l-200.355 173.649-200.356-173.649c1.769-.736 3.704-1.159 5.738-1.159zm0 299.411h-389.234c-8.26 0-14.971-6.71-14.971-14.971v-251.648l199.778 173.141c2.822 2.441 6.316 3.655 9.81 3.655s6.988-1.213 9.81-3.655l199.778-173.141v251.649c-.001 8.26-6.711 14.97-14.971 14.97z"
+                                            data-original="#000000" class="active-path" data-old_color="#000000"
+                                            fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                                {!! '<a href="mailto:'.$info->email.'">'.$info->email.'</a></p>' !!}
+                            @endif
+                        </p>
                         <div><a class="RRQQWe"
                                 href="{{$info->map_address ?? "#"}}"
                                 target="_blank">
@@ -270,7 +259,9 @@
                     <nav class="site-footer-navigation" style="float:right;margin-top:5px">
                         <ul class="navmenu  navmenu-depth-1  ">
                             <li class="navmenu-item navmenu-id-terms-conditions">
-                                <a class="navmenu-link" href="{{isset($pages[5]) ? '/pages/'.$pages[5][0]->slug.'.html' : '#'}}">Điều khoản &amp; Chính
+                                <a class="navmenu-link"
+                                   href="{{isset($pages[5]) ? '/pages/'.$pages[5][0]->slug.'.html' : '#'}}">Điều khoản
+                                    &amp; Chính
                                     sách</a>
                             </li>
                         </ul>
@@ -359,3 +350,83 @@
 
 
 <div id='arcontactus'></div>
+
+
+@push('scripts')
+    <script>
+        window.addEventListener('load', function () {
+            @if(isset($info->email))
+            var arcItem = {};
+            arcItem.id = 'msg-item-6';
+            arcItem.class = 'msg-item-envelope';
+            arcItem.title = "Email báo giá<br/>{{$info->email}}";
+            arcItem.icon = '<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM48 96h416c8.8 0 16 7.2 16 16v41.4c-21.9 18.5-53.2 44-150.6 121.3-16.9 13.4-50.2 45.7-73.4 45.3-23.2.4-56.6-31.9-73.4-45.3C85.2 197.4 53.9 171.9 32 153.4V112c0-8.8 7.2-16 16-16zm416 320H48c-8.8 0-16-7.2-16-16V195c22.8 18.7 58.8 47.6 130.7 104.7 20.5 16.4 56.7 52.5 93.3 52.3 36.4.3 72.3-35.5 93.3-52.3 71.9-57.1 107.9-86 130.7-104.7v205c0 8.8-7.2 16-16 16z"></path></svg>';
+            arcItem.href = 'mailto:{{$info->email}}';
+            arcItem.color = '#FF643A';
+            arcItems.push(arcItem);
+            @endif
+            @if(isset($info->facebook))
+            var arcItem = {};
+            arcItem.id = 'msg-item-1';
+            arcItem.class = 'msg-item-facebook-messenger';
+            arcItem.title = "FB Messenger<br/>{{$info->facebook}}";
+            arcItem.icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 32C15.9 32-77.5 278 84.6 400.6V480l75.7-42c142.2 39.8 285.4-59.9 285.4-198.7C445.8 124.8 346.5 32 224 32zm23.4 278.1L190 250.5 79.6 311.6l121.1-128.5 57.4 59.6 110.4-61.1-121.1 128.5z"></path></svg>';
+            arcItem.href = '{{$info->facebook}}';
+            arcItem.color = '#567AFF';
+            arcItems.push(arcItem);
+            @endif
+            @if(isset($info->zalo))
+            var arcItem = {};
+            arcItem.id = 'msg-item-10';
+            arcItem.class = 'msg-item-zalo';
+            arcItem.title = "Zalo Chat<br/>{{$info->zalo}}";
+            arcItem.icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.1 436.6"><path fill="currentColor" class="st0" d="M82.6 380.9c-1.8-.8-3.1-1.7-1-3.5 1.3-1 2.7-1.9 4.1-2.8 13.1-8.5 25.4-17.8 33.5-31.5 6.8-11.4 5.7-18.1-2.8-26.5C69 269.2 48.2 212.5 58.6 145.5 64.5 107.7 81.8 75 107 46.6c15.2-17.2 33.3-31.1 53.1-42.7 1.2-.7 2.9-.9 3.1-2.7-.4-1-1.1-.7-1.7-.7-33.7 0-67.4-.7-101 .2C28.3 1.7.5 26.6.6 62.3c.2 104.3 0 208.6 0 313 0 32.4 24.7 59.5 57 60.7 27.3 1.1 54.6.2 82 .1 2 .1 4 .2 6 .2H290c36 0 72 .2 108 0 33.4 0 60.5-27 60.5-60.3v-.6-58.5c0-1.4.5-2.9-.4-4.4-1.8.1-2.5 1.6-3.5 2.6-19.4 19.5-42.3 35.2-67.4 46.3-61.5 27.1-124.1 29-187.6 7.2-5.5-2-11.5-2.2-17.2-.8-8.4 2.1-16.7 4.6-25 7.1-24.4 7.6-49.3 11-74.8 6zm72.5-168.5c1.7-2.2 2.6-3.5 3.6-4.8 13.1-16.6 26.2-33.2 39.3-49.9 3.8-4.8 7.6-9.7 10-15.5 2.8-6.6-.2-12.8-7-15.2-3-.9-6.2-1.3-9.4-1.1-17.8-.1-35.7-.1-53.5 0-2.5 0-5 .3-7.4.9-5.6 1.4-9 7.1-7.6 12.8 1 3.8 4 6.8 7.8 7.7 2.4.6 4.9.9 7.4.8 10.8.1 21.7 0 32.5.1 1.2 0 2.7-.8 3.6 1-.9 1.2-1.8 2.4-2.7 3.5-15.5 19.6-30.9 39.3-46.4 58.9-3.8 4.9-5.8 10.3-3 16.3s8.5 7.1 14.3 7.5c4.6.3 9.3.1 14 .1 16.2 0 32.3.1 48.5-.1 8.6-.1 13.2-5.3 12.3-13.3-.7-6.3-5-9.6-13-9.7-14.1-.1-28.2 0-43.3 0zm116-52.6c-12.5-10.9-26.3-11.6-39.8-3.6-16.4 9.6-22.4 25.3-20.4 43.5 1.9 17 9.3 30.9 27.1 36.6 11.1 3.6 21.4 2.3 30.5-5.1 2.4-1.9 3.1-1.5 4.8.6 3.3 4.2 9 5.8 14 3.9 5-1.5 8.3-6.1 8.3-11.3.1-20 .2-40 0-60-.1-8-7.6-13.1-15.4-11.5-4.3.9-6.7 3.8-9.1 6.9zm69.3 37.1c-.4 25 20.3 43.9 46.3 41.3 23.9-2.4 39.4-20.3 38.6-45.6-.8-25-19.4-42.1-44.9-41.3-23.9.7-40.8 19.9-40 45.6zm-8.8-19.9c0-15.7.1-31.3 0-47 0-8-5.1-13-12.7-12.9-7.4.1-12.3 5.1-12.4 12.8-.1 4.7 0 9.3 0 14v79.5c0 6.2 3.8 11.6 8.8 12.9 6.9 1.9 14-2.2 15.8-9.1.3-1.2.5-2.4.4-3.7.2-15.5.1-31 .1-46.5z"/></svg>';
+            arcItem.href = 'https://zalo.me/{{$info->zalo}}';
+            arcItem.color = '#008FE5';
+            arcItems.push(arcItem);
+            @endif
+            @if(isset($info->sale))
+            var arcItem = {};
+            arcItem.id = 'msg-item-9';
+            arcItem.class = 'msg-item-phone';
+            arcItem.title = "Bán Hàng<br/><b style='color:#4EB625'>{{$info->sale}}</b>";
+            arcItem.icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
+            arcItem.href = 'tel:{{$info->sale}}';
+            arcItem.color = '#4EB625';
+            arcItems.push(arcItem);
+            @endif
+            @if(isset($info->phone))
+            arcItem.id = 'msg-item-3';
+            arcItem.class = 'msg-item-phone';
+            arcItem.title = "Tư vấn kỹ thuật<br/><b style='color:#FF643A'>{{$info->phone}}</b>";
+            arcItem.icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
+            arcItem.href = 'tel:{{$info->phone}}';
+            arcItem.color = '#FF643A';
+            arcItems.push(arcItem);
+            @endif
+            jQuery('#arcontactus').contactUs({
+                buttonIcon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M416 224V64c0-35.3-28.7-64-64-64H64C28.7 0 0 28.7 0 64v160c0 35.3 28.7 64 64 64v54.2c0 8 9.1 12.6 15.5 7.8l82.8-62.1H352c35.3.1 64-28.6 64-63.9zm96-64h-64v64c0 52.9-43.1 96-96 96H192v64c0 35.3 28.7 64 64 64h125.7l82.8 62.1c6.4 4.8 15.5.2 15.5-7.8V448h32c35.3 0 64-28.7 64-64V224c0-35.3-28.7-64-64-64z"></path></svg>',
+                drag: !1,
+                mode: 'regular',
+                buttonIconUrl: '/images/svg/msg.svg',
+                showMenuHeader: !1,
+                menuHeaderText: "How would you like to contact us?",
+                showHeaderCloseBtn: !1,
+                headerCloseBtnBgColor: '#008749',
+                headerCloseBtnColor: '#ffffff',
+                itemsIconType: 'rounded',
+                align: 'left',
+                reCaptcha: !1,
+                reCaptchaKey: '',
+                countdown: 0,
+                theme: '#f2ba33',
+                buttonText: !1,
+                buttonSize: 'medium',
+                menuSize: 'large',
+                items: arcItems,
+                ajaxUrl: '#',
+                promptPosition: 'top',
+            })
+        })
+    </script>
+@endpush

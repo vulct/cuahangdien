@@ -20,6 +20,10 @@ class GroupService
         return Contact::latest('id')->where('isDelete', 0)->get();
     }
 
+    public function getStaffIsActive(){
+        return Contact::latest('id')->where(['isDelete' => 0, 'active' => 1])->get();
+    }
+
     public function create($request)
     {
         try {
