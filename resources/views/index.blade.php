@@ -268,7 +268,7 @@
                             Nội thành TP.HCM
                         </div>
                     </a>
-                    <a class="highlights-banners-block" href="tel:{{$info->hotline1}}">
+                    <a class="highlights-banners-block" href="tel:{{$info->hotline1 ?? ''}}">
                         <div class="highlights-banners-icon">
                             <i class="sprite_support sprite_tu-van"></i>
                         </div>
@@ -276,10 +276,10 @@
                             <p class="highlights-banners-heading">
                                 Hỗ trợ tư vấn
                             </p>
-                            {{$info->hotline1}}
+                            {{ $info->hotline1 ?? '' }}
                         </div>
                     </a>
-                    <a class="highlights-banners-block" href="{{$info->facebook}}" target="_blank">
+                    <a class="highlights-banners-block" href="{{$info->facebook ?? ''}}" target="_blank">
                         <div class="highlights-banners-icon">
                             <i class="sprite_support sprite_lien_he"></i>
                         </div>
@@ -290,7 +290,7 @@
                             Trả lời trong vòng 24h
                         </div>
                     </a>
-                    <a class="highlights-banners-block" href="{{$pages[3] ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">
+                    <a class="highlights-banners-block" href="{{isset($pages[3]) ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">
                         <div class="highlights-banners-icon">
                             <i class="sprite_support sprite_tra_hang"></i>
                         </div>
@@ -315,14 +315,14 @@
                             <h1>
                                 <a href="{{config('app.url')}}">{{$info->name ?? 'Thiết Bị Điện Dân Dụng và Công Nghiệp'}}</a>
                             </h1>
-                            {!! $info->address ? '<p class="brand--info--address"><i class="icon-mini"></i> '.$info->address.'</p>' : '' !!}
-                            {!! $info->hotline1 ? '<p class="brand--info--mobile"><i class="icon-mini"></i>
-                            <a href="'.$info->hotline1.'">'.$info->hotline1.'</a>' : '' !!} {!! $info->hotline2 ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
+                            {!! isset($info->address) ? '<p class="brand--info--address"><i class="icon-mini"></i> '.$info->address.'</p>' : '' !!}
+                            {!! isset($info->hotline1) ? '<p class="brand--info--mobile"><i class="icon-mini"></i>
+                            <a href="'.$info->hotline1.'">'.$info->hotline1.'</a>' : '' !!} {!! isset($info->hotline2) ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
                             <p class="brand--info--email"><i class="icon-mini"></i> <a
-                                    href="mailto:{{$info->email}}">{{$info->email}}</a> | <span
-                                    class="brand--info--hotline"> <i class="icon-mini"></i> <a href="tel:{{$info->phone}}">{{$info->phone}}</a></span>
+                                    href="mailto:{{$info->email ?? ''}}">{{$info->email ?? ''}}</a> | <span
+                                    class="brand--info--hotline"> <i class="icon-mini"></i> <a href="tel:{{$info->phone ?? ''}}">{{$info->phone ?? ''}}</a></span>
                             </p>
-                            <p>{{$info->description}}</p>
+                            <p>{{$info->description ?? ''}}</p>
                         </div>
                     </div>
 
