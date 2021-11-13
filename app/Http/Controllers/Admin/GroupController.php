@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ContactRequest;
 use App\Models\Contact;
 use App\Services\Admin\GroupService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -33,30 +35,30 @@ class GroupController extends Controller
         ]);
     }
 
-    public function store(ContactRequest $request)
+    public function store(ContactRequest $request): RedirectResponse
     {
         $this->groupService->create($request);
         return redirect()->route('admin.groups.index');
     }
 
-    public function edit(Contact $contact)
+    public function edit(Contact $group)
     {
         return view('admin.groups.edit', [
             'title' => 'Chỉnh sửa thông tin nhân viên',
-            'staff' => $contact
+            'staff' => $group
         ]);
     }
 
-    public function update(Contact $contact, ContactRequest $groupRequest)
+    public function update(Contact $group, ContactRequest $groupRequest): RedirectResponse
     {
-        $result = $this->groupService->update($contact, $groupRequest);
+        $result = $this->groupService->update($group, $groupRequest);
         if ($result) {
             return redirect()->route('admin.groups.index');
         }
         return back();
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->groupService->destroy($request);
 

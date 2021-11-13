@@ -47,8 +47,6 @@ class GroupService
                 return false;
             }
 
-
-
         } catch (\Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
@@ -78,6 +76,19 @@ class GroupService
             Session::flash('error', $exception->getMessage());
             return false;
         }
+    }
+
+    public function destroy($request): bool
+    {
+        $id = $request->input('slug');
+
+        $staff = Contact::where(['id' => $id, 'isDelete' => 0])->first();
+
+        if ($staff) {
+            return Contact::where(['id' => $id, 'isDelete' => 0])->update(['isDelete' => 1]);
+        }
+
+        return false;
     }
 
 }
