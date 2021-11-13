@@ -8,6 +8,7 @@ use App\Services\Admin\InfoService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class InfoController extends Controller
@@ -19,11 +20,7 @@ class InfoController extends Controller
         $this->infoService = $infoService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
+
     public function index()
     {
         return view('admin.info.edit', [
@@ -32,13 +29,8 @@ class InfoController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+
+    public function store(Request $request): RedirectResponse
     {
         $result = $this->infoService->create($request);
         if ($result) {
@@ -48,15 +40,7 @@ class InfoController extends Controller
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Info $info
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, Info $info): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, Info $info): RedirectResponse
     {
         $result = $this->infoService->update($info, $request);
         if ($result) {
