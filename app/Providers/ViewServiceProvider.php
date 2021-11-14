@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\BannerComposer;
+use App\Http\View\Composers\BlogComposer;
+use App\Http\View\Composers\BrandComposer;
 use App\Http\View\Composers\BrandsWithCategoryComposer;
 use App\Http\View\Composers\InfoComposer;
 use App\Http\View\Composers\MenuComposer;
 use App\Http\View\Composers\PageComposer;
+use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\StaffComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -20,7 +23,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -34,12 +37,18 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer('index', BannerComposer::class);
 
-        View::composer('index', BrandsWithCategoryComposer::class);
+        View::composer(['index', 'guest.layouts.product'], BrandComposer::class);
 
-        View::composer(['index', 'guest.layouts.footer'], InfoComposer::class);
+        View::composer(['index', 'guest.layouts.product'], BrandsWithCategoryComposer::class);
+
+        View::composer(['index', 'guest.layouts.footer', 'guest.layouts.app'], InfoComposer::class);
 
         View::composer(['index', 'guest.layouts.footer', 'guest.layouts.menu'], PageComposer::class);
 
         View::composer(['guest.layouts.footer'], StaffComposer::class);
+
+        View::composer('index', BlogComposer::class);
+
+        View::composer('guest.layouts.product', ProductComposer::class);
     }
 }

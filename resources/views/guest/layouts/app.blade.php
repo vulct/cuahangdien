@@ -8,8 +8,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <title>Thiết Bị Điện Đặng Gia Ph&#225;t | thietbidiendgp.vn</title>
-    <meta name="description" content="Nh&#224; cung cấp v&#224; ph&#226;n phối thiết bị điện d&#226;n dụng v&#224; c&#244;ng nghiệp tại TP.HCM. Đặt h&#224;ng dễ d&#224;ng, b&#225;o gi&#225;, giao h&#224;ng nhanh ch&#243;ng. Hot line (028) 3731 3963.">
+    <title>{{$info->name ?? ""}} | {{config('app.url')}}</title>
+    <meta name="description"
+          content="{{$info->description ?? ""}}">
     <meta name="viewport" content="width=device-width">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
@@ -33,6 +34,8 @@
             data-section-type="static-header"
             data-section-data>
                 {"settings": { "sticky_header": true } }
+
+
     </script>
 
     <section class="site-header"
@@ -49,8 +52,8 @@
         <div class="site-header-main">
             <div class="site-header-logo">
                 <a class="site-logo" href="/">
-                    <img class="site-logo-image" src="/images/logo.png" style="max-width: 190px; max-height: 42px;"
-                         alt="Thiết bị điện Đặng Gia Phát">
+                    <img class="site-logo-image" src="{{$info->logo ?? ""}}" style="max-width: 190px; max-height: 42px;"
+                         alt="{{$info->name ?? ""}}">
                 </a>
             </div>
             <div class="site-header-search" data-live-search>
@@ -60,10 +63,7 @@
                     <div class="form-field no-label"><input class="form-field-input site-header-search-form-field"
                                                             type="text" name="q" aria-label="Tìm kiếm"
                                                             placeholder="Nhập tìm kiếm: công tắc schneider, led bulb philips, hoặc mã hàng..."
-                                                            autocomplete="off" data-live-search-input>
-                        <button class="site-header-takeover-cancel" type="button" data-live-search-takeover-cancel>
-                            Hủy
-                        </button>
+                                                            autocomplete="off" >
                         <button class="site-header-search-button button-primary" type="button" aria-label="Search"
                                 data-live-search-submit><span class="search-icon search-icon--inactive"> <svg
                                     aria-hidden="true" focusable="false"
@@ -71,7 +71,7 @@
                                         fill="currentColor" fill-rule="evenodd"
                                         d="M12.514 14.906a8.264 8.264 0 0 1-4.322 1.21C3.668 16.116 0 12.513 0 8.07 0 3.626 3.668.023 8.192.023c4.525 0 8.193 3.603 8.193 8.047 0 2.033-.769 3.89-2.035 5.307l4.999 5.552-1.775 1.597-5.06-5.62zm-4.322-.843c3.37 0 6.102-2.684 6.102-5.993 0-3.31-2.732-5.994-6.102-5.994S2.09 4.76 2.09 8.07c0 3.31 2.732 5.993 6.102 5.993z"/> </svg> </span>
                             <span class="search-icon search-icon--active"> <svg aria-hidden="true" focusable="false"
-                                                                                 width="26"
+                                                                                width="26"
                                                                                 height="26" viewBox="0 0 26 26"
                                                                                 xmlns="http://www.w3.org/2000/svg"> <g
                                         fill-rule="nonzero" fill="currentColor"> <path

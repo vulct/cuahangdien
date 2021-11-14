@@ -278,18 +278,6 @@ h3.collection--title
     color: #f9f9f9;
     text-decoration:none;
 }
-.title-header .h3-title a:before{
-    float: left;
-    left: 20px;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    margin-top: 6px;
-    margin-right: 8px;
-    content: "";
-    background-image: url(../images/icon-24.png?v=3);
-    background-position: 0px 24px;
-}
 .h3-title.ii16 a:before{
     background-position: 0px 24px;
 }

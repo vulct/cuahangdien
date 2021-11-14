@@ -35,7 +35,7 @@ class BrandService
         return DB::table('products')
             ->select('products.category_id','brands.id', 'brands.slug', 'brands.image', 'brands.name')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->where(['brands.isDelete' => 0, 'brands.active' => 0])
+            ->where(['brands.isDelete' => 0, 'brands.active' => 1])
             ->groupBy('products.category_id', 'brands.id', 'brands.name', 'brands.slug', 'brands.image')
             ->get();
     }

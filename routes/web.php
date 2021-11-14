@@ -22,6 +22,8 @@ Route::get('/', function (){
     return view('index');
 });
 
+Route::get('/blogs', [PostController::class, 'index'])->name('blogs');
+
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/auth/login', [LoginController::class, 'store']);
 

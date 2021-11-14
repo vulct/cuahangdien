@@ -20,13 +20,18 @@ class PostService
         return Post::where(['isDelete' => 0])->get();
     }
 
+    public function getPostIsActive()
+    {
+        return Post::with('category')->where(['isDelete' => 0, 'active' => 1])->limit(6)->get();
+    }
+
     public function create($request): bool
     {
         try {
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            }else{
+            } else {
                 $path_image = '/storage/default/image-available.jpg';
             }
 
@@ -88,5 +93,7 @@ class PostService
             return false;
         }
     }
+
+
 
 }

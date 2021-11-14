@@ -151,6 +151,16 @@ class Helper
             case 3 : return 'Thanh toán vận chuyển';
             case 4 : return 'Bảo hành đổi trả';
             case 5 : return 'Chính sách bảo mật';
+            default: return 'Không tồn tại';
         }
+    }
+
+    public static function getDateTime($datetime)
+    {
+        $timeEng = ['Sun','Mon','Tue','Wed', 'Thu', 'Fri', 'Sat', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        $timeVie = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy','Một', 'Hai', 'Ba', 'Tư', 'Năm', 'Sáu', 'Bảy', 'Tám', 'Chín', 'Mười', 'Mười Một', 'Mười Hai'];
+        $time = strtotime($datetime);
+        $time = date('d \T\h\á\n\g M Y',$time);
+        return str_replace( $timeEng, $timeVie, $time);
     }
 }

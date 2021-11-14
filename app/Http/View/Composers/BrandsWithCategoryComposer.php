@@ -21,7 +21,6 @@ class BrandsWithCategoryComposer
 
     public function compose(View $view)
     {
-        //$getList = Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0])->get();
 
         $data = array();
 
@@ -35,8 +34,9 @@ class BrandsWithCategoryComposer
         }
 
         // lấy thương hiệu
-        $data['brands'][] = $this->brands;
-
+        foreach ($this->subcategory as $cate) {
+            $data['brands'][$cate->id] = $this->brands;
+        }
         $view->with('data', $data);
     }
 

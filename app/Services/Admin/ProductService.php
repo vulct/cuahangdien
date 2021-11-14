@@ -6,8 +6,12 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\UploadService;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Log;
 
 class ProductService
 {
@@ -23,6 +27,16 @@ class ProductService
     public function get()
     {
         return Product::with('attributes')->orderbyDesc('id')->where('isDelete', 0)->get();
+    }
+
+    /**
+     * @return Builder[]|Collection
+     */
+    public function getProductWithCategoryIsActive()
+    {
+        return Category::with(['products' => function ($query) {
+            $query->with(['attributes']);
+        }])->where(['parent_id' => 0, 'isDelete' => 0, 'active' => 1, 'type' => 0])->get();
     }
 
     public function create($request)
@@ -42,7 +56,7 @@ class ProductService
             // upload image product
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            }else{
+            } else {
                 $path_image = '/storage/default/image-available.jpg';
             }
             // add product
@@ -77,10 +91,10 @@ class ProductService
             }
             DB::commit();
             Session::flash('success', 'Thêm sản phẩm thành công.');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             Session::flash('error', 'Thêm sản phẩm không thành công. Vui lòng thử lại.');
-            \Log::info($exception->getMessage());
+            Log::info($exception->getMessage());
             return false;
         }
         return true;
@@ -126,11 +140,11 @@ class ProductService
                     $arrayAttributeChecked[] = $attribute_id;
                 }
                 // update attribute
-                if($dataAttributes[$i]['codename'] !== null && isset($dataAttributes[$i]['attribute_id'])){
-                    foreach ($product['attributes'] as $att){
+                if ($dataAttributes[$i]['codename'] !== null && isset($dataAttributes[$i]['attribute_id'])) {
+                    foreach ($product['attributes'] as $att) {
                         $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
-                        if ((int)$dataAttributes[$i]['attribute_id'] === $att->id){
-                            if ($this->updateAttribute($dataAttributes[$i]['attribute_id'],$dataAttributes[$i]) === false) {
+                        if ((int)$dataAttributes[$i]['attribute_id'] === $att->id) {
+                            if ($this->updateAttribute($dataAttributes[$i]['attribute_id'], $dataAttributes[$i]) === false) {
                                 Session::flash('error', 'Cập nhật mẫu mã không thành công, vui lòng kiểm tra lại.');
                                 return false;
                             }
@@ -140,8 +154,8 @@ class ProductService
             }
 
             // destroy attribute
-            foreach ($product['attributes'] as $att){
-                if (!in_array($att->id, $arrayAttributeChecked)){
+            foreach ($product['attributes'] as $att) {
+                if (!in_array($att->id, $arrayAttributeChecked)) {
                     if ($this->deleteAttribute($att->id) === false) {
                         Session::flash('error', 'Xóa mẫu mã không thành công, vui lòng kiểm tra lại.');
                         return false;
@@ -157,7 +171,7 @@ class ProductService
             $product->keyword = (string)$request->input('keyword');
             $product->content = (string)$request->input('content');
             $product->warranty = (string)$request->input('warranty');
-            $product->unit = (string)$request->input('unit') === null ?  'Cái' : (string)$request->input('unit');
+            $product->unit = (string)$request->input('unit') === null ? 'Cái' : (string)$request->input('unit');
             $product->slug = (string)$request->input('slug');
             $product->category_id = $category_id;
             $product->brand_id = $brand_id;
@@ -165,9 +179,9 @@ class ProductService
 
             Session::flash('success', 'Cập nhật thông tin sản phẩm thành công');
             return true;
-        } catch (\Exception $err) {
+        } catch (Exception $err) {
             Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại');
-            \Log::info($err->getMessage());
+            Log::info($err->getMessage());
             return false;
         }
 
