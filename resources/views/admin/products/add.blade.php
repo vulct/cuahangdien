@@ -282,7 +282,7 @@
                                                                             <input type="number" class="form-control"
                                                                                    name="discount" id="discount"
                                                                                    value="{{old("group-a.$i.discount")}}"
-                                                                                   placeholder="276,000 VNĐ">
+                                                                                   placeholder="30%">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -385,7 +385,7 @@
                                                                         <input type="number" class="form-control"
                                                                                name="discount" id="discount"
                                                                                value="{{old('discount')}}"
-                                                                               placeholder="276,000 VNĐ">
+                                                                               placeholder="30%">
                                                                     </div>
                                                                 </div>
                                                             </div>

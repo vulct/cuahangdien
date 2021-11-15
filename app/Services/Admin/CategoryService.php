@@ -4,7 +4,6 @@ namespace App\Services\Admin;
 
 use App\Models\Category;
 use App\Services\UploadService;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CategoryService
@@ -27,10 +26,14 @@ class CategoryService
         return Category::where(['isDelete' => 0, 'active' => $active, 'type' => $type])->get();
     }
 
-    public function getParentCategory(): \Illuminate\Support\Collection
+    public function getParentCategory()
     {
-        return DB::table('categories')
-            ->where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'parent_id' => 0])->get();
+        return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'parent_id' => 0])->get();
+    }
+
+    public function getFirstCategory()
+    {
+        return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 1])->first();
     }
 
     public function create($request): bool

@@ -11,13 +11,13 @@ class MenuComposer
 
     public function __construct(CategoryService $categoryService)
     {
-        $this->category = $categoryService->getParentCategory();
+        $this->category = $categoryService->get(1,0);
     }
 
 
     public function compose(View $view)
     {
         //return menu
-        $view->with('categories', $this->category);
+        $view->with('menu', $this->category);
     }
 }

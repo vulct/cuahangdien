@@ -35,8 +35,8 @@ class ProductService
     public function getProductWithCategoryIsActive()
     {
         return Category::with(['products' => function ($query) {
-            $query->with(['attributes']);
-        }])->where(['parent_id' => 0, 'isDelete' => 0, 'active' => 1, 'type' => 0])->get();
+            $query->with(['attributes'])->where(['isDelete' => 0, 'active' => 1]);
+        }])->where(['top' => 1, 'isDelete' => 0, 'active' => 1, 'type' => 0])->get();
     }
 
     public function create($request)

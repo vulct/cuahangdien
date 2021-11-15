@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CommentRequest;
 use App\Models\Comment;
 use App\Services\Admin\CommentService;
 use Illuminate\Http\Request;

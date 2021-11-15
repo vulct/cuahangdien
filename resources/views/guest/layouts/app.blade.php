@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <title>{{$info->name ?? ""}} | {{config('app.url')}}</title>
+    <title>{{$title ?? $info->name ?? ""}} | {{preg_replace("(^https?://)", "", config('app.url') )}}</title>
     <meta name="description"
           content="{{$info->description ?? ""}}">
     <meta name="viewport" content="width=device-width">

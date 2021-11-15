@@ -4,6 +4,8 @@ namespace App\Services\Admin;
 
 use App\Models\Post;
 use App\Services\UploadService;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 
 class PostService
@@ -22,7 +24,29 @@ class PostService
 
     public function getPostIsActive()
     {
-        return Post::with('category')->where(['isDelete' => 0, 'active' => 1])->limit(6)->get();
+        return Post::with('category')->latest('posts.updated_at')->where(['isDelete' => 0, 'active' => 1])->limit(2)->get();
+    }
+
+    public function getPostPaginate($category): LengthAwarePaginator
+    {
+        if ($category === 0){
+            return Post::with('category')->where(['isDelete' => 0, 'active' => 1])->paginate(2);
+        }
+        return Post::with('category')->where(['isDelete' => 0, 'active' => 1, 'category_id' => $category])->paginate(2);
+    }
+
+    public function getPostByID($id)
+    {
+        return Post::with('category','comments')->where(['isDelete' => 0, 'active' => 1, 'id' => $id])->first();
+    }
+
+    public function getRelatedPosts($id, $post)
+    {
+        return Post::with('category')->latest('posts.updated_at')
+            ->where(['isDelete' => 0, 'active' => 1, 'posts.category_id' => $id])
+            ->where('id', '!=', $post)
+            ->limit(2)
+            ->get();
     }
 
     public function create($request): bool
@@ -48,7 +72,7 @@ class PostService
             ]);
 
             Session::flash('success', 'Tạo bài viết thành công.');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }
@@ -88,7 +112,7 @@ class PostService
 
             Session::flash('success', 'Cập nhật danh mục thành công.');
             return true;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }

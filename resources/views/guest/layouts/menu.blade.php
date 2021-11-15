@@ -8,7 +8,7 @@
             <li class="navmenu-item navmenu-item-parent navmenu-id-shop navmenu-meganav-item-parent"
                 data-navmenu-trigger
                 data-navmenu-meganav-trigger>
-                <a class="navmenu-link navmenu-link-parent " href="/san-pham.html">
+                <a class="navmenu-link navmenu-link-parent " href="/san-pham">
                     Sản phẩm
                     <span class="navmenu-icon navmenu-icon-depth-1">
                                 <svg class="svg-chevron-down"></svg>
@@ -17,8 +17,10 @@
                 <div class="navmenu-submenu" data-navmenu-submenu="">
                     <div class="navmenu-meganav--scroller">
                         <ul class="navmenu navmenu-depth-2">
-                            @foreach($categories as $cate)
-                                <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}">{{$cate->name}}</a></li>
+                            @foreach($menu as $cate)
+                                @if($cate->parent_id === 0)
+                                    <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}.html">{{$cate->name}}</a></li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
@@ -41,7 +43,7 @@
 
 
             <li class="navmenu-item">
-                <a class="navmenu-link" href="/blogs.html">Tin tức</a>
+                <a class="navmenu-link" href="{{route('blogs')}}">Tin tức</a>
             </li>
             <li class="navmenu-item">
                 <a class="navmenu-link" href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng tôi</a>
@@ -78,27 +80,11 @@
                     <div class="navmenu-submenu navmenu-meganav" data-navmenu-submenu="" data-meganav-menu="">
                         <div class="navmenu-meganav--scroller">
                             <ul class="navmenu navmenu-depth-2">
-                                <li><a class="navmenu-link" href="/thiet-bi-smart-home.html">Thiết bị Smart home</a>
-                                </li>
-                                <li><a class="navmenu-link" href="/den-nang-luong-mat-troi">Đèn năng lượng mặt
-                                        trời</a></li>
-                                <li><a class="navmenu-link" href="/den-chieu-sang">Đèn chiếu sáng</a></li>
-                                <li><a class="navmenu-link" href="/den-trang-tri">Đèn Trang Trí</a></li>
-                                <li><a class="navmenu-link" href="/cong-tac-o-cam">Công tắc - Ổ cắm</a></li>
-                                <li><a class="navmenu-link" href="/o-cam-phich-cam-cong-nghiep">Phích cắm, Ổ cắm
-                                        công nghiệp</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-tu-dien">Tủ điện</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-dong-cat">Thiết bị đóng cắt</a></li>
-                                <li><a class="navmenu-link" href="/day-cap-dien">Dây cáp điện</a></li>
-                                <li><a class="navmenu-link" href="/chuong-dien">Chuông điện</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-an-ninh">Thiết bị an ninh</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-quat">Thiết bị Quạt</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-gia-dung">Thiết bị gia dụng</a></li>
-                                <li><a class="navmenu-link" href="/thiet-bi-tu-dong-hoa">Thiết bị tự động hóa</a>
-                                </li>
-                                <li><a class="navmenu-link" href="/thiet-bi-cong-trinh">Thiết bị công trình</a></li>
-                                <li><a class="navmenu-link" href="/ong-phu-kien">Ống luồn dây diện</a></li>
-
+                                @foreach($menu as $cate)
+                                    @if($cate->parent_id === 0)
+                                        <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}.html">{{$cate->name}}</a></li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>

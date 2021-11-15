@@ -14,10 +14,11 @@
                                 <div class='navbar navbar-default' role='navigation'>
                                     <div class='navbar-collapse collapse' style='padding:0;margin: 0;'>
                                         <ul class='nav navbar-nav lef-nav-bar' style="min-height: 550px;">
-
-                                            @foreach($categories as $cate)
-                                                <li class='dropdown ttmenu-full'>
-                                                    <a href='/{{$cate->slug}}' data-toggle='dropdown'
+                                            @php $i = 1; @endphp
+                                            @foreach($menu as $cate)
+                                                @if($i <= 14)
+                                                    <li class='dropdown ttmenu-full'>
+                                                    <a href='/danh-muc/{{$cate->slug}}.html' data-toggle='dropdown'
                                                        class='dropdown-toggle'>
                                                     <span class='icon-wrap'>
                                                         <i class='lv1-icon navicon {{$cate->icon}}'></i>
@@ -36,7 +37,7 @@
                                                                                     @foreach($data['brands'][$cate->id] as $brand)
                                                                                         @if($brand->category_id === $cate->id)
                                                                                         <div>
-                                                                                            <a href="/hang/{{$brand->slug}}/{{$cate->slug}}">
+                                                                                            <a href="/hang/{{$brand->slug}}/{{$cate->slug}}.html">
                                                                                                 <img class="lazy"
                                                                                                      data-src="{{$brand->image}}"
                                                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
@@ -56,7 +57,7 @@
                                                                                 @if(isset($data['subcategory'][$cate->id]))
                                                                                     @foreach($data['subcategory'][$cate->id] as $subcategory)
                                                                                         <div>
-                                                                                            <a href="/{{$subcategory->name}}">
+                                                                                            <a href="/danh-muc/{{$subcategory->slug}}.html">
                                                                                                 <img class="lazy"
                                                                                                      data-src="{{asset($subcategory->image)}}"
                                                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
@@ -75,6 +76,8 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                @endif
+                                            @php $i++; @endphp
                                             @endforeach
                                         </ul>
                                     </div>
@@ -342,9 +345,7 @@
         @include('guest.layouts.product')
 
 
-        <div style='text-align: center; margin: 20px auto; width:200px'><a class='button-primary' href='/san-pham.html'
-                                                                           style='background: #ffb354; border: 1px solid #ffb354;padding: 0.875rem 1.75rem;font-size: 1.3125rem;width: 100%;'>Xem
-                tất cả</a></div>
+        <div style='text-align: center; margin: 20px auto; width:200px'><a class='button-primary' href='{{route('products')}}' style='background: #ffb354; border: 1px solid #ffb354;padding: 0.875rem 1.75rem;font-size: 1.3125rem;width: 100%;'>Xem tất cả</a></div>
         <div class="shopify-section highlights-banners--section">
             <div class="highlights-banners-container">
                 <div class="brands-banners">
@@ -464,8 +465,10 @@
             </scriptmore>
         </div>
         <div class="clearfix"></div>
-
-
     </main>
 
 @endsection
+
+@push('stylesheets')
+
+@endpush

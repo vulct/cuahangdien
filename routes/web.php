@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Admin\Auth\AccountController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BannerController;
@@ -14,15 +13,26 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function (){
     return view('index');
-});
+})->name('index');
 
-Route::get('/blogs', [PostController::class, 'index'])->name('blogs');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+
+Route::get('/san-pham', [BlogController::class, 'index'])->name('products');
+
+Route::get('/blogs/{category}.html', [BlogController::class, 'getPostWithCategory'])->name('blogs.category');
+
+Route::get('/posts/{post}.html', [\App\Http\Controllers\PostController::class, 'index'])->name('posts');
+
+Route::post('/comments/create', [\App\Http\Controllers\CommentController::class, 'create']);
+
+Route::post('/comments/rate', [\App\Http\Controllers\CommentController::class, 'rate']);
 
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/auth/login', [LoginController::class, 'store']);

@@ -21,31 +21,6 @@ $(".ttmenu-full").hover(
 );
 !function(s){"use strict";s(".nav-pills > li ").hover(function(){s(this).hasClass("hoverblock")||s(this).find("a").tab("show")}),s(".nav-tabs > li").find("a.pane").click(function(){s(this).parent().siblings().addClass("hoverblock")}),s(".hovermenu .dropdown").hover(function(){s(this).addClass("open")},function(){s(this).removeClass("open")}),s(".clickablemenu .dropdown").click("show.bs.dropdown",function(n){var i=s(this).find(".dropdown-menu"),o=parseInt(i.css("margin-top"));i.css({"margin-top":o+65+"px",opacity:0}).animate({"margin-top":o+"px",opacity:1},420,function(){s(this).css({"margin-top":""})})}),s(".verticalmenu .dropdown").click("show.bs.dropdown",function(n){var i=s(this).find(".dropdown-menu"),o=parseInt("1",10);i.css({"margin-left":o+65+"px",opacity:0}).animate({"margin-left":o+"px",opacity:1},420,function(){s(this).css({"margin-left":""})})})}(jQuery);
 
-
-(function(doc, win) {
-
-    var inViewPort = function($target) {
-        var rect = $target.getBoundingClientRect();
-        return ((win.innerHeight - 50) >= rect.top);
-    };
-
-    var showWhenInView = function() {
-        $element = document.getElementById('more');
-        if (inViewPort($element)) {
-            var $script = $element.querySelector('scriptmore');
-            $element.innerHTML = $script.innerHTML;
-
-            win.removeEventListener('scroll', showWhenInView);
-            win.removeEventListener('resize', showWhenInView);
-        }
-    };
-
-    win.addEventListener('scroll', showWhenInView);
-    win.addEventListener('resize', showWhenInView);
-    showWhenInView();
-
-})(document, window);
-
 (function($, win) {
     $.fn.inViewport = function(cb) {
         return this.each(function(i,el){
@@ -60,4 +35,12 @@ $(".ttmenu-full").hover(
 }(jQuery, window));
 $(".amin").inViewport(function(px){
     if(px) $(this).addClass("animated fadeInUp") ;
+});
+
+
+// Setup AJAX
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
