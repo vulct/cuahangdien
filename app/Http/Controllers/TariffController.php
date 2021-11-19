@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TariffRequest;
 use App\Models\Tariff;
+use App\Services\Admin\BrandService;
 use App\Services\Admin\CategoryService;
 use App\Services\TariffService;
 use Illuminate\Http\JsonResponse;
@@ -13,12 +14,12 @@ use Illuminate\Http\Request;
 class TariffController extends Controller
 {
     protected $tariffService;
-    protected $categoryService;
+    protected $brandService;
 
-    public function __construct(TariffService $tariffService, CategoryService $categoryService)
+    public function __construct(TariffService $tariffService, BrandService $brandService)
     {
         $this->tariffService = $tariffService;
-        $this->categoryService = $categoryService;
+        $this->brandService = $brandService;
     }
 
     public function index()
@@ -33,7 +34,7 @@ class TariffController extends Controller
     {
         return view('admin.tariff.add', [
             'title' => 'Thêm mới bảng giá',
-            'categories' => $this->categoryService->get(1,0)
+            'brands' => $this->brandService->get(1)
         ]);
     }
 
@@ -47,7 +48,7 @@ class TariffController extends Controller
     {
         return view('admin.tariff.edit', [
             'title' => 'Chỉnh sửa bảng giá',
-            'categories' => $this->categoryService->get(1,0),
+            'brands' => $this->brandService->get(1),
             'tariff' => $tariff
         ]);
     }
@@ -69,7 +70,7 @@ class TariffController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa bài viết thành công'
+                'message' => 'Xóa báo giá thành công'
             ]);
         }
 

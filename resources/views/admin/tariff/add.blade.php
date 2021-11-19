@@ -117,17 +117,17 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="inputStatus"
-                                                       class="col-sm-2 col-form-label">{{__('Danh mục sản phẩm')}} <span
+                                                <label for="brand_id"
+                                                       class="col-sm-2 col-form-label">{{__('Thương hiệu sản phẩm')}} <span
                                                         class="text-danger">*</span></label>
                                                 <div class="col-sm-10">
-                                                    <select id="inputStatus" name="category_id"
+                                                    <select id="brand_id" name="brand_id"
                                                             class="form-control select2"
                                                             style="width: 100%" required>
                                                         <option value="">Trống</option>
-                                                        @foreach($categories as $cate_parent)
+                                                        @foreach($brands as $brand)
                                                             <option
-                                                                value="{{$cate_parent->id}}" {{ old('category_id') == $cate_parent->id ? "selected" :""}}>{{$cate_parent->name}}</option>
+                                                                value="{{$brand->id}}" {{ old('brand_id') == $brand->id ? "selected" :""}}>{{$brand->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

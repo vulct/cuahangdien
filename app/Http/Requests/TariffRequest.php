@@ -18,7 +18,7 @@ class TariffRequest extends FormRequest
             ],
             'language' => 'string|nullable|max:100',
             'link_download' => 'required',
-            'category_id' => 'numeric|required',
+            'brand_id' => 'numeric|required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',
@@ -57,7 +57,7 @@ class TariffRequest extends FormRequest
             'slug' => 'đường dẫn (URL)',
             'link_download' => 'đường dẫn Google Drive',
             'language' => 'ngôn ngữ',
-            'category_id' => 'danh mục',
+            'brand_id' => 'thương hiệu',
             'image' => 'hình ảnh'
         ];
     }

@@ -26,7 +26,7 @@ class CreateTariffsTable extends Migration
         });
 
         Schema::table('tariffs', function (Blueprint $table) {
-            $table->foreignId('category_id')->index()
+            $table->foreignId('brand_id')->index()
                 ->constrained();
         });
     }

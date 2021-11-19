@@ -36,7 +36,7 @@ class TariffService
                 "image" => $path_image,
                 "slug" => (string)$request->slug,
                 "active" => (int)$request->active,
-                "category_id" => (int)$request->category_id
+                "brand_id" => (int)$request->brand_id
             ]);
 
             Session::flash('success', 'Tạo báo giá thành công.');
@@ -60,7 +60,7 @@ class TariffService
             $tariff->language = (string)$request->language;
             $tariff->slug = (string)$request->slug;
             $tariff->active = (int)$request->active;
-            $tariff->category_id = (int)$request->category_id;
+            $tariff->brand_id = (int)$request->brand_id;
             $tariff->save();
 
             Session::flash('success', 'Cập nhật báo giá thành công.');
