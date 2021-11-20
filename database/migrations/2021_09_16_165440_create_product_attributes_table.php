@@ -18,17 +18,16 @@ class CreateProductAttributesTable extends Migration
             $table->string('type_name', 120)->nullable();
             $table->string('codename', 120);
             $table->string('size', 120)->nullable();
-            $table->decimal('price', 13, 2)->nullable()->default(null);
-            $table->decimal('discount', 13, 2)->nullable()->default(null);
+            $table->decimal('price', 13)->nullable()->default(null);
+            $table->decimal('discount', 13)->nullable()->default(null);
+            $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
         });
 
         Schema::table('product_attributes', function (Blueprint $table) {
             $table->foreignId('product_id')
-                ->nullable()->default(0)
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->nullable()->default(null)
+                ->constrained();
         });
     }
 
