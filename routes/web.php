@@ -18,21 +18,29 @@ use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function (){
+Route::get('/', function () {
     return view('index');
 })->name('index');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 
-Route::get('/san-pham', [BlogController::class, 'index'])->name('products');
+Route::get('/san-pham', [\App\Http\Controllers\ProductController::class, 'index'])->name('products');
 
 Route::get('/blogs/{category}.html', [BlogController::class, 'getPostWithCategory'])->name('blogs.category');
 
 Route::get('/posts/{post}.html', [\App\Http\Controllers\PostController::class, 'index'])->name('posts');
 
-Route::post('/comments/create', [\App\Http\Controllers\CommentController::class, 'create']);
+Route::post('/comments/create', [CommentController::class, 'create']);
 
-Route::post('/comments/rate', [\App\Http\Controllers\CommentController::class, 'rate']);
+Route::post('/comments/rate', [CommentController::class, 'rate']);
+
+Route::name('brands.')->group(function () {
+    Route::get('/thuong-hieu', [\App\Http\Controllers\BrandController::class, 'list'])->name('index');
+
+    Route::prefix('hang')->group(function () {
+        Route::get('/{brand}.html', [\App\Http\Controllers\BrandController::class, 'getProductByBrand'])->name('hang');
+    });
+});
 
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/auth/login', [LoginController::class, 'store']);
@@ -46,34 +54,34 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [HomeController::class, 'index']);
 
             #Categories of products
-            Route::resource('/categories',CategoryController::class);
+            Route::resource('/categories', CategoryController::class);
 
             #Categories of posts
-            Route::get('/categories_post',[CategoryController::class,'getCategoriesOfPost'])->name('categories_post');
+            Route::get('/categories_post', [CategoryController::class, 'getCategoriesOfPost'])->name('categories_post');
 
-            Route::get('/categories_post/create',[CategoryController::class,'createCategoriesOfPost'])->name('categories_post.create');
+            Route::get('/categories_post/create', [CategoryController::class, 'createCategoriesOfPost'])->name('categories_post.create');
 
-            Route::post('/categories_post/create',[CategoryController::class,'storeCategoriesOfPost'])->name('categories_post.store');
+            Route::post('/categories_post/create', [CategoryController::class, 'storeCategoriesOfPost'])->name('categories_post.store');
 
-            Route::get('/categories_post/{category}',[CategoryController::class,'showCategoriesOfPost'])->name('categories_post.show');
+            Route::get('/categories_post/{category}', [CategoryController::class, 'showCategoriesOfPost'])->name('categories_post.show');
 
-            Route::get('/categories_post/{category}/edit',[CategoryController::class,'editCategoriesOfPost'])->name('categories_post.edit');
+            Route::get('/categories_post/{category}/edit', [CategoryController::class, 'editCategoriesOfPost'])->name('categories_post.edit');
 
-            Route::patch('/categories_post/{category}',[CategoryController::class,'updateCategoriesOfPost'])->name('categories_post.update');
+            Route::patch('/categories_post/{category}', [CategoryController::class, 'updateCategoriesOfPost'])->name('categories_post.update');
 
-            Route::delete('/categories_post/destroy',[CategoryController::class,'destroy'])->name('categories_post.destroy');
+            Route::delete('/categories_post/destroy', [CategoryController::class, 'destroy'])->name('categories_post.destroy');
 
             #Posts
-            Route::resource('/posts',PostController::class);
+            Route::resource('/posts', PostController::class);
 
             #Price list - tariff
-            Route::resource('/tariffs',TariffController::class);
+            Route::resource('/tariffs', TariffController::class);
 
             #Brands
-            Route::resource('/brands',BrandController::class);
+            Route::resource('/brands', BrandController::class);
 
             #Shipping Methods
-            Route::resource('/shipping_methods',ShippingController::class);
+            Route::resource('/shipping_methods', ShippingController::class);
 
             #Products
             Route::resource('/products', ProductController::class);
@@ -94,17 +102,17 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/info', InfoController::class);
 
             #Contact with staff
-            Route::resource('/groups',GroupController::class);
+            Route::resource('/groups', GroupController::class);
 
             #Banners
-            Route::resource('/banners',BannerController::class);
+            Route::resource('/banners', BannerController::class);
 
             #Logout
             Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
             #Info Account Admin
-            Route::resource('/account',AccountController::class);
-            Route::post('/account',[AccountController::class, 'change'])->name('account.change');
+            Route::resource('/account', AccountController::class);
+            Route::post('/account', [AccountController::class, 'change'])->name('account.change');
         });
     });
 

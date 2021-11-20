@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Services\UploadService;
 use Illuminate\Support\Facades\Session;
 
@@ -115,4 +116,5 @@ class CategoryService
             return false;
         }
     }
+
 }

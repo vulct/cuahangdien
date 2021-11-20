@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
+use App\Http\Requests\Admin\CommentRequest;
 use App\Services\Admin\CommentService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -43,27 +44,7 @@ class CommentController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Comment $productReview)
-    {
-        //
-    }
-
-    public function edit(Comment $productReview)
-    {
-        //
-    }
-
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
 
         $result = $this->commentService->update($request);
@@ -80,7 +61,7 @@ class CommentController extends Controller
         ]);
     }
 
-    public function destroy(Request $request): \Illuminate\Http\JsonResponse
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->commentService->destroy($request);
 
@@ -94,5 +75,69 @@ class CommentController extends Controller
         return response()->json([
             'error' => true
         ]);
+    }
+
+    public function create(CommentRequest $request): string
+    {
+        $result = $this->commentService->create($request);
+        if ($result) {
+            return '<div class="spr-form-message spr-form-message-success">Cảm ơn bạn đã phản hồi!</div>';
+        }
+        return '<div class="spr-form-message spr-form-message-success">Gửi phản hồi không thành công!</div>';
+    }
+
+    public function rate(Request $request): JsonResponse
+    {
+        $result = $this->commentService->rate($request);
+        $id = "";
+        if (isset($request->id)) {
+            $id = strip_tags((int)$request->id);
+        }
+
+        if ($result && $id !== "") {
+            $rate = $this->commentService->getRateOfPost($id);
+
+            // count star rating
+            $star = [];
+            $sum = 0;
+            $count = 0;
+            foreach ($rate as $comment) {
+                if ($comment->rating) {
+                    $sum += $comment->rating;
+                    $count += 1;
+                }
+            }
+            $count === 0 ? $star['avg'] = 0 : $star['avg'] = round($sum/$count,1);
+            $star['count'] = $count;
+
+            $message = "<span class='spr-badge'>
+                        <span class='spr-starrating spr-badge-starrating'>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                        </span>
+                        <span class='spr-badge-caption'><em><b>" . $star['avg'] . "/5</b> - <em> từ <b> " . $star['count'] . "</b></em> lượt đánh giá</em></span>
+                    </span>";
+
+            return response()->json([
+                'msg' => $message
+            ]);
+        }
+
+        return response()->json([
+            'msg' => "<span class='spr-badge'>
+                        <span class='spr-starrating spr-badge-starrating'>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                            <i class='spr-icon spr-icon-star'></i>
+                        </span>
+                        <span class='spr-badge-caption'><em>Lỗi đánh giá</em></span>
+                    </span>"
+        ]);
+
     }
 }

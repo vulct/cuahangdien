@@ -34,8 +34,6 @@
             data-section-type="static-header"
             data-section-data>
                 {"settings": { "sticky_header": true } }
-
-
     </script>
 
     <section class="site-header"

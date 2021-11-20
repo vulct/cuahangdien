@@ -24,15 +24,15 @@ class PostService
 
     public function getPostIsActive()
     {
-        return Post::with('category')->latest('posts.updated_at')->where(['isDelete' => 0, 'active' => 1])->limit(2)->get();
+        return Post::with('category')->latest('posts.updated_at')->where(['isDelete' => 0, 'active' => 1])->limit(6)->get();
     }
 
     public function getPostPaginate($category): LengthAwarePaginator
     {
         if ($category === 0){
-            return Post::with('category')->where(['isDelete' => 0, 'active' => 1])->paginate(2);
+            return Post::with('category')->where(['isDelete' => 0, 'active' => 1])->paginate(6);
         }
-        return Post::with('category')->where(['isDelete' => 0, 'active' => 1, 'category_id' => $category])->paginate(2);
+        return Post::with('category')->where(['isDelete' => 0, 'active' => 1, 'category_id' => $category])->paginate(6);
     }
 
     public function getPostByID($id)

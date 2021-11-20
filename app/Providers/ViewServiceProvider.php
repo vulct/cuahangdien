@@ -33,13 +33,13 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['guest.layouts.menu','index'], MenuComposer::class);
+        View::composer(['guest.layouts.menu','index', 'guest.brands.list'], MenuComposer::class);
 
         View::composer('index', BannerComposer::class);
 
         View::composer(['index', 'guest.layouts.product'], BrandComposer::class);
 
-        View::composer(['index', 'guest.layouts.product'], BrandsWithCategoryComposer::class);
+        View::composer(['index', 'guest.layouts.product','guest.brands.list'], BrandsWithCategoryComposer::class);
 
         View::composer(['*'], InfoComposer::class);
 

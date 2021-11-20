@@ -10000,10 +10000,10 @@ article.cart-item  .cart-item--quantity input{
 }
 .filter-item span.fa-minus
 {
-    background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAKlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKE86IAAAADnRSTlMABhMUHiYnOElZb+/1+1AcS30AAAAoSURBVAhbY2CYxgACPgEgkuUoEofjIojULgASTNtBTGsQk2E5AwwAAMdrBhc7Cq32AAAAAElFTkSuQmCC) 4px center no-repeat;
+    background: #fff url(../images/icon/right.png) 4px center no-repeat;
 }
 .filter-item span.fa-minus.active{
-    background:#fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAMFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABaPxwLAAAAEHRSTlMABhMUHiYnKDhJWW/t7/X7P0GMYwAAACpJREFUCFtjYEACmxkYWBYw9Cow+BUwcBxieQYU6pkXACQ5voLlBRhQAADp9Qb+VU0zXgAAAABJRU5ErkJggg==) 4px center no-repeat;
+    background:#fff url(../images/icon/down.png) 4px center no-repeat;
 }
 .modal .filter-item a {
     padding: 0.5625rem 0.1875rem;
@@ -10169,10 +10169,7 @@ ul> li> a >.filter-text > span{
 
 .productgrid--search-form-field {
     height: 4.125rem;
-    padding-top: 0.5rem;
-    padding-right: 3rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
+    padding: 0.5rem 3rem 0.5rem 1rem;
     font-size: 2.125rem;
     line-height: 1;
     color: #222;

@@ -21,10 +21,7 @@ class PostController extends Controller
     {
         // get post
         $post_detail = $this->postService->getPostByID($post->id);
-//        echo '<pre>';
-//        var_dump($post_detail);
-//        echo '</pre>';
-//        die();
+
         // count star rating
         $star = [];
         $sum = 0;

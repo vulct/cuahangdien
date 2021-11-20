@@ -29,8 +29,6 @@ class BlogComposer
             }
         }
 
-//        var_dump($data);
-//        die();
         $view->with('posts', $data);
     }
 }

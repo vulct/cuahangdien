@@ -4,7 +4,11 @@
 namespace App\Services\Admin;
 
 use App\Models\Brand;
+use App\Models\Product;
 use App\Services\UploadService;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -21,23 +25,36 @@ class BrandService
 
     public function get($active = 0)
     {
-        if ($active === 0 ){
+        if ($active === 0) {
             return Brand::where('isDelete', 0)->get();
         }
         return Brand::latest()->where(['isDelete' => 0, 'active' => $active])->get();
     }
 
-    public function getBrandsWithCategory(): \Illuminate\Support\Collection
+    public function getBrandsWithCategory(): Collection
     {
         // SELECT p.category_id, b.id, b.name, b.slug, b.image  FROM products p
         // INNER JOIN brands b ON p.brand_id = b.id WHERE b.isDelete = 0 AND b.active = 1
         // GROUP BY p.category_id, b.id, b.name, b.slug, b.image
         return DB::table('products')
-            ->select('products.category_id','brands.id', 'brands.slug', 'brands.image', 'brands.name')
+            ->select('products.category_id', 'brands.id', 'brands.slug', 'brands.image', 'brands.name')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->where(['brands.isDelete' => 0, 'brands.active' => 1])
             ->groupBy('products.category_id', 'brands.id', 'brands.name', 'brands.slug', 'brands.image')
             ->get();
+    }
+
+    public function getProductByBrand($id): LengthAwarePaginator
+    {
+        return Product::with(['brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'attributes' => function ($query){
+            $query->where('isDelete', 0);
+        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(2);
+    }
+
+    public function getAllBrandWithOutSlug($id){
+        return Brand::latest()->where(['isDelete' => 0, 'active' => 1, ])->get();
     }
 
     public function create($request)
@@ -46,7 +63,7 @@ class BrandService
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            }else{
+            } else {
                 $path_image = '/storage/default/image-available.jpg';
             }
 
@@ -61,7 +78,7 @@ class BrandService
 
             Session::flash('success', 'Tạo thương hiệu thành công.');
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }
@@ -100,7 +117,7 @@ class BrandService
             $brand->save();
             Session::flash('success', 'Cập nhật thương hiệu thành công.');
             return true;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }

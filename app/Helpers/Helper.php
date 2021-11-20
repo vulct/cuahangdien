@@ -6,7 +6,6 @@ use App\Models\Category;
 
 class Helper
 {
-
     // show category with table
     public static function category($categories, $parent_id = 0, $char = '', $category_parent = []): string
     {
@@ -46,7 +45,6 @@ class Helper
         return $html;
     }
 
-
     // show category of post
     public static function category_post($categories, $parent_id = 0, $char = '', $category_parent = []): string
     {
@@ -85,7 +83,6 @@ class Helper
         }
         return $html;
     }
-
 
     // show category with option
     public static function categoryOption($categories, $parent_id = 0, $char = '', $selected = 0): string
@@ -139,7 +136,7 @@ class Helper
     }
 
     // get name type of page
-    public static function getNameTypeOfPage($type)
+    public static function getNameTypeOfPage($type): string
     {
         //0 - về chúng tôi, 1 - tuyển dụng, 2 - hướng dẫn mua hàng
         // 3 - thanh toán vận chuyển, 4 - bảo hành đổi trả,

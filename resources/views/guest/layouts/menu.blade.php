@@ -27,7 +27,7 @@
                 </div>
             </li>
             <li class="navmenu-item">
-                <a class="navmenu-link" href="/thuong-hieu.html">Thương hiệu</a>
+                <a class="navmenu-link" href="{{route('brands.index')}}">Thương hiệu</a>
             </li>
             <li class="navmenu-item navmenu-item-parent navmenu-id-shop navmenu-meganav-item-parent"
                 data-navmenu-trigger data-navmenu-meganav-trigger>
@@ -38,7 +38,7 @@
             </li>
 
             <li class="navmenu-item">
-                <a class="navmenu-link navmenu-sale" href="/khuyen-mai.html">Khuyến mãi</a>
+                <a class="navmenu-link navmenu-sale" href="/khuyen-mai">Khuyến mãi</a>
             </li>
 
 
@@ -90,7 +90,7 @@
                     </div>
                 </li>
                 <li class="navmenu-item">
-                    <a class="navmenu-link" href="/thuong-hieu.html">Thương hiệu</a>
+                    <a class="navmenu-link" href="{{route('brands.index')}}">Thương hiệu</a>
                 </li>
                 <li class="navmenu-item navmenu-item-parent navmenu-id-shop navmenu-meganav-item-parent"
                     data-navmenu-trigger="" data-navmenu-meganav-trigger="">

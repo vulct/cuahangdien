@@ -409,8 +409,8 @@
                                 </div>
                                 @endif
                                 <div class="clearfix"></div>
-                                @if(isset($posts['rowOne']))
-                                        <div class="blogposts--inner">
+                                @if(isset($posts['rowTwo']))
+                                <div class="blogposts--inner">
                                             @foreach($posts['rowTwo'] as $post)
                                                 <article class="article--excerpt-wrapper">
                                                     <a class="article--excerpt-image"
@@ -433,8 +433,6 @@
                                                             </a>
                                                         </h2>
                                                         <div class="article--excerpt-text">
-                                                            <meta charset="utf-8">
-                                                            <meta charset="utf-8">
                                                             <span>{!! $post->description !!}</span>
                                                         </div>
                                                         <a class="article--excerpt-readmore"
@@ -455,7 +453,6 @@
                                 Xem tất cả
                                 <span class="blogposts--footer-icon">
                                 <svg class="svg-chevron-down"></svg>
-
                             </span>
                             </a>
                         </div>

@@ -31,7 +31,8 @@ class ProductAttributesService
         $attribute = ProductAttributes::where('id', $id)->first();
 
         if ($attribute) {
-            ProductAttributes::where('id', $id)->delete();
+            $attribute->isDelete = 1;
+            $attribute->save();
             return true;
         }
         return false;

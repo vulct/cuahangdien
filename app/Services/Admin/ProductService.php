@@ -35,11 +35,13 @@ class ProductService
     public function getProductWithCategoryIsActive()
     {
         return Category::with(['products' => function ($query) {
-            $query->with(['attributes'])->where(['isDelete' => 0, 'active' => 1]);
+            $query->with(['attributes' => function ($query) {
+                $query->where('isDelete', 0);
+            }])->where(['isDelete' => 0, 'active' => 1]);
         }])->where(['top' => 1, 'isDelete' => 0, 'active' => 1, 'type' => 0])->get();
     }
 
-    public function create($request)
+    public function create($request): bool
     {
 
         try {
@@ -100,7 +102,7 @@ class ProductService
         return true;
     }
 
-    public function update($request, $product)
+    public function update($request, $product): bool
     {
         // 1. Check xem có tồn tại input name "attribute_id":
         // - Có : Update attribute đó.
@@ -203,7 +205,7 @@ class ProductService
         return false;
     }
 
-    protected function insertAttribute($product_id, $data)
+    protected function insertAttribute($product_id, $data): bool
     {
         return $this->productAttributeService->create($product_id, $data);
     }
@@ -219,5 +221,12 @@ class ProductService
         }
 
         return false;
+    }
+
+    public function getCategoryWithBrand($id)
+    {
+        return Product::with(['category' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'brand'])->where(['brand_id' => $id , 'isDelete' => 0, 'active' => 1])->get();
     }
 }

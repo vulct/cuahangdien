@@ -84,7 +84,7 @@
                     </article>
                     @endforeach
                 </div>
-                {{$posts->links('guest.layouts.pagination')}}
+                {{$posts->links('guest.layouts.pagination.default')}}
             </section>
         </div>
     </main>
