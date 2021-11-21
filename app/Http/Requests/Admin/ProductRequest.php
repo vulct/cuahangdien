@@ -39,7 +39,7 @@ class ProductRequest extends FormRequest
             'codename' => 'string|max:120',
             'size' => 'nullable|max:120|string',
             'price' => 'integer',
-            'discount' => 'integer|between:0,100',
+            'discount' => 'numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => [
                 'required',

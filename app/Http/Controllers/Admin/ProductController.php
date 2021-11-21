@@ -99,7 +99,7 @@ class ProductController extends Controller
             'title' => 'Chỉnh sửa thông tin sản phẩm',
             'categories' => $this->categoryService->get(1),
             'brands' => $this->brandService->get(1),
-            'product' => $product
+            'product' => $this->productService->getProductIsActive($product->id)
         ]);
     }
 

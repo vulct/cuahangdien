@@ -195,6 +195,7 @@
                                                                                 <i class="fas fa-pencil-alt"></i>
                                                                             </span>
                                                                                 </div>
+                                                                                <input type="hidden" name="attribute_id" value="{{$att->id}}">
                                                                                 <input type="text" id="codename"
                                                                                        name="codename"
                                                                                        value="{{$att->codename}}"

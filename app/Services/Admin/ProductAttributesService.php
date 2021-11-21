@@ -19,14 +19,13 @@ class ProductAttributesService
                 "discount" => $request['discount'],
                 "product_id" => $product_id,
             ])->id;
-
         } catch (\Exception $exception) {
             Session::flash('error', $exception->getMessage());
             return false;
         }
     }
 
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $attribute = ProductAttributes::where('id', $id)->first();
 
@@ -38,7 +37,7 @@ class ProductAttributesService
         return false;
     }
 
-    public function update($attribute_id, $request)
+    public function update($attribute_id, $request): bool
     {
         try {
             // Get Attribute

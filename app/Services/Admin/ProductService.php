@@ -26,12 +26,24 @@ class ProductService
 
     public function get()
     {
-        return Product::with('attributes')->orderbyDesc('id')->where('isDelete', 0)->get();
+        return Product::with(['attributes' => function ($query) {
+            $query->where('isDelete', 0);
+        }])->orderbyDesc('id')->where('isDelete', 0)->get();
+    }
+
+    public function getProductIsActive($id)
+    {
+        return Product::where(['id' => $id, 'active' => 1, 'isDelete' => 0])
+            ->with(['attributes' => function ($query) {
+                $query->where('isDelete', 0);
+            }])
+            ->first();
     }
 
     /**
      * @return Builder[]|Collection
      */
+
     public function getProductWithCategoryIsActive()
     {
         return Category::with(['products' => function ($query) {
@@ -45,7 +57,7 @@ class ProductService
     {
 
         try {
-            $count_Category = Category::where('id', (int)$request->input('category'))->where(['isDelete' => 0, 'active' => 1])->first();
+            $count_Category = Category::where('id', (int)$request->input('category'))->where(['type' => 0, 'isDelete' => 0, 'active' => 1])->first();
             $count_Brand = Brand::where('id', (int)$request->input('brand'))->where(['isDelete' => 0, 'active' => 1])->first();
             if ($count_Category !== null || $count_Brand !== null) {
                 $category_id = (int)$request->input('category');
@@ -54,6 +66,7 @@ class ProductService
                 Session::flash('error', 'Danh mục hoặc thương hiệu đã chọn không hợp lệ, vui lòng kiểm tra lại.');
                 return false;
             }
+
             DB::beginTransaction();
             // upload image product
             if ($request->hasFile('image')) {
@@ -82,20 +95,29 @@ class ProductService
                 Session::flash('error', 'Vui lòng thêm ít nhất một mẫu mã cho sản phẩm.');
                 return false;
             }
+
             $dataAttributes = $request->input('group-a');
+
             for ($i = 0; $i < count($dataAttributes); $i++) {
-                if ($dataAttributes[$i]['codename'] !== null) {
+                if ($dataAttributes[$i]['codename'] !== null && $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
                     if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false) {
                         DB::rollBack();
                         return false;
                     }
+                } else {
+                    Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
+                    return false;
                 }
             }
+
             DB::commit();
+
             Session::flash('success', 'Thêm sản phẩm thành công.');
         } catch (Exception $exception) {
             DB::rollBack();
+
             Session::flash('error', 'Thêm sản phẩm không thành công. Vui lòng thử lại.');
+
             Log::info($exception->getMessage());
             return false;
         }
@@ -130,24 +152,39 @@ class ProductService
 
             //update or create attributes
             $arrayAttributeChecked = [];
+
             $dataAttributes = $request->input('group-a');
+
             for ($i = 0; $i < count($dataAttributes); $i++) {
+
                 // add attribute
                 if ($dataAttributes[$i]['codename'] !== null && !isset($dataAttributes[$i]['attribute_id'])) {
-                    $attribute_id = $this->insertAttribute($product->id, $dataAttributes[$i]);
-                    if ($attribute_id === false) {
-                        Session::flash('error', 'Thêm mới mẫu mã không thành công, vui lòng kiểm tra lại.');
+                    if ($this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
+                        $attribute_id = $this->productAttributeService->create($product->id, $dataAttributes[$i]);
+                        if ($attribute_id === false) {
+                            Session::flash('error', 'Thêm mới mẫu mã không thành công, vui lòng kiểm tra lại.');
+                            return false;
+                        } elseif (is_numeric($attribute_id)) {
+                            $arrayAttributeChecked[] = $attribute_id;
+                        }
+                    } else {
+                        Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
                         return false;
                     }
-                    $arrayAttributeChecked[] = $attribute_id;
                 }
+
                 // update attribute
                 if ($dataAttributes[$i]['codename'] !== null && isset($dataAttributes[$i]['attribute_id'])) {
                     foreach ($product['attributes'] as $att) {
-                        $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
                         if ((int)$dataAttributes[$i]['attribute_id'] === $att->id) {
-                            if ($this->updateAttribute($dataAttributes[$i]['attribute_id'], $dataAttributes[$i]) === false) {
-                                Session::flash('error', 'Cập nhật mẫu mã không thành công, vui lòng kiểm tra lại.');
+                            if ($this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
+                                if ($this->updateAttribute($dataAttributes[$i]['attribute_id'], $dataAttributes[$i]) === false) {
+                                    Session::flash('error', 'Cập nhật mẫu mã không thành công, vui lòng kiểm tra lại.');
+                                    return false;
+                                } else
+                                    $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
+                            }else{
+                                Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
                                 return false;
                             }
                         }
@@ -207,7 +244,10 @@ class ProductService
 
     protected function insertAttribute($product_id, $data): bool
     {
-        return $this->productAttributeService->create($product_id, $data);
+        if (is_numeric($this->productAttributeService->create($product_id, $data))) {
+            return true;
+        }
+        return false;
     }
 
     public function destroy($request): bool
@@ -227,6 +267,17 @@ class ProductService
     {
         return Product::with(['category' => function ($query) {
             $query->where(['isDelete' => 0, 'active' => 1]);
-        }, 'brand'])->where(['brand_id' => $id , 'isDelete' => 0, 'active' => 1])->get();
+        }, 'brand'])->where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1])->get();
+    }
+
+    public function checkValueDiscount($discount): bool
+    {
+        $discount_code_flag = false;
+
+        if ($discount >= 0 && $discount < 100) {
+            $discount_code_flag = true;
+        }
+
+        return $discount_code_flag;
     }
 }
