@@ -58,9 +58,13 @@ frm.submit(function (e) {
             frmBtn.style.display = 'none';
         },
         error: function (data) {
-            frmDiv.innerHTML = data;
+            let err = JSON.parse(data.responseText);
+
+            $.each(err.errors, function(index, value) {
+                frmDiv.innerHTML = value;
+            });
+
             $('#spr-form-actions').hide();
-            frmBtn.style.display = 'none';
         },
     });
 });

@@ -1759,7 +1759,11 @@
 
 .spr-form-message-success {
     padding: 0;
-    margin: 0
+    margin: 0;
+}
+.contact-message.message--success, .message.message-success{
+    border-radius: 10px;
+    text-align: center;
 }
 
 .spr-button, .spr-button-primary {
@@ -2044,7 +2048,7 @@
     background: -webkit-linear-gradient(#f2ba34,#bc8500);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: tahoma;
+    font-family: tahoma, sans-serif;
 }
 .brand-header .title-all {
     float: right;

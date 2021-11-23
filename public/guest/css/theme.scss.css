@@ -10058,7 +10058,7 @@ ul> li> a >.filter-text > span{
 .iscollapse .filter-item ul{display:none}
 .iscollapse .filter-item.filter-item--active ul{display:block;}
 .filter-item span.fa-icon{display:none;}
-.iscollapse .filter-item span.fa-icon{display:block;}
+.iscollapse .filter-item span.fa-icon{display: flex;justify-content: center;align-items: center;}
 
 .iscpse.filter-item > ul > li > ul{display:none}
 .iscpse.filter-item > ul > li a.filter-link--active + ul{display:block!important;}
