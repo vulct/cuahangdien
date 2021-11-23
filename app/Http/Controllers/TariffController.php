@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TariffRequest;
+use App\Models\Brand;
 use App\Models\Tariff;
 use App\Services\Admin\BrandService;
-use App\Services\Admin\CategoryService;
 use App\Services\TariffService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class TariffController extends Controller
 {
@@ -60,6 +61,7 @@ class TariffController extends Controller
         if ($result) {
             return redirect()->route('admin.tariffs.index');
         }
+
         return back();
     }
 
@@ -76,6 +78,84 @@ class TariffController extends Controller
 
         return response()->json([
             'error' => true
+        ]);
+    }
+
+    public function countTariffOfBrand(): array
+    {
+        $tariffs = $this->tariffService->getAll();
+
+        $brands = $this->brandService->get(1);
+
+        $list_brands_of_tariff = [];
+        $count_of_brand = [];
+
+        foreach ($brands as $brand){
+            foreach ($tariffs as $tariff){
+                if ($tariff->brand_id === $brand->id){
+                    $list_brands_of_tariff[$brand->id] = $brand;
+                    isset($count_of_brand[$brand->id]) ? $count_of_brand[$brand->id]++ : $count_of_brand[$brand->id] = 1;
+                }
+            }
+        }
+
+        return array([
+            'list_brands_of_tariff' => $list_brands_of_tariff,
+            'count_of_brand' => $count_of_brand
+        ]);
+    }
+
+    public function getAll()
+    {
+        $list_brands_of_tariff = $this->countTariffOfBrand()[0]['list_brands_of_tariff'];
+
+        $count_of_brand = $this->countTariffOfBrand()[0]['count_of_brand'];
+
+        return view('guest.tariffs.index', [
+            'title' => 'Bảng giá thiết bị điện ' . date("Y"),
+            'brands' => $list_brands_of_tariff,
+            'count_of_brand' => $count_of_brand,
+            'tariffs' => $this->tariffService->getAllWithPaginate()
+        ]);
+    }
+
+    public function getTariffWithBrand(Brand $brand)
+    {
+
+        $title = !isEmpty($brand->meta_title) ? $brand->meta_title : $brand->name;
+
+        $list_brands_of_tariff = $this->countTariffOfBrand()[0]['list_brands_of_tariff'];
+
+        $count_of_brand = $this->countTariffOfBrand()[0]['count_of_brand'];
+
+        return view('guest.tariffs.brand', [
+            'title' => $title,
+            'brands' => $list_brands_of_tariff,
+            'brand_selected' => $brand,
+            'count_of_brand' => $count_of_brand,
+            'tariffs' => $this->tariffService->getAllWithPaginate($brand->id)
+        ]);
+    }
+
+    public function getDetailTariff(Tariff $tariff)
+    {
+
+        $tariff_detail = $this->tariffService->getDetail($tariff->id);
+
+        $title = !isEmpty($tariff_detail->meta_title) ? $tariff_detail->meta_title : $tariff_detail->name;
+
+        $list_brands_of_tariff = $this->countTariffOfBrand()[0]['list_brands_of_tariff'];
+
+        $count_of_brand = $this->countTariffOfBrand()[0]['count_of_brand'];
+
+        $brand_selected = $this->brandService->getDetailByID($tariff->brand_id);
+
+        return view('guest.tariffs.detail', [
+            'title' => $title,
+            'count_of_brand' => $count_of_brand,
+            'brands' => $list_brands_of_tariff,
+            'tariff' => $tariff_detail,
+            'brand_selected' => $brand_selected
         ]);
     }
 }

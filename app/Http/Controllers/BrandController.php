@@ -45,7 +45,7 @@ class BrandController
 
     public function getProductByBrand(Brand $brand)
     {
-        $title =  !empty($brand->meta_title) ? $brand->meta_title : $brand->name;
+        $title =  !empty($brand->meta_title) ? $brand->meta_title : 'Thương hiệu ' . $brand->name;
 
         $products = $this->brands->getProductByBrand($brand->id);
 
@@ -69,7 +69,7 @@ class BrandController
 
         foreach ($categories_array as $category){
             foreach ($count as $key => $c){
-                if ($category->id == $key && $category->parent_id !== 0){
+                if ($category->id == $key && $category->parent_id !== 0 && isset($count[$cate->parent_id])){
                     $count[$category->parent_id] += $c;
                 }
             }

@@ -19,7 +19,7 @@
                         <ul class="navmenu navmenu-depth-2">
                             @foreach($menu as $cate)
                                 @if($cate->parent_id === 0)
-                                    <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}.html">{{$cate->name}}</a></li>
+                                    <li><a class="navmenu-link" href="{{route('danhmuc.chitiet',$cate->slug)}}">{{$cate->name}}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -27,18 +27,18 @@
                 </div>
             </li>
             <li class="navmenu-item">
-                <a class="navmenu-link" href="{{route('brands.index')}}">Thương hiệu</a>
+                <a class="navmenu-link" href="{{route('hang.index')}}">Thương hiệu</a>
             </li>
             <li class="navmenu-item navmenu-item-parent navmenu-id-shop navmenu-meganav-item-parent"
                 data-navmenu-trigger data-navmenu-meganav-trigger>
-                <a class="navmenu-link navmenu-link-parent " href="/bang-gia.html">
+                <a class="navmenu-link navmenu-link-parent " href="{{route('bang-gia')}}">
                     Bảng giá
                 </a>
 
             </li>
 
             <li class="navmenu-item">
-                <a class="navmenu-link navmenu-sale" href="/khuyen-mai">Khuyến mãi</a>
+                <a class="navmenu-link navmenu-sale" href="{{route('khuyen-mai')}}">Khuyến mãi</a>
             </li>
 
 
@@ -82,7 +82,7 @@
                             <ul class="navmenu navmenu-depth-2">
                                 @foreach($menu as $cate)
                                     @if($cate->parent_id === 0)
-                                        <li><a class="navmenu-link" href="/danh-muc/{{$cate->slug}}.html">{{$cate->name}}</a></li>
+                                        <li><a class="navmenu-link" href="{{route('danhmuc.chitiet',$cate->slug)}}">{{$cate->name}}</a></li>
                                     @endif
                                 @endforeach
                             </ul>
@@ -90,23 +90,23 @@
                     </div>
                 </li>
                 <li class="navmenu-item">
-                    <a class="navmenu-link" href="{{route('brands.index')}}">Thương hiệu</a>
+                    <a class="navmenu-link" href="{{route('hang.index')}}">Thương hiệu</a>
                 </li>
                 <li class="navmenu-item navmenu-item-parent navmenu-id-shop navmenu-meganav-item-parent"
                     data-navmenu-trigger="" data-navmenu-meganav-trigger="">
-                    <a class="navmenu-link" href="/bang-gia.html">
+                    <a class="navmenu-link" href="{{route('bang-gia')}}">
                         Bảng giá
 
                     </a>
 
                 </li>
                 <li class="navmenu-item">
-                    <a class="navmenu-link" href="/khuyen-mai.html">Khuyến mãi</a>
+                    <a class="navmenu-link" href="{{route('khuyen-mai')}}">Khuyến mãi</a>
                 </li>
 
 
                 <li class="navmenu-item navmenu-id-theme-features">
-                    <a class="navmenu-link" href="/blogs.html">Tin tức</a>
+                    <a class="navmenu-link" href="{{route('blogs')}}">Tin tức</a>
                 </li>
                 <li class="navmenu-item navmenu-id-theme-features">
                     <a class="navmenu-link" href="/pages/ve-chung-toi.html">Về chúng tôi</a>

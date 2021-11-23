@@ -40,7 +40,8 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('admin.tariffs.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.tariffs.update', $tariff->slug) }}" method="post" enctype="multipart/form-data">
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card card-primary">
@@ -87,7 +88,7 @@
                                                         </div>
                                                         <input type="text" id="link_download"
                                                                name="link_download"
-                                                               value="{{old('link_download')  ?? $tariff->name }}"
+                                                               value="{{old('link_download')  ?? $tariff->link_download }}"
                                                                class="form-control"
                                                                placeholder="https://drive.google.com/file/d/1-eCe8fDcZ6GSLlQn6ZCSoCIUoZGyqZ13/view"/>
                                                     </div>
@@ -107,7 +108,7 @@
                                                         </div>
                                                         <input type="text" id="language"
                                                                name="language"
-                                                               value="{{old('language')  ?? $tariff->name}}"
+                                                               value="{{old('language')  ?? $tariff->language}}"
                                                                class="form-control"
                                                                placeholder="Tiếng Việt"/>
                                                     </div>
@@ -161,7 +162,7 @@
                                                                     class="fas fa-pencil-alt"></i></span>
                                                         </div>
                                                         <input type="text" id="slug" class="form-control"
-                                                               value="{{old('slug')  ?? $tariff->name}}" name="slug"
+                                                               value="{{old('slug')  ?? $tariff->slug}}" name="slug"
                                                                placeholder="bang-gia" required/>
                                                     </div>
                                                     <span class="form-text">
@@ -213,7 +214,7 @@
                                 <div class="col-md-12 ">
                                     <div class="form-group">
                                         <button type="submit"
-                                                class="btn btn-success d-block w-100">{{__('Add')}}</button>
+                                                class="btn btn-success d-block w-100">{{__('Edit')}}</button>
                                     </div>
                                 </div>
                             </div>

@@ -32,6 +32,11 @@ class CategoryService
         return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'parent_id' => 0])->get();
     }
 
+    public function getChildCategories($id)
+    {
+        return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'parent_id' => $id])->get();
+    }
+
     public function getFirstCategory()
     {
         return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 1])->first();

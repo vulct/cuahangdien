@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\PostService;
+use function PHPUnit\Framework\isEmpty;
 
 class BlogController extends Controller
 {
@@ -26,7 +27,7 @@ class BlogController extends Controller
             $selected = $category->id;
         }
         return view('guest.blogs.list', [
-            'title' => $category->meta_title ?? $category->name,
+            'title' => $category->name,
             'posts' => $this->postService->getPostPaginate($selected),
             'categories' => $this->categoryService->get(1, 1),
             'selected' => $category

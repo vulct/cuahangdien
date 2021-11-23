@@ -39,7 +39,7 @@ class PostController extends Controller
         $related = $this->postService->getRelatedPosts($post_detail->category_id, $post_detail->id);
 
 
-        return view('guest.post.detail', [
+        return view('guest.posts.detail', [
             'title' => !empty($post_detail->meta_title) ? $post_detail->meta_title : $post_detail->name,
             'post' => $post_detail,
             'star' => $star,

@@ -36,7 +36,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 box-category">
                             <article class="animated fadeIn" data-product-item tabindex="1" style="animation-delay:450ms;">
                                 <div class="" data-product-item-content>
-                                    <a class="" href="/danh-muc/{{$category->slug}}.html">
+                                    <a class="" href="{{route('danhmuc.chitiet',$category->slug)}}">
                                         <figure class="productitem--image" data-product-item-image>
                                             <img alt="{{$category->image}}" src="{{asset($category->image)}}">
                                         </figure>

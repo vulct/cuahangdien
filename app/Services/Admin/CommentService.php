@@ -13,7 +13,7 @@ class CommentService
         return Comment::latest()->where(['isDelete' => 0, 'type' => $type])->get();
     }
 
-    public function destroy($request)
+    public function destroy($request): bool
     {
         $id = $request->input('slug');
 
@@ -26,10 +26,9 @@ class CommentService
         return false;
     }
 
-    public function update($request)
+    public function update($request): bool
     {
         try {
-
             $id = $request->comment;
             $status = (int)$request->status;
             $status === 0 ?  $statusUpdate = 1 : $statusUpdate = 0;
@@ -57,7 +56,7 @@ class CommentService
             Comment::create([
                 "name" => strip_tags((string)$request->name),
                 "email" => (string)$request->email,
-                "content" => strip_tags((string)$request->slug),
+                "content" => strip_tags((string)$request->content),
                 "post_id" => strip_tags((int)$request->post_id),
                 "rating" => strip_tags((int)$request->rating),
                 "type" => $type
@@ -88,6 +87,25 @@ class CommentService
     public function getRateOfPost($id)
     {
         return Comment::where(['isDelete' => 0, 'active' => 1, 'post_id' => $id])->get();
+    }
+
+    public function contact($request): bool
+    {
+        try {
+            // Check type comment
+            $type = in_array((int)$request->type, [0, 1, 2]) ? (int)$request->type : 2;
+
+            Comment::create([
+                "name" => strip_tags((string)$request->name),
+                "email" => strip_tags((string)$request->email),
+                "content" => strip_tags((string)$request->content),
+                "phone" => strip_tags((int)$request->phone),
+                "type" => $type
+            ]);
+        } catch (\Exception $exception) {
+            return false;
+        }
+        return true;
     }
 
 }

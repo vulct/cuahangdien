@@ -16,7 +16,7 @@ class CommentRequest extends FormRequest
                 'max:200'
             ],
             'content' => 'string|required|max:1500',
-            'email' => 'nullable|string|max:200',
+            'email' => 'required|email|string|max:200',
             'phone' => 'string|nullable|max:20',
             'rating' => 'nullable',
             'type' => 'required|numeric',
@@ -30,7 +30,7 @@ class CommentRequest extends FormRequest
         return true;
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name' => 'họ tên',

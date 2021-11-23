@@ -31,33 +31,7 @@ class BrandService
         return Brand::latest()->where(['isDelete' => 0, 'active' => $active])->get();
     }
 
-    public function getBrandsWithCategory(): Collection
-    {
-        // SELECT p.category_id, b.id, b.name, b.slug, b.image  FROM products p
-        // INNER JOIN brands b ON p.brand_id = b.id WHERE b.isDelete = 0 AND b.active = 1
-        // GROUP BY p.category_id, b.id, b.name, b.slug, b.image
-        return DB::table('products')
-            ->select('products.category_id', 'brands.id', 'brands.slug', 'brands.image', 'brands.name')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->where(['brands.isDelete' => 0, 'brands.active' => 1])
-            ->groupBy('products.category_id', 'brands.id', 'brands.name', 'brands.slug', 'brands.image')
-            ->get();
-    }
-
-    public function getProductByBrand($id): LengthAwarePaginator
-    {
-        return Product::with(['brand' => function ($query) {
-            $query->where(['isDelete' => 0, 'active' => 1]);
-        }, 'attributes' => function ($query){
-            $query->where('isDelete', 0);
-        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(2);
-    }
-
-    public function getAllBrandWithOutSlug($id){
-        return Brand::latest()->where(['isDelete' => 0, 'active' => 1, ])->get();
-    }
-
-    public function create($request)
+    public function create($request): bool
     {
         try {
 
@@ -86,7 +60,7 @@ class BrandService
 
     }
 
-    public function destroy($request)
+    public function destroy($request): bool
     {
         $slug = $request->input('slug');
 
@@ -99,7 +73,7 @@ class BrandService
         return false;
     }
 
-    public function update($brand, $brandRequest)
+    public function update($brand, $brandRequest): bool
     {
         try {
             $path_image = $brand->image;
@@ -121,5 +95,37 @@ class BrandService
             Session::flash('error', $exception->getMessage());
             return false;
         }
+    }
+
+    public function getBrandsWithCategory(): Collection
+    {
+        // SELECT p.category_id, b.id, b.name, b.slug, b.image  FROM products p
+        // INNER JOIN brands b ON p.brand_id = b.id WHERE b.isDelete = 0 AND b.active = 1
+        // GROUP BY p.category_id, b.id, b.name, b.slug, b.image
+        return DB::table('products')
+            ->select('products.category_id', 'brands.id', 'brands.slug', 'brands.image', 'brands.name')
+            ->join('brands', 'brands.id', '=', 'products.brand_id')
+            ->where(['brands.isDelete' => 0, 'brands.active' => 1])
+            ->groupBy('products.category_id', 'brands.id', 'brands.name', 'brands.slug', 'brands.image')
+            ->get();
+    }
+
+    public function getProductByBrand($id): LengthAwarePaginator
+    {
+        return Product::with(['brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'attributes' => function ($query) {
+            $query->where('isDelete', 0);
+        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(2);
+    }
+
+    public function getAllBrandWithOutSlug($id)
+    {
+        return Brand::latest()->where(['isDelete' => 0, 'active' => 1])->get();
+    }
+
+    public function getDetailByID($id)
+    {
+        return Brand::where(['isDelete' => 0, 'active' => 1, 'id' => $id])->firstOrFail();
     }
 }

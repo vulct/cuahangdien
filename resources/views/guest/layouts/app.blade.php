@@ -12,6 +12,9 @@
     <meta name="description"
           content="{{$info->description ?? ""}}">
     <meta name="viewport" content="width=device-width">
+    @if(isset($info->icon))
+    <link rel="shortcut icon" href="{{asset($info->icon)}}" />
+    @endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');

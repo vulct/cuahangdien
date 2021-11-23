@@ -50,6 +50,7 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{$contact->name}}</td>
                                             <td>{{$contact->email}}</td>
+                                            <td>{{$contact->phone}}</td>
                                             <td>{{$contact->content}}</td>
                                             <td>{!! \App\Helpers\Helper::view($contact->active) !!}</td>
                                             <td>

@@ -15,8 +15,8 @@
                         @if(isset($brands[$category->id]))
                             <div class="brand-row">
                             <div class="brand-header">
-                                <h3 class="h3-title ii3"><a href="/danh-muc/{{$category->slug}}.html" title="">{{$category->name}}</a></h3>
-                                <a href="/danh-muc/{{$category->slug}}.html" class="title-all">
+                                <h3 class="h3-title ii3"><a href="{{route('danhmuc.chitiet',$category->slug)}}" title="">{{$category->name}}</a></h3>
+                                <a href="{{route('danhmuc.chitiet',$category->slug)}}" class="title-all">
                                     <span class="text">Xem tất cả</span>
                                 </a>
                             </div>

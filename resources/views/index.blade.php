@@ -18,7 +18,7 @@
                                             @foreach($menu as $cate)
                                                 @if($i <= 14)
                                                     <li class='dropdown ttmenu-full'>
-                                                    <a href='/danh-muc/{{$cate->slug}}.html' data-toggle='dropdown'
+                                                    <a href='{{route('danhmuc.chitiet',$cate->slug)}}' data-toggle='dropdown'
                                                        class='dropdown-toggle'>
                                                     <span class='icon-wrap'>
                                                         <i class='lv1-icon navicon {{$cate->icon}}'></i>
@@ -57,7 +57,7 @@
                                                                                 @if(isset($data['subcategory'][$cate->id]))
                                                                                     @foreach($data['subcategory'][$cate->id] as $subcategory)
                                                                                         <div>
-                                                                                            <a href="/danh-muc/{{$subcategory->slug}}.html">
+                                                                                            <a href="{{route('danhmuc.chitiet',$subcategory->slug)}}">
                                                                                                 <img class="lazy"
                                                                                                      data-src="{{asset($subcategory->image)}}"
                                                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="

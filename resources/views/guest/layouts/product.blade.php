@@ -4,8 +4,8 @@
     <div id='shopify-section-{{$i}}' class='shopify-section featured-collection--section'>
         <section class='product-row--container featured-collection--container'>
             <div class='title-header'>
-                <h3 class='h3-title'><a href='/danh-muc/{{$category->slug}}.html' title='{{$category->name}}'><i class="{{$category->icon}}"></i> {{$category->name}}</a></h3>
-                <a href='/danh-muc/{{$category->slug}}.html' class='title-all'>
+                <h3 class='h3-title'><a href='{{route('danhmuc.chitiet',$category->slug)}}' title='{{$category->name}}'><i class="{{$category->icon}}"></i> {{$category->name}}</a></h3>
+                <a href='{{route('danhmuc.chitiet',$category->slug)}}' class='title-all'>
                     <span class='text'>Xem thêm</span>
                     <i class='icon-next'></i>
                 </a>
@@ -88,7 +88,7 @@
             @foreach($menu as $cate)
                 @if($cate->parent_id === $category->id)
                     <div class='_links'>
-                        <a href='/danh-muc/{{$cate->slug}}.html' title='{{$cate->name}}'>{{$cate->name}}</a> /
+                        <a href='{{route('danhmuc.chitiet',$cate->slug)}}' title='{{$cate->name}}'>{{$cate->name}}</a> /
                     </div>
                 @endif
             @endforeach

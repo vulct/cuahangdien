@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Services\UploadService;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -183,7 +184,7 @@ class ProductService
                                     return false;
                                 } else
                                     $arrayAttributeChecked[] = $dataAttributes[$i]['attribute_id'];
-                            }else{
+                            } else {
                                 Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
                                 return false;
                             }
@@ -263,13 +264,6 @@ class ProductService
         return false;
     }
 
-    public function getCategoryWithBrand($id)
-    {
-        return Product::with(['category' => function ($query) {
-            $query->where(['isDelete' => 0, 'active' => 1]);
-        }, 'brand'])->where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1])->get();
-    }
-
     public function checkValueDiscount($discount): bool
     {
         $discount_code_flag = false;
@@ -279,5 +273,56 @@ class ProductService
         }
 
         return $discount_code_flag;
+    }
+
+    public function getCategoryWithBrand($id)
+    {
+        return Product::with(['category' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }])->where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1])->get();
+    }
+
+    public function getProductByCategory($id): LengthAwarePaginator
+    {
+        return Product::with(['category' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }])->where(['category_id' => $id, 'isDelete' => 0, 'active' => 1])->paginate(2);
+    }
+
+    public function getProductByBrandAndCategory($brand, $category): LengthAwarePaginator
+    {
+        return Product::with(['category' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }])
+            ->where(['brand_id' => $brand, 'category_id' => $category, 'isDelete' => 0, 'active' => 1])
+            ->paginate(2);
+    }
+
+    public function getCategoriesWithBrandWithoutCategory($brand, $category)
+    {
+        return Product::with(['category' => function ($query) use ($category) {
+            $query->where(['isDelete' => 0, 'active' => 1])
+                ->where('id', '!=', $category);
+        }, 'brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }])
+            ->where(['brand_id' => $brand, 'isDelete' => 0, 'active' => 1])
+            ->get();
+    }
+
+    public function getProductDiscount()
+    {
+        return Product::withExists(['attributes' => function ($query) {
+            $query->where('isDelete', 0)
+            ->where('discount', '>=', 40.00);
+        }])
+            ->where(['isDelete' => 0, 'active' => 1])
+            ->get();
     }
 }

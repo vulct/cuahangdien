@@ -19,28 +19,28 @@
                             @php $array = []; @endphp
                             @foreach($categoryOfBrand as $key => $category)
                                 @if(!in_array($category->id, $array))
-                                <li class="filter-item filter-item--a{{$key}}">
-                                    <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" title="{{$category->name}}" class="filter-link--a1">
-                                        <span class="filter-text">{{$category->name}} <span> ({{$count[$category->id]}})</span></span>
-                                    </a>
-                                    @if($category->parent_id === 0 && count($categoryOfBrand) > 0)
-                                        <span class="fa-icon fa-minus"></span>
-                                        <ul>
-                                            @foreach($categoryOfBrand as $key => $cate)
-                                                @if($cate->parent_id === $category->id)
-                                                    <li>
-                                                        <a href="/hang/{{$brand->slug}}/{{$cate->slug}}.html"
-                                                           title="Dòng {{$cate->name}}" class="c-4938">
-                                                            <span class="filter-text">{{$cate->name}} <span> ({{$count[$cate->id]}})</span></span>
-                                                        </a>
-                                                    </li>
+                                    <li class="filter-item filter-item--a{{$key}}">
+                                        <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" title="{{$category->name}}" class="filter-link--a1">
+                                            <span class="filter-text">{{$category->name}} <span> ({{$count[$category->id]}})</span></span>
+                                        </a>
+                                        @if($category->parent_id === 0 && count($categoryOfBrand) > 0)
+                                            <span class="fa-icon fa-minus"></span>
+                                            <ul>
+                                                @foreach($categoryOfBrand as $key => $cate)
+                                                    @if($cate->parent_id === $category->id)
+                                                        <li>
+                                                            <a href="/hang/{{$brand->slug}}/{{$cate->slug}}.html"
+                                                               title="Dòng {{$cate->name}}" class="c-4938">
+                                                                <span class="filter-text">{{$cate->name}} <span> ({{$count[$cate->id]}})</span></span>
+                                                            </a>
+                                                        </li>
 
-                                                    @php $array[] = $cate->id; @endphp
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
+                                                        @php $array[] = $cate->id; @endphp
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
                                     @php $array[] = $category->id; @endphp
                                 @endif
                             @endforeach
@@ -60,13 +60,19 @@
                         </div>
                         <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                             <a href="/hang/{{$brand->slug}}.html" itemprop="item">
-                                <span itemprop="name">Thương hiệu {{$brand->name}}</span>
+                                <span itemprop="name">{{$brand->name}}</span>
                                 <meta itemprop="position" content="2">
+                            </a>
+                        </div>
+                        <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                            <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" itemprop="item">
+                                <span itemprop="name">{{$category->name}}</span>
+                                <meta itemprop="position" content="3">
                             </a>
                         </div>
                     </nav>
                     <div class="productgrid--masthead">
-                        <div class="collection--information"><h1 class="collection--title">Thương hiệu {{$brand->name}}</h1></div>
+                        <div class="collection--information"><h1 class="collection--title">{{$category->name}}</h1></div>
                     </div>
 
                     <nav class="productgrid--utils productgrid--utils--visible-mobile utils-page">
@@ -145,10 +151,10 @@
                         @endforeach
                     </div>
                     {{$products->links('guest.layouts.pagination.default')}}
-                    @if($brand->description)
+                    @if($category->description)
                         <div class="box-intro">
                             <div class="ellips expand">
-                                {!! $brand->description !!}
+                                {!! $category->description !!}
                             </div>
                             <div class="smore"></div>
                         </div>

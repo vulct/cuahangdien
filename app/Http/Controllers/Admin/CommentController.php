@@ -80,6 +80,7 @@ class CommentController extends Controller
     public function create(CommentRequest $request): string
     {
         $result = $this->commentService->create($request);
+
         if ($result) {
             return '<div class="spr-form-message spr-form-message-success">Cảm ơn bạn đã phản hồi!</div>';
         }
@@ -89,7 +90,9 @@ class CommentController extends Controller
     public function rate(Request $request): JsonResponse
     {
         $result = $this->commentService->rate($request);
+
         $id = "";
+
         if (isset($request->id)) {
             $id = strip_tags((int)$request->id);
         }
@@ -139,5 +142,21 @@ class CommentController extends Controller
                     </span>"
         ]);
 
+    }
+
+    public function contact()
+    {
+        return view('guest.contacts.index', [
+            'title' => 'Liên hệ'
+        ]);
+    }
+
+    public function sendContact(CommentRequest $request): string
+    {
+        $result = $this->commentService->contact($request);
+        if ($result){
+            return '<div class="message message-success" id="show-message"><p>Gửi liên hệ thành công, chúng tôi sẽ phản hồi trong thời gian sớm nhất.</p></div>';
+        }
+        return '<div class="message message-error" id="show-message"><p>Gửi liên hệ không thành công, vui lòng thử lại.</p></div>';
     }
 }

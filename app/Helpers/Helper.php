@@ -2,8 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Models\Category;
-
 class Helper
 {
     // show category with table
@@ -33,45 +31,6 @@ class Helper
                             <button class="btn btn-primary btn-sm btn-show" data-url="'. route('admin.categories.show', $category->slug) .'" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
                             <a class="btn btn-info btn-sm btn-edit" href="'. route('admin.categories.edit', $category->slug) .'"><i class="fas fa-pencil-alt"></i></a>
                             <button class="btn btn-danger btn-sm btn-delete" data-url="categories/destroy" onclick="'.'removeFunction(\''.$slug.'\')"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                ';
-
-                unset($categories[$key]);
-
-                $html .= self::category($categories, $category->id, $char . '|--', $category);
-            }
-        }
-        return $html;
-    }
-
-    // show category of post
-    public static function category_post($categories, $parent_id = 0, $char = '', $category_parent = []): string
-    {
-        $html = '';
-
-        foreach ($categories as $key => $category) {
-            if ($category->parent_id == $parent_id) {
-                $name_parent = "ROOT";
-                if ($category->parent_id !== 0 && isset($category_parent->name)){
-                    $name_parent = $category_parent->name;
-                }
-                $image = $category->image;
-                $slug = $category->slug;
-                $html .= '
-                    <tr>
-                        <td>' . $category->id . '</td>
-                        <td>
-                        <img src="'.$image.'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
-                        </td>
-                        <td>' . $char . ' ' . $category->name . '</td>
-                        <td>'. $name_parent .'</td>
-                        <td>' . self::show($category->top) . '</td>
-                        <td>' . self::active($category->active) . '</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm btn-show" data-url="'. route('admin.categories_post.show', $category->slug) .'" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
-                            <a class="btn btn-info btn-sm btn-edit" href="'. route('admin.categories_post.edit', $category->slug) .'"><i class="fas fa-pencil-alt"></i></a>
-                            <button class="btn btn-danger btn-sm btn-delete" data-url="categories_post/destroy" onclick="'.'removeFunction(\''.$slug.'\')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 ';
@@ -119,8 +78,8 @@ class Helper
 
     public static function view($active = 0): string
     {
-        return $active == 0 ? '<span class="d-block badge bg-danger p-2">Đã xem</span>'
-            : '<span class="d-block badge bg-success p-2">Chưa xem</span>';
+        return $active == 0 ? '<span class="d-block badge bg-success p-2">Đã xem</span>'
+            : '<span class="d-block badge bg-danger p-2">Chưa xem</span>';
     }
 
     // get url banner with sort

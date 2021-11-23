@@ -16,7 +16,7 @@
                         <meta itemprop="position" content="1">
                     </div>
                     <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <a href="/blogs/{{$post->category->slug}}.html" itemprop="item">
+                        <a href="{{route('blogs.category',$post->category->slug)}}" itemprop="item">
                             <span itemprop="name">{{$post->category->name}}</span>
                             <meta itemprop="position" content="2">
                         </a>
@@ -95,7 +95,7 @@
                                 </span>
                             </div>
                         </div>
-                        @include('guest.layouts.signature');
+                        @include('guest.layouts.signature')
                     </div>
 
                     <div class="comment-box" id="comment-box">
@@ -159,7 +159,7 @@
 
             <section class="bg-white relate-articles">
                 <div class="width1140 width1400">
-                    <a href="/blogs/{{$post->category->slug}}.html"><h2>BÀI VIẾT LIÊN QUAN</h2></a>
+                    <a href="{{route('blogs.category',$post->category->slug)}}"><h2>BÀI VIẾT LIÊN QUAN</h2></a>
 
                     <div>
                         <ul class="clearfix">
@@ -185,14 +185,14 @@
                             @endforeach
                         </ul>
                     </div>
-                    <p style="text-align:center;"><a href="/blogs/{{$post->category->slug}}.html">Xem tất cả</a></p>
+                    <p style="text-align:center;"><a href="{{route('blogs.category',$post->category->slug)}}">Xem tất cả</a></p>
                 </div>
             </section>
             <section class="cate-articles">
                 <div class="width1140">
                     <div class="items clearfix">
                         @foreach($categories as $cate)
-                        <div class="item"><a href="/blogs/{{$cate->slug}}.html" class="_1line">{{$cate->name}}</a></div>
+                        <div class="item"><a href="{{route('blogs.category',$cate->slug)}}" class="_1line">{{$cate->name}}</a></div>
                         @endforeach
                     </div>
                 </div>

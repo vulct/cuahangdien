@@ -10,7 +10,7 @@
                         @foreach($categories as $category)
                             @if($category->id !== $selected->id)
                                 <li class="s-menu-items">
-                                    <a href="/blogs/{{$category->slug}}.html">{{$category->name}}</a>
+                                    <a href="{{route('blogs.category',$category->slug)}}">{{$category->name}}</a>
                                 </li>
                             @else
                                 <li class="s-menu-items active">
@@ -28,7 +28,7 @@
                 <meta itemprop="position" content="1">
             </div>
             <div itemprop="itemListElement" itemscope>
-                <a href="/blogs/{{$selected->slug}}.html" itemprop="item">
+                <a href="{{route('blogs.category',$selected->slug)}}" itemprop="item">
                     <span itemprop="name">{{$selected->name}}</span><meta itemprop="position" content="2">
                 </a>
             </div>
@@ -56,7 +56,7 @@
                                         {{\App\Helpers\Helper::getDateTime($post->updated_at)}}
                                     </span>
                                 <span class="article--excerpt-meta-item">
-                                        <a href="/blogs/{{$post->category->slug}}.html" title="Xem mục tin {{$post->category->name}}">{{$post->category->name}}</a>
+                                        <a href="{{route('blogs.category',$post->category->slug)}}" title="Xem mục tin {{$post->category->name}}">{{$post->category->name}}</a>
                                     </span>
                             </aside>
                             <h2 class="article--excerpt-title">

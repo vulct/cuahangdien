@@ -78,7 +78,7 @@
                                     tôi</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
-                                <a class="navmenu-link " href="/pages/contact.html">Liên hệ</a>
+                                <a class="navmenu-link " href="{{route('contact')}}">Liên hệ</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
                                 <a class="navmenu-link "
@@ -104,13 +104,13 @@
                         <ul class="navmenu navmenu-depth-1">
 
                             <li class="navmenu-item navmenu-id-blog">
-                                <a class="navmenu-link" href="/bang-gia.html">Bảng giá</a>
+                                <a class="navmenu-link" href="{{route('bang-gia')}}">Bảng giá</a>
                             </li>
                             <li class="navmenu-item navmenu-id-blog">
-                                <a class="navmenu-link" href="/khuyen-mai.html">Khuyến mãi</a>
+                                <a class="navmenu-link" href="{{route('khuyen-mai')}}">Khuyến mãi</a>
                             </li>
                             <li class="navmenu-item navmenu-id-blog">
-                                <a class="navmenu-link" href="/blogs.html">Tin tức</a>
+                                <a class="navmenu-link" href="{{route('blogs')}}">Tin tức</a>
                             </li>
                             <li class="navmenu-item navmenu-id-submit-your-creation">
                                 <a class="navmenu-link"
@@ -158,7 +158,7 @@
                             </li>
 
                             <li class="navmenu-item navmenu-id-submit-feedback">
-                                <a class="navmenu-link" href="/pages/contact.html">Ý kiến phản hồi</a>
+                                <a class="navmenu-link" href="{{route('contact')}}">Ý kiến phản hồi</a>
                             </li>
                         </ul>
                     </div>
@@ -175,7 +175,7 @@
                             <p>
                                 <img src="{{asset('guest/images/svg/phone.svg')}}" alt="phone support" width="20"
                                      height="20"/>
-                                <a href="tel:{{$info->hotline1}}">{{$info->hotline1}}</a> {!! isset($info->hotline2) ? '- <a href="tel:{{$info->hotline2}}">{{$info->hotline2}}</a>' : "" !!}
+                                <a href="tel:{{$info->hotline1}}">{{$info->hotline1}}</a> {!! isset($info->hotline2) ? '- <a href="tel:'.$info->hotline2.'">'.$info->hotline2.'</a>' : "" !!}
                             </p>
                         @endif
                         @if(isset($info->phone))
@@ -354,8 +354,8 @@
 @push('scripts')
     <script>
         window.addEventListener('load', function () {
+            let arcItem = {};
             @if(isset($info->email))
-            var arcItem = {};
             arcItem.id = 'msg-item-6';
             arcItem.class = 'msg-item-envelope';
             arcItem.title = "Email báo giá<br/>{!! $info->email !!}";
@@ -365,7 +365,6 @@
             arcItems.push(arcItem);
             @endif
             @if(isset($info->facebook))
-            var arcItem = {};
             arcItem.id = 'msg-item-1';
             arcItem.class = 'msg-item-facebook-messenger';
             arcItem.title = "FB Messenger<br/>{{$info->facebook}}";
@@ -375,7 +374,6 @@
             arcItems.push(arcItem);
             @endif
             @if(isset($info->zalo))
-            var arcItem = {};
             arcItem.id = 'msg-item-10';
             arcItem.class = 'msg-item-zalo';
             arcItem.title = "Zalo Chat<br/>{{$info->zalo}}";
@@ -385,7 +383,6 @@
             arcItems.push(arcItem);
             @endif
             @if(isset($info->sale))
-            var arcItem = {};
             arcItem.id = 'msg-item-9';
             arcItem.class = 'msg-item-phone';
             arcItem.title = "Bán Hàng<br/><b style='color:#4EB625'>{{$info->sale}}</b>";
@@ -395,7 +392,6 @@
             arcItems.push(arcItem);
             @endif
             @if(isset($info->phone))
-            var arcItem = {};
             arcItem.id = 'msg-item-3';
             arcItem.class = 'msg-item-phone';
             arcItem.title = "Tư vấn kỹ thuật<br/><b style='color:#FF643A'>{{$info->phone}}</b>";
