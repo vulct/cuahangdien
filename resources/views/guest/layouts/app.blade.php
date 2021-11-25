@@ -36,7 +36,7 @@
             data-section-id="static-header"
             data-section-type="static-header"
             data-section-data>
-                {"settings": { "sticky_header": true } }
+            {"settings": { "sticky_header": true } }
     </script>
 
     <section class="site-header"
@@ -58,27 +58,26 @@
                 </a>
             </div>
             <div class="site-header-search" data-live-search>
-                <form class="site-header-search-form form-fields-inline" action="/search" method="get"
+                <form class="site-header-search-form form-fields-inline" action="{{ route('search') }}" method="get"
                       data-live-search-form>
-
                     <div class="form-field no-label"><input class="form-field-input site-header-search-form-field"
                                                             type="text" name="q" aria-label="Tìm kiếm"
                                                             placeholder="Nhập tìm kiếm: công tắc schneider, led bulb philips, hoặc mã hàng..."
                                                             autocomplete="off" >
-                        <button class="site-header-search-button button-primary" type="button" aria-label="Search"
-                                data-live-search-submit><span class="search-icon search-icon--inactive"> <svg
-                                    aria-hidden="true" focusable="false"
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21"> <path
-                                        fill="currentColor" fill-rule="evenodd"
-                                        d="M12.514 14.906a8.264 8.264 0 0 1-4.322 1.21C3.668 16.116 0 12.513 0 8.07 0 3.626 3.668.023 8.192.023c4.525 0 8.193 3.603 8.193 8.047 0 2.033-.769 3.89-2.035 5.307l4.999 5.552-1.775 1.597-5.06-5.62zm-4.322-.843c3.37 0 6.102-2.684 6.102-5.993 0-3.31-2.732-5.994-6.102-5.994S2.09 4.76 2.09 8.07c0 3.31 2.732 5.993 6.102 5.993z"/> </svg> </span>
-                            <span class="search-icon search-icon--active"> <svg aria-hidden="true" focusable="false"
-                                                                                width="26"
-                                                                                height="26" viewBox="0 0 26 26"
-                                                                                xmlns="http://www.w3.org/2000/svg"> <g
-                                        fill-rule="nonzero" fill="currentColor"> <path
-                                            d="M13 26C5.82 26 0 20.18 0 13S5.82 0 13 0s13 5.82 13 13-5.82 13-13 13zm0-3.852a9.148 9.148 0 1 0 0-18.296 9.148 9.148 0 0 0 0 18.296z"
-                                            opacity=".29"/> <path
-                                            d="M13 26c7.18 0 13-5.82 13-13a1.926 1.926 0 0 0-3.852 0A9.148 9.148 0 0 1 13 22.148 1.926 1.926 0 0 0 13 26z"/> </g> </svg> </span>
+                        <button class="site-header-search-button button-primary" type="submit" aria-label="Search">
+                            <span class="search-icon search-icon--inactive">
+                                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21">
+                                    <path fill="currentColor" fill-rule="evenodd" d="M12.514 14.906a8.264 8.264 0 0 1-4.322 1.21C3.668 16.116 0 12.513 0 8.07 0 3.626 3.668.023 8.192.023c4.525 0 8.193 3.603 8.193 8.047 0 2.033-.769 3.89-2.035 5.307l4.999 5.552-1.775 1.597-5.06-5.62zm-4.322-.843c3.37 0 6.102-2.684 6.102-5.993 0-3.31-2.732-5.994-6.102-5.994S2.09 4.76 2.09 8.07c0 3.31 2.732 5.993 6.102 5.993z"/>
+                                </svg>
+                            </span>
+                            <span class="search-icon search-icon--active">
+                                <svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                                    <g fill-rule="nonzero" fill="currentColor">
+                                        <path d="M13 26C5.82 26 0 20.18 0 13S5.82 0 13 0s13 5.82 13 13-5.82 13-13 13zm0-3.852a9.148 9.148 0 1 0 0-18.296 9.148 9.148 0 0 0 0 18.296z" opacity=".29"/>
+                                        <path d="M13 26c7.18 0 13-5.82 13-13a1.926 1.926 0 0 0-3.852 0A9.148 9.148 0 0 1 13 22.148 1.926 1.926 0 0 0 13 26z"/>
+                                    </g>
+                                </svg>
+                            </span>
                         </button>
                     </div>
                 </form>

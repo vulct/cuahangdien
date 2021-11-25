@@ -67,7 +67,7 @@ Route::get('/contact.html', [CommentController::class, 'contact'])->name('contac
 Route::post('/contact/send', [CommentController::class, 'sendContact'])->name('contact.send');
 
 #Search
-Route::resource('/search', SearchController::class);
+Route::get('/search', [SearchController::class,'resultSearch'])->name('search');
 
 #====ROUTE FOR ADMIN====#
 
