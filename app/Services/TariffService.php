@@ -117,4 +117,8 @@ class TariffService
             }])->where(['isDelete' => 0, 'active' => 1,'id' => $id])->first();
     }
 
+    public function getFirstTariff()
+    {
+        return Tariff::where(['isDelete' => 0, 'active' => 1])->latest('updated_at')->first();
+    }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 use App\Http\Controllers\Admin\Auth\AccountController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -33,6 +33,7 @@ Route::get('/posts/{post}.html', [\App\Http\Controllers\PostController::class, '
 
 #Products
 Route::get('/san-pham', [\App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::get('/products/{product}.html', [\App\Http\Controllers\ProductController::class, 'detail'])->name('products.detail');
 
 #Comment and Rate
 Route::post('/comments/create', [CommentController::class, 'create']);

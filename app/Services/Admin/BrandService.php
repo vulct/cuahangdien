@@ -128,4 +128,17 @@ class BrandService
     {
         return Brand::where(['isDelete' => 0, 'active' => 1, 'id' => $id])->firstOrFail();
     }
+
+    public function getBrandKeyIsIdProduct(): array
+    {
+        $brands = $this->get(1);
+
+        $brand_of_product = [];
+
+        foreach ($brands as $brand) {
+            $brand_of_product[$brand->id] = $brand;
+        }
+
+        return $brand_of_product;
+    }
 }

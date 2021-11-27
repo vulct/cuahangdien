@@ -284,13 +284,13 @@ class ProductService
         }])->where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1])->get();
     }
 
-    public function getProductByCategory($id): LengthAwarePaginator
+    public function getProductByCategory($id, $limit): LengthAwarePaginator
     {
         return Product::with(['category' => function ($query) {
             $query->where(['isDelete' => 0, 'active' => 1]);
         }, 'brand' => function ($query) {
             $query->where(['isDelete' => 0, 'active' => 1]);
-        }])->where(['category_id' => $id, 'isDelete' => 0, 'active' => 1])->paginate(2);
+        }])->where(['category_id' => $id, 'isDelete' => 0, 'active' => 1])->paginate($limit);
     }
 
     public function getProductByBrandAndCategory($brand, $category): LengthAwarePaginator
@@ -320,9 +320,20 @@ class ProductService
     {
         return Product::withExists(['attributes' => function ($query) {
             $query->where('isDelete', 0)
-            ->where('discount', '>=', 40.00);
+                ->where('discount', '>=', 40.00);
         }])
             ->where(['isDelete' => 0, 'active' => 1])
             ->get();
+    }
+
+    public function getDetailProduct($id)
+    {
+        return Product::withExists(['attributes' => function ($query) {
+            $query->where('isDelete', 0);},
+            'category' => function ($query) {
+                $query->where(['isDelete' => 0, 'active' => 1]);},
+            'brand' => function ($query) {
+                $query->where(['isDelete' => 0, 'active' => 1]);
+            }])->where(['id' => $id, 'isDelete' => 0, 'active' => 1])->firstOrFail();
     }
 }

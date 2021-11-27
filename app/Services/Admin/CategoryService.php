@@ -122,4 +122,9 @@ class CategoryService
         }
     }
 
+    public function getDetailById($id)
+    {
+        return Category::where(['isDelete' => 0, 'active' => 1, 'type' => 0, 'id' => $id])->firstOrFail();
+    }
+
 }
