@@ -43,6 +43,46 @@ class Helper
         return $html;
     }
 
+    // show category of post
+    public static function category_post($categories, $parent_id = 0, $char = '', $category_parent = []): string
+    {
+        $html = '';
+
+        foreach ($categories as $key => $category) {
+            if ($category->parent_id == $parent_id) {
+                $name_parent = "ROOT";
+                if ($category->parent_id !== 0 && isset($category_parent->name)){
+                    $name_parent = $category_parent->name;
+                }
+                $image = $category->image;
+                $slug = $category->slug;
+                $html .= '
+                    <tr>
+                        <td>' . $category->id . '</td>
+                        <td>
+                        <img src="'.$image.'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
+                        </td>
+                        <td>' . $char . ' ' . $category->name . '</td>
+                        <td>'. $name_parent .'</td>
+                        <td>' . self::show($category->top) . '</td>
+                        <td>' . self::active($category->active) . '</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm btn-show" data-url="'. route('admin.categories_post.show', $category->slug) .'" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
+                            <a class="btn btn-info btn-sm btn-edit" href="'. route('admin.categories_post.edit', $category->slug) .'"><i class="fas fa-pencil-alt"></i></a>
+                            <button class="btn btn-danger btn-sm btn-delete" data-url="categories_post/destroy" onclick="'.'removeFunction(\''.$slug.'\')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                ';
+
+                unset($categories[$key]);
+
+                $html .= self::category($categories, $category->id, $char . '|--', $category);
+            }
+        }
+        return $html;
+    }
+
+
     // show category with option
     public static function categoryOption($categories, $parent_id = 0, $char = '', $selected = 0): string
     {
