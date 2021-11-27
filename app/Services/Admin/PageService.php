@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class PageService
 {
-    //0 - về chúng tôi, 1 - tuyển dụng, 2 - hướng dẫn mua hàng
+    // 0 - về chúng tôi, 1 - tuyển dụng, 2 - hướng dẫn mua hàng
     // 3 - thanh toán vận chuyển, 4 - bảo hành đổi trả,
     // 5 - chính sách bảo mật
 
@@ -23,11 +23,11 @@ class PageService
 
     public function getPageWithType($type = 0)
     {
-        return Page::latest('id')->where(['isDelete' => 0, 'type' => $type, 'active' => 1])->get();
+        return Page::latest('id')->where(['isDelete' => 0, 'type' => $type, 'active' => 1])->first();
     }
 
 
-    public function create($request)
+    public function create($request): bool
     {
         try {
             $type = (int)$request->input('type');
