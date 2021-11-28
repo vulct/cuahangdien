@@ -21,12 +21,14 @@ class BlogController extends Controller
     public function index()
     {
         $category = $this->categoryService->getFirstCategory();
+
         $selected = 0;
+
         if ($category) {
             $selected = $category->id;
         }
         return view('guest.blogs.list', [
-            'title' => $category->name,
+            'title' => $category->name ?? 'Tin tức mới cập nhật',
             'posts' => $this->postService->getPostPaginate($selected),
             'categories' => $this->categoryService->get(1, 1),
             'selected' => $category

@@ -24,6 +24,8 @@
     <link href="{{ asset('guest/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('guest/css/arcontactus.css') }}" rel="stylesheet"/>
     <link href="{{ asset('guest/css/custom.css') }}" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{{asset('guest/js/theme/api.jquery.min.js')}}"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('guest/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style push -->
@@ -36,7 +38,7 @@
             data-section-id="static-header"
             data-section-type="static-header"
             data-section-data>
-            {"settings": { "sticky_header": true } }
+            {"settings": { "sticky_header": true}}
     </script>
 
     <section class="site-header"
@@ -106,9 +108,9 @@
 <!-- Main Footer -->
 @include('guest.layouts.footer')
 
-<script src="{{asset('guest/js/theme/main.min.js')}}"></script>
 
-<script src="{{asset('guest/js/theme/api.jquery.min.js')}}"></script>
+
+<script src="{{asset('guest/js/theme/main.min.js')}}"></script>
 
 <script src="{{asset('guest/js/custom.js')}}"></script>
 

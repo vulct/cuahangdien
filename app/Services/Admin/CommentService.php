@@ -57,11 +57,13 @@ class CommentService
                 "name" => strip_tags((string)$request->name),
                 "email" => (string)$request->email,
                 "content" => strip_tags((string)$request->content),
-                "post_id" => strip_tags((int)$request->post_id),
+                "post_id" => isset($request->post_id) ? strip_tags((int)$request->post_id) : null,
+                "product_id" => isset($request->product_id) ? strip_tags((int)$request->product_id) : null,
                 "rating" => strip_tags((int)$request->rating),
                 "type" => $type
             ]);
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
             return false;
         }
         return true;

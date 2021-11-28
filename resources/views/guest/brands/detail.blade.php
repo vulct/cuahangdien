@@ -100,8 +100,8 @@
                                     </a>
                                     <div class='productitem--info'>
                                         <div class='productitem--price'>
-                                            @if($product['attributes'][0]['discount'] > 0)
-                                                <div class='price--compare-at visible' data-price-compare-at>
+                                            @if(isset($product['attributes']))
+                                                @if($product['attributes'][0]['discount'] > 0)                                                <div class='price--compare-at visible' data-price-compare-at>
                                                     <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
                                                 </div>
                                                 <span class='productitem--badge badge--sale' data-badge-sales>
@@ -128,6 +128,7 @@
                                                     </span>
                                                 </div>
                                             @endif
+                                                @endif
                                         </div>
                                         <h4 class='productitem--title'>
                                             <a href='/products/{{$product->slug}}.html'>

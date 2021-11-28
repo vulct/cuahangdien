@@ -70,6 +70,9 @@ Route::post('/contact/send', [CommentController::class, 'sendContact'])->name('c
 #Search
 Route::get('/search', [SearchController::class,'resultSearch'])->name('search');
 
+#Pages
+Route::get('/pages/{page}.html', [PageController::class,'detail'])->name('pages.chitiet');
+
 #====ROUTE FOR ADMIN====#
 
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');

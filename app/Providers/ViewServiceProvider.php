@@ -45,7 +45,7 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer(['index', 'guest.layouts.footer', 'guest.layouts.menu'], PageComposer::class);
 
-        View::composer(['guest.layouts.footer'], StaffComposer::class);
+        View::composer(['guest.layouts.footer', 'guest.products.detail'], StaffComposer::class);
 
         View::composer('index', BlogComposer::class);
 

@@ -79,12 +79,14 @@ class CommentController extends Controller
 
     public function create(CommentRequest $request): string
     {
+        $message = $request->type == 0 ? 'đánh giá' : 'phản hồi';
+
         $result = $this->commentService->create($request);
 
         if ($result) {
-            return '<div class="spr-form-message spr-form-message-success">Cảm ơn bạn đã phản hồi!</div>';
+            return '<div class="spr-form-message spr-form-message-success">Cảm ơn bạn đã '.$message.'!</div>';
         }
-        return '<div class="spr-form-message spr-form-message-success">Gửi phản hồi không thành công!</div>';
+        return '<div class="spr-form-message spr-form-message-success">Gửi '.$message.' không thành công!</div>';
     }
 
     public function rate(Request $request): JsonResponse

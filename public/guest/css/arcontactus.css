@@ -1,6 +1,6 @@
 .arcontactus-widget.right.arcontactus-message{right:20px}
 .arcontactus-widget.right.arcontactus-message{bottom:20px}
-.arcontactus-widget .arcontactus-message-button
+.arcontactus-widget .arcontactus-message-button,
 .pulsation{-webkit-animation-duration:2s;animation-duration:2s}
 .arcontactus-widget.md .arcontactus-message-button,.arcontactus-widget.md.arcontactus-message{width:60px;height:60px}
 .arcontactus-widget{opacity:0;transition:.2s opacity}

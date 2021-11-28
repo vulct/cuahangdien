@@ -46,3 +46,11 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+.message.message-error {
+    background: #d34423;
+    padding: 8px;
+    color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}

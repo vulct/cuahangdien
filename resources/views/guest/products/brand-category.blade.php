@@ -106,33 +106,35 @@
                                     </a>
                                     <div class='productitem--info'>
                                         <div class='productitem--price'>
-                                            @if($product['attributes'][0]['discount'] > 0)
-                                                <div class='price--compare-at visible' data-price-compare-at>
-                                                    <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
-                                                </div>
-                                                <span class='productitem--badge badge--sale' data-badge-sales>
-                                                    <span data-price-percent-saved>{{round($product['attributes'][0]['discount'],2)}}
-                                                    </span>%
-                                                </span>
-
-                                                <div class='price--main' data-price>
-                                                    <span class='money'>
-                                                        {{number_format($product['attributes'][0]['price'] - ($product['attributes'][0]['price']*$product['attributes'][0]['discount']/100))}} <span>VND</span>
+                                            @if(isset($product['attributes']))
+                                                @if($product['attributes'][0]['discount'] > 0)
+                                                    <div class='price--compare-at visible' data-price-compare-at>
+                                                        <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
+                                                    </div>
+                                                    <span class='productitem--badge badge--sale' data-badge-sales>
+                                                        <span data-price-percent-saved>{{round($product['attributes'][0]['discount'],2)}}
+                                                        </span>%
                                                     </span>
-                                                </div>
-                                            @else
-                                                <div class='price--compare-at visible' data-price-compare-at>
-                                                    <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
-                                                </div>
-                                                <span class='productitem--badge badge--sale' data-badge-sales>
-                                                    <span data-price-percent-saved>LH</span>
-                                                </span>
 
-                                                <div class='price--main' data-price>
-                                                    <span class='money'>
-                                                        {{number_format($product['attributes'][0]['price'])}} <span>VND</span>
+                                                    <div class='price--main' data-price>
+                                                        <span class='money'>
+                                                            {{number_format($product['attributes'][0]['price'] - ($product['attributes'][0]['price']*$product['attributes'][0]['discount']/100))}} <span>VND</span>
+                                                        </span>
+                                                    </div>
+                                                @else
+                                                    <div class='price--compare-at visible' data-price-compare-at>
+                                                        <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
+                                                    </div>
+                                                    <span class='productitem--badge badge--sale' data-badge-sales>
+                                                        <span data-price-percent-saved>LH</span>
                                                     </span>
-                                                </div>
+
+                                                    <div class='price--main' data-price>
+                                                        <span class='money'>
+                                                            {{number_format($product['attributes'][0]['price'])}} <span>VND</span>
+                                                        </span>
+                                                    </div>
+                                                @endif
                                             @endif
                                         </div>
                                         <h4 class='productitem--title'>

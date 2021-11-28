@@ -135,7 +135,7 @@ class ProductController extends Controller
         $product_detail = $this->productService->getDetailProduct($product->id);
 
         //bảng giá mới của hãng ( product->brand_id )
-        $tariff = $this->tariffService->getFirstTariff();
+        $tariff = $this->tariffService->getFirstTariff($product->brand_id);
 
         // các sản phẩm có cùng thư mục
         $products_in_category = $this->productService->getProductByCategory($product_detail->category_id, 5);

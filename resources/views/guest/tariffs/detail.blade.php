@@ -83,7 +83,7 @@
                         <iframe src="{{$tariff->link_download . '/preview'}}" width="100%" height="1200"></iframe>
 
                     </div>
-                    <div class="meta-footer">Để báo giá nhanh và chính xác nhất, xin Quý khách vui lòng liên hệ Hotline: <a href="tel:(028) 3731 3963">(028) 3731 3963</a>. Hoặc gửi báo giá khối lượng quá email <a href="mailto:sale@thietbidiendgp.vn">sale@thietbidiendgp.vn</a></div>
+                    <div class="meta-footer">Để báo giá nhanh và chính xác nhất, xin Quý khách vui lòng liên hệ Hotline: <a href="tel:{{$info->hotline1 ?? ''}}">{{$info->hotline1 ?? ''}}</a>. Hoặc gửi báo giá khối lượng quá email <a href="mailto:{{$info->email ?? ''}}">{{$info->email ?? ''}}</a></div>
                     <nav class="breadcrumbs-container" role="navigation" aria-label="breadcrumbs" itemscope itemtype='http://schema.org/BreadcrumbList'>
                         <div class="breadcrumb-home" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                             <a href="{{route('index')}}" itemprop="item">

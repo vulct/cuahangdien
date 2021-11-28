@@ -61,51 +61,43 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="{{asset('guest/css/validate.css')}}">
-    <style>
-        .message.message-error {
-            background: #d34423;
-            padding: 8px;
-            color: #fff;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-    </style>
+<link href="{{ asset('guest/css/custom.css') }}" rel="stylesheet"/>
+<link rel="stylesheet" href="{{asset('guest/css/validate.css')}}">
 @endpush
 
 @push('scripts')
-    <script src="{{asset('guest/scripts/jquery.validate.js')}}"></script>
-    <script src="{{asset('guest/scripts/jquery.validate.unobtrusive.js')}}"></script>
-    <script>
-        let show_error = '<div class="message message-error" id="show-message"><ul id="message-list-items"></ul></div>'
-        let frm = $('#contact_form');
-        let frmDiv = document.getElementById("contact_form");
-        frm.submit(function (e) {
-            let list_mess = $('#message-list-items');
-            let show_mess = $('#show-message');
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "/contact/send",
-                data: frm.serialize(),
-                success: function (data) {
-                    if(list_mess.length > 0 && show_mess.length > 0){
-                        show_mess.remove();
-                    }
-                    $(".contact-page-content").html(data);
-                },
-                error: function (data) {
-                    let err = JSON.parse(data.responseText);
-                    if(list_mess.length > 0 && show_mess.length > 0){
-                        list_mess.empty();
-                    }else{
-                        $(show_error).insertBefore( frm );
-                    }
-                    $.each(err.errors, function(index, value) {
-                        $('#message-list-items').append('<li id="item-message">'+ value +'</li>');
-                    });
-                },
-            });
+<script src="{{asset('guest/scripts/jquery.validate.js')}}"></script>
+<script src="{{asset('guest/scripts/jquery.validate.unobtrusive.js')}}"></script>
+<script>
+    let show_error = '<div class="message message-error" id="show-message"><ul id="message-list-items"></ul></div>'
+    let frm = $('#contact_form');
+    let frmDiv = document.getElementById("contact_form");
+    frm.submit(function (e) {
+        let list_mess = $('#message-list-items');
+        let show_mess = $('#show-message');
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/contact/send",
+            data: frm.serialize(),
+            success: function (data) {
+                if(list_mess.length > 0 && show_mess.length > 0){
+                    show_mess.remove();
+                }
+                $(".contact-page-content").html(data);
+            },
+            error: function (data) {
+                let err = JSON.parse(data.responseText);
+                if(list_mess.length > 0 && show_mess.length > 0){
+                    list_mess.empty();
+                }else{
+                    $(show_error).insertBefore( frm );
+                }
+                $.each(err.errors, function(index, value) {
+                    $('#message-list-items').append('<li id="item-message">'+ value +'</li>');
+                });
+            },
         });
-    </script>
+    });
+</script>
 @endpush

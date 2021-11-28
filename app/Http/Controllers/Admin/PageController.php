@@ -113,4 +113,9 @@ class PageController extends Controller
             'error' => true
         ]);
     }
+
+    public function detail(Page $page)
+    {
+
+    }
 }

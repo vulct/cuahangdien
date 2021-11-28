@@ -41,7 +41,7 @@
 @endsection
 
 @push('stylesheets')
-
+<style> .brand-row {margin-bottom: 30px;}.brand-row .collection--brands--logo {display: grid;grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));grid-gap: 0;}.brand-header {background: 0 0;height: 38px;line-height: 38px;border-bottom: 2px solid #f2ba33;margin-bottom: 8px;}.brand-header .h3-title {float: left;font-size: 18px;color: #424242;width: 290px;text-overflow: ellipsis;white-space: nowrap;margin: 0;text-transform: uppercase;padding-left: 0;position: relative;}.brand-header .h3-title a {background: -webkit-linear-gradient(#f2ba34, #bc8500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: tahoma, sans-serif;}.brand-header .title-all {float: right;margin-right: 0;font-size: 14px;color: #cea23b;font-weight: 700;}.brand-header .title-all {float: right;margin-right: 0;font-size: 14px;color: #cea23b;font-weight: 700;}</style>
 @endpush
 
 @push('scripts')

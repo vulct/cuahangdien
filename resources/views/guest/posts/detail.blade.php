@@ -202,7 +202,9 @@
 @endsection
 
 @push('stylesheets')
+<link rel="stylesheet" href="{{asset('guest/css/post.css')}}">
 
+<link rel="stylesheet" href="{{asset('guest/css/review.css')}}">
 @endpush
 
 @push('scripts')
