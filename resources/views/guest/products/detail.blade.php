@@ -3,9 +3,6 @@
 @section('content')
     <main class="site-main">
         <div id="shopify-section-static-product" class="shopify-section product--section">
-            <script type="application/json" data-section-type="static-product" data-section-id="static-product" data-section-data="">
-           {"settings":{"cart_redirection":false},"context":{"product_available":"Thêm vào giỏ","product_unavailable":"Hết hàng"},"product":{"id":1378,"title":"Ổ cắm gắn âm loại không kín nước dạng nghiêng IP44 16A/ 32A","handle":"o-cam-gan-am-loai-khong-kin-nuoc-dang-nghieng-16a","description":"shortdescription","published_at":"\/Date(1436292050390)\/","created_at":"\/Date(1436292050390)\/","vendor":"","type":"Phích cắm và ổ cắm công nghiệp","tags":[],"price":144200,"price_min":144200,"price_max":144200,"available":true,"price_varies":true,"compare_at_price":206000,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[{"id":1379,"title":"32A - 3P - 230V - 6H - IP44","option1":"32A - 3P - 230V - 6H - IP44","option2":null,"option3":null,"sku":"","requires_shipping":true,"taxable":true,"featured_image":{"id":1379,"product_id":1378,"position":0,"width":0,"height":0,"src":"086115377d9f4d65ad9f246b9be97cbe.JPG","variant_ids":[1379]},"available":true,"name":"Ổ cắm gắn âm loại không kín nước dạng nghiêng IP44 16A/ 32A","public_title":"32A - 3P - 230V - 6H - IP44","options":["32A - 3P - 230V - 6H - IP44"],"price":171500,"weight":30,"compare_at_price":245000,"inventory_quantity":1,"inventory_management":null,"inventory_policy":"","barcode":"F423-6"},{"id":1380,"title":"32A - 4P - 400V - 6H - IP44","option1":"32A - 4P - 400V - 6H - IP44","option2":null,"option3":null,"sku":"","requires_shipping":true,"taxable":true,"featured_image":{"id":1380,"product_id":1378,"position":0,"width":0,"height":0,"src":"086115377d9f4d65ad9f246b9be97cbe.JPG","variant_ids":[1380]},"available":true,"name":"Ổ cắm gắn âm loại không kín nước dạng nghiêng IP44 16A/ 32A","public_title":"32A - 4P - 400V - 6H - IP44","options":["32A - 4P - 400V - 6H - IP44"],"price":189000,"weight":30,"compare_at_price":270000,"inventory_quantity":1,"inventory_management":null,"inventory_policy":"","barcode":"F424-6"},{"id":1381,"title":"32A - 5P - 400V - 6H - IP44","option1":"32A - 5P - 400V - 6H - IP44","option2":null,"option3":null,"sku":"","requires_shipping":true,"taxable":true,"featured_image":{"id":1381,"product_id":1378,"position":0,"width":0,"height":0,"src":"086115377d9f4d65ad9f246b9be97cbe.JPG","variant_ids":[1381]},"available":true,"name":"Ổ cắm gắn âm loại không kín nước dạng nghiêng IP44 16A/ 32A","public_title":"32A - 5P - 400V - 6H - IP44","options":["32A - 5P - 400V - 6H - IP44"],"price":206500,"weight":30,"compare_at_price":295000,"inventory_quantity":1,"inventory_management":null,"inventory_policy":"","barcode":"F425-6"}],"images":["/media/products/800/086115377d9f4d65ad9f246b9be97cbe.JPG"],"featured_image":"/media/products/800/086115377d9f4d65ad9f246b9be97cbe.JPG","options":["Loại"],"content":"shortdescription"}, "recently_viewed_info":{"title":"Ổ cắm gắn âm loại không kín nước dạng nghiêng IP44 16A/ 32A","handle":"o-cam-gan-am-loai-khong-kin-nuoc-dang-nghieng-16a","image":"/media/products/350/086115377d9f4d65ad9f246b9be97cbe.JPG","price":"\u003cdiv class=\u0027product--price\u0027\u003e\u003cdiv class= \u0027price--compare-at\u0027 data-price-compare-at\u003e \u003cspan class=\u0027money\u0027\u003e\u003c/span\u003e \u003c/div\u003e \u003cdiv class=\u0027price--main\u0027 data-price\u003e \u003cspan class=\u0027money\u0027\u003e144,200 VND\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e","link":"/products/o-cam-gan-am-loai-khong-kin-nuoc-dang-nghieng-16a"}, "time":{"second":"giây","seconds":"giây","minute":"phút","minutes":"phút","hour":"giờ","hours":"giờ","ago":"trước"}}
-        </script>
             <nav class="breadcrumbs-container" role="navigation" aria-label="breadcrumbs" itemscope itemtype='http://schema.org/BreadcrumbList'>
                 <div class="breadcrumb-home" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                     <a href="{{ route('index')  }}" itemprop="item">
@@ -141,32 +138,31 @@
                                     <div class="arrow"></div>
                                 </div>
                                 @endif
-                                <form method="post" action="/cart/add" data-product-form="">
+                                <form method="post" action="{{route('cart.store')}}" id="add-cart" data-product-form="">
+                                    <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                                    @csrf
                                     @if($product->attributes->count() > 1)
                                     <div data-product-options-container="">
-                                        <select name='id' data-variants class='form-options no-js-required'>
-                                            @foreach($product->attributes as $key => $attribute)
-                                                <option value="{{$attribute->id}}" {!! $key === 0 ? 'selected="selected"' : '' !!}>{{ !empty($attribute->type_name) ? $attribute->type_name : $attribute->codename }} - {{ $attribute->price }}</option>
-                                            @endforeach
-                                        </select>
                                         <div class="form-field form-options js-required">
                                             <div class="form-field-select-wrapper">
-                                                <select class="form-field-input form-field-select form-field-filled" data-product-option="0">
+                                                <select id="attribute_id" name="attribute_id" class="form-field-input form-field-select form-field-filled" data-product-option="0">
                                                     @foreach($product->attributes as $key => $attribute)
                                                         <option value="{{$attribute->id}}" {!! $key === 0 ? 'selected="selected"' : '' !!}>{{ !empty($attribute->type_name) ? $attribute->type_name : $attribute->codename }} -- {{ number_format($attribute->price) }} VND</option>
                                                     @endforeach
                                                 </select>
-                                                <label class="form-field-title">Mẫu</label>
+                                                <label for="attribute_id" class="form-field-title">Mẫu</label>
                                                 <svg class="svg-chevron-down"></svg>
                                             </div>
                                         </div>
                                     </div>
+                                    @else
+                                        <input type="hidden" id="attribute_id" name="attribute_id" value="{{$product->attributes[0]->id}}">
                                     @endif
                                         <div class="product-form--atc" >
                                             <div class="product-form--atc-qty form-fields--qty" data-quantity-wrapper>
                                                 <div class="form-field form-field--qty-select visible">
                                                     <div class="form-field-select-wrapper">
-                                                        <select class="form-field-input form-field-select" aria-label="Số lượng" data-quantity-select>
+                                                        <select class="form-field-input form-field-select" name="num_product" id="num_product" aria-label="Số lượng" data-quantity-select>
                                                             <option selected value="1"> 1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -185,16 +181,6 @@
                                                         <svg class="svg-chevron-down"></svg>
 
                                                     </div>
-                                                </div>
-                                                <div class="form-field form-field--qty-input hidden">
-                                                    <input class="form-field-input form-field-number form-field-filled"
-                                                           value="1"
-                                                           name="quantity"
-                                                           type="text"
-                                                           pattern="\d*"
-                                                           aria-label="Số lượng"
-                                                           data-quantity-input>
-                                                    <label class="form-field-title" style="top:6px;font-size:13px;">Số lượng</label>
                                                 </div>
                                             </div>
                                             <button class="product-form--atc-button "
@@ -401,16 +387,22 @@
     .fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}
 </style>
 <link rel="stylesheet" href="{{asset('guest/css/review.css')}}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{asset('manage/plugins/toastr/toastr.min.css')}}">
 
 <script src="{{asset('guest/js/option_selection.js')}}"></script>
 @endpush
 
 @push('scripts')
 <script src="{{asset('guest/js/jquery.sticky-kit.js')}}"></script>
+<!-- Toastr -->
+<script src="{{asset('manage/plugins/toastr/toastr.min.js')}}"></script>
 
 <script src="{{asset('guest/scripts/products.js')}}"></script>
 
 <script src="{{asset('guest/scripts/comments.js')}}"></script>
 
-@include('guest.layouts.add-cart')
+{{--<!-- Notify -->--}}
+{{--@include('admin.layouts.alert')--}}
+
 @endpush

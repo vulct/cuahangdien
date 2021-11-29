@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <main class="site-main" style="padding-top: 183px;">
+    <main class="site-main">
         <div id="shopify-section-static-search" class="shopify-section search--section">
             <div class="productgrid--outer layout--no-sidebar">
                 <div class="productgrid--wrapper">

@@ -159,4 +159,11 @@ class Helper
         $time = date('d \T\h\á\n\g M Y',$time);
         return str_replace( $timeEng, $timeVie, $time);
     }
+
+    public static function price($price = 0, $discount = 0, $qty = 1): string
+    {
+        if ($discount > 0) return number_format(($price - $price * $discount/100)*$qty);
+        if ($price != 0)  return number_format($price*$qty);
+        return 0;
+    }
 }

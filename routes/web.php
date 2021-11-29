@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TariffController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 #====ROUTE FOR CUSTOMER====#
@@ -72,6 +73,13 @@ Route::get('/search', [SearchController::class,'resultSearch'])->name('search');
 
 #Pages
 Route::get('/pages/{page}.html', [PageController::class,'detail'])->name('pages.chitiet');
+
+#Cart
+Route::get('/cart', [CartController::class, 'show'])->name('cart');
+
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.store');
+
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 #====ROUTE FOR ADMIN====#
 

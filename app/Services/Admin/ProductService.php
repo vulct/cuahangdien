@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttributes;
 use App\Services\UploadService;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -335,5 +336,11 @@ class ProductService
             'brand' => function ($query) {
                 $query->where(['isDelete' => 0, 'active' => 1]);
             }])->where(['id' => $id, 'isDelete' => 0, 'active' => 1])->firstOrFail();
+    }
+
+    public function getAttributesOfProduct($product,$attribute)
+    {
+        return ProductAttributes::where(['id' => $attribute, 'isDelete' => 0, 'product_id' => $product])
+            ->first();
     }
 }

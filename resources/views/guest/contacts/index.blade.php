@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <main class="site-main" style="padding-top: 183px;">
+    <main class="site-main">
         <article class="site-page" data-template-page="" data-template-contact="">
             <header class="page-masthead">
                 <h1 class="page-title">

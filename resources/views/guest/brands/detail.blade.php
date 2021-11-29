@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <main class="site-main" style="padding-top: 62px;">
+    <main class="site-main">
         <div id="shopify-section-static-collection" class="shopify-section collection--section">
             <script type="application/json" data-section-type="static-collection" data-section-id="static-collection"
                     data-section-data="">{"context": {"see_more": "See more","see_less": "See less"}}

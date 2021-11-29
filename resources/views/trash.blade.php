@@ -17,3 +17,5 @@
 {{--//        var_dump($post_detail);--}}
 {{--//        echo '</pre>';--}}
 {{--//        die();--}}
+
+

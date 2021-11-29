@@ -161,7 +161,7 @@
                                                                     class="fas fa-pencil-alt"></i></span>
                                                         </div>
                                                         <input type="text" id="slug" class="form-control"
-                                                               value="{{old('slug')}}" name="slug"
+                                                               value="{{old('slug') ?? $post->slug}}" name="slug"
                                                                placeholder="3-hinh-thuc-chieu-sang-moi-trong-noi-that-nam-2021" required/>
                                                     </div>
                                                     <span class="form-text">
