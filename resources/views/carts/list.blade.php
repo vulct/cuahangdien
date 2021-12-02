@@ -69,7 +69,7 @@
                                                     <div class="cart-item--quantity form-fields--qty" data-quantity-wrapper="">
                                                         <div class="form-field form-field--qty-select visible">
                                                             <div class="form-field-select-wrapper">
-                                                                <input class="form-field-input form-field-select form-field-filled" aria-label="Quantity" value="{{$cart['qty']}}">
+                                                                <input class="form-field-input form-field-select form-field-filled" aria-label="Quantity" id="cart-quantity-{{$key}}" value="{{$cart['qty']}}" onchange="updateItem('{{route('cart.update',$key)}}', {{$key}})">
                                                                 <label class="form-field-title">
                                                                     Số lượng
                                                                 </label>
@@ -84,9 +84,9 @@
                                                     </div>
                                                     <div class="cart-item--total">
                                                         @if($cart['discount'] != 0)
-                                                        <span class="money">{{\App\Helpers\Helper::price($cart['price'],$cart['discount'],$cart['qty'])}} VND</span>
+                                                        <span class="money" id="cart-subtotal-{{$key}}">{{\App\Helpers\Helper::price($cart['price'],$cart['discount'],$cart['qty'])}} VND</span>
                                                         @else
-                                                            <span class="money">{{\App\Helpers\Helper::price($cart['price'],0,$cart['qty'])}} VND</span>
+                                                            <span class="money" id="cart-subtotal-{{$key}}">{{\App\Helpers\Helper::price($cart['price'],0,$cart['qty'])}} VND</span>
                                                         @endif
                                                     </div>
                                                     <div class="cart-item--remove" onclick="removeItem('{{route('cart.delete',$key)}}')">
@@ -111,10 +111,9 @@
                             <div class="cart-total">
                                 <div class="cart-subtotal">
                                     <span>Tạm tính</span>
-                                    <span class="money">{{number_format($total)}} <span>VND</span></span>
+                                    <span class="money" id="cart-total">{{number_format($total)}} <span>VND</span></span>
                                 </div>
                                 <div class="cart-shipping">
-
                                     <br />
                                     <div><i>Chi phí khác sẽ được chúng tôi thông báo sau khi báo giá được xử lý.</i></div>
 

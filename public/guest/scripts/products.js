@@ -117,4 +117,28 @@ function ShowLoading() {
     $('#arcontactus').after(element_loading);
     return true;
 }
+
+function updateItem(url, key) {
+    let qty = $("#cart-quantity-"+ key).val();
+    $.ajax({
+        type: 'GET',
+        url : url,
+        data : {qty: qty},
+        success:function(response){
+            if (response.error === true) {
+                toastr.error(response.message);
+            }else{
+                toastr.success(response.message);
+                let id = response.key;
+                $('#cart-subtotal-'+id).empty().text(response.subtotal + ' VND');
+
+                $("#cart-total").empty().text(response.total + ' VND');
+            }
+            console.log(response);
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    });
+}
 // ####END-CART####

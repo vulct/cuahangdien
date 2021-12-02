@@ -175,7 +175,7 @@
                                                             <option value="10+">10+</option>
                                                         </select>
 
-                                                        <label class="form-field-title"  style="top:6px;font-size:13px;">
+                                                        <label class="form-field-title" style="top:6px;font-size:13px;">
                                                             Số lượng
                                                         </label>
                                                         <svg class="svg-chevron-down"></svg>
@@ -195,7 +195,6 @@
                                             </span>
                                             </button>
                                         </div>
-                                    {{var_dump($info->map_address)}}
                                     <div class="box-feeship">
                                         <h6>Đặt hàng và nhận báo giá</h6>
                                         <p>Xem <a href="{{isset($page['buy_product']) ? route('pages.chitiet',$page['buy_product']->slug) : '#'}}"><i>Hướng dẫn mua hàng</i></a> hoặc <a href="{{isset($page['warranty']) ? route('pages.chitiet', $page['warranty']->slug) : '#'}}"><i>Bảo hành &amp; đổi trả</i></a></p>

@@ -62,7 +62,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function deleteItemInCart(Request $request)
+    public function deleteItemInCart(Request $request): JsonResponse
     {
         $id = (int)$request->item;
         $result = $this->cartService->delete($id);
@@ -71,6 +71,43 @@ class CartController extends Controller
             return response()->json(['message' => $message, 'error' => false]);
         }
         $message = 'Xoá sản phẩm không thành công!!!';
+        return response()->json(['message' => $message, 'error' => true]);
+    }
+
+    public function update(Request $request)
+    {
+        $id = (int)$request->item;
+
+        $qty = (int)$request->qty;
+
+        $result = $this->cartService->update($id,$qty);
+
+        if ($result){
+
+            $carts = Session::get('carts');
+            // total cart
+            $total = 0;
+            $subtotal = 0;
+            foreach ($carts as $key => $cart){
+                $price = $cart['discount'] != 0 ? ($cart['price'] - $cart['price']*$cart['discount']/100)*$cart['qty'] : $cart['price']*$cart['qty'];
+                $total += $cart['qty']*$price;
+                // subtotal of id
+                if ($key == $id){
+                    $subtotal += $price*$cart['qty'];
+                }
+            }
+
+            $message = 'Cập nhật số lượng sản phẩm thành công!!!';
+
+            return response()->json([
+                'key' => $id,
+                'total' => number_format($total),
+                'subtotal' => number_format($subtotal),
+                'message' => $message,
+                'error' => false
+            ]);
+        }
+        $message = 'Cập nhật số lượng sản phẩm không thành công!!!';
         return response()->json(['message' => $message, 'error' => true]);
     }
 }

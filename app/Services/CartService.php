@@ -72,6 +72,8 @@ class CartService
 
         if (is_null($carts)) return [];
 
+        $product_list = [];
+
         foreach ($carts as $cart){
             $product_list[] = $cart['product'];
         }
@@ -87,6 +89,21 @@ class CartService
             Session::put('carts', $carts);
         }catch (Exception $exception){
             return false;
+        }
+
+        return true;
+    }
+
+    public function update($id, $qty): bool
+    {
+        $carts = Session::get('carts');
+
+        $exists = Arr::exists($carts, $id);
+
+        if ($exists) {
+            $carts[$id]['qty'] = $qty;
+            Session::put('carts', $carts);
+            return true;
         }
 
         return true;
