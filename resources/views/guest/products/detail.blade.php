@@ -195,11 +195,11 @@
                                             </span>
                                             </button>
                                         </div>
-
+                                    {{var_dump($info->map_address)}}
                                     <div class="box-feeship">
                                         <h6>Đặt hàng và nhận báo giá</h6>
                                         <p>Xem <a href="{{isset($page['buy_product']) ? route('pages.chitiet',$page['buy_product']->slug) : '#'}}"><i>Hướng dẫn mua hàng</i></a> hoặc <a href="{{isset($page['warranty']) ? route('pages.chitiet', $page['warranty']->slug) : '#'}}"><i>Bảo hành &amp; đổi trả</i></a></p>
-                                        @if($info->map_address)
+                                        @if(isset($info->map_address))
                                             <div>
                                                 <a class="RRQQWe" href="{{$info->map_address}}" target="_blank">
                                                     <div class="fbNEY">
@@ -399,10 +399,25 @@
 <script src="{{asset('manage/plugins/toastr/toastr.min.js')}}"></script>
 
 <script src="{{asset('guest/scripts/products.js')}}"></script>
-
+<script>
+var stickWidth = 1024;
+var win = $(window);
+var menu = $(".product-gallery");
+var options = {
+    offset_top: 75
+};
+if (win.width() > stickWidth) {
+    menu.stick_in_parent(options);
+}
+win.resize(function () {
+    if (win.width() > stickWidth) {
+        menu.stick_in_parent(options);
+    } else {
+        menu.trigger("sticky_kit:detach");
+    }
+});
+</script>
 <script src="{{asset('guest/scripts/comments.js')}}"></script>
 
-{{--<!-- Notify -->--}}
-{{--@include('admin.layouts.alert')--}}
 
 @endpush

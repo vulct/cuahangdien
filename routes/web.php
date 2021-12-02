@@ -79,6 +79,8 @@ Route::get('/cart', [CartController::class, 'show'])->name('cart');
 
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.store');
 
+Route::get('/cart/delete/{item}', [CartController::class, 'deleteItemInCart'])->name('cart.delete');
+
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 #====ROUTE FOR ADMIN====#

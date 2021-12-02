@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\Admin\ProductService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
+use PHPUnit\Exception;
 
 class CartService
 {
@@ -33,7 +34,14 @@ class CartService
 
         if (is_null($carts)) {
             Session::put('carts', [
-                $attribute_id => ['product' =>$product_id,'qty' => $qty]
+                $attribute_id => [
+                    'product' =>$product_id,
+                    'code' => $check_attr_of_product->codename,
+                    'type' => $check_attr_of_product->type_name,
+                    'price' => $check_attr_of_product->price,
+                    'discount' => $check_attr_of_product->discount,
+                    'qty' => $qty
+                ]
             ]);
             return true;
         }
@@ -46,9 +54,40 @@ class CartService
             return true;
         }
 
+        $carts[$attribute_id]['product'] = $product_id;
+        $carts[$attribute_id]['code'] = $check_attr_of_product->codename;
+        $carts[$attribute_id]['type'] = $check_attr_of_product->type_name;
+        $carts[$attribute_id]['price'] = $check_attr_of_product->price;
+        $carts[$attribute_id]['discount'] = $check_attr_of_product->discount;
         $carts[$attribute_id]['qty'] = $qty;
 
         Session::put('carts', $carts);
+
+        return true;
+    }
+
+    public function getProduct()
+    {
+        $carts = Session::get('carts');
+
+        if (is_null($carts)) return [];
+
+        foreach ($carts as $cart){
+            $product_list[] = $cart['product'];
+        }
+
+        return $this->productService->getProductWhereIn($product_list);
+    }
+
+    public function delete($id): bool
+    {
+        $carts = Session::get('carts');
+        try {
+            unset($carts[$id]);
+            Session::put('carts', $carts);
+        }catch (Exception $exception){
+            return false;
+        }
 
         return true;
     }

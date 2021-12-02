@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Admin\ProductService;
 use App\Services\CartService;
+use Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -37,6 +38,7 @@ class CartController extends Controller
         $carts = Session::get('carts')[$attribute_id];
 
         $product = $this->productService->getDetailProduct($product_id);
+
         $attribute = $this->productService->getAttributesOfProduct($product_id, $attribute_id);
 
         $html = view('guest.layouts.add-cart', compact(['carts','product','attribute']))->render();
@@ -47,5 +49,28 @@ class CartController extends Controller
     public function checkout()
     {
         //
+    }
+
+    public function show()
+    {
+        $products = $this->cartService->getProduct();
+
+        return view('carts.list', [
+            'title' => 'Sản phẩm đã chọn',
+            'products' => $products,
+            'carts' => Session::get('carts')
+        ]);
+    }
+
+    public function deleteItemInCart(Request $request)
+    {
+        $id = (int)$request->item;
+        $result = $this->cartService->delete($id);
+        if ($result){
+            $message = 'Xoá sản phẩm thành công!!!';
+            return response()->json(['message' => $message, 'error' => false]);
+        }
+        $message = 'Xoá sản phẩm không thành công!!!';
+        return response()->json(['message' => $message, 'error' => true]);
     }
 }

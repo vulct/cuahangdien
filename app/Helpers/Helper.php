@@ -160,6 +160,7 @@ class Helper
         return str_replace( $timeEng, $timeVie, $time);
     }
 
+    //get price in add-cart
     public static function price($price = 0, $discount = 0, $qty = 1): string
     {
         if ($discount > 0) return number_format(($price - $price * $discount/100)*$qty);

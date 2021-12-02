@@ -19,7 +19,7 @@
                     <div class="atc--product-details">
                         <h2 class="atc--product-details--title" data-atc-banner-product-title="">{{$product->name}} × {{$carts['qty']}}</h2>
                         <span class="atc--product-details--options" data-atc-banner-product-options="">{{is_null($attribute->typename) ? $attribute->typename : $attribute->codename}}</span>
-                        <span class="atc--product-details--price money" data-atc-banner-product-price="">{{App\Helpers\Helper::price($attribute->price, $attribute->discount, 1)}} VND</span></div>
+                        <span class="atc--product-details--price money" data-atc-banner-product-price="">{{App\Helpers\Helper::price($attribute->price, $attribute->discount)}} VND</span></div>
                 </div>
             </div>
             <div class="atc-banner--cart">

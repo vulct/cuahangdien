@@ -36,7 +36,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|ProductAttributes whereSize($value)
  * @method static Builder|ProductAttributes whereTypeName($value)
  * @method static Builder|ProductAttributes whereUpdatedAt($value)
- * @mixin Eloquent
+ * @mixin Builder
  */
 class ProductAttributes extends Model
 {

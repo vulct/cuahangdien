@@ -319,7 +319,7 @@ class ProductService
 
     public function getProductDiscount()
     {
-        return Product::withExists(['attributes' => function ($query) {
+        return Product::with(['attributes' => function ($query) {
             $query->where('isDelete', 0)
                 ->where('discount', '>=', 40.00);
         }])
@@ -329,7 +329,7 @@ class ProductService
 
     public function getDetailProduct($id)
     {
-        return Product::withExists(['attributes' => function ($query) {
+        return Product::with(['attributes' => function ($query) {
             $query->where('isDelete', 0);},
             'category' => function ($query) {
                 $query->where(['isDelete' => 0, 'active' => 1]);},
@@ -342,5 +342,16 @@ class ProductService
     {
         return ProductAttributes::where(['id' => $attribute, 'isDelete' => 0, 'product_id' => $product])
             ->first();
+    }
+
+    public function getProductWhereIn($id)
+    {
+        return Product::with(['attributes' => function ($query) {
+            $query->where('isDelete', 0);
+            }])
+            ->where(['isDelete' => 0, 'active' => 1])
+            ->whereIn('id',$id)
+            ->get();
+
     }
 }

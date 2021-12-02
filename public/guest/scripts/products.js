@@ -1,20 +1,3 @@
-var stickWidth = 1024;
-var win = $(window);
-var menu = $(".product-gallery");
-var options = {
-    offset_top: 75
-};
-if (win.width() > stickWidth) {
-    menu.stick_in_parent(options);
-}
-win.resize(function () {
-    if (win.width() > stickWidth) {
-        menu.stick_in_parent(options);
-    } else {
-        menu.trigger("sticky_kit:detach");
-    }
-});
-
 $('.spr-summary-actions-newreview').click(function() {
     $('#form').toggle();
 });
@@ -94,12 +77,44 @@ $('#add-cart').on('submit', function (e) {
         error: function(xhr) {
             submit.removeClass("processing");
             submit.prop("disabled", false);
-            var err = JSON.parse(xhr.responseText);
-            if (xhr.error === true) {
-                toastr.error(err.message)
-            }
-            console.log(err);
+            console.log(xhr);
         }
     });
 })
+
+function removeItem(url) {
+    $.ajax({
+        type: 'GET',
+        url : url,
+        success:function(response){
+            $("#alert-loading").remove();
+            if (response.error === true) {
+                toastr.error(response.message);
+            }else{
+                toastr.success(response.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }
+            console.log(response);
+        },
+        beforeSend: function(){
+            ShowLoading();
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    });
+}
+
+function ShowLoading() {
+    let element_loading = '<div id="alert-loading" style="position: fixed; top: 0; left: 0; z-index: 9999999; width: 100%; text-align: center; background: rgba(98, 93, 81, 0.62) none repeat scroll 0% 0%; height: 100%;/*! display: inline;">' +
+        '<div style="text-align: center;position: relative;top: 50%;-ms-transform: translateY(-50%);-webkit-transform: translateY(-50%);transform: translateY(-50%);">' +
+        '    Loading...<br>' +
+        '<img src="/guest/images/icon/loading.gif" alt="loading" style="display: inline-block;width: 26px;height: 26px;"/>' +
+        '</div>' +
+        '</div>';
+    $('#arcontactus').after(element_loading);
+    return true;
+}
 // ####END-CART####
