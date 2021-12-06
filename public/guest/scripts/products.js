@@ -75,6 +75,12 @@ $('#add-cart').on('submit', function (e) {
             submit.prop("disabled", true);
         },
         error: function(xhr) {
+            if (xhr.status === 419){
+                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }
             submit.removeClass("processing");
             submit.prop("disabled", false);
             console.log(xhr);
@@ -102,13 +108,19 @@ function removeItem(url) {
             ShowLoading();
         },
         error: function(xhr) {
+            if (xhr.status === 419){
+                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }
             console.log(xhr);
         }
     });
 }
 
 function ShowLoading() {
-    let element_loading = '<div id="alert-loading" style="position: fixed; top: 0; left: 0; z-index: 9999999; width: 100%; text-align: center; background: rgba(98, 93, 81, 0.62) none repeat scroll 0% 0%; height: 100%;/*! display: inline;">' +
+    let element_loading = '<div id="alert-loading" style="position: fixed; top: 0; left: 0; z-index: 9999999; width: 100%; text-align: center; background: rgba(98, 93, 81, 0.62) none repeat scroll 0 0; height: 100%;">' +
         '<div style="text-align: center;position: relative;top: 50%;-ms-transform: translateY(-50%);-webkit-transform: translateY(-50%);transform: translateY(-50%);">' +
         '    Loading...<br>' +
         '<img src="/guest/images/icon/loading.gif" alt="loading" style="display: inline-block;width: 26px;height: 26px;"/>' +
@@ -130,13 +142,20 @@ function updateItem(url, key) {
             }else{
                 toastr.success(response.message);
                 let id = response.key;
-                $('#cart-subtotal-'+id).empty().text(response.subtotal + ' VND');
+                $('#cart-subtotal-' + id).empty().text(response.subtotal + ' VND');
 
-                $("#cart-total").empty().text(response.total + ' VND');
+                $(".cart-money-total").empty().text(response.total + ' VND');
             }
             console.log(response);
         },
         error: function(xhr) {
+            if (xhr.status === 419){
+                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }
+            console.log(xhr.status);
             console.log(xhr);
         }
     });

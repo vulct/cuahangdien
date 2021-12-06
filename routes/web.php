@@ -83,7 +83,8 @@ Route::get('/cart/delete/{item}', [CartController::class, 'deleteItemInCart'])->
 
 Route::get('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
 
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout.index');
+Route::post('/checkout', [CartController::class, 'addOrder'])->name('checkout.store');
 
 #====ROUTE FOR ADMIN====#
 

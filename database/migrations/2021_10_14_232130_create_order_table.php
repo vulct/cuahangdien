@@ -22,16 +22,25 @@ class CreateOrderTable extends Migration
             $table->string('province', 120);
             $table->string('address', 255);
             $table->string('description', 255);
-            $table->decimal('total', 13,2);
+            $table->decimal('total', 13);
             $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('shipping_status')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
+            #Status
+            //0. Đang xử lý
+            //1. Đang báo giá
+            //2. Đã báo giá
+            //3. Đang giao hàng
+            //4. Đã thanh toán
+            //5. Chưa thanh toán
+            //6. Thành công
+            //7. Huỷ
         });
 
         Schema::table('order', function (Blueprint $table) {
             $table->foreignId('shipping_method_id')
-                ->nullable()->default(0)->index()
+                ->nullable()->default(null)->index()
                 ->constrained();
         });
     }

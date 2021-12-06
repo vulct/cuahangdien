@@ -355,5 +355,8 @@ class ProductService
 
     }
 
-
+    public function getLatest()
+    {
+        return Product::latest('created_at')->where(['isDelete' => 0, 'active' => 1])->first();
+    }
 }

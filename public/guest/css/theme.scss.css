@@ -11414,6 +11414,7 @@ ul> li> a >.filter-text > span{
     }
 
 .product-form--atc {
+    display: flex;
     margin-top: 4px;
     font-size: 0;
 }

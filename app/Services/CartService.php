@@ -2,18 +2,24 @@
 
 namespace App\Services;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Services\Admin\ProductService;
+use App\Services\Admin\ShippingService;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use PHPUnit\Exception;
 
 class CartService
 {
     protected $productService;
+    protected $shippingService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ShippingService $shippingService)
     {
         $this->productService = $productService;
+        $this->shippingService = $shippingService;
     }
 
     public function create($product_id, $attribute_id, $qty): bool
@@ -106,6 +112,89 @@ class CartService
             return true;
         }
 
+        return false;
+    }
+
+    public function addOrder($request): bool
+    {
+        try {
+            DB::beginTransaction();
+            DB::enableQueryLog();
+            $carts = Session::get('carts');
+
+            if (is_null($carts))
+                return false;
+
+            $total = $this->totalCart();
+
+            $shipping = $this->shippingService->getMethodByID($request->shipping_status);
+
+            $product_latest = $this->productService->getLatest();
+
+            $code =   '#DH'.str_pad($product_latest->id + 1, 8, "0", STR_PAD_LEFT);
+
+            $code_name  = substr(str_shuffle("QWERTYUIOPASDFGHJKLZXCVBNM0123456789"), 0, 10);
+
+            $order = Order::create([
+                'code' => $code,
+                'code_name' => $code_name,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'province' => $request->province,
+                'address' => $request->address,
+                'email' => $request->email,
+                'description' => $request->description ?? "" ,
+                'total' => $total,
+                'status' => 0,
+                'shipping_method_id' => $shipping->id
+            ]);
+
+            $this->insertOrderItem($carts, $order->id);
+
+            DB::commit();
+            #Queue
+            #SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
+
+            Session::forget('carts');
+            return $order->code_name;
+        } catch (\Exception $err) {
+            DB::rollBack();
+            return false;
+        }
+
+    }
+
+    public function insertOrderItem($carts, $order_id): bool
+    {
+        try {
+            foreach ($carts as $key => $cart) {
+                $price = $cart['discount'] != 0 ? $cart['price'] - $cart['price'] * ($cart['discount'] / 100) : $cart['price'];
+                OrderItem::create([
+                    'quantity' => $cart['qty'],
+                    'price' => $price,
+                    'discount' => $cart['discount'],
+                    'product_attribute_id' => $key,
+                    'order_id' => $order_id
+                ]);
+            }
+        }catch (\Exception $exception){
+            return false;
+        }
         return true;
+    }
+
+    public function totalCart()
+    {
+        $carts = Session::get('carts');
+        // total cart
+        $total = 0;
+        if ($carts){
+            foreach ($carts as $cart){
+                $total += $cart['discount'] != 0 ? ($cart['price'] - $cart['price']*($cart['discount']/100))*$cart['qty'] : $cart['price']*$cart['qty'];
+            }
+        }
+
+        return $total;
     }
 }

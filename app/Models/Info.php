@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Info
@@ -26,32 +28,32 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $facebook
  * @property string|null $zalo
  * @property string|null $sale
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Info newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Info newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Info query()
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereBusinessLicense($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereFacebook($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereHotline1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereHotline2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereIcon($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereKeyword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereMapAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereMapIframe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereSale($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereTaxCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Info whereZalo($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Info newModelQuery()
+ * @method static Builder|Info newQuery()
+ * @method static Builder|Info query()
+ * @method static Builder|Info whereAddress($value)
+ * @method static Builder|Info whereBusinessLicense($value)
+ * @method static Builder|Info whereCreatedAt($value)
+ * @method static Builder|Info whereDescription($value)
+ * @method static Builder|Info whereEmail($value)
+ * @method static Builder|Info whereFacebook($value)
+ * @method static Builder|Info whereHotline1($value)
+ * @method static Builder|Info whereHotline2($value)
+ * @method static Builder|Info whereIcon($value)
+ * @method static Builder|Info whereId($value)
+ * @method static Builder|Info whereKeyword($value)
+ * @method static Builder|Info whereLogo($value)
+ * @method static Builder|Info whereMapAddress($value)
+ * @method static Builder|Info whereMapIframe($value)
+ * @method static Builder|Info whereName($value)
+ * @method static Builder|Info wherePhone($value)
+ * @method static Builder|Info whereSale($value)
+ * @method static Builder|Info whereTaxCode($value)
+ * @method static Builder|Info whereUpdatedAt($value)
+ * @method static Builder|Info whereZalo($value)
+ * @mixin Builder
  */
 class Info extends Model
 {

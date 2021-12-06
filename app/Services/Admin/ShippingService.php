@@ -12,7 +12,7 @@ class ShippingService
         return ShippingMethod::orderbyDesc('id')->where('isDelete', 0)->get();
     }
 
-    public function create($request)
+    public function create($request): bool
     {
         try {
 
@@ -32,7 +32,7 @@ class ShippingService
 
     }
 
-    public function destroy($request)
+    public function destroy($request): bool
     {
         $id = $request->input('slug');
 
@@ -45,7 +45,7 @@ class ShippingService
         return false;
     }
 
-    public function update($shippingMethod, $shippingMethodRequest)
+    public function update($shippingMethod, $shippingMethodRequest): bool
     {
         try {
 
@@ -59,6 +59,16 @@ class ShippingService
             Session::flash('error', $exception->getMessage());
             return false;
         }
+    }
+
+    public function getMethodIsActive()
+    {
+        return ShippingMethod::where(['active' => 1, 'isDelete' => 0])->latest('updated_at')->get();
+    }
+
+    public function getMethodByID($id)
+    {
+        return ShippingMethod::where(['id' => $id,'active' => 1 ,'isDelete' => 0])->first();
     }
 
 }

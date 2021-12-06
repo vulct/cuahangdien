@@ -11,9 +11,9 @@ class OrderRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,36 @@ class OrderRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:200'
+            ],
+            'email' => 'required|email|max:120',
+            'phone' => 'required|max:12|regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
+            'city' => 'numeric|required',
+            'province' => 'required|numeric',
+            'address' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'shipping_status' => 'required|numeric|max:10',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'họ tên',
+            'email' => 'email',
+            'phone' => 'số điện thoại',
+            'city' => 'tỉnh/thành phố',
+            'province' => 'quận huyện',
+            'address' => 'địa chỉ',
+            'description' => 'ghi chú',
+            'shipping_status' => 'phương thức thanh toán',
         ];
     }
 }

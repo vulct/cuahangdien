@@ -34,7 +34,7 @@ class PageService
             // get page with type
             $page_type = $this->getPageWithType($type);
 
-            if ($page_type->isEmpty() && $page_type->count() > 1){
+            if (isset($page_type) && $page_type->count() < 1){
                 Page::create([
                     "name" => (string)$request->input('name'),
                     "content" => (string)$request->input('content'),

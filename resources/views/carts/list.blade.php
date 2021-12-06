@@ -4,7 +4,7 @@
     <main class="site-main">
         <div id="shopify-section-static-cart" class="shopify-section cart--section">
             @if($carts)
-                <form action="{{route('checkout')}}" method="get">
+                <form action="{{route('checkout.index')}}" method="get">
                     <header class="cart-title">
                         <div class="cart-title-left">
                             <h1>Sản phẩm đã chọn</h1>
@@ -14,10 +14,10 @@
                             <div class="cart-title-total--large">
                                 <div class="cart-title-total" data-cart-title-total="">
                                     Tạm tính
-                                    <span class="money">1,876,620 VND</span>
+                                    <span class="money cart-money-total">{{number_format($total)}} VND</span>
                                 </div>
                             </div>
-                            <a class="button-primary cart-title-button" href="{{route('checkout')}}" aria-label="Checkout">
+                            <a class="button-primary cart-title-button" href="{{route('checkout.index')}}" aria-label="Checkout">
                                 <svg aria-hidden="true" focusable="false" width="28" height="26" viewBox="0 10 28 26" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="currentColor" fill-rule="evenodd" d="M26.15 14.488L6.977 13.59l-.666-2.661C6.159 10.37 5.704 10 5.127 10H1.213C.547 10 0 10.558 0 11.238c0 .68.547 1.238 1.213 1.238h2.974l3.337 13.249-.82 3.465c-.092.371 0 .774.212 1.053.243.31.576.465.94.465H22.72c.667 0 1.214-.558 1.214-1.239 0-.68-.547-1.238-1.214-1.238H9.434l.333-1.423 12.135-.589c.455-.03.85-.31 1.032-.712l4.247-9.286c.181-.34.151-.774-.06-1.144-.212-.34-.577-.589-.97-.589zM22.297 36c-1.256 0-2.275-1.04-2.275-2.321 0-1.282 1.019-2.322 2.275-2.322s2.275 1.04 2.275 2.322c0 1.281-1.02 2.321-2.275 2.321zM10.92 33.679C10.92 34.96 9.9 36 8.646 36 7.39 36 6.37 34.96 6.37 33.679c0-1.282 1.019-2.322 2.275-2.322s2.275 1.04 2.275 2.322z"></path>
                                 </svg>
@@ -27,7 +27,7 @@
                     </header>
                     <section class="cartitems--container ">
                         <div class="cartitems">
-                            @php $i = 1; $total = 0; @endphp
+                            @php $i = 1; @endphp
                             @foreach($carts as $key => $cart)
                                 @foreach($products as $product)
                                     @if($cart['product'] === $product->id)
@@ -96,14 +96,7 @@
                                                 </div>
                                             </div>
                                         </article>
-                                                @php
-                                                    $i++;
-                                                    if ($cart['discount'] != 0){
-                                                        $total += ($cart['price'] - $cart['price']*$cart['discount']/100)*$cart['qty'];
-                                                    }else{
-                                                        $total += $cart['price']*$cart['qty'];
-                                                    }
-                                                @endphp
+                                                @php $i++; @endphp
                                     @endif
                                 @endforeach
                             @endforeach
@@ -111,7 +104,7 @@
                             <div class="cart-total">
                                 <div class="cart-subtotal">
                                     <span>Tạm tính</span>
-                                    <span class="money" id="cart-total">{{number_format($total)}} <span>VND</span></span>
+                                    <span class="money cart-money-total">{{number_format($total)}} <span>VND</span></span>
                                 </div>
                                 <div class="cart-shipping">
                                     <br />
@@ -119,7 +112,7 @@
 
                                 </div>
                                 <div class="cart-checkout">
-                                    <a class="button-primary" href="{{route('checkout')}}" name="checkout" aria-label="Checkout">
+                                    <a class="button-primary" href="{{route('checkout.index')}}" name="checkout" aria-label="Checkout">
                                         Gửi Báo Giá
                                     </a>
                                     <a class="cart-continue" href="{{route('products')}}" style="color: red;font-weight: bold;">
