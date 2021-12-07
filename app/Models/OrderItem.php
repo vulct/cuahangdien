@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -31,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|OrderItem whereUpdatedAt($value)
  * @mixin Builder
  */
+
 class OrderItem extends Model
 {
     use HasFactory;
@@ -42,4 +44,9 @@ class OrderItem extends Model
         'product_attribute_id',
         'order_id'
     ];
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

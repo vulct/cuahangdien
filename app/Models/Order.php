@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -22,6 +23,7 @@ class Order extends Model
     protected $table = 'order';
 
     protected $fillable = [
+        'code_name',
         'code',
         'email',
         'name',
@@ -40,6 +42,11 @@ class Order extends Model
     public function shipping(): HasOne
     {
         return $this->hasOne(ShippingMethod::class, 'id', 'shipping_method_id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public function getRouteKeyName(): string
