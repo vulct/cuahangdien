@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -31,6 +32,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|OrderItem whereQuantity($value)
  * @method static Builder|OrderItem whereUpdatedAt($value)
  * @mixin Builder
+ * @property-read \App\Models\Order $order
+ * @property-read \App\Models\ProductAttributes|null $product_attribute
  */
 
 class OrderItem extends Model
@@ -48,5 +51,10 @@ class OrderItem extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function product_attribute(): HasOne
+    {
+        return $this->hasOne(ProductAttributes::class,'id','product_attribute_id');
     }
 }
