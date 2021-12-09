@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Jobs\SendMail;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\Admin\ProductService;
@@ -9,17 +11,19 @@ use App\Services\Admin\ShippingService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use PHPUnit\Exception;
+use Mail;
 
 class CartService
 {
     protected $productService;
     protected $shippingService;
+    protected $orderService;
 
-    public function __construct(ProductService $productService, ShippingService $shippingService)
+    public function __construct(ProductService $productService, ShippingService $shippingService, OrderService $orderService)
     {
         $this->productService = $productService;
         $this->shippingService = $shippingService;
+        $this->orderService = $orderService;
     }
 
     public function create($product_id, $attribute_id, $qty): bool
@@ -93,7 +97,7 @@ class CartService
         try {
             unset($carts[$id]);
             Session::put('carts', $carts);
-        }catch (Exception $exception){
+        }catch (\Exception $exception){
             return false;
         }
 
@@ -115,11 +119,10 @@ class CartService
         return false;
     }
 
-    public function addOrder($request): bool
+    public function addOrder($request)
     {
         try {
             DB::beginTransaction();
-            DB::enableQueryLog();
             $carts = Session::get('carts');
 
             if (is_null($carts))
@@ -129,11 +132,11 @@ class CartService
 
             $shipping = $this->shippingService->getMethodByID($request->shipping_status);
 
-            $product_latest = $this->productService->getLatest();
+            $product_latest = $this->orderService->getLatest();
 
-            $code =   '#DH'.str_pad($product_latest->id + 1, 8, "0", STR_PAD_LEFT);
+            $code = 'DH'.str_pad($product_latest->id + 1, 8, "0", STR_PAD_LEFT);
 
-            $code_name  = substr(str_shuffle("QWERTYUIOPASDFGHJKLZXCVBNM0123456789"), 0, 10);
+            $code_name  = substr(str_shuffle("QWERTYUIOPASDFGHJKLZXCVBNM0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8);
 
             $order = Order::create([
                 'code' => $code,
@@ -150,19 +153,23 @@ class CartService
                 'shipping_method_id' => $shipping->id
             ]);
 
+            // insert item
             $this->insertOrderItem($carts, $order->id);
 
             DB::commit();
-            #Queue
-            #SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
+            //send email
+            SendMail::dispatch($this->orderService->searchByCodeName($order->code_name))->delay(now()->addSeconds(2));
+
+            // remove cart
             Session::forget('carts');
+
             return $order->code_name;
         } catch (\Exception $err) {
+            echo $err;
             DB::rollBack();
             return false;
         }
-
     }
 
     public function insertOrderItem($carts, $order_id): bool
@@ -196,5 +203,10 @@ class CartService
         }
 
         return $total;
+    }
+
+    public function sendOrderConfirmationMail($order)
+    {
+        Mail::to($order->email)->send(new OrderMail($order));
     }
 }
