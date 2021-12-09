@@ -138,7 +138,7 @@
                     <div class="site-footer-block-content accordion--content" data-accordion-content>
                         <ul class="navmenu navmenu-depth-1">
                             <li class="navmenu-item navmenu-id-shipping">
-                                <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>
+                                <a class="navmenu-link" href="{{route('tracuu')}}">Tra cứu đơn hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
                                 <a class="navmenu-link"

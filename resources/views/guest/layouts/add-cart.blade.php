@@ -28,7 +28,7 @@
                 <footer class="atc-banner--cart-footer">
                     <a class="button-secondary atc-button--viewcart" href="{{route('cart')}}"
                        data-atc-banner-cart-button=""> Xem giỏ hàng (<span>{{$carts['qty']}}</span>)
-                    </a> <a class="button-primary atc-button--checkout" href=""> Báo giá </a>
+                    </a> <a class="button-primary atc-button--checkout" href="{{route('checkout.index')}}"> Báo giá </a>
                 </footer>
             </div>
         </div>

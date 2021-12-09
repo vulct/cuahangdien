@@ -102,8 +102,8 @@
                     <i class="nav-icon  fab fa-shopify "></i>
                     <span style="text-transform: uppercase">Cửa hàng</span>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ (request()->is('admin/orders*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/orders*')) ? 'active' : '' }}">
                         <i class="nav-icon  fas fa-cart-arrow-down "></i>
                         <p>
                             Quản lý đơn hàng
@@ -112,8 +112,8 @@
                     </a>
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{route('admin.order.index')}}" class="nav-link {{ (request()->is('admin/orders*')) ? 'active' : '' }}">
                                 <i class="fas fa-shopping-cart nav-icon"></i>
                                 <p>Đơn hàng</p>
                             </a>

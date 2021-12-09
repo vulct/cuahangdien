@@ -35,7 +35,7 @@
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Đường dẫn')}}:</th>
-                                        <td><a href="{{config('app.url') . '/category/'. $cate->slug}}">{{config('app.url') . '/category/'. $cate->slug}}</a></td>
+                                        <td><a href="#">{{$cate->slug}}</a></td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Mô tả')}}:</th>

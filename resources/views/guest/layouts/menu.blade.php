@@ -49,7 +49,7 @@
                 <a class="navmenu-link" href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng tôi</a>
             </li>
             <li class="navmenu-item">
-                <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>
+                <a class="navmenu-link" href="{{route('tracuu')}}">Tra cứu đơn hàng</a>
             </li>
         </ul>
     </nav>
@@ -112,7 +112,7 @@
                     <a class="navmenu-link" href="/pages/ve-chung-toi.html">Về chúng tôi</a>
                 </li>
                 <li class="navmenu-item navmenu-id-theme-features">
-                    <a class="navmenu-link" href="/tra-cuu-don-hang.html">Tra cứu đơn hàng</a>
+                    <a class="navmenu-link" href="{{route('tracuu')}}">Tra cứu đơn hàng</a>
                 </li>
                 <li class="navmenu-item navmenu-id-theme-features">
                     <a class="navmenu-link" href="/pages/thanh-toan-van-chuyen">Thanh toán & Vận chuyển</a>

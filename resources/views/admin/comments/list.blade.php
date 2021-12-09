@@ -45,6 +45,7 @@
                                     <tbody>
                                     @php $i= 0; @endphp
                                     @foreach($comments as $key => $comment)
+                                        @if(!empty($comment->email))
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{$comment->name}}</td>
@@ -56,6 +57,7 @@
                                                 <button class="btn btn-danger btn-sm btn-delete" data-url="reviews/destroy" onclick="removeFunction('{{$comment->id}}')"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                     <tfoot>

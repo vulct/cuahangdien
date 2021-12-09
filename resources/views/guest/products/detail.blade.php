@@ -35,7 +35,7 @@
                     <div class="product-infomation">
                         <h1 class="product-title" itemprop="name">
                             {{$product->name}}
-                            @if($product->attributes[0])
+                            @if($product->attributes->first())
                             <span>{{$product->attributes[0]->codename}}</span>
                             @endif
                         </h1>
