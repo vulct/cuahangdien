@@ -76,7 +76,7 @@ $('#add-cart').on('submit', function (e) {
         },
         error: function(xhr) {
             if (xhr.status === 419){
-                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                toastr.error('Token đã hết hạn. Vui lòng chờ tải lại trang để lấy token mới.');
                 setTimeout(function () {
                     window.location.reload();
                 }, 2000);
@@ -109,7 +109,7 @@ function removeItem(url) {
         },
         error: function(xhr) {
             if (xhr.status === 419){
-                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                toastr.error('Token đã hết hạn. Vui lòng chờ tải lại trang để lấy token mới.');
                 setTimeout(function () {
                     window.location.reload();
                 }, 2000);
@@ -150,7 +150,7 @@ function updateItem(url, key) {
         },
         error: function(xhr) {
             if (xhr.status === 419){
-                toastr.error('Có lỗi xảy ra. Tải lại trang để lấy token mới.');
+                toastr.error('Token đã hết hạn. Vui lòng chờ tải lại trang để lấy token mới.');
                 setTimeout(function () {
                     window.location.reload();
                 }, 2000);
