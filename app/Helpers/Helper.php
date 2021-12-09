@@ -167,4 +167,111 @@ class Helper
         if ($price != 0)  return number_format($price*$qty);
         return 0;
     }
+
+    // get status order
+    public static function statusBillShowInAdmin($status = 0): string
+    {
+
+        switch ($status){
+            case 1:
+                $html = '<span class="d-block badge bg-secondary p-2">Đang báo giá</span>';
+                break;
+            case 2:
+                $html = '<span class="d-block badge bg-info p-2">Đã báo giá</span>';
+                break;
+            case 3:
+                $html = '<span class="d-block badge bg-primary p-2">Đang giao hàng</span>';
+                break;
+            case 4:
+                $html = '<span class="d-block badge bg-success p-2">Đã thanh toán</span>';
+                break;
+            case 5:
+                $html = '<span class="d-block badge bg-info p-2">Chưa thanh toán</span>';
+                break;
+            case 6:
+                $html = '<span class="d-block badge bg-success p-2">Thành công</span>';
+                break;
+            case 7:
+                $html = '<span class="d-block badge bg-danger p-2">Huỷ</span>';
+                break;
+            case 0:
+            default:
+                $html = '<span class="d-block badge bg-warning p-2">Đang xử lý</span>';
+                break;
+        }
+
+        return $html;
+    }
+
+    public static function statusOrder($status = 0): string
+    {
+        switch ($status){
+            case 1:
+                $html = '<span class="label label-warning">Đang báo giá</span>';
+                break;
+            case 2:
+                $html = '<span class="label label-info">Đã báo giá</span>';
+                break;
+            case 3:
+                $html = '<span class="label label-primary">Đang giao hàng</span>';
+                break;
+            case 4:
+                $html = '<span class="label label-success">Đã thanh toán</span>';
+                break;
+            case 5:
+                $html = '<span class="label label-info">Chưa thanh toán</span>';
+                break;
+            case 6:
+                $html = '<span class="label label-success">Thành công</span>';
+                break;
+            case 7:
+                $html = '<span class="label label-danger">Huỷ</span>';
+                break;
+            case 0:
+            default:
+                $html = '<span class="label label-default">Đang xử lý</span>';
+                break;
+        }
+
+        return $html;
+    }
+
+    public static function obfuscate_email($email): string
+    {
+        $em   = explode("@",$email);
+        $name = implode('@', array_slice($em, 0, count($em)-1));
+        $len  = floor(strlen($name)/2);
+        return substr($name,0, $len) . str_repeat('*', $len) . "@" . end($em);
+    }
+
+    public static function hiddenPhoneNumber($phone = "")
+    {
+        $phone_clear = preg_replace("/[^0-9]/", "", (string)$phone);
+        return preg_replace("/\\d(?=\\d{4})/","*",$phone_clear);
+    }
+
+    public static function getFullAddress($address, $province, $city): string
+    {
+        // read file json
+        // get city
+        $city_list = file_get_contents(public_path('json/tinh_tp.json'));
+        $city_decode = json_decode($city_list, true);
+        // get province
+        $province_list = file_get_contents(public_path('json/quan_huyen.json'));
+        $province_decode = json_decode($province_list, true);
+        $province_string = "";
+        $city_string = "";
+
+        foreach ($province_decode as $key => $item){
+            if ($province == (int)$key){
+                $province_string = $item['name_with_type'];
+            }
+        }
+        foreach ($city_decode as $code => $city_item){
+            if ($city == (int)$code){
+                $city_string = $city_item['name_with_type'];
+            }
+        }
+        return $address . ', ' . $province_string . ', ' . $city_string;
+    }
 }
