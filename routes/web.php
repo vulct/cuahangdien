@@ -13,10 +13,12 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 #====ROUTE FOR CUSTOMER====#
@@ -84,7 +86,15 @@ Route::get('/cart/delete/{item}', [CartController::class, 'deleteItemInCart'])->
 Route::get('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
 
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout.index');
+
 Route::post('/checkout', [CartController::class, 'addOrder'])->name('checkout.store');
+
+#Search Order
+Route::get('/tra-cuu-don-hang', [CartController::class, 'search'])->name('tracuu');
+
+Route::post('/tra-cuu-don-hang', [CartController::class, 'searchOrderByForm'])->name('tracuu.form');
+
+Route::get('/don-hang', [CartController::class, 'searchOrderByCodeName'])->name('tracuu.code');
 
 #====ROUTE FOR ADMIN====#
 
@@ -160,6 +170,15 @@ Route::middleware(['auth'])->group(function () {
             #Info Account Admin
             Route::resource('/account', AccountController::class);
             Route::post('/account', [AccountController::class, 'change'])->name('account.change');
+
+            #Order
+            Route::get('/orders',[OrderController::class,'index'])->name('order.index');
+            Route::get('/orders/detail/{code_name}',[OrderController::class,'detail'])->name('order.detail');
+            Route::get('/orders/edit/{code_name}',[OrderController::class,'edit'])->name('order.edit');
+            Route::get('/orders/show/{code_name}',[OrderController::class,'showStatus'])->name('order.show');
+            Route::post('/orders/status',[OrderController::class,'updateStatus'])->name('order.update');
+            #Print
+            Route::get('/orders/print/{code_name}',[OrderController::class,'print'])->name('order.print');
         });
     });
 
