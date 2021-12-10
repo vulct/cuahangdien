@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Cập nhật trạng thái đơn hàng #{{$order->code}}</h4>
+                <h4 class="modal-title">Cập nhật trạng thái đơn hàng <b>#{{$order->code}}</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <div class="card flex-md-row mb-4 box-shadow h-md-250">
                         <div class="card-body d-flex flex-column align-items-start">
-                            <div class="table-responsive">
+                            <div class="table">
                                 <form id="update-status" action="{{route('admin.order.update')}}" method="post">
                                     @csrf
                                     <div class="form-group row">
