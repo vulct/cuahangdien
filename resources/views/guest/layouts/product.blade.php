@@ -18,7 +18,7 @@
                             @foreach($data['brands'][$category->id] as $brand)
                                 @if($brand->category_id === $category->id)
                                     <li>
-                                        <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html"><img
+                                        <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}"><img
                                                 data-src="{{asset($brand->image)}}" class="lazy"
                                                 src="{{asset($brand->image)}}" alt="{{$category->name}}"/></a>
                                     </li>
@@ -33,7 +33,7 @@
                         <article class='productgrid--item imagestyle--natural productitem--emphasis' data-product-item
                          tabindex='1'>
                     <div class='productitem' data-product-item-content>
-                        <a class='productitem--image-link' href='/products/{{$product->slug}}.html'>
+                        <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                             <figure class='productitem--image' data-product-item-image>
                                 <img alt='{{$product->name}}'
                                      src='{{$product->image}}' width='350' height='350'>
@@ -42,8 +42,8 @@
                         <div class='productitem--info'>
                             <div class='productitem--price'>
                                 @if(isset($product['attributes']))
-                                    @if($product['attributes'])
-                                <div class='price--compare-at visible' data-price-compare-at>
+                                    @if($product['attributes'][0]['discount'] > 0)
+                                    <div class='price--compare-at visible' data-price-compare-at>
                                     <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
                                 </div>
                                 <span class='productitem--badge badge--sale' data-badge-sales><span
@@ -72,7 +72,7 @@
                                     @endif
                             </div>
                             <h4 class='productitem--title'>
-                                <a href='/products/{{$product->slug}}.html'>
+                                <a href='{{route('products.detail',$product->slug)}}'>
                                     {{$product->name}}
                                 </a>
                             </h4>

@@ -17,9 +17,9 @@ class TariffRequest extends FormRequest
                 'max:200'
             ],
             'language' => 'string|nullable|max:100',
-            'link_download' => 'required',
+            'link_download' => 'required|max:200',
             'brand_id' => 'numeric|required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'slug' => [
                 'required',
                 'min:3',

@@ -31,7 +31,7 @@ class OrderController extends Controller
 
         if ($order_detail){
             return view('admin.orders.detail', [
-                'title' => 'Chi tiết đơn hàng #' . $order_detail->code,
+                'title' => 'Chi tiết đơn hàng #' . $code_name->code,
                 'order' => $order_detail
             ]);
         }

@@ -40,12 +40,12 @@ class ProductRequest extends FormRequest
             'size' => 'nullable|max:120|string',
             'price' => 'integer',
             'discount' => 'numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'slug' => [
                 'required',
                 'min:3',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                'max:255',
+                'max:120',
                 Rule::unique('products')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })
@@ -59,7 +59,7 @@ class ProductRequest extends FormRequest
             $rules['slug'] = [
                 'required',
                 'string',
-                'max:255',
+                'max:120',
                 Rule::unique('products')->where(function ($query) {
                     $query->where('isDelete', 0);
                 })->ignore($this->product->id)

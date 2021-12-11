@@ -167,7 +167,7 @@
                             <li>
                                 <div class="featured">
                                     <div class="cover">
-                                        <a href="/posts/{{$post->slug}}.html"
+                                        <a href="{{route('posts',$post->slug)}}"
                                            title="{{$post->name}}">
                                             <img
                                                 src="{{asset($post->image)}}"
@@ -177,7 +177,7 @@
                                     </div>
                                     <header class="overlay">
                                         <div class="heading">
-                                            <a href="/posts/{{$post->slug}}.html">{{$post->name}}</a>
+                                            <a href="{{route('posts',$post->slug)}}">{{$post->name}}</a>
                                         </div>
                                     </header>
                                 </div>

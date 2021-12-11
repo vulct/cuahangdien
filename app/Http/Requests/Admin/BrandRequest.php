@@ -31,8 +31,8 @@ class BrandRequest extends FormRequest
                 'max:100'
             ],
             'meta_title' => 'string|nullable|max:100',
-            'description' => 'string|nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'string|nullable|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'slug' => [
                 'required',
                 'min:3',

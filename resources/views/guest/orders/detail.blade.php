@@ -426,27 +426,11 @@
     </div>
 </div>
 <style>
-    .ssuport {
-        padding: 8px 8px 4px;
-        background: cornsilk;
-    }
-
-    .ssuport:before, .ssuport:after {
-        content: "";
-        clear: both;
-        display: block;
-    }
-
     .ssuport img {
         width: 90px;
         float: left;
         margin-right: 15px;
         border-radius: 50%;
-    }
-
-    .ssuport .sname {
-        font-size: 17px;
-        font-weight: bold;
     }
 
     .ssuport > div {

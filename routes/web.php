@@ -73,9 +73,6 @@ Route::post('/contact/send', [CommentController::class, 'sendContact'])->name('c
 #Search
 Route::get('/search', [SearchController::class,'resultSearch'])->name('search');
 
-#Pages
-Route::get('/pages/{page}.html', [PageController::class,'detail'])->name('pages.chitiet');
-
 #Cart
 Route::get('/cart', [CartController::class, 'show'])->name('cart');
 
@@ -96,6 +93,9 @@ Route::post('/tra-cuu-don-hang', [CartController::class, 'searchOrderByForm'])->
 
 Route::get('/don-hang', [CartController::class, 'searchOrderByCodeName'])->name('tracuu.code');
 
+#Pages
+Route::get('/pages/{page}.html',[PageController::class, 'view'])->name('pages');
+
 #====ROUTE FOR ADMIN====#
 
 Route::get('/admin/auth/login', [LoginController::class, 'index'])->name('login');
@@ -106,7 +106,10 @@ Route::middleware(['auth'])->group(function () {
     Route::name('admin.')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
             Route::get('/dashboard', [HomeController::class, 'index']);
+
+            Route::get('/load_data',[HomeController::class, 'getDataChart'])->name('chart');
 
             #Categories of products
             Route::resource('/categories', CategoryController::class);
@@ -181,7 +184,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/orders/print/{code_name}',[OrderController::class,'print'])->name('order.print');
         });
     });
-
 });
 
 

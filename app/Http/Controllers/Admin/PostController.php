@@ -7,13 +7,9 @@ use App\Http\Requests\Admin\PostRequest;
 use App\Models\Post;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\PostService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
@@ -27,11 +23,6 @@ class PostController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
     public function index()
     {
         return view('admin.posts.list', [
@@ -40,11 +31,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
     public function create()
     {
         return view('admin.posts.add', [
@@ -53,24 +39,12 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param PostRequest $request
-     * @return RedirectResponse
-     */
-    public function store(PostRequest $request)
+    public function store(PostRequest $request): RedirectResponse
     {
         $this->postService->create($request);
         return redirect()->route('admin.posts.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Post $post
-     * @return Application|Factory|View
-     */
     public function edit(Post $post)
     {
         return view('admin.posts.edit', [
@@ -80,14 +54,8 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Post $post
-     * @return RedirectResponse
-     */
-    public function update(PostRequest $request, Post $post)
+
+    public function update(PostRequest $request, Post $post): RedirectResponse
     {
         $result = $this->postService->update($post, $request);
 
@@ -97,13 +65,8 @@ class PostController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Post $post
-     * @return JsonResponse
-     */
-    public function destroy(Request $request)
+
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->postService->destroy($request);
 

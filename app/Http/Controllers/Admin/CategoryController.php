@@ -22,11 +22,6 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
     public function index()
     {
         return view('admin.categories.list', [
@@ -34,10 +29,6 @@ class CategoryController extends Controller
             'categories' => $this->categoryService->get()
         ]);
     }
-
-    /**
-     * Get category of posts
-     */
 
     public function getCategoriesOfPost ()
     {
@@ -48,17 +39,11 @@ class CategoryController extends Controller
         ]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
     public function create()
     {
         return view('admin.categories.add', [
             'title' => 'Thêm mới danh mục',
-            'categories' => $this->categoryService->get(1,0)
+            'categories' => $this->categoryService->get(1)
         ]);
     }
 
@@ -71,12 +56,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CategoryRequest $request
-     * @return RedirectResponse
-     */
     public function store(CategoryRequest $request): RedirectResponse
     {
         $this->categoryService->create($request);
@@ -90,17 +69,11 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories_post');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Category $category
-     * @return Application|Factory|View
-     */
     public function show(Category $category)
     {
 
         return view('admin.categories.detail', [
-            'categories' => $this->categoryService->get(1,0),
+            'categories' => $this->categoryService->get(1),
             'cate' => $category
         ]);
     }
@@ -114,17 +87,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Category $category
-     * @return Application|Factory|View
-     */
     public function edit(Category $category)
     {
         return view('admin.categories.edit', [
             'title' => 'Chỉnh sửa danh mục',
-            'categories' => $this->categoryService->get(1,0),
+            'categories' => $this->categoryService->get(1),
             'cate' => $category
         ]);
     }
@@ -139,13 +106,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Category $category
-     * @param CategoryRequest $updateCategoryRequest
-     * @return RedirectResponse
-     */
     public function update(Category $category, CategoryRequest $updateCategoryRequest): RedirectResponse
     {
         $result = $this->categoryService->update($category, $updateCategoryRequest);
@@ -163,12 +123,7 @@ class CategoryController extends Controller
         }
         return back();
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param CategoryRequest $request
-     * @return JsonResponse
-     */
+
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->categoryService->destroy($request);

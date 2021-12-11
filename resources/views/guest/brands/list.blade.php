@@ -24,7 +24,7 @@
                                 <div  class="collection--brands--logo">
                                 @foreach($brands[$category->id] as $brand)
                                     @if($brand->category_id === $category->id)
-                                        <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" title="Xem sản phẩm thương hiệu {{$brand->name}}" class="brand-image">
+                                        <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}" title="Xem sản phẩm thương hiệu {{$brand->name}}" class="brand-image">
                                             <img class="lazy" src="{{asset($brand->image)}}" data-src="{{asset($brand->image)}}" alt="Thiết bị điện {{$brand->name}}">
                                         </a>
                                     @endif

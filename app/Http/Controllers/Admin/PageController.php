@@ -21,11 +21,7 @@ class PageController extends Controller
     {
         $this->pageService = $pageServices;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
+
     public function index()
     {
         return view('admin.pages.list', [
@@ -34,11 +30,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
     public function create()
     {
         return view('admin.pages.add', [
@@ -46,12 +37,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param PageRequest $request
-     * @return RedirectResponse
-     */
     public function store(PageRequest $request): RedirectResponse
     {
         $result = $this->pageService->create($request);
@@ -62,12 +47,6 @@ class PageController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Page $page
-     * @return Application|Factory|View
-     */
     public function edit(Page $page)
     {
         return view('admin.pages.edit', [
@@ -76,13 +55,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param PageRequest $request
-     * @param Page $page
-     * @return RedirectResponse
-     */
     public function update(PageRequest $request, Page $page): RedirectResponse
     {
         $result = $this->pageService->update($page, $request);
@@ -92,12 +64,6 @@ class PageController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->pageService->destroy($request);
@@ -114,8 +80,11 @@ class PageController extends Controller
         ]);
     }
 
-    public function detail(Page $page)
+    public function view(Page $page)
     {
-
+        return view('guest.pages.view',[
+            'title' => $page->name ?? 'Thông tin chi tiết',
+            'page' => $page
+        ]);
     }
 }

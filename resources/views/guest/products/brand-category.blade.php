@@ -9,7 +9,7 @@
             <div class="productgrid--outer layout--has-sidebar">
                 <div class="productgrid--sidebar" style="">
                     <div class="productgrid--sidebar-section" data-productgrid-filters-content="">
-                        <a href="/hang/{{$brand->slug}}.html" title="{{$brand->meta_title}}"><img
+                        <a href="{{route('hang.chitiet',$brand->slug)}}" title="{{$brand->meta_title}}"><img
                                 src="{{asset($brand->image)}}" class="filters-brand-image" alt="{{$brand->name}}"></a>
                         <a href="{{route('bang-gia.hang',$brand->slug)}}" class="btn button-secondary price--tag">
                             <span class="icon--tag">Catalogue &amp; Bảng giá {{$brand->name}}</span>
@@ -20,7 +20,7 @@
                             @foreach($categoryOfBrand as $key => $category)
                                 @if(!in_array($category->id, $array))
                                     <li class="filter-item filter-item--a{{$key}}">
-                                        <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" title="{{$category->name}}" class="filter-link--a1">
+                                        <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}" title="{{$category->name}}" class="filter-link--a1">
                                             <span class="filter-text">{{$category->name}} <span> ({{$count[$category->id]}})</span></span>
                                         </a>
                                         @if($category->parent_id === 0 && count($categoryOfBrand) > 0)
@@ -29,7 +29,7 @@
                                                 @foreach($categoryOfBrand as $key => $cate)
                                                     @if($cate->parent_id === $category->id)
                                                         <li>
-                                                            <a href="/hang/{{$brand->slug}}/{{$cate->slug}}.html"
+                                                            <a href="{{route('hang.danhmuc',[$brand->slug,$cate->slug])}}"
                                                                title="Dòng {{$cate->name}}" class="c-4938">
                                                                 <span class="filter-text">{{$cate->name}} <span> ({{$count[$cate->id]}})</span></span>
                                                             </a>
@@ -59,13 +59,13 @@
                             <meta itemprop="position" content="1">
                         </div>
                         <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                            <a href="/hang/{{$brand->slug}}.html" itemprop="item">
+                            <a href="{{route('hang.chitiet',$brand->slug)}}" itemprop="item">
                                 <span itemprop="name">{{$brand->name}}</span>
                                 <meta itemprop="position" content="2">
                             </a>
                         </div>
                         <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                            <a href="/hang/{{$brand->slug}}/{{$category->slug}}.html" itemprop="item">
+                            <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}" itemprop="item">
                                 <span itemprop="name">{{$category->name}}</span>
                                 <meta itemprop="position" content="3">
                             </a>
@@ -98,7 +98,7 @@
                                      data-product-item
                                      tabindex='1'>
                                 <div class='productitem' data-product-item-content>
-                                    <a class='productitem--image-link' href='/products/{{$product->slug}}.html'>
+                                    <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                                         <figure class='productitem--image' data-product-item-image>
                                             <img alt='{{$product->name}}'
                                                  src='{{$product->image}}' width='350' height='350'>
@@ -138,7 +138,7 @@
                                             @endif
                                         </div>
                                         <h4 class='productitem--title'>
-                                            <a href='/products/{{$product->slug}}.html'>
+                                            <a href='{{route('products.detail',$product->slug)}}'>
                                                 {{$product->name}}
                                             </a>
                                         </h4>

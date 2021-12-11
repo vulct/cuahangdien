@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class OrderService
@@ -55,4 +56,35 @@ class OrderService
             return false;
         }
     }
+
+    public function countBill()
+    {
+        return Order::all();
+    }
+
+    public function sumBill()
+    {
+        return Order::all()->sum('total');
+    }
+
+    public function getListBill($limit = 1)
+    {
+        return Order::latest()->limit($limit)->get();
+    }
+
+    public function getTotalSaleByMonth(): \Illuminate\Support\Collection
+    {
+        //SELECT  MONTH(created_at) as SalesMonth,
+        //         SUM(total) AS TotalSales
+        //    FROM `order` WHERE `status` = 7 AND YEAR(created_at) = 2021
+        //GROUP BY YEAR(created_at), MONTH(created_at)
+        $year = date('Y', strtotime(now()));
+        return DB::table('order')
+            ->selectRaw('MONTH(created_at) as sale_month, sum(total) as total_sales')
+            ->where(['status' => 6])
+            ->whereYear('created_at','=',$year)
+            ->groupBy('sale_month')
+            ->get();
+    }
+
 }

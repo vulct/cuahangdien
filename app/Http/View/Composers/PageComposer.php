@@ -12,7 +12,7 @@ class PageComposer
 
     public function __construct(PageService $pageService)
     {
-        $this->pages = $pageService->getPageIsActive();
+        $this->pages = $pageService->getPageIsActive() ?? [];
     }
 
     public function compose(View $view)
@@ -20,7 +20,7 @@ class PageComposer
         $listPage = $this->pages;
         $data = [];
         foreach ($listPage as $page){
-            $data[$page->type][] = $page;
+            $data[$page->type] = $page;
         }
         $view->with('pages', $data);
     }

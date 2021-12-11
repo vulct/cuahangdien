@@ -85,7 +85,7 @@
             </div>
         </div>
         <div class="site-header-cart">
-            <a class="site-header-cart--button" href="/cart.html" title="Xem giỏ hàng">
+            <a class="site-header-cart--button" href="{{route('cart')}}" title="Xem giỏ hàng">
                     <span class="site-header-cart--count" data-header-cart-count="">
                     </span>
                 <svg aria-hidden="true" focusable="false" width="28" height="26"

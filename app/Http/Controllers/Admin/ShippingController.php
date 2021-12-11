@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ShippingMethodRequest;
 use App\Models\ShippingMethod;
 use App\Services\Admin\ShippingService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ShippingController extends Controller
 {
@@ -22,11 +20,7 @@ class ShippingController extends Controller
         $this->shippingService = $service;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
+
     public function index()
     {
         return view('admin.shipping_methods.list', [
@@ -35,11 +29,6 @@ class ShippingController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
     public function create()
     {
         return view('admin.shipping_methods.add', [
@@ -47,24 +36,12 @@ class ShippingController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(ShippingMethodRequest $request)
+    public function store(ShippingMethodRequest $request): RedirectResponse
     {
         $this->shippingService->create($request);
         return redirect()->route('admin.shipping_methods.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Application|Factory|View|Response
-     */
     public function show(ShippingMethod $shippingMethod)
     {
         return view('admin.shipping_methods.detail', [
@@ -72,12 +49,6 @@ class ShippingController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Application|Factory|View|Response
-     */
     public function edit(ShippingMethod $shippingMethod)
     {
         return view('admin.shipping_methods.edit', [
@@ -86,14 +57,7 @@ class ShippingController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(ShippingMethod $shippingMethod, ShippingMethodRequest $shippingMethodRequest)
+    public function update(ShippingMethod $shippingMethod, ShippingMethodRequest $shippingMethodRequest): RedirectResponse
     {
         $result = $this->shippingService->update($shippingMethod, $shippingMethodRequest);
         if ($result) {
@@ -102,13 +66,7 @@ class ShippingController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $result = $this->shippingService->destroy($request);
 

@@ -34,7 +34,10 @@ class PageService
             // get page with type
             $page_type = $this->getPageWithType($type);
 
-            if (!isset($page_type) && $page_type->count() < 1){
+            if ($page_type){
+                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
+                return false;
+            }else{
                 Page::create([
                     "name" => (string)$request->input('name'),
                     "content" => (string)$request->input('content'),
@@ -44,12 +47,7 @@ class PageService
                     "type" => $type,
                     "active" => (int)$request->input('active'),
                 ]);
-
                 Session::flash('success', 'Tạo trang nội dung thành công.');
-
-            }else{
-                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
-                return false;
             }
 
 
@@ -79,26 +77,34 @@ class PageService
             $type = (int)$request->input('type');
             // get page with type
             $page_type = $this->getPageWithType($type);
-
-            if ($page_type->count() > 1){
-                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
-                return false;
-            }else if($page_type->count() === 1 && isset($page_type[0])) {
-                Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
-                return false;
-            }else{
-                $page->name = (string)$request->input('name');
-                $page->content = (string)$request->input('content');
-                $page->description = (string)$request->input('description');
-                $page->keyword = (string)$request->input('keyword');
-                $page->slug = (string)$request->input('slug');
-                $page->active = (int)$request->input('active');
-                $page->type = (int)$request->input('type');
-                $page->save();
-                Session::flash('success', 'Cập nhật trang nội dung thành công.');
-                return true;
-
+            if ($page_type){
+                if ($type !== $page->type){
+                    Session::flash('error', 'Thể loại trang đã tồn tại, vui lòng sửa trang đã tạo.');
+                    return false;
+                }else{
+                    $page->name = (string)$request->input('name');
+                    $page->content = (string)$request->input('content');
+                    $page->description = (string)$request->input('description');
+                    $page->keyword = (string)$request->input('keyword');
+                    $page->slug = (string)$request->input('slug');
+                    $page->active = (int)$request->input('active');
+                    $page->type = (int)$request->input('type');
+                    $page->save();
+                    Session::flash('success', 'Cập nhật trang nội dung thành công.');
+                    return true;
+                }
             }
+
+            $page->name = (string)$request->input('name');
+            $page->content = (string)$request->input('content');
+            $page->description = (string)$request->input('description');
+            $page->keyword = (string)$request->input('keyword');
+            $page->slug = (string)$request->input('slug');
+            $page->active = (int)$request->input('active');
+            $page->type = (int)$request->input('type');
+            $page->save();
+            Session::flash('success', 'Cập nhật trang nội dung thành công.');
+            return true;
 
         } catch (\Exception $exception) {
             Session::flash('error', $exception->getMessage());

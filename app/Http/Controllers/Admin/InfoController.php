@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\InfoRequest;
+use App\Http\Requests\Admin\PageRequest;
 use App\Models\Info;
 use App\Services\Admin\InfoService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -37,7 +36,7 @@ class InfoController extends Controller
     }
 
 
-    public function store(Request $request): RedirectResponse
+    public function store(InfoRequest $request): RedirectResponse
     {
         $result = $this->infoService->create($request);
         if ($result) {
@@ -47,7 +46,7 @@ class InfoController extends Controller
     }
 
 
-    public function update(Request $request, Info $info): RedirectResponse
+    public function update(InfoRequest $request, Info $info): RedirectResponse
     {
         $result = $this->infoService->update($info, $request);
         if ($result) {

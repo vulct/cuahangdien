@@ -33,6 +33,16 @@ class ProductService
         }])->orderbyDesc('id')->where('isDelete', 0)->get();
     }
 
+    public function getAllProductIsActive()
+    {
+        return Product::where(['isDelete' => 0, 'active' => 1])->get();
+    }
+
+    public function getListProduct($limit = 1)
+    {
+        return Product::where(['isDelete' => 0, 'active' => 1])->limit($limit)->get();
+    }
+
     public function getProductIsActive($id)
     {
         return Product::where(['id' => $id, 'active' => 1, 'isDelete' => 0])
@@ -335,7 +345,7 @@ class ProductService
                 $query->where(['isDelete' => 0, 'active' => 1]);},
             'brand' => function ($query) {
                 $query->where(['isDelete' => 0, 'active' => 1]);
-            }])->where(['id' => $id, 'isDelete' => 0, 'active' => 1])->firstOrFail();
+            }])->where(['id' => $id, 'isDelete' => 0, 'active' => 1])->first();
     }
 
     public function getAttributesOfProduct($product,$attribute)

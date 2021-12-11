@@ -236,6 +236,39 @@ class Helper
         return $html;
     }
 
+    public static function getStatusBillInDashboard($status = 0): string
+    {
+        switch ($status){
+            case 1:
+                $html = '<span class="badge badge-light">Đang báo giá</span>';
+                break;
+            case 2:
+                $html = '<span class="badge badge-info">Đã báo giá</span>';
+                break;
+            case 3:
+                $html = '<span class="badge badge-primary">Đang giao hàng</span>';
+                break;
+            case 4:
+                $html = '<span class="badge badge-success">Đã thanh toán</span>';
+                break;
+            case 5:
+                $html = '<span class="badge badge-info">Chưa thanh toán</span>';
+                break;
+            case 6:
+                $html = '<span class="badge badge-success">Thành công</span>';
+                break;
+            case 7:
+                $html = '<span class="badge badge-danger">Huỷ</span>';
+                break;
+            case 0:
+            default:
+                $html = '<span class="badge badge-warning">Đang xử lý</span>';
+                break;
+        }
+
+        return $html;
+    }
+
     public static function obfuscate_email($email): string
     {
         $em   = explode("@",$email);

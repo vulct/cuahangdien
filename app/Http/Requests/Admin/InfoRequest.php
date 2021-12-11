@@ -32,24 +32,50 @@ class InfoRequest extends FormRequest
             ],
             'keyword' => 'string|nullable|max:255',
             'description' => 'nullable|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'hotline1' => 'nullable|string|max:20',
-            'hotline2' => 'nullable|string|max:20',
-            'phone' => 'nullable|string|max:20',
+            'hotline1' => [
+                'nullable',
+                'string',
+                'max:12',
+                'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'
+            ],
+            'hotline2' => ['nullable',
+                'string',
+                'max:12',
+                'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
+            ],
+            'phone' => ['nullable', 'string', 'max:12', 'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'],
             'address' => 'nullable|string|max:255',
             'tax_code' => 'nullable|string|max:255',
             'business_license' => 'nullable|string|max:255',
-            'map_address' => 'nullable|string|max:255',
-            'map_iframe' => 'nullable|string|max:255',
-            'facebook' => 'nullable|string|max:255',
-            'zalo' => 'nullable|string|max:255',
-            'sale' => 'nullable|string|max:255',
+            'map_address' => ['nullable',
+                'string',
+                'max:255'
+            ],
+            'map_iframe' => ['nullable',
+                'string',
+                'max:255'
+            ],
+            'facebook' => ['nullable',
+                'string',
+                'max:255'
+            ],
+            'zalo' => ['nullable',
+                'string',
+                'max:12',
+                'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'
+            ],
+            'sale' => ['nullable',
+                'string',
+                'max:12',
+                'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'
+            ],
             'email' => 'nullable|max:255|string|email'
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name' => 'tên cửa hàng',

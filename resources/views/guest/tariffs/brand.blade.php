@@ -125,7 +125,7 @@
                                                     <li>
                                                         <span>
                                                             <em>Ngôn ngữ:</em>
-                                                            {{\PHPUnit\Framework\isEmpty($tariff->language) ? 'Tiếng Việt' : $tariff->language}}
+                                                            {{empty($tariff->language) ? 'Tiếng Việt' : $tariff->language}}
                                                         </span>
                                                     </li>
                                                 </ul>

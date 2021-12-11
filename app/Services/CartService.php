@@ -205,8 +205,4 @@ class CartService
         return $total;
     }
 
-    public function sendOrderConfirmationMail($order)
-    {
-        Mail::to($order->email)->send(new OrderMail($order));
-    }
 }

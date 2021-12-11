@@ -74,7 +74,7 @@
 
                             <li class="navmenu-item navmenu-id-about">
                                 <a class="navmenu-link "
-                                   href="{{isset($pages[0]) ? '/pages/'.$pages[0][0]->slug.'.html' : '#'}}">Về chúng
+                                   href="{{isset($pages[0]) ? route('pages',$pages[0]->slug) : '#'}}">Về chúng
                                     tôi</a>
                             </li>
                             <li class="navmenu-item navmenu-id-contact">
@@ -114,11 +114,11 @@
                             </li>
                             <li class="navmenu-item navmenu-id-submit-your-creation">
                                 <a class="navmenu-link"
-                                   href="{{isset($pages[1]) ? '/pages/'.$pages[1][0]->slug.'.html' : '#'}}">Tuyển
+                                   href="{{isset($pages[1]) ? route('pages',$pages[1]->slug) : '#'}}">Tuyển
                                     dụng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-search">
-                                <a class="navmenu-link " href="/search.html">Tìm kiếm</a>
+                                <a class="navmenu-link " href="{{route('search')}}">Tìm kiếm</a>
                             </li>
                         </ul>
                     </div>
@@ -142,18 +142,18 @@
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
                                 <a class="navmenu-link"
-                                   href="{{isset($pages[2]) ? '/pages/'.$pages[2][0]->slug.'.html' : '#'}}">Hướng dẫn
+                                   href="{{isset($pages[2]) ? route('pages',$pages[2]->slug) : '#'}}">Hướng dẫn
                                     mua hàng</a>
                             </li>
                             <li class="navmenu-item navmenu-id-shipping">
                                 <a class="navmenu-link"
-                                   href="{{isset($pages[3]) ? '/pages/'.$pages[3][0]->slug.'.html' : '#'}}">Thanh toán &
+                                   href="{{isset($pages[3]) ? route('pages',$pages[3]->slug) : '#'}}">Thanh toán &
                                     Vận
                                     chuyển</a>
                             </li>
                             <li class="navmenu-item navmenu-id-returns">
                                 <a class="navmenu-link"
-                                   href="{{isset($pages[4]) ? '/pages/'.$pages[4][0]->slug.'.html' : '#'}}">Bảo hành &
+                                   href="{{isset($pages[4]) ? route('pages',$pages[4]->slug) : '#'}}">Bảo hành &
                                     Đổi trả</a>
                             </li>
 
@@ -260,7 +260,7 @@
                         <ul class="navmenu  navmenu-depth-1  ">
                             <li class="navmenu-item navmenu-id-terms-conditions">
                                 <a class="navmenu-link"
-                                   href="{{isset($pages[5]) ? '/pages/'.$pages[5][0]->slug.'.html' : '#'}}">Điều khoản
+                                   href="{{isset($pages[5]) ? route('pages',$pages[5]->slug) : '#'}}">Điều khoản
                                     &amp; Chính
                                     sách</a>
                             </li>
@@ -320,9 +320,9 @@
                     <div class="atc-banner--cart-subtotal"><span class="atc-subtotal--label"> Tạm tính </span> <span
                             class="atc-subtotal--price money" data-atc-banner-cart-subtotal></span></div>
                     <footer class="atc-banner--cart-footer"><a class="button-secondary atc-button--viewcart"
-                                                               href="/cart.html" data-atc-banner-cart-button> Xem giỏ
+                                                               href="{{route('cart')}}" data-atc-banner-cart-button> Xem giỏ
                             hàng (<span></span>) </a> <a class="button-primary atc-button--checkout"
-                                                         href="/checkout.html"> Báo giá </a></footer>
+                                                         href="{{route('checkout.index')}}"> Báo giá </a></footer>
                 </div>
             </div>
             <button class="atc-banner--close" type="button" aria-label="Close" data-atc-banner-close>

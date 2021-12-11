@@ -14,8 +14,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
 
 class ProductController extends Controller
 {
@@ -31,11 +29,6 @@ class ProductController extends Controller
         $this->brandService = $brandService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
     public function index()
     {
         return view('admin.products.list', [
@@ -44,11 +37,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
     public function create()
     {
         return view('admin.products.add', [
@@ -58,12 +46,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param ProductRequest $request
-     * @return RedirectResponse
-     */
     public function store(ProductRequest $request): RedirectResponse
     {
         if ($this->productService->create($request)) {
@@ -72,12 +54,6 @@ class ProductController extends Controller
         return back()->withInput();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Product $product
-     * @return Application|Factory|View
-     */
     public function show(Product $product)
     {
         return view('admin.products.detail', [
@@ -87,12 +63,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Product $product
-     * @return Application|Factory|View
-     */
     public function edit(Product $product)
     {
         return view('admin.products.edit', [
@@ -103,14 +73,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param ProductRequest $request
-     * @param Product $product
-     * @return RedirectResponse
-     */
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $result = $this->productService->update($request, $product);
         if ($result) {
@@ -119,12 +82,6 @@ class ProductController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->productService->destroy($request);

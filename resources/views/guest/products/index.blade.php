@@ -67,7 +67,7 @@
                             </h3>
                             <div class="collection--brands--logo">
                                 @foreach($brands as $brand)
-                                    <a href="/hang/{{$brand->slug}}.html" title="Xem sản phẩm thương hiệu {{$brand->name}}" class="brand-image">
+                                    <a href="{{route('hang.chitiet',$brand->slug)}}" title="Xem sản phẩm thương hiệu {{$brand->name}}" class="brand-image">
                                         <img class="lazy" src="{{asset($brand->image)}}" data-src="{{asset($brand->image)}}" width="120" height="60" alt="Thiết bị điện {{$brand->name}}" />
                                     </a>
                                 @endforeach

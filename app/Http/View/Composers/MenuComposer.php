@@ -11,7 +11,7 @@ class MenuComposer
 
     public function __construct(CategoryService $categoryService)
     {
-        $this->category = $categoryService->get(1,0);
+        $this->category = $categoryService->get(1,0) ?? [];
     }
 
 
