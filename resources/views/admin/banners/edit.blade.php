@@ -85,7 +85,7 @@
                                                        class="col-sm-2 col-form-label">{{__('Vị trí')}}<span class="text-danger">*</span></label>
                                                 <div class="col-sm-10">
                                                     <div class="input-group">
-                                                        <select class="form-control" id="sort" name="sort">
+                                                        <select class="form-control" id="sort" name="sort" required>
                                                             <option value="0">Vị trí 1</option>
                                                             <option value="1">Vị trí 2</option>
                                                             <option value="2">Vị trí 3</option>
@@ -105,7 +105,7 @@
                                                 <div class="col-sm-10">
                                                     <div class="custom-file mt-2">
                                                         <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                               accept="image/*" name="image">
+                                                               accept="image/*" name="image" required>
                                                         <label class="custom-file-label"
                                                                for="exampleInputFile">{{__('Choose File')}}</label>
                                                         <span class="form-text">

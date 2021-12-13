@@ -35,7 +35,7 @@
                     <div class="product-infomation">
                         <h1 class="product-title" itemprop="name">
                             {{$product->name}}
-                            @if($product->attributes->first())
+                            @if(isset($product->attributes) && count($product->attributes) > 0)
                             <span>{{$product->attributes[0]->codename}}</span>
                             @endif
                         </h1>
@@ -62,7 +62,7 @@
 
                                 <div class="product-pricing">
                                     <div class="product--price">
-                                        @if(isset($product->attributes))
+                                        @if(isset($product->attributes) && count($product->attributes) > 0)
 
                                             @if($product->attributes[0]->price)
                                                 <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
@@ -94,7 +94,7 @@
 
                                 </div>
                                 <div style="font-style: italic;color: #d31d1d;font-size: 14.5px;margin-bottom: 6px;">Giá sản phẩm rẻ hơn khi mua số lượng nhiều
-                                    @if(!empty($info->email))
+                                    @if( isset($info->email) && !empty($info->email))
                                     <i style="font-size:14.5px;color:#222;display:block;">(vui lòng thêm vào báo giá để nhận báo giá hoặc qua email: {{$info->email}})</i>
                                     @endif
                                 </div>

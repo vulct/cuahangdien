@@ -85,7 +85,7 @@
                                                         <input type="text" id="phone"
                                                                name="phone"
                                                                value="{{old('phone')}}"
-                                                               class="form-control" placeholder=""/>
+                                                               class="form-control" placeholder="" required/>
                                                     </div>
                                                     <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 100 kí tự
@@ -97,7 +97,7 @@
                                                        class="col-sm-2 col-form-label">{{__('Vị trí')}}<span class="text-danger">*</span></label>
                                                 <div class="col-sm-10">
                                                 <div class="input-group">
-                                                    <select class="form-control" id="type" name="type">
+                                                    <select class="form-control" id="type" name="type" required>
                                                         <option value="0">Kinh doanh</option>
                                                         <option value="1">Kỹ thuật</option>
                                                     </select>

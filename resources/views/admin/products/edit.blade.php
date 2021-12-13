@@ -199,7 +199,7 @@
                                                                                 <input type="text" id="codename"
                                                                                        name="codename"
                                                                                        value="{{$att->codename}}"
-                                                                                       class="form-control" placeholder="PM1W-VN"/>
+                                                                                       class="form-control" placeholder="PM1W-VN" required />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-1">
@@ -303,7 +303,7 @@
                                                                                 <input type="text" id="codename"
                                                                                        name="codename"
                                                                                        value="{{old("group-a.$i.codename")}}"
-                                                                                       class="form-control" placeholder="PM1W-VN"/>
+                                                                                       class="form-control" placeholder="PM1W-VN" required />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-1">
@@ -406,7 +406,7 @@
                                                                             <input type="text" id="codename"
                                                                                    name="codename"
                                                                                    value="{{old('codename')}}"
-                                                                                   class="form-control" placeholder="PM1W-VN"/>
+                                                                                   class="form-control" required placeholder="PM1W-VN"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-1">

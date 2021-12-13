@@ -75,7 +75,7 @@
                                                 <label for="type"
                                                        class="col-sm-2 col-form-label">{{__('Loại trang')}}<span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <select class="form-control" id="type" name="type">
+                                                    <select class="form-control" id="type" name="type" required>
                                                         <option value="0" {{ $page->type == 0 ? 'selected' : '' }}>Về chúng tôi</option>
                                                         <option value="1" {{ $page->type == 1 ? 'selected' : '' }}>Tuyển dụng</option>
                                                         <option value="2" {{ $page->type == 2 ? 'selected' : '' }}>Hướng dẫn mua hàng</option>

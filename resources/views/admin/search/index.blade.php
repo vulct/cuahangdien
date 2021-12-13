@@ -78,7 +78,7 @@
                                     </a>
                                     <div class='productitem--info'>
                                         <div class='productitem--price'>
-                                            @if(isset($product['attributes']))
+                                            @if(isset($product['attributes']) && count($product['attributes']) > 0)
                                                 @if($product['attributes'][0]['discount'] > 0)
                                                 <div class='price--compare-at visible' data-price-compare-at>
                                                     <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>

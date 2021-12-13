@@ -54,21 +54,21 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
+                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name" required>
                                                 <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 200 kí tự
                                                 </span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="slug">{{__('Đường dẫn')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug">
+                                                <input type="text" id="slug" class="form-control" value="{{old('slug')}}" name="slug" required>
                                                 <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 120 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_"
                                                 </span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="content">{{__('Nội dung')}} <span class="text-danger">*</span></label>
-                                                <textarea id="content" class="summernote" name="content">{{old('content')}}</textarea>
+                                                <textarea id="content" class="summernote" name="content" required>{{old('content')}}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote"
@@ -80,7 +80,7 @@
                                                 <label for="type"
                                                        class="col-sm-2 col-form-label">{{__('Loại trang')}}<span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <select class="form-control" id="type" name="type">
+                                                    <select class="form-control" id="type" name="type" required>
                                                         <option value="0">Về chúng tôi</option>
                                                         <option value="1">Tuyển dụng</option>
                                                         <option value="2">Hướng dẫn mua hàng</option>

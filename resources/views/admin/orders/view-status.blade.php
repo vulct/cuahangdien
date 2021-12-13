@@ -19,7 +19,7 @@
                                         <div class="col-sm-10">
                                             <div class="input-group">
                                                 <input type="hidden" name="code_name" value="{{$order->code_name}}">
-                                                <select class="form-control" id="status" name="status">
+                                                <select class="form-control" id="status" name="status" required>
                                                     <option value="0" {{$order->status == 0 ? 'selected' : ''}}>Đang xử lý</option>
                                                     <option value="1" {{$order->status == 1 ? 'selected' : ''}}>Đang báo giá</option>
                                                     <option value="2" {{$order->status == 2 ? 'selected' : ''}}>Đã báo giá</option>

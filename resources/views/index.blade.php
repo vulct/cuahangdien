@@ -231,7 +231,7 @@
                         {{ $info->hotline1 ?? '' }}
                     </div>
                 </a>
-                <a class="highlights-banners-block" href="{{$info->facebook ?? ''}}" target="_blank">
+                <a class="highlights-banners-block" href="{{$info->facebook ?? '#'}}" target="_blank">
                     <div class="highlights-banners-icon">
                         <i class="sprite_support sprite_lien_he"></i>
                     </div>

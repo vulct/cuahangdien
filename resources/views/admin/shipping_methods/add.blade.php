@@ -56,7 +56,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
-                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name">
+                                                <input type="text" id="name" class="form-control" value="{{old('name')}}" name="name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote">{{__('Mô tả')}}</label>

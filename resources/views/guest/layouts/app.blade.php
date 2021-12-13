@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <title>{{$title ?? $info->name ?? ""}} | {{preg_replace("(^https?://)", "", config('app.url') )}}</title>
+    <title>{{$title ?? $info->name ?? config('app.name')}} | {{preg_replace("(^https?://)", "", config('app.url') )}}</title>
     <meta name="description"
           content="{{$info->description ?? ""}}">
     <meta name="viewport" content="width=device-width">
@@ -54,7 +54,7 @@
         <div class="site-header-main">
             <div class="site-header-logo">
                 <a class="site-logo" href="/">
-                    <img class="site-logo-image" src="{{$info->logo ?? ""}}" style="max-width: 190px; max-height: 42px;"
+                    <img class="site-logo-image" src="{{$info->logo ?? "#"}}" style="max-width: 190px; max-height: 42px;"
                          alt="{{$info->name ?? ""}}">
                 </a>
             </div>
