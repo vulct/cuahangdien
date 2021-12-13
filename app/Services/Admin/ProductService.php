@@ -102,13 +102,13 @@ class ProductService
                 "brand_id" => $brand_id
             ])->id;
 
+            $dataAttributes = $request->input('group-a');
+
             // add attributes for product
-            if (count($request->input('group-a')) <= 0) {
+            if (count($dataAttributes) <= 0 || empty($dataAttributes)) {
                 Session::flash('error', 'Vui lòng thêm ít nhất một mẫu mã cho sản phẩm.');
                 return false;
             }
-
-            $dataAttributes = $request->input('group-a');
 
             for ($i = 0; $i < count($dataAttributes); $i++) {
                 if ($dataAttributes[$i]['discount'] !== null && $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
@@ -116,6 +116,9 @@ class ProductService
                         DB::rollBack();
                         return false;
                     }
+                }elseif ($dataAttributes[$i]['codename']){
+                    Session::flash('error', 'Mã sản phẩm không được để trống.');
+                    return false;
                 } else {
                     Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
                     return false;
@@ -183,6 +186,9 @@ class ProductService
                         Session::flash('error', 'Chiết khấu không được nhỏ hơn 0 và lớn hơn 100%.');
                         return false;
                     }
+                }elseif (empty($dataAttributes[$i]['codename'])){
+                    Session::flash('error', 'Mã sản phẩm không được để trống.');
+                    return false;
                 }
 
                 // update attribute
