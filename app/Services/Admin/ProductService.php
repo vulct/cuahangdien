@@ -111,7 +111,8 @@ class ProductService
             $dataAttributes = $request->input('group-a');
 
             for ($i = 0; $i < count($dataAttributes); $i++) {
-                if ($dataAttributes[$i]['codename'] !== null && $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
+                if ($dataAttributes[$i]['discount'] !== null &&
+                    $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
                     if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false) {
                         DB::rollBack();
                         return false;
