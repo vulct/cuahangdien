@@ -11,7 +11,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
@@ -29,8 +29,9 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{number_format($total_bill)}} VND</h3>
-
+                                <h3 style="display: flex;flex-wrap: wrap;justify-content: center;">
+                                    <span>{{number_format($total_bill)}} </span> <span>&ensp;VND</span>
+                                </h3>
                                 <p>Doanh thu</p>
                             </div>
                             <div class="icon">
@@ -303,13 +304,6 @@
 @endpush
 
 @push('scripts')
-    <!-- jQuery -->
-    <script src="{{ asset('manage/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('manage/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('manage/dist/js/adminlte.min.js') }}"></script>
-
     <script src="{{asset('manage/plugins/chart.js/Chart.min.js')}}"></script>
     <script src="{{ asset('manage/dist/js/pages/dashboard.js') }}"></script>
 @endpush

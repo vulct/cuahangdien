@@ -27,6 +27,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/link_storage', function () {
+    Artisan::call('storage:link');
+});
+
 #Blogs
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 

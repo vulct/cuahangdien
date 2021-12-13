@@ -64,7 +64,7 @@ class OrderService
 
     public function sumBill()
     {
-        return Order::all()->sum('total');
+        return Order::where(['status' => 6])->sum('total');
     }
 
     public function getListBill($limit = 1)

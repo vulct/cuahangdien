@@ -192,11 +192,11 @@
                                         <td>
                                             <p style="border-top: 1px solid #979797;"></p>
                                             <p style="font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; padding: 0; margin: 0 0 10px;color: #5e5e5e; text-align: center; line-height: 14px; font-size: 11px;">
-                                                <b>{{$info->name}}</b>
+                                                <b>{{$info->name ?? "#"}}</b>
                                                 <br />
-                                                <span>Điện thoại:</span> {{$info->hotline1}} hoặc {{$info->hotline2}}
+                                                <span>Điện thoại:</span> {{$info->hotline1 ?? "#"}} hoặc {{$info->hotline2 ?? "#"}}
                                                 <br />
-                                                <span>Địa chỉ:</span> {{$info->address}}
+                                                <span>Địa chỉ:</span> {{$info->address ?? "#"}}
                                             </p>
                                         </td>
                                     </tr>
