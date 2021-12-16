@@ -11,7 +11,7 @@
                         @if($staff->type === 0)
                             <li class="item">
                                 <div class="avatar">
-                                    <img src="{{asset($staff->image)}}" data-src="{{$staff->image}}" class="lazy"
+                                    <img src="{{asset($staff->image)}}" data-src="{{asset($staff->image)}}" class="lazy"
                                          width="62"
                                          height="62" alt="avatar">
                                 </div>
@@ -32,7 +32,7 @@
                         @if($staff->type === 1)
                             <li class="item tech">
                                 <div class="avatar ">
-                                    <img src="{{asset($staff->image)}}" data-src="{{$staff->image}}" class="lazy"
+                                    <img src="{{asset($staff->image)}}" data-src="{{asset($staff->image)}}" class="lazy"
                                          width="62" height="62" alt="avatar">
                                 </div>
                                 <div class="detail">

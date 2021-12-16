@@ -151,7 +151,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputFile">{{__('Avatar')}}</label>
-                                                <img class="card-img-right flex-auto d-none d-md-block" src="{{$staff->image}}"
+                                                <img class="card-img-right flex-auto d-none d-md-block" src="{{asset($staff->image)}}"
                                                      alt="Thumbnail [200x250]" style="width: 200px;"
                                                      data-holder-rendered="true">
                                                 <div class="custom-file mt-2">

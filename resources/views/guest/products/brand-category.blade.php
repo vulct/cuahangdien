@@ -101,7 +101,7 @@
                                     <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                                         <figure class='productitem--image' data-product-item-image>
                                             <img alt='{{$product->name}}'
-                                                 src='{{$product->image}}' width='350' height='350'>
+                                                 src='{{asset($product->image)}}' width='350' height='350'>
                                         </figure>
                                     </a>
                                     <div class='productitem--info'>
@@ -144,8 +144,8 @@
                                         </h4>
 
                                         <div class='productitem--provider'><img
-                                                src='{{$brand->image}}'
-                                                alt='{{$brand->image}}' width='120'
+                                                src='{{asset($brand->image)}}'
+                                                alt='{{$brand->name}}' width='120'
                                                 height='60'></div>
                                     </div>
                                 </div>

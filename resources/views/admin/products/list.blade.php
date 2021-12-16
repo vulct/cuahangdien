@@ -52,7 +52,7 @@
                                         @foreach($products as $key => $product)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
-                                                <td><img class="rounded me-4" alt="{{$product->name}}" width="50" height="50" src="{{$product->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                                <td><img class="rounded me-4" alt="{{$product->name}}" width="50" height="50" src="{{asset($product->image)}}" data-holder-rendered="true" style="object-fit: cover;"></td>
                                                 <td>{{$product->name}}</td>
                                                 <td>{{$product->category->name}}</td>
                                                 <td>{{$product->brand->name}}</td>

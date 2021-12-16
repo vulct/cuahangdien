@@ -64,7 +64,7 @@
                     </nav>
                     <div class="productgrid--masthead">
                         <div class="collection--information">
-                            <h1 class="collection--title price--title">Bảng Giá Thiết Bị Điện</h1>
+                            <h1 class="collection--title price--title">Bảng Giá</h1>
                             <p  class="price-notification">Vui lòng chọn hãng để tải bảng giá nhanh nhất.</p>
                         </div>
                     </div>

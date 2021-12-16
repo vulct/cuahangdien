@@ -38,8 +38,8 @@
                                                                                     <div>
                                                                                         <a href="{{route('hang.danhmuc',[$brand->slug, $cate->slug])}}">
                                                                                             <img class="lazy"
-                                                                                                 data-src="{{$brand->image}}"
-                                                                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
+                                                                                                 data-src="{{asset($brand->image)}}"
+                                                                                                 src="{{asset($brand->image)}}"
                                                                                                  alt="{{$brand->name}}"/><span>{{$brand->name}}</span>
                                                                                         </a>
                                                                                     </div>
@@ -90,7 +90,7 @@
                         <div class="slider-wrap" style="">
                             @php $bannerSort0 = \App\Helpers\Helper::bannerWithSort($banners, 0); @endphp
                             <a class="impress-banner" href="{{$bannerSort0->url ?? '#'}}" data-banner-title="">
-                                <img src="{{$bannerSort0->image ?? asset('storage/default/banners/vt1.jpg')}}"
+                                <img src="{{$bannerSort0->image ? asset($bannerSort0->image) : asset('storage/default/banners/vt1.jpg')}}"
                                      alt="{{$bannerSort0->alt ?? ''}}" class="insdr-insight-1-1">
                             </a>
                         </div>
@@ -100,7 +100,7 @@
                                 <a class="impress-banner" data-banner-group-code="home_v4_sub_banner"
                                    href="{{$bannerSort6->url ?? '#'}}">
 
-                                    <img src="{{$bannerSort6->image ?? '/storage/default/banners/vt7.jpg'}}"
+                                    <img src="{{$bannerSort6->image ? asset($bannerSort6->image) : asset('storage/default/banners/vt7.jpg')}}"
                                          alt="{{$bannerSort6->alt ?? ''}}">
                                 </a>
                             </div>
@@ -109,7 +109,7 @@
                                 <a class="impress-banner" data-banner-group-code="home_v4_sub_banner"
                                    href="{{$bannerSort5->url ?? '#'}}">
 
-                                    <img src="{{$bannerSort5->image ?? '/storage/default/banners/vt6.jpg'}}"
+                                    <img src="{{$bannerSort5->image ? asset($bannerSort5->image) : asset('storage/default/banners/vt6.jpg')}}"
                                          alt="{{$bannerSort5->alt ?? ''}}">
                                 </a>
                             </div>
@@ -122,7 +122,7 @@
                             <a class="impress-banner" data-banner-group-code="home_v4_sub_banner"
                                href="{{$bannerSort1->url ?? '#'}}">
 
-                                <img src="{{$bannerSort1->image ?? '/storage/default/banners/vt2.jpg'}}"
+                                <img src="{{$bannerSort1->image ? asset($bannerSort1->image) : asset('storage/default/banners/vt2.jpg')}}"
                                      alt="{{$bannerSort1->alt ?? ''}}">
                             </a>
                         </div>
@@ -131,21 +131,21 @@
                             <a class="impress-banner" data-banner-group-code="home_v4_sub_banner"
                                href="{{$bannerSort2->url ?? '#'}}">
 
-                                <img src="{{$bannerSort2->image ?? '/storage/default/banners/vt3.jpg'}}"
+                                <img src="{{$bannerSort2->image ? asset($bannerSort2->image) : asset('storage/default/banners/vt3.jpg')}}"
                                      alt="{{$bannerSort2->alt ?? ''}}">
                             </a>
                         </div>
                         <div class="mini-item">
                             @php $bannerSort4 = \App\Helpers\Helper::bannerWithSort($banners, 4); @endphp
                             <a class="impress-banner" href="{{$bannerSort4->url ?? '#'}}">
-                                <img src="{{$bannerSort4->image ?? '/storage/default/banners/vt5.jpg'}}"
+                                <img src="{{$bannerSort4->image ? asset($bannerSort4->image) : asset('storage/default/banners/vt5.jpg')}}"
                                      alt="{{$bannerSort4->alt ?? ''}}">
                             </a>
                         </div>
                         <div class="mini-item">
                             @php $bannerSort3 = \App\Helpers\Helper::bannerWithSort($banners, 3); @endphp
                             <a class="impress-banner" href="{{$bannerSort3->url ?? '#'}}">
-                                <img src="{{$bannerSort3->image ?? '/storage/default/banners/vt4.jpg'}}"
+                                <img src="{{$bannerSort3->image ? asset($bannerSort3->image) : asset('storage/default/banners/vt4.jpg')}}"
                                      alt="{{$bannerSort3->alt ?? ''}}">
                             </a>
                         </div>
@@ -177,7 +177,7 @@
                             class="slideshow-background slideshow-background--static-slideshow-1 slideshow-height-large "
                             data-rimg="lazy" data-rimg-template=""
                             data-themecolor="#4d4d4d"
-                            data-slidecolor="#ffffff" style="background-image: url('{{$banner->image}}');">
+                            data-slidecolor="#ffffff" style="background-image: url('{{asset($banner->image)}}');">
                             <div data-rimg-canvas></div>
                             <div class="slideshow-slide-overlay slideshow-slide-overlay--static-slideshow-1"></div>
                         </div>
@@ -265,16 +265,21 @@
                     <div class="col-md-12 brand-heading">
 
                         <h1>
-                            <a href="{{config('app.url')}}">{{$info->name ?? 'Thiết Bị Điện Dân Dụng và Công Nghiệp'}}</a>
+                            <a href="{{config('app.url')}}">{{$info->name ?? 'Thiết Bị Điện Dân Dụng và Vật Tư Ngành Nước'}}</a>
                         </h1>
                         {!! isset($info->address) ? '<p class="brand--info--address"><i class="icon-mini"></i> '.$info->address.'</p>' : '' !!}
                         {!! isset($info->hotline1) ? '<p class="brand--info--mobile"><i class="icon-mini"></i>
-                        <a href="'.$info->hotline1.'">'.$info->hotline1.'</a>' : '' !!} {!! isset($info->hotline2) ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
+                        <a href="'.$info->hotline1.'">'.$info->hotline1.'</a>' : '' !!}
+                        {!! isset($info->hotline2) ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
+                        @if(isset($info->email))
                         <p class="brand--info--email"><i class="icon-mini"></i> <a
-                                href="mailto:{{$info->email ?? ''}}">{{$info->email ?? ''}}</a> | <span
-                                class="brand--info--hotline"> <i class="icon-mini"></i> <a href="tel:{{$info->phone ?? ''}}">{{$info->phone ?? ''}}</a></span>
+                                href="mailto:{{$info->email ?? ''}}">{{$info->email ?? ''}}</a> @if(isset($info->phone))| <span
+                                class="brand--info--hotline"> <i class="icon-mini"></i> <a href="tel:{{$info->phone ?? ''}}">{{$info->phone ?? ''}}</a></span>@endif
                         </p>
+                        @endif
+                        @if(isset($info->description))
                         <p>{{$info->description ?? ''}}</p>
+                        @endif
                     </div>
                 </div>
 

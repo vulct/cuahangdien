@@ -27,9 +27,24 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/link_storage', function () {
-    Artisan::call('storage:link');
+##GET FILE
+Route::get('storage/{filename}', function ($filename)
+{
+    $path = storage_path('app/public/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
 });
+
 
 #Blogs
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');

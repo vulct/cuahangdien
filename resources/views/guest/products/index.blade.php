@@ -38,7 +38,7 @@
                                 <div class="" data-product-item-content>
                                     <a class="" href="{{route('danhmuc.chitiet',$category->slug)}}">
                                         <figure class="productitem--image" data-product-item-image>
-                                            <img alt="{{$category->image}}" src="{{asset($category->image)}}">
+                                            <img alt="{{$category->name}}" src="{{asset($category->image)}}">
                                         </figure>
                                         <div class="overlay"></div>
                                         <h4 class="title-category">

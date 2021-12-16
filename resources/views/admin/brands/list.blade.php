@@ -49,7 +49,7 @@
                                     @foreach($brands as $key => $brand)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Logo')}}" src="{{$brand->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Logo')}}" src="{{asset($brand->image)}}" data-holder-rendered="true" style="object-fit: cover;"></td>
                                             <td>{{$brand->name}}</td>
                                             <td>{{$brand->slug}}</td>
                                             <td>{{$brand->updated_at}}</td>

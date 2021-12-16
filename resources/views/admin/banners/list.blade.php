@@ -50,7 +50,7 @@
                                     @foreach($banners as $key => $banner)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="rounded" alt="{{$banner->alt}}" src="{{$banner->image}}" data-holder-rendered="true" style="object-fit: cover; width: 120px; height: auto;"></td>
+                                            <td><img class="rounded" alt="{{$banner->alt}}" src="{{asset($banner->image)}}" data-holder-rendered="true" style="object-fit: cover; width: 120px; height: auto;"></td>
                                             <td>{{$banner->title}}</td>
                                             <td>{{$banner->url}}</td>
                                             <td>{{$banner->alt}}</td>

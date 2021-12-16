@@ -71,7 +71,7 @@
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Hình ảnh sản phẩm')}}:</th>
-                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{$product->image}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
+                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image)}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
                                         </td>
                                     </tr>
                                     </tbody>

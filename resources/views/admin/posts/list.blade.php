@@ -49,7 +49,7 @@
                                     @foreach($posts as $key => $post)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Thumb')}}" src="{{$post->image}}" data-holder-rendered="true" style="object-fit: cover;"></td>
+                                            <td><img class="img-circle img-size-50 mr-2" alt="{{__('Thumb')}}" src="{{asset($post->image)}}" data-holder-rendered="true" style="object-fit: cover;"></td>
                                             <td>{{$post->name}}</td>
                                             <td>{{$post->slug}}</td>
                                             <td>{{$post->updated_at}}</td>

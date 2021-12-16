@@ -112,7 +112,7 @@
                                                             <i class="fa fa-info-circle"></i> Vui lòng chọn ảnh theo kích thước quy định
                                                         </span>
                                                     </div>
-                                                    <img class="card-img-right flex-auto d-none d-md-block" src="{{$banner->image}}"
+                                                    <img class="card-img-right flex-auto d-none d-md-block" src="{{asset($banner->image)}}"
                                                          alt="Thumbnail [200x250]" style="width: 200px;"
                                                          data-holder-rendered="true">
                                                 </div>

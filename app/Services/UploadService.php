@@ -18,4 +18,9 @@ class UploadService
             return false;
         }
     }
+
+//    public function uploadMultiple ($request)
+//    {
+//
+//    }
 }

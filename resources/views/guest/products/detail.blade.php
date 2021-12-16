@@ -30,7 +30,14 @@
                     <meta itemprop="image" content="{{asset($product->image)}}">
                     <meta itemprop="description" content="{{$product->description}}">
                     <div class="product-gallery" data-product-image>
-                        <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" data-image="" alt="{{asset($product->name)}}" class="lazy" width="800" height="800">
+                        <div class="owl-carousel">
+                            <div class="item">
+                                <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800">
+                            </div>
+                            <div class="item">
+                                <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800">
+                            </div>
+                        </div>
                     </div>
                     <div class="product-infomation">
                         <h1 class="product-title" itemprop="name">
@@ -104,7 +111,7 @@
                                 <div class="unco">
                                     <div class="row">
                                         <ul class="product--topinfo">
-                                            <li><i>Mã sản phẩm:</i> <b data-code="">{{$product->attributes[0]->codename}}</b> </li>
+                                            <li><i>Mã sản phẩm:</i> <b data-code="">{{$product->attributes[0]->codename ?? "#"}}</b> </li>
                                             <li><i>Thương hiệu:</i><a href="{{route('hang.danhmuc',[$product->brand->slug,$product->category->slug])}}" class="_1line">{{$product->category->name}} ({{$product->brand->name}})</a></li>
                                             <li><i>Bảo hành:</i> <b>{{$product->warranty}}</b></li>
                                             <li><i>Loại:</i> <a href="{{route('danhmuc.chitiet', $product->category->slug)}}">{{$product->category->name}}</a></li>
@@ -156,7 +163,7 @@
                                         </div>
                                     </div>
                                     @else
-                                        <input type="hidden" id="attribute_id" name="attribute_id" value="{{$product->attributes[0]->id}}">
+                                        <input type="hidden" id="attribute_id" name="attribute_id" value="{{$product->attributes[0]->id ?? ""}}">
                                     @endif
                                         <div class="product-form--atc" >
                                             <div class="product-form--atc-qty form-fields--qty" data-quantity-wrapper>
@@ -301,7 +308,7 @@
                                 <br />
                                 <div class="product--description">
                                     <div class="product--description-content">
-                                        {!! $product->description !!}
+                                        {!! $product->content !!}
                                     </div>
                                 </div>
                             </div>
@@ -362,20 +369,6 @@
                     </div>
                 </div>
             </section>
-            <section class="product-section--container product-recently-viewed--section">
-                <div class="product-recently-viewed-wrapper">
-                    <div class="product-recently-viewed-header">
-                        <h3 class="product-recently-viewed-heading">
-                            Sản phẩm bạn đã xem
-                        </h3>
-                        <span class="product-recently-viewed-clear" data-clear-recently-viewed="">
-                                Xóa lịch sử
-                            </span>
-                    </div>
-                    <div class="product-section--content product-recently-viewed--content imagestyle--natural" data-recently-viewed-container="">
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 @endsection
@@ -388,8 +381,9 @@
 <link rel="stylesheet" href="{{asset('guest/css/review.css')}}">
 <!-- Toastr -->
 <link rel="stylesheet" href="{{asset('manage/plugins/toastr/toastr.min.css')}}">
-
 <script src="{{asset('guest/js/option_selection.js')}}"></script>
+<link rel="stylesheet" href="{{asset('guest/plugins/owlcarousel/dist/assets/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('guest/plugins/owlcarousel/dist/assets/owl.theme.default.min.css')}}">
 @endpush
 
 @push('scripts')
@@ -417,6 +411,28 @@ win.resize(function () {
 });
 </script>
 <script src="{{asset('guest/scripts/comments.js')}}"></script>
+<script src="{{asset('guest/plugins/owlcarousel/dist/owl.carousel.min.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        var owl = $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            items:3
+        });
 
+        owl.on('changed.owl.carousel', function(event) {
+            setTimeout(function(){
+                var activeEls = $('.owl-item.active').eq(1); // .eq(1) to get the "middle image out of 3 actives"
+                setCarouselCaption( activeEls );
+            },1);
+        });
 
+        function setCarouselCaption(el){
+            $(".owl-item").removeClass("target");
+            el.addClass("target");
+        }
+
+    });
+</script>
 @endpush

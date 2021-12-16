@@ -112,7 +112,7 @@ class TariffController extends Controller
         $count_of_brand = $this->countTariffOfBrand()[0]['count_of_brand'];
 
         return view('guest.tariffs.index', [
-            'title' => 'Bảng giá thiết bị điện ' . date("Y"),
+            'title' => 'Bảng giá ' . date("Y"),
             'brands' => $list_brands_of_tariff,
             'count_of_brand' => $count_of_brand,
             'tariffs' => $this->tariffService->getAllWithPaginate()

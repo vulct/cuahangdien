@@ -36,7 +36,7 @@
                         <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                             <figure class='productitem--image' data-product-item-image>
                                 <img alt='{{$product->name}}'
-                                     src='{{$product->image}}' width='350' height='350'>
+                                     src='{{asset($product->image)}}' width='350' height='350'>
                             </figure>
                         </a>
                         <div class='productitem--info'>
@@ -77,7 +77,7 @@
                                 </a>
                             </h4>
 
-                            <div class='productitem--provider'><img src='{{$brands[$product->brand_id]->image}}'
+                            <div class='productitem--provider'><img src='{{asset($brands[$product->brand_id]->image)}}'
                                                                     alt='{{$brands[$product->brand_id]->name}}' width='120'
                                                                     height='60'></div>
                         </div>

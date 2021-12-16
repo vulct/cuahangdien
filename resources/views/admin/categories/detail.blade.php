@@ -59,7 +59,7 @@
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Hình thu nhỏ')}}:</th>
-                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{$cate->image}}"  alt="Ảnh thu nhỏ" style="width: 200px;" data-holder-rendered="true">
+                                        <td><img class="card-img-right flex-auto d-none d-md-block" src="{{asset($cate->image)}}"  alt="Ảnh thu nhỏ" style="width: 200px;" data-holder-rendered="true">
                                         </td>
                                     </tr>
                                     </tbody>
