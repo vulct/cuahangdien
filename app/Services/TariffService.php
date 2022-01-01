@@ -101,12 +101,12 @@ class TariffService
         if ($id === ""){
             return Tariff::with(['brand' => function($query){
                 $query->where(['isDelete' => 0, 'active' => 1]);
-            }])->where(['isDelete' => 0, 'active' => 1])->paginate(2);
+            }])->where(['isDelete' => 0, 'active' => 1])->paginate(6);
         }
 
         return Tariff::with(['brand' => function($query){
             $query->where(['isDelete' => 0, 'active' => 1]);
-        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(2);
+        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(6);
 
     }
 

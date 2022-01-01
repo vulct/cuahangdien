@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BrandRequest;
 use App\Models\Brand;
 use App\Services\Admin\BrandService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -77,7 +74,12 @@ class BrandController extends Controller
                 'message' => 'Xóa thương hiệu thành công'
             ]);
         }
-
+        if ($result === 0) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Vui lòng không xóa thương hiệu khi đang tồn tại sản phẩm thuộc thương hiệu này.'
+            ]);
+        }
         return response()->json([
             'error' => true
         ]);

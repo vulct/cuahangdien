@@ -169,16 +169,16 @@
                     </h5>
                     <div class="site-footer-block-content site-footer-contact" style="margin-bottom: .25rem;">
                         <p><b>{{$info->name ?? ""}}</b></p>
-                        <p> {!! isset($info->address) ? '<b>Địa chỉ: </b>' . $info->address : "" !!}</p>
-                        <p>{{ isset($info->business_license) ? 'MST: '.$info->business_license : "" }}</p>
-                        @if(isset($info->hotline1))
+                        <p> {!! isset($info->address) && !empty($info->address) ? '<b>Địa chỉ: </b>' . $info->address : "" !!}</p>
+                        <p>{{ isset($info->business_license) && !empty($info->business_license) ? 'MST: '.$info->business_license : "" }}</p>
+                        @if(isset($info->hotline1) && !empty($info->hotline1))
                             <p>
                                 <img src="{{asset('guest/images/svg/phone.svg')}}" alt="phone support" width="20"
                                      height="20"/>
                                 <a href="tel:{{$info->hotline1}}">{{$info->hotline1}}</a> {!! isset($info->hotline2) ? '- <a href="tel:'.$info->hotline2.'">'.$info->hotline2.'</a>' : "" !!}
                             </p>
                         @endif
-                        @if(isset($info->phone))
+                        @if(isset($info->phone) && !empty($info->phone))
                             <p>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       id="Capa_1" x="0px" y="0px" width="20px" height="20px"
@@ -205,7 +205,7 @@
                             </p>
                         @endif
                         <p>
-                            @if(isset($info->email))
+                            @if(isset($info->email) && !empty($info->email))
                                 <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1"
                                       height="20px"
                                      viewBox="0 0 479.058 479.058"
@@ -350,12 +350,11 @@
 
 <div id='arcontactus'></div>
 
-
 @push('scripts')
     <script>
         window.addEventListener('load', function () {
-            let arcItem = {};
-            @if(isset($info->email))
+            @if(isset($info->email) && !empty($info->email))
+            var arcItem={};
             arcItem.id = 'msg-item-6';
             arcItem.class = 'msg-item-envelope';
             arcItem.title = "Email báo giá<br/>{!! $info->email !!}";
@@ -364,7 +363,8 @@
             arcItem.color = '#FF643A';
             arcItems.push(arcItem);
             @endif
-            @if(isset($info->facebook))
+            @if(isset($info->facebook) && !empty($info->facebook))
+            var arcItem={};
             arcItem.id = 'msg-item-1';
             arcItem.class = 'msg-item-facebook-messenger';
             arcItem.title = "FB Messenger<br/>{{$info->facebook}}";
@@ -373,7 +373,8 @@
             arcItem.color = '#567AFF';
             arcItems.push(arcItem);
             @endif
-            @if(isset($info->zalo))
+            @if(isset($info->zalo) && !empty($info->zalo))
+            var arcItem={};
             arcItem.id = 'msg-item-10';
             arcItem.class = 'msg-item-zalo';
             arcItem.title = "Zalo Chat<br/>{{$info->zalo}}";
@@ -382,7 +383,8 @@
             arcItem.color = '#008FE5';
             arcItems.push(arcItem);
             @endif
-            @if(isset($info->sale))
+            @if(isset($info->sale) && !empty($info->sale))
+            var arcItem={};
             arcItem.id = 'msg-item-9';
             arcItem.class = 'msg-item-phone';
             arcItem.title = "Bán Hàng<br/><b style='color:#4EB625'>{{$info->sale}}</b>";
@@ -391,7 +393,8 @@
             arcItem.color = '#4EB625';
             arcItems.push(arcItem);
             @endif
-            @if(isset($info->phone))
+            @if(isset($info->phone) && !empty($info->phone))
+            var arcItem={};
             arcItem.id = 'msg-item-3';
             arcItem.class = 'msg-item-phone';
             arcItem.title = "Tư vấn kỹ thuật<br/><b style='color:#FF643A'>{{$info->phone}}</b>";

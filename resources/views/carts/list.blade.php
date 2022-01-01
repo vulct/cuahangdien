@@ -31,11 +31,12 @@
                             @foreach($carts as $key => $cart)
                                 @foreach($products as $product)
                                     @if($cart['product'] === $product->id)
+                                        @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                                         <article class="cart-item" id="cart-item-{{$key}}" data-cartitem-price="{{App\Helpers\Helper::price($cart['price'],$cart['discount'],$cart['qty'])}} VND">
                                             <div class="cart-item--no">{{$i}}.</div>
                                             <figure class="cart-item--image-wrapper">
                                                 <a href="{{route('products.detail',$product->slug)}}">
-                                                    <img src="{{asset($product->image)}}" alt="{{$product->name}}">
+                                                    <img src="{{asset($image)}}" alt="{{$product->name}}">
                                                 </a>
                                             </figure>
                                             <div class="cart-item--inner">

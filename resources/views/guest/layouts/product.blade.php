@@ -29,6 +29,7 @@
                 </div>
                 @php $i = 1; @endphp
                 @foreach($category['products'] as $product)
+                    @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                     @if($i <= 5)
                         <article class='productgrid--item imagestyle--natural productitem--emphasis' data-product-item
                          tabindex='1'>
@@ -36,7 +37,7 @@
                         <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                             <figure class='productitem--image' data-product-item-image>
                                 <img alt='{{$product->name}}'
-                                     src='{{asset($product->image)}}' width='350' height='350'>
+                                     src='{{asset($image)}}' width='350' height='350'>
                             </figure>
                         </a>
                         <div class='productitem--info'>
@@ -87,13 +88,23 @@
                     @php $i++; @endphp
                 @endforeach
             </div>
+            @php $dem_menu = 0 @endphp
             @foreach($menu as $cate)
                 @if($cate->parent_id === $category->id)
-                    <div class='_links'>
-                        <a href='{{route('danhmuc.chitiet',$cate->slug)}}' title='{{$cate->name}}'>{{$cate->name}}</a> /
-                    </div>
+                    @php $dem_menu += 1 @endphp
                 @endif
             @endforeach
+            @if($dem_menu > 0)
+            <div class='_links'>
+                @php $dem = 0 @endphp
+                @foreach($menu as $cate)
+                    @if($cate->parent_id === $category->id)
+                            @if($dem != 0)/@endif <a href='{{route('danhmuc.chitiet',$cate->slug)}}' title='{{$cate->name}}'>{{$cate->name}}</a>
+                        @php $dem += 1 @endphp
+                    @endif
+                @endforeach
+            </div>
+            @endif
         </section>
     </div>
 @endforeach

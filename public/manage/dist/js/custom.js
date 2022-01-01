@@ -150,9 +150,14 @@ function removeFunction(slug){
                             location.reload();
                         }, 500);
                     }else {
+                        let message = 'Xóa không thành công, vui lòng thử lại.'
+                        if (typeof data.message !== 'undefined' || data.message !== null) {
+                            message =  data.message
+                        }
+
                         Swal.fire(
                             'Delete Error!',
-                            'Xóa không thành công, vui lòng thử lại.',
+                            message,
                             'error'
                         )
                     }

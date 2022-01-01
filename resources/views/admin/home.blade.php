@@ -266,9 +266,10 @@
                             <div class="card-body p-0">
                                 <ul class="products-list product-list-in-card pl-2 pr-2">
                                     @foreach($list_new_product as $product)
+                                        @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="{{asset($product->image)}}" alt="Product image" class="img-size-50">
+                                            <img src="{{asset($image)}}" alt="Product image" class="img-size-50">
                                         </div>
                                         <div class="product-info">
                                             <a href="{{route('products.detail', $product->slug)}}" class="product-title">{{$product->name}}

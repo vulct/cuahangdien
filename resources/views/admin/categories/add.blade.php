@@ -185,6 +185,16 @@
                                                 </select>
                                             </div>
                                             @endif
+                                            <div class="form-group">
+                                                <label for="s_home">{{__('Vị trí hiển thị trên trang chủ')}}</label>
+                                                <input type="number" id="s_home" class="form-control"
+                                                       value="{{old('s_home') ?? 0}}" name="s_home" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="s_menu">{{__('Vị trí hiển thị trên danh sách')}}</label>
+                                                <input type="number" id="s_menu" class="form-control"
+                                                       value="{{old('s_menu') ?? 0}}" name="s_menu" />
+                                            </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="active"
                                                        name="active" value="1" checked=""/>
@@ -193,10 +203,10 @@
                                             </div>
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox" id="top"
-                                                       name="top" value="1"/>
+                                                       name="top" value="1" checked="" />
                                                 <label for="top" class="custom-control-label">Hiển thị</label>
                                                 <span class="form-text">
-                                                    <i class="fa fa-info-circle"></i> Danh mục này sẽ hiển thị ra ngoài trang chủ. Mặc định chỉ dành cho những danh mục Root.
+                                                    <i class="fa fa-info-circle"></i> Danh mục này sẽ hiển thị ra ngoài trang chủ.
                                                 </span>
                                             </div>
                                         </div>

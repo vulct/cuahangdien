@@ -547,15 +547,48 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="slug">{{__('Hình ảnh sản phẩm')}}</label>
+                                                <label for="slug">{{__('Hình ảnh sản phẩm 01')}}</label>
+                                                @if($product->image != null)
                                                 <img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image)}}"
-                                                     alt="Thumbnail [200x250]" style="width: 200px;"
+                                                     alt="Image product [200x250]" style="width: 200px;"
                                                      data-holder-rendered="true">
+
+                                                @endif
                                                 <div class="custom-file mt-2">
                                                     <input type="file" class="custom-file-input" id="exampleInputFile"
                                                            accept="image/*" name="image">
                                                     <label class="custom-file-label"
                                                            for="exampleInputFile">{{__('Choose File')}}</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="image_01">{{__('Hình ảnh sản phẩm 02')}}</label>
+                                                @if($product->image_01 != null)
+                                                <img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image_01)}}"
+                                                     alt="Image product [200x250]" style="width: 200px;"
+                                                     data-holder-rendered="true">
+                                                @endif
+                                                <div class="custom-file mt-2">
+                                                    <input type="file" class="custom-file-input" id="image_01"
+                                                           accept="image/*" name="image_01">
+                                                    <label class="custom-file-label"
+                                                           for="image_01">{{__('Choose File')}}</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="image_01">{{__('Hình ảnh sản phẩm 03')}}</label>
+                                                @if($product->image_02 != null)
+                                                <img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image_02)}}"
+                                                     alt="Image product [200x250]" style="width: 200px;"
+                                                     data-holder-rendered="true">
+                                                @endif
+                                                <div class="custom-file mt-2">
+                                                    <input type="file" class="custom-file-input" id="image_02"
+                                                           accept="image/*" name="image_02">
+                                                    <label class="custom-file-label"
+                                                           for="image_02">{{__('Choose File')}}</label>
                                                 </div>
                                             </div>
                                         </div>

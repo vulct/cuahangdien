@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('guest.products.index', [
-            'title' => 'Thiết Bị Diện Dân Dụng & Công nghiệp',
+            'title' => 'Thiết Bị Điện & Vật Tư Ngành Nước',
             'brands' => $this->brandService->get(1),
             'categories' => $this->categoryService->getParentCategory()
         ]);
@@ -91,7 +91,7 @@ class ProductController extends Controller
             $brand_of_product[$brand->id] = $brand;
         }
 
-        $products = $this->productService->getProductByCategory($category->id, 50);
+        $products = $this->productService->getProductByCategory($category->id, 5);
 
         $brand_with_category = $this->brandService->getBrandsWithCategory();
 

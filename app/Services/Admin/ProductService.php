@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Log;
 
 class ProductService
 {
@@ -81,17 +80,33 @@ class ProductService
 
             DB::beginTransaction();
             // upload image product
+            $path_image_01 = null;
+            $path_image_02 = null;
+            $path_image = null;
+            if ($request->hasFile('image_01')) {
+                $path_image_01 = $this->upload->store($request->file('image_01'));
+            }
+
+            if ($request->hasFile('image_02')) {
+                $path_image_02 = $this->upload->store($request->file('image_02'));
+            }
+
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
-            } else {
+            }
+
+            if($path_image === null && $path_image_01 === null && $path_image_02 === null) {
                 $path_image = '/storage/default/image-available.jpg';
             }
+
             // add product
             $product_id = Product::create([
                 "name" => (string)$request->input('name'),
                 "meta_title" => (string)$request->input('meta_title'),
                 "keyword" => (string)$request->input('keyword'),
                 "image" => $path_image,
+                "image_01" => $path_image_01,
+                "image_02" => $path_image_02,
                 "description" => (string)$request->input('description'),
                 "content" => (string)$request->input('content'),
                 "warranty" => (string)$request->input('warranty'),
@@ -111,12 +126,12 @@ class ProductService
             }
 
             for ($i = 0; $i < count($dataAttributes); $i++) {
-                if ($dataAttributes[$i]['discount'] !== null && $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
+                if ($dataAttributes[$i]['discount'] === null || $this->checkValueDiscount($dataAttributes[$i]['discount']) === true) {
                     if ($this->insertAttribute($product_id, $dataAttributes[$i]) === false) {
                         DB::rollBack();
                         return false;
                     }
-                }elseif ($dataAttributes[$i]['codename']){
+                }elseif (empty($dataAttributes[$i]['codename'])){
                     Session::flash('error', 'Mã sản phẩm không được để trống.');
                     return false;
                 } else {
@@ -133,7 +148,6 @@ class ProductService
 
             Session::flash('error', 'Thêm sản phẩm không thành công. Vui lòng thử lại.');
 
-            Log::info($exception->getMessage());
             return false;
         }
         return true;
@@ -159,10 +173,24 @@ class ProductService
             }
 
             // update image product
+
+            $path_image_01 = $product->image_01;
+            $path_image_02 = $product->image_02;
             $path_image = $product->image;
+            if ($request->hasFile('image_01')) {
+                $path_image_01 = $this->upload->store($request->file('image_01'));
+            }
+
+            if ($request->hasFile('image_02')) {
+                $path_image_02 = $this->upload->store($request->file('image_02'));
+            }
 
             if ($request->hasFile('image')) {
                 $path_image = $this->upload->store($request->file('image'));
+            }
+
+            if (($path_image_01 !== null || $path_image_02 !== null) && $path_image == '/storage/default/image-available.jpg'){
+                $path_image = null;
             }
 
             //update or create attributes
@@ -224,6 +252,8 @@ class ProductService
             $product->name = (string)$request->input('name');
             $product->meta_title = (string)$request->input('meta_title');
             $product->image = $path_image;
+            $product->image_01 = $path_image_01;
+            $product->image_02 = $path_image_02;
             $product->description = (string)$request->input('description');
             $product->keyword = (string)$request->input('keyword');
             $product->content = (string)$request->input('content');
@@ -238,7 +268,6 @@ class ProductService
             return true;
         } catch (Exception $err) {
             Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại');
-            Log::info($err->getMessage());
             return false;
         }
 
@@ -310,6 +339,16 @@ class ProductService
         }])->where(['category_id' => $id, 'isDelete' => 0, 'active' => 1])->paginate($limit);
     }
 
+    public function getProductByBrand($id)
+    {
+        return Product::where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1]);
+    }
+
+    public function getProductByIdOfCategory($id)
+    {
+        return Product::where(['category_id' => $id, 'isDelete' => 0, 'active' => 1]);
+    }
+
     public function getProductByBrandAndCategory($brand, $category): LengthAwarePaginator
     {
         return Product::with(['category' => function ($query) {
@@ -318,7 +357,7 @@ class ProductService
             $query->where(['isDelete' => 0, 'active' => 1]);
         }])
             ->where(['brand_id' => $brand, 'category_id' => $category, 'isDelete' => 0, 'active' => 1])
-            ->paginate(2);
+            ->paginate(8);
     }
 
     public function getCategoriesWithBrandWithoutCategory($brand, $category)

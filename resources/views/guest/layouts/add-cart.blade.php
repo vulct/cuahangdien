@@ -13,7 +13,8 @@
                 </h2>
                 <div class="atc--product">
                     <div class="atc--product-image" data-atc-banner-product-image="">
-                        <img src="{{asset($product->image)}}"
+                        @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
+                        <img src="{{asset($image)}}"
                             alt="{{$product->name}}">
                     </div>
                     <div class="atc--product-details">

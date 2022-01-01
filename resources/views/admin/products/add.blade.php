@@ -446,12 +446,30 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="slug">{{__('Hình ảnh sản phẩm')}}</label>
+                                                <label for="exampleInputFile">{{__('Hình ảnh sản phẩm 01')}}</label>
                                                 <div class="custom-file mt-2">
                                                     <input type="file" class="custom-file-input" id="exampleInputFile"
                                                            accept="image/*" name="image">
                                                     <label class="custom-file-label"
                                                            for="exampleInputFile">{{__('Choose File')}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="image01">{{__('Hình ảnh sản phẩm 02')}}</label>
+                                                <div class="custom-file mt-2">
+                                                    <input type="file" class="custom-file-input" id="image01"
+                                                           accept="image/*" name="image01">
+                                                    <label class="custom-file-label"
+                                                           for="image01">{{__('Choose File')}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="image02">{{__('Hình ảnh sản phẩm 03')}}</label>
+                                                <div class="custom-file mt-2">
+                                                    <input type="file" class="custom-file-input" id="image02"
+                                                           accept="image/*" name="image02">
+                                                    <label class="custom-file-label"
+                                                           for="image02">{{__('Choose File')}}</label>
                                                 </div>
                                             </div>
                                         </div>

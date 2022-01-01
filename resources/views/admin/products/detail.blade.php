@@ -19,7 +19,7 @@
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th>{{__('Đường dẫn')}}:</th>
-                                        <td><a href="{{config('app.url') . '/product/'. $product->slug}}">{{config('app.url') . '/product/'. $product->slug}}</a></td>
+                                        <td><a href="{{route('products.detail',$product->slug)}}">{{route('products.detail',$product->slug)}}</a></td>
                                     </tr>
                                     <tr style="border-top: none !important;" class="border-bottom">
                                         <th style="width:50%">{{__('Tiêu đề')}}:</th>
@@ -69,11 +69,27 @@
                                         <th>{{__('Trạng thái')}}:</th>
                                         <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
                                     </tr>
+                                    @if($product->image != null)
                                     <tr style="border-top: none !important;" class="border-bottom">
-                                        <th>{{__('Hình ảnh sản phẩm')}}:</th>
+                                        <th>{{__('Hình ảnh sản phẩm 01')}}:</th>
                                         <td><img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image)}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
                                         </td>
                                     </tr>
+                                    @endif
+                                    @if($product->image_01 != null)
+                                        <tr style="border-top: none !important;" class="border-bottom">
+                                            <th>{{__('Hình ảnh sản phẩm 02')}}:</th>
+                                            <td><img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image_01)}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($product->image_02 != null)
+                                        <tr style="border-top: none !important;" class="border-bottom">
+                                            <th>{{__('Hình ảnh sản phẩm 03')}}:</th>
+                                            <td><img class="card-img-right flex-auto d-none d-md-block" src="{{asset($product->image_02)}}"  alt="Thumbnail [200x250]" style="width: 200px;" data-holder-rendered="true">
+                                            </td>
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

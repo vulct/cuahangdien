@@ -96,15 +96,11 @@
                     data-navmenu-trigger="" data-navmenu-meganav-trigger="">
                     <a class="navmenu-link" href="{{route('bang-gia')}}">
                         Bảng giá
-
                     </a>
-
                 </li>
                 <li class="navmenu-item">
                     <a class="navmenu-link" href="{{route('khuyen-mai')}}">Khuyến mãi</a>
                 </li>
-
-
                 <li class="navmenu-item navmenu-id-theme-features">
                     <a class="navmenu-link" href="{{route('blogs')}}">Tin tức</a>
                 </li>

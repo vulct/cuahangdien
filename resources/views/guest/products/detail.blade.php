@@ -27,15 +27,22 @@
 
                 <article class="product--outer" itemscope itemtype="http://schema.org/Product">
                     <meta itemprop="url" content="{{route('products.detail',$product->slug)}}">
-                    <meta itemprop="image" content="{{asset($product->image)}}">
+                    @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
+                    <meta itemprop="image" content="{{asset($image)}}">
                     <meta itemprop="description" content="{{$product->description}}">
                     <div class="product-gallery" data-product-image>
-                        <div class="owl-carousel">
-                            <div class="item">
-                                <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800">
-                            </div>
-                            <div class="item">
-                                <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800">
+                        <div class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    @php
+                                    $image_01 = $product->image ?? $product->image_01 ?? $product->image_02;
+                                    $image_02 = $product->image_01 ?? $product->image ?? $product->image_02;
+                                    $image_03 = $product->image_02 ?? $product->image ?? $product->image_01;
+                                    @endphp
+                                    <li class="splide__slide"><img src="{{asset($image_01)}}" data-src="{{asset($image_01)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800"></li>
+                                    <li class="splide__slide"><img src="{{asset($image_02)}}" data-src="{{asset($image_02)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800"></li>
+                                    <li class="splide__slide"><img src="{{asset($image_03)}}" data-src="{{asset($image_03)}}" data-image="" alt="{{$product->name}}" class="lazy" width="800" height="800"></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -101,8 +108,8 @@
 
                                 </div>
                                 <div style="font-style: italic;color: #d31d1d;font-size: 14.5px;margin-bottom: 6px;">Giá sản phẩm rẻ hơn khi mua số lượng nhiều
-                                    @if( isset($info->email) && !empty($info->email))
-                                    <i style="font-size:14.5px;color:#222;display:block;">(vui lòng thêm vào báo giá để nhận báo giá hoặc qua email: {{$info->email}})</i>
+                                    @if( isset($info->zalo) && !empty($info->zalo))
+                                    <i style="font-size:14.5px;color:#222;display:block;">(vui lòng thêm vào báo giá để nhận báo giá hoặc qua zalo: {{$info->zalo}})</i>
                                     @endif
                                 </div>
                             </div>
@@ -205,7 +212,7 @@
                                     <div class="box-feeship">
                                         <h6>Đặt hàng và nhận báo giá</h6>
                                         <p>Xem <a href="{{isset($page['buy_product']) ? route('pages.chitiet',$page['buy_product']->slug) : '#'}}"><i>Hướng dẫn mua hàng</i></a> hoặc <a href="{{isset($page['warranty']) ? route('pages.chitiet', $page['warranty']->slug) : '#'}}"><i>Bảo hành &amp; đổi trả</i></a></p>
-                                        @if(isset($info->map_address))
+                                        @if(isset($info->map_address) && !empty($info->map_address))
                                             <div>
                                                 <a class="RRQQWe" href="{{$info->map_address}}" target="_blank">
                                                     <div class="fbNEY">
@@ -277,10 +284,11 @@
                                             </tr>
                                             @php $i = 1; @endphp
                                             @foreach($product->attributes as $att)
+                                                @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                                                 <tr>
                                                     <td width="30">{{$i}}</td>
                                                     <td class="table--img">
-                                                        <img src="{{asset($product->image)}}" data-src="{{asset($product->image)}}" width="50" height="50" class="lazy" alt="image-product"/>
+                                                        <img src="{{asset($image)}}" data-src="{{asset($image)}}" width="50" height="50" class="lazy" alt="image-product"/>
                                                     </td>
                                                     <td>{{$att->type_name}}</td>
                                                     <td>{{$att->codename}}</td>
@@ -293,7 +301,7 @@
                                             @endforeach
                                         </table>
                                     </div>
-                                    <p class="description-notification">Thông tin sản phẩm được cập nhật ngày <span>{{date('d/m/Y', strtotime($product->updated_at))}}</span>. Nếu GIÁ hoặc CHIẾC KHẤU có thể chưa được cập nhật mới, Quý khách hàng có nhu cầu vui lòng liên hệ báo giá qua email <a href="mailto:{{$info->email}}" style="color: orangered;font-weight:500">{{$info->email}}</a> để nhận thông tin giá chính xác nhất. Cảm ơn. </p>
+                                    <p class="description-notification">Thông tin sản phẩm được cập nhật ngày <span>{{date('d/m/Y', strtotime($product->updated_at))}}</span>. Nếu GIÁ hoặc CHIẾC KHẤU có thể chưa được cập nhật mới, Quý khách hàng có nhu cầu vui lòng liên hệ báo giá qua zalo <a href="tel:{{$info->zalo}}" style="color: orangered;font-weight:500">{{$info->zalo}}</a> để nhận thông tin giá chính xác nhất. Cảm ơn. </p>
                                 </div>
                             </div>
                             @endif
@@ -382,8 +390,7 @@
 <!-- Toastr -->
 <link rel="stylesheet" href="{{asset('manage/plugins/toastr/toastr.min.css')}}">
 <script src="{{asset('guest/js/option_selection.js')}}"></script>
-<link rel="stylesheet" href="{{asset('guest/plugins/owlcarousel/dist/assets/owl.carousel.min.css')}}">
-<link rel="stylesheet" href="{{asset('guest/plugins/owlcarousel/dist/assets/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('guest/plugins/splide/dist/css/splide.min.css')}}">
 @endpush
 
 @push('scripts')
@@ -411,28 +418,11 @@ win.resize(function () {
 });
 </script>
 <script src="{{asset('guest/scripts/comments.js')}}"></script>
-<script src="{{asset('guest/plugins/owlcarousel/dist/owl.carousel.min.js')}}"></script>
+<script src="{{asset('guest/plugins/splide/dist/js/splide.min.js')}}"></script>
 <script>
-    $(document).ready(function(){
-        var owl = $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            items:3
-        });
-
-        owl.on('changed.owl.carousel', function(event) {
-            setTimeout(function(){
-                var activeEls = $('.owl-item.active').eq(1); // .eq(1) to get the "middle image out of 3 actives"
-                setCarouselCaption( activeEls );
-            },1);
-        });
-
-        function setCarouselCaption(el){
-            $(".owl-item").removeClass("target");
-            el.addClass("target");
-        }
-
-    });
+    document.addEventListener( 'DOMContentLoaded', function() {
+        var splide = new Splide( '.splide' );
+        splide.mount();
+    } );
 </script>
 @endpush

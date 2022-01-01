@@ -28,7 +28,7 @@
                         </div>
                     </nav>
                     <div class="collection--information">
-                        <h1 class="collection--title">Thiết Bị Diện Dân Dụng & Công nghiệp</h1>
+                        <h1 class="collection--title">Thiết Bị Điện & Vật Tư Ngành Nước</h1>
                         <p style="margin: 10px 0;">Chọn danh mục thiết bị điện bên dưới để tìm kiếm sản phẩm bạn cần một cách chính xác.</p>
                     </div>
                     <div class="productgrid--items row">

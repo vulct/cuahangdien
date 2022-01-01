@@ -11,10 +11,12 @@ class CategoryService
 {
 
     protected $upload;
+    protected $productService;
 
-    public function __construct(UploadService $upload)
+    public function __construct(UploadService $upload, ProductService $productService)
     {
         $this->upload = $upload;
+        $this->productService = $productService;
     }
 
     public function get($active = 0, $type = 0)
@@ -44,6 +46,7 @@ class CategoryService
 
     public function create($request): bool
     {
+
         try {
 
             if ($request->hasFile('image')) {
@@ -51,9 +54,6 @@ class CategoryService
             } else {
                 $path_image = '/storage/default/image-available.jpg';
             }
-
-            // Show in home default with root category
-            $top = (int)$request->cate_parent === 0 ? '1' : (int)$request->top;
 
             // Check type category
             $type = in_array((int)$request->type, [0, 1]) ? (int)$request->type : 0;
@@ -67,8 +67,10 @@ class CategoryService
                 "description" => (string)$request->description,
                 "image" => $path_image,
                 "type" => $type,
+                "sort_home" => (int)$request->s_home,
+                "sort_menu" => (int)$request->s_menu,
                 "active" => (int)$request->active,
-                "top" => $top,
+                "top" => (int)$request->top,
             ]);
 
             Session::flash('success', 'Tạo danh mục thành công.');
@@ -79,12 +81,18 @@ class CategoryService
         return true;
     }
 
-    public function destroy($request): bool
+    public function destroy($request)
     {
         $slug = $request->input('slug');
 
         $category = Category::where('slug', $slug)->first();
+        // get product of category
 
+        $product = $this->productService->getProductByIdOfCategory($category->id);
+
+        if ($product->count() > 0){
+            return 0;
+        }
         if ($category) {
             return Category::where('slug', $slug)->orWhere('parent_id', $category->id)->update(['isDelete' => 1]);
         }

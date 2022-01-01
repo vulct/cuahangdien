@@ -7,7 +7,7 @@
                 <div class="productgrid--wrapper">
                     <nav class="breadcrumbs-container" role="navigation" aria-label="breadcrumbs" itemscope itemtype='http://schema.org/BreadcrumbList'>
                         <div class="breadcrumb-home" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                            <a href="https://www.thietbidiendgp.vn/" itemprop="item">
+                            <a href="/" itemprop="item">
                                 <span itemprop="name" >Trang chủ</span>
                                 <meta itemprop="position" content="1">
                                 </a>
@@ -66,6 +66,7 @@
                     <div class="productgrid--items">
                         @if(!$products->isEmpty())
                             @foreach($products as $product)
+                            @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                             <article class='productgrid--item imagestyle--natural productitem--emphasis'
                                      data-product-item
                                      tabindex='1'>
@@ -73,7 +74,7 @@
                                     <a class='productitem--image-link' href='{{route('products.detail',$product->slug)}}'>
                                         <figure class='productitem--image' data-product-item-image>
                                             <img alt='{{$product->name}}'
-                                                 src='{{asset($product->image)}}' width='350' height='350'>
+                                                 src='{{asset($image)}}' width='350' height='350'>
                                         </figure>
                                     </a>
                                     <div class='productitem--info'>

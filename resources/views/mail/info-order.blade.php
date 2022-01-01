@@ -98,12 +98,13 @@
                                                         $attribute = $item->product_attribute;
                                                         $product = $item->product_attribute->product;
                                                     @endphp
+                                                    @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                                                     <tr>
                                                 <td align="center" style="padding: 3px 9px; vertical-align: middle;" valign="top"><span>{{$i++}}</span></td>
                                                 <td align="left" style="padding: 0; vertical-align: middle;">
                                                     <div style="width: 50px; height: 50px;">
                                                         <img
-                                                            src="{{asset($product->image)}}"
+                                                            src="{{asset($image)}}"
                                                             style="display: block; width: 100%;margin-left: auto; margin-right: auto;"
                                                             alt="{{$product->name}}"
                                                         />

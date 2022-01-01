@@ -99,13 +99,14 @@
                                     @foreach($carts as $key => $cart)
                                         @foreach($products as $product)
                                             @if($cart['product'] === $product->id)
+                                                @php $image = $product->image ?? $product->image_01 ?? $product->image_02 @endphp
                                                 <tr class="product">
                                                     <td class="product__image">
                                                         <div class="product-thumbnail">
                                                             <div class="product-thumbnail__wrapper">
                                                                 <img alt="{{$product->name}}"
                                                                      class="product-thumbnail__image"
-                                                                     src="{{asset($product->image)}}">
+                                                                     src="{{asset($image)}}">
                                                             </div>
                                                         </div>
                                                     </td>

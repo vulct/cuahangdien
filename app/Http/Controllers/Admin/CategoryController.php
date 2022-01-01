@@ -134,7 +134,12 @@ class CategoryController extends Controller
                 'message' => 'Xóa danh mục thành công'
             ]);
         }
-
+        if ($result === 0) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Vui lòng không xóa danh mục khi đang tồn tại sản phẩm thuộc danh mục này.'
+            ]);
+        }
         return response()->json([
             'error' => true
         ]);

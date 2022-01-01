@@ -89,7 +89,7 @@
                                                                name="link_download"
                                                                value="{{old('link_download')}}"
                                                                class="form-control"
-                                                               placeholder="https://drive.google.com/file/d/1-eCe8fDcZ6GSLlQn6ZCSoCIUoZGyqZ13/view"/>
+                                                               placeholder="https://drive.google.com/file/d/1-eCe8fDcZ6GSLlQn6ZCSoCIUoZGyqZ13"/>
                                                     </div>
                                                     <span class="form-text">
                                                         <i class="fa fa-info-circle"></i> Tối đa 200 kí tự

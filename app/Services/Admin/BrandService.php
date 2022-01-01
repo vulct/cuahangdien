@@ -17,10 +17,12 @@ class BrandService
 {
 
     protected $upload;
+    protected $productService;
 
-    public function __construct(UploadService $upload)
+    public function __construct(UploadService $upload, ProductService $productService)
     {
         $this->upload = $upload;
+        $this->productService = $productService;
     }
 
     public function get($active = 0)
@@ -60,11 +62,18 @@ class BrandService
 
     }
 
-    public function destroy($request): bool
+    public function destroy($request)
     {
         $slug = $request->input('slug');
 
         $brand = Brand::where(['slug' => $slug, 'isDelete' => 0])->first();
+
+        // get brand of product
+        $product = $this->productService->getProductByBrand($brand->id);
+
+        if ($product->count() > 0){
+            return 0;
+        }
 
         if ($brand) {
             return Brand::where(['slug' => $slug, 'isDelete' => 0])->update(['isDelete' => 1]);
@@ -116,7 +125,7 @@ class BrandService
             $query->where(['isDelete' => 0, 'active' => 1]);
         }, 'attributes' => function ($query) {
             $query->where('isDelete', 0);
-        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(2);
+        }])->where(['isDelete' => 0, 'active' => 1, 'brand_id' => $id])->paginate(8);
     }
 
     public function getAllBrandWithOutSlug($id)

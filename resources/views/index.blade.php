@@ -217,7 +217,7 @@
                         <p class="highlights-banners-heading">
                             Miễn phí ship
                         </p>
-                        Nội thành TP.HCM
+                        Nội thành TP.Thanh Hoá
                     </div>
                 </a>
                 <a class="highlights-banners-block" href="tel:{{$info->hotline1 ?? ''}}">
@@ -267,18 +267,18 @@
                         <h1>
                             <a href="{{config('app.url')}}">{{$info->name ?? 'Thiết Bị Điện Dân Dụng và Vật Tư Ngành Nước'}}</a>
                         </h1>
-                        {!! isset($info->address) ? '<p class="brand--info--address"><i class="icon-mini"></i> '.$info->address.'</p>' : '' !!}
-                        {!! isset($info->hotline1) ? '<p class="brand--info--mobile"><i class="icon-mini"></i>
+                        {!! isset($info->address) && !empty($info->address) ? '<p class="brand--info--address"><i class="icon-mini"></i> '.$info->address.'</p>' : '' !!}
+                        {!! isset($info->hotline1) && !empty($info->hotline1) ? '<p class="brand--info--mobile"><i class="icon-mini"></i>
                         <a href="'.$info->hotline1.'">'.$info->hotline1.'</a>' : '' !!}
-                        {!! isset($info->hotline2) ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
-                        @if(isset($info->email))
+                        {!! isset($info->hotline2) && !empty($info->hotline2)  ? '/<a href="tel:'.$info->hotline2.'"> '.$info->hotline2.'</a></p>' : '</p>' !!}
+                        @if(isset($info->email) && !empty($info->email))
                         <p class="brand--info--email"><i class="icon-mini"></i> <a
                                 href="mailto:{{$info->email ?? ''}}">{{$info->email ?? ''}}</a> @if(isset($info->phone))| <span
                                 class="brand--info--hotline"> <i class="icon-mini"></i> <a href="tel:{{$info->phone ?? ''}}">{{$info->phone ?? ''}}</a></span>@endif
                         </p>
                         @endif
-                        @if(isset($info->description))
-                        <p>{{$info->description ?? ''}}</p>
+                        @if(isset($info->description) && !empty($info->description))
+                        <p>{!! $info->description ?? '' !!}</p>
                         @endif
                     </div>
                 </div>
