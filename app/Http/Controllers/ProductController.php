@@ -114,10 +114,13 @@ class ProductController extends Controller
         $brand_of_product = $this->brandService->getBrandKeyIsIdProduct();
 
         $product_is_discount = [];
+
         foreach ($products as $product) {
             foreach ($product->attributes as $attribute) {
                 if ($attribute->discount >= 40) {
-                    $product_is_discount[] = $product;
+                    if (!key_exists($product->id,$product_is_discount)){
+                        $product_is_discount[$product->id] = $product;
+                    }
                 }
             }
         }

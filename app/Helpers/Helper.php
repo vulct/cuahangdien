@@ -21,7 +21,7 @@ class Helper
                     <tr>
                         <td>' . $category->id . '</td>
                         <td>
-                        <img src="'.$image.'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
+                        <img src="'.asset($image).'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
                         </td>
                         <td>' . $char . ' ' . $category->name . '</td>
                         <td>'. $name_parent .'</td>
@@ -60,7 +60,7 @@ class Helper
                     <tr>
                         <td>' . $category->id . '</td>
                         <td>
-                        <img src="'.$image.'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
+                        <img src="'.asset($image).'" class="img-circle img-size-50 mr-2" style="min-height: 50px;" alt="Hình thu nhỏ" />
                         </td>
                         <td>' . $char . ' ' . $category->name . '</td>
                         <td>'. $name_parent .'</td>
@@ -312,5 +312,12 @@ class Helper
         $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
 
         return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+    }
+
+    public static function clearDescriptionProduct( $string = ""): string
+    {
+        $text = preg_replace("/^<p.*?>/", "",$string);
+        $text = preg_replace("|</p>$|", "",$text);
+        return strip_tags($text);
     }
 }

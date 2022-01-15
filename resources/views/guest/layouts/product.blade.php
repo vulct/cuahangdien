@@ -43,7 +43,7 @@
                         <div class='productitem--info'>
                             <div class='productitem--price'>
                                 @if(isset($product['attributes']) && count($product['attributes']) > 0)
-                                    @if($product['attributes'][0]['discount'] > 0)
+                                    @if($product['attributes'][0]['discount'] > 0 && $product->attributes[0]->price > 0)
                                     <div class='price--compare-at visible' data-price-compare-at>
                                     <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
                                 </div>
@@ -56,12 +56,22 @@
                                     {{number_format($product['attributes'][0]['price'] - ($product['attributes'][0]['price']*$product['attributes'][0]['discount']/100))}} <span>VND</span>
                                 </span>
                                 </div>
+                                @elseif($product->attributes[0]->price == 0 || $product->attributes[0]->price == "")
+                                        <div class="price--compare-at visible" data-price-compare-at="">
+                                            <span class="price--spacer"></span>
+                                        </div>
+
+                                        <div class="price--main" data-price="">
+                                                        <span class="money">
+                                                            Liên hệ
+                                                        </span>
+                                        </div>
                                 @else
                                     <div class='price--compare-at visible' data-price-compare-at>
                                         <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
                                     </div>
                                     <span class='productitem--badge badge--sale' data-badge-sales><span
-                                            data-price-percent-saved>LH</span>
+                                            data-price-percent-saved>Liên Hệ</span>
                                     </span>
 
                                     <div class='price--main' data-price>
@@ -77,7 +87,16 @@
                                     {{$product->name}}
                                 </a>
                             </h4>
-
+                            @php
+                                $description = \App\Helpers\Helper::clearDescriptionProduct($product->description);
+                            @endphp
+                            @if(!empty($description))
+                                <div class='productitem--desc'>
+                                    <span class='watt'>
+                                        {{$description}}
+                                    </span>
+                                </div>
+                            @endif
                             <div class='productitem--provider'><img src='{{asset($brands[$product->brand_id]->image)}}'
                                                                     alt='{{$brands[$product->brand_id]->name}}' width='120'
                                                                     height='60'></div>

@@ -10313,7 +10313,7 @@ ul> li> a >.filter-text > span{
 .productitem--brand {width: 50%;float: left;padding-left: 0;}
 .productitem--brand .productitem--provider {display:block;}
 .productitem--brand .productitem--provider img,
-.productitem--provider img{opacity:0.7;max-width:80px;display:block;width:100%;}
+.productitem--provider img{opacity:0.7;max-width:80px;max-height:40px;display:block;width:100%;}
 .productitem--price .price--spacer {
     display: block;
     height: 1.12125rem;
@@ -10324,8 +10324,8 @@ ul> li> a >.filter-text > span{
 }
 
 .productitem--price .price--main {
-    /*color: #29927d;*/
     color:#333941;
+    /*color: #e74728;*/
 }
 .productitem--price .price--main span.money span{
     /*color: #3f8c7d;*/
@@ -10494,8 +10494,8 @@ ul> li> a >.filter-text > span{
 .productitem--image img.loaded{opacity: 1 !important;transition: opacity .2s ease;}
 .productitem--image img {
     display: block;
-    width: auto;
-    height: auto;
+    width: 223px;
+    height: 223px;
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto;
@@ -11576,7 +11576,7 @@ ul> li> a >.filter-text > span{
     position:relative
 }
 .product-recently-viewed--section.hide{
-    display:none
+    display:block;
 }
 .product-recently-viewed--section .flickity-viewport{
     position:relative
