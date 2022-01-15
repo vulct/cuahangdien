@@ -116,8 +116,14 @@
                                                     </span>
                                                 </div>
                                                 @elseif($product->attributes[0]->price == 0 || $product->attributes[0]->price == "")
+                                                    <div class="price--compare-at visible" data-price-compare-at="">
+                                                        <span class="price--spacer"></span>
+                                                    </div>
+
                                                     <div class="price--main" data-price="">
-                                                        <span class="money money--style">Liên hệ</span>
+                                                        <span class="money">
+                                                            Liên hệ
+                                                        </span>
                                                     </div>
                                                 @else
                                                     <div class='price--compare-at visible' data-price-compare-at>
@@ -140,10 +146,19 @@
                                                 {{$product->name}}
                                             </a>
                                         </h4>
-
+                                        @php
+                                            $description = \App\Helpers\Helper::clearDescriptionProduct($product->description);
+                                        @endphp
+                                        @if(!empty($description))
+                                            <div class='productitem--desc'>
+                                                <span class='watt'>
+                                                    {{$description}}
+                                                </span>
+                                            </div>
+                                        @endif
                                         <div class='productitem--provider'><img
-                                                src='{{asset($brand->image)}}'
-                                                alt='{{$brand->name}}' width='120'
+                                                src='{{asset($brands[$product->brand_id]->image)}}'
+                                                alt='{{$brands[$product->brand_id]->name}}' width='120'
                                                 height='60'></div>
                                     </div>
                                 </div>
