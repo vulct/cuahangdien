@@ -75,17 +75,12 @@ class BrandController
             }
         }
 
-//        echo '<pre>';
-//        print_r($cate_brand);
-//        echo '</pre>';
-//        die();
-
         return view('guest.brands.detail', [
             'title' => $title,
             'products' => $products,
             'categoryOfBrand' => $cate_brand,
             'count' => $count,
-            'brand' => $brand
+            'brand_detail' => $brand
         ]);
     }
 

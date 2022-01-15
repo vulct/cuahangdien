@@ -9,10 +9,10 @@
             <div class="productgrid--outer layout--has-sidebar">
                 <div class="productgrid--sidebar" style="">
                     <div class="productgrid--sidebar-section" data-productgrid-filters-content="">
-                        <a href="{{route('hang.chitiet',$brand->slug)}}" title="{{$brand->meta_title}}"><img
-                                src="{{asset($brand->image)}}" class="filters-brand-image" alt="{{$brand->name}}"></a>
-                        <a href="{{route('bang-gia.hang',$brand->slug)}}" class="btn button-secondary price--tag">
-                            <span class="icon--tag">Catalogue &amp; Bảng giá {{$brand->name}}</span>
+                        <a href="{{route('hang.chitiet',$brand_detail->slug)}}" title="{{$brand_detail->meta_title}}"><img
+                                src="{{asset($brand_detail->image)}}" class="filters-brand-image" alt="{{$brand_detail->name}}"></a>
+                        <a href="{{route('bang-gia.hang',$brand_detail->slug)}}" class="btn button-secondary price--tag">
+                            <span class="icon--tag">Catalogue &amp; Bảng giá {{$brand_detail->name}}</span>
                         </a>
 
                         <ul class="productgrid--sidebar-item filter-group left-menu iscollapse">
@@ -20,7 +20,7 @@
                             @foreach($categoryOfBrand as $key => $category)
                                 @if(!in_array($category->id, $array))
                                 <li class="filter-item filter-item--a{{$key}}">
-                                    <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}" title="{{$category->name}}" class="filter-link--a1">
+                                    <a href="{{route('hang.danhmuc',[$brand_detail->slug,$category->slug])}}" title="{{$category->name}}" class="filter-link--a1">
                                         <span class="filter-text">{{$category->name}} <span> ({{$count[$category->id]}})</span></span>
                                     </a>
                                     @if($category->parent_id === 0 && count($categoryOfBrand) > 0)
@@ -29,7 +29,7 @@
                                             @foreach($categoryOfBrand as $key => $cate)
                                                 @if($cate->parent_id === $category->id)
                                                     <li>
-                                                        <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}"
+                                                        <a href="{{route('hang.danhmuc',[$brand_detail->slug,$category->slug])}}"
                                                            title="Dòng {{$cate->name}}" class="c-4938">
                                                             <span class="filter-text">{{$cate->name}} <span> ({{$count[$cate->id]}})</span></span>
                                                         </a>
@@ -59,14 +59,14 @@
                             <meta itemprop="position" content="1">
                         </div>
                         <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                            <a href="{{route('hang.chitiet',$brand->slug)}}" itemprop="item">
-                                <span itemprop="name">Thương hiệu {{$brand->name}}</span>
+                            <a href="{{route('hang.chitiet',$brand_detail->slug)}}" itemprop="item">
+                                <span itemprop="name">Thương hiệu {{$brand_detail->name}}</span>
                                 <meta itemprop="position" content="2">
                             </a>
                         </div>
                     </nav>
                     <div class="productgrid--masthead">
-                        <div class="collection--information"><h1 class="collection--title">Thương hiệu {{$brand->name}}</h1></div>
+                        <div class="collection--information"><h1 class="collection--title">Thương hiệu {{$brand_detail->name}}</h1></div>
                     </div>
 
                     <nav class="productgrid--utils productgrid--utils--visible-mobile utils-page">
@@ -157,19 +157,20 @@
                                             </div>
                                         @endif
                                         <div class='productitem--provider'><img
-                                                src='{{asset($brands[$product->brand_id]->image)}}'
-                                                alt='{{$brands[$product->brand_id]->name}}' width='120'
-                                                height='60'></div>
+                                                src='{{asset($brand_detail->image)}}'
+                                                alt='{{$brand_detail->name}}' width='120'
+                                                height='60'>
+                                        </div>
                                     </div>
                                 </div>
                             </article>
                         @endforeach
                     </div>
                     {{$products->links('guest.layouts.pagination.default')}}
-                    @if($brand->description)
+                    @if($brand_detail->description)
                         <div class="box-intro">
                             <div class="ellips expand">
-                                {!! $brand->description !!}
+                                {!! $brand_detail->description !!}
                             </div>
                             <div class="smore"></div>
                         </div>

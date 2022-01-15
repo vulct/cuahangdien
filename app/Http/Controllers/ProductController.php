@@ -76,7 +76,7 @@ class ProductController extends Controller
             'categoryOfBrand' => $cate_brand,
             'count' => $count,
             'brand' => $brand,
-            'category' => $category
+            'category_detail' => $category
         ]);
     }
 
@@ -94,6 +94,12 @@ class ProductController extends Controller
         $products = $this->productService->getProductByCategory($category->id, 5);
 
         $brand_with_category = $this->brandService->getBrandsWithCategory();
+        $list_brand_category = [];
+        foreach ($brand_with_category as $brand){
+            if (!key_exists($brand->id, $list_brand_category)){
+                $list_brand_category[$brand->id] = $brand;
+            }
+        }
 
         $get_categories_child = $this->categoryService->getChildCategories($category->id);
 
@@ -101,7 +107,7 @@ class ProductController extends Controller
             'title' => $title,
             'products' => $products,
             'category' => $category,
-            'list_brand' => $brand_with_category,
+            'list_brand' => $list_brand_category,
             'categories_child' => $get_categories_child,
             'brands' => $brand_of_product
         ]);

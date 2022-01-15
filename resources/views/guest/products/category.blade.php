@@ -43,7 +43,7 @@
                             </h3>
                             <div class="collection--brands--logo">
                                 @foreach($list_brand as $brand)
-                                    <a href='/hang/{{$brand->slug}}/{{$category->slug}}.html'
+                                    <a href='{{route('hang.danhmuc',[$brand->slug,$category->slug])}}'
                                        title='Xem {{$category->name}} của hãng {{$brand->name}}' class='brand-image'>
                                         <img src='{{asset($brand->image)}}' alt="Xem {{$category->name}} của hãng {{$brand->name}}"/>
                                     </a>

@@ -65,14 +65,14 @@
                             </a>
                         </div>
                         <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                            <a href="{{route('hang.danhmuc',[$brand->slug,$category->slug])}}" itemprop="item">
-                                <span itemprop="name">{{$category->name}}</span>
+                            <a href="{{route('hang.danhmuc',[$brand->slug,$category_detail->slug])}}" itemprop="item">
+                                <span itemprop="name">{{$category_detail->name}}</span>
                                 <meta itemprop="position" content="3">
                             </a>
                         </div>
                     </nav>
                     <div class="productgrid--masthead">
-                        <div class="collection--information"><h1 class="collection--title">{{$category->name}}</h1></div>
+                        <div class="collection--information"><h1 class="collection--title">{{$category_detail->name}}</h1></div>
                     </div>
 
                     <nav class="productgrid--utils productgrid--utils--visible-mobile utils-page">

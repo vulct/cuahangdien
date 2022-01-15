@@ -60,12 +60,7 @@
                                         <div class="price--compare-at visible" data-price-compare-at="">
                                             <span class="price--spacer"></span>
                                         </div>
-
-                                        <div class="price--main" data-price="">
-                                                        <span class="money">
-                                                            Liên hệ
-                                                        </span>
-                                        </div>
+                                        <div class="price--main" data-price=""><span class="money">Liên hệ</span></div>
                                 @else
                                     <div class='price--compare-at visible' data-price-compare-at>
                                         <span class='price--spacer'>{{number_format($product['attributes'][0]['price'])}} VND</span>
