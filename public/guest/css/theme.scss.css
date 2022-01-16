@@ -11576,7 +11576,7 @@ ul> li> a >.filter-text > span{
     position:relative
 }
 .product-recently-viewed--section.hide{
-    display:block;
+    display:none;
 }
 .product-recently-viewed--section .flickity-viewport{
     position:relative
