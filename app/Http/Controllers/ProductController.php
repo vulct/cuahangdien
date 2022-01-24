@@ -10,6 +10,7 @@ use App\Services\Admin\CategoryService;
 use App\Services\Admin\PageService;
 use App\Services\Admin\ProductService;
 use App\Services\TariffService;
+use Illuminate\Http\Request;
 use function PHPUnit\Framework\isEmpty;
 
 class ProductController extends Controller
@@ -80,8 +81,9 @@ class ProductController extends Controller
         ]);
     }
 
-    public function getProductByCategory(Category $category)
+    public function getProductByCategory(Category $category, Request $request)
     {
+        $url = route('danhmuc.chitiet', $category->slug);
         $title = !isEmpty($category->meta_title) ? $category->meta_title : $category->name;
 
         $brands = $this->brandService->get(1);
@@ -91,9 +93,24 @@ class ProductController extends Controller
             $brand_of_product[$brand->id] = $brand;
         }
 
-        $products = $this->productService->getProductByCategory($category->id, 5);
+        $products = $this->productService->getProductByCategory($category->id, 40);
+
+        // nếu tồn tại request b = brands
+        // lọc sản phẩm theo id của brand
+        // request b ở dạng array
+        // ?b=131,88&p=0p5&sort_by=default
+        if(isset($request->b)){
+            $array_brands = explode(',',$request->b);
+            $products = $this->productService->getProductFilterByBrand($array_brands, 40);
+        }
+
+        echo '<pre>';
+        var_dump($products);
+        echo '</pre>';
+        die();
 
         $brand_with_category = $this->brandService->getBrandsWithCategory();
+
         $list_brand_category = [];
         foreach ($brand_with_category as $brand){
             if (!key_exists($brand->id, $list_brand_category)){
@@ -103,13 +120,31 @@ class ProductController extends Controller
 
         $get_categories_child = $this->categoryService->getChildCategories($category->id);
 
-        return view('guest.products.category', [
+        // sản phẩm đang giảm giá - discount > 40%
+
+        $products_discount = $this->productService->getProductDiscount();
+
+        $product_is_discount = [];
+
+        foreach ($products_discount as $product) {
+            foreach ($product->attributes as $attribute) {
+                if ($attribute->discount >= 40) {
+                    if (!key_exists($product->id,$product_is_discount)){
+                        $product_is_discount[$product->id] = $product;
+                    }
+                }
+            }
+        }
+
+        return view('guest.products.category-sort', [
             'title' => $title,
+            'data_url' => $url,
             'products' => $products,
             'category' => $category,
             'list_brand' => $list_brand_category,
             'categories_child' => $get_categories_child,
-            'brands' => $brand_of_product
+            'brands' => $brand_of_product,
+            'product_discount' => $product_is_discount
         ]);
     }
 

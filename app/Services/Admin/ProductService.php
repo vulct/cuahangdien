@@ -339,6 +339,16 @@ class ProductService
         }])->where(['category_id' => $id, 'isDelete' => 0, 'active' => 1])->paginate($limit);
     }
 
+    //getProductSortByCategory
+    public function getProductFilterByBrand($id, $limit)
+    {
+        return Product::with(['category' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }, 'brand' => function ($query) {
+            $query->where(['isDelete' => 0, 'active' => 1]);
+        }])->where(['isDelete' => 0, 'active' => 1])->whereIn('brand_id' ,$id)->paginate($limit);
+    }
+
     public function getProductByBrand($id)
     {
         return Product::where(['brand_id' => $id, 'isDelete' => 0, 'active' => 1]);
